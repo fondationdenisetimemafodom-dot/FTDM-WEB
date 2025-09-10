@@ -1,0 +1,80 @@
+{
+  "header": {
+    "logo": "Together for Human Solidarity",
+    "nav": {
+      "home": "Home",
+      "about": "About Us",
+      "projects": "Projects",
+      "news": "News",
+      "contact": "Contact"
+    },
+    "donate": "Donate Now"
+  },
+  "hero": {
+    "title": "Together for Human Solidarity",
+    "subtitle": "We promote health, education, and economic empowerment for a better world.",
+    "cta": {
+      "primary": "Donate Now",
+      "secondary": "Learn More"
+    }
+  },
+  "about": {
+    "title": "Who we are",
+    "description": "We promote health, education, and economic empowerment for a better world. Together, we create impact that lasts."
+  },
+  "projects": {
+    "title": "Projects in tune today",
+    "cta": "View All Projects",
+    "cards": {
+      "project1": {
+        "title": "Clean Water Initiative",
+        "description": "Bringing safe and clean water to rural communities."
+      },
+      "project2": {
+        "title": "Educational Support",
+        "description": "Supporting schools and young learners with resources."
+      },
+      "project3": {
+        "title": "Health Outreach",
+        "description": "Providing healthcare and awareness in underserved areas."
+      }
+    }
+  },
+  "news": {
+    "title": "Latest News",
+    "cta": "Read All News",
+    "items": {
+      "news1": {
+        "title": "Community health outreach",
+        "excerpt": "Our latest campaign reached over 500 families."
+      },
+      "news2": {
+        "title": "Youth empowerment program",
+        "excerpt": "Helping young people gain skills for the future."
+      },
+      "news3": {
+        "title": "New school initiative",
+        "excerpt": "Partnering with local leaders to support education."
+      }
+    }
+  },
+  "footer": {
+    "cta": {
+      "title": "Join us in making a difference",
+      "subtitle": "Every contribution counts in creating better lives.",
+      "donate": "Donate",
+      "contact": "Contact Us"
+    },
+    "links": {
+      "about": "About Us",
+      "projects": "Projects",
+      "news": "News",
+      "contact": "Contact"
+    },
+    "legal": {
+      "rights": "All rights reserved",
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions"
+    }
+  }
+}

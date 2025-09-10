@@ -1,0 +1,80 @@
+{
+  "header": {
+    "logo": "Gemeinsam für Menschliche Solidarität",
+    "nav": {
+      "home": "Startseite",
+      "about": "Über uns",
+      "projects": "Projekte",
+      "news": "Nachrichten",
+      "contact": "Kontakt"
+    },
+    "donate": "Jetzt spenden"
+  },
+  "hero": {
+    "title": "Gemeinsam für Menschliche Solidarität",
+    "subtitle": "Wir fördern Gesundheit, Bildung und wirtschaftliche Stärkung für eine bessere Welt.",
+    "cta": {
+      "primary": "Jetzt spenden",
+      "secondary": "Mehr erfahren"
+    }
+  },
+  "about": {
+    "title": "Wer wir sind",
+    "description": "Wir fördern Gesundheit, Bildung und wirtschaftliche Stärkung für eine bessere Welt. Gemeinsam schaffen wir nachhaltige Wirkung."
+  },
+  "projects": {
+    "title": "Aktuelle Projekte",
+    "cta": "Alle Projekte ansehen",
+    "cards": {
+      "project1": {
+        "title": "Sauberes Wasser Initiative",
+        "description": "Bereitstellung von sicherem und sauberem Wasser für ländliche Gemeinden."
+      },
+      "project2": {
+        "title": "Bildungsunterstützung",
+        "description": "Unterstützung von Schulen und jungen Lernenden mit Ressourcen."
+      },
+      "project3": {
+        "title": "Gesundheitsaufklärung",
+        "description": "Gesundheitsversorgung und Aufklärung in benachteiligten Gebieten anbieten."
+      }
+    }
+  },
+  "news": {
+    "title": "Neueste Nachrichten",
+    "cta": "Alle Nachrichten lesen",
+    "items": {
+      "news1": {
+        "title": "Gesundheitskampagne in der Gemeinde",
+        "excerpt": "Unsere letzte Kampagne erreichte über 500 Familien."
+      },
+      "news2": {
+        "title": "Jugendförderungsprogramm",
+        "excerpt": "Junge Menschen dabei unterstützen, Fähigkeiten für die Zukunft zu erwerben."
+      },
+      "news3": {
+        "title": "Neue Schulinitiative",
+        "excerpt": "Zusammenarbeit mit lokalen Führungskräften zur Unterstützung der Bildung."
+      }
+    }
+  },
+  "footer": {
+    "cta": {
+      "title": "Schließen Sie sich uns an, um einen Unterschied zu machen",
+      "subtitle": "Jeder Beitrag zählt, um Leben zu verbessern.",
+      "donate": "Spenden",
+      "contact": "Kontaktieren Sie uns"
+    },
+    "links": {
+      "about": "Über uns",
+      "projects": "Projekte",
+      "news": "Nachrichten",
+      "contact": "Kontakt"
+    },
+    "legal": {
+      "rights": "Alle Rechte vorbehalten",
+      "privacy": "Datenschutzrichtlinie",
+      "terms": "Allgemeine Geschäftsbedingungen"
+    }
+  }
+}

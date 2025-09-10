@@ -1,0 +1,80 @@
+{
+  "header": {
+    "logo": "Ensemble pour la Solidarité Humaine",
+    "nav": {
+      "home": "Accueil",
+      "about": "À propos",
+      "projects": "Projets",
+      "news": "Actualités",
+      "contact": "Contact"
+    },
+    "donate": "Faire un don"
+  },
+  "hero": {
+    "title": "Ensemble pour la Solidarité Humaine",
+    "subtitle": "Nous promouvons la santé, l’éducation et l’autonomisation économique pour un monde meilleur.",
+    "cta": {
+      "primary": "Faire un don",
+      "secondary": "En savoir plus"
+    }
+  },
+  "about": {
+    "title": "Qui sommes-nous",
+    "description": "Nous promouvons la santé, l’éducation et l’autonomisation économique pour un monde meilleur. Ensemble, nous créons un impact durable."
+  },
+  "projects": {
+    "title": "Projets en cours",
+    "cta": "Voir tous les projets",
+    "cards": {
+      "project1": {
+        "title": "Initiative Eau Propre",
+        "description": "Apporter de l’eau potable aux communautés rurales."
+      },
+      "project2": {
+        "title": "Soutien Éducatif",
+        "description": "Fournir des ressources aux écoles et aux jeunes apprenants."
+      },
+      "project3": {
+        "title": "Sensibilisation à la Santé",
+        "description": "Offrir des soins de santé et de la sensibilisation dans les zones défavorisées."
+      }
+    }
+  },
+  "news": {
+    "title": "Dernières Actualités",
+    "cta": "Lire toutes les actualités",
+    "items": {
+      "news1": {
+        "title": "Campagne de santé communautaire",
+        "excerpt": "Notre dernière campagne a atteint plus de 500 familles."
+      },
+      "news2": {
+        "title": "Programme d’autonomisation des jeunes",
+        "excerpt": "Aider les jeunes à acquérir des compétences pour l’avenir."
+      },
+      "news3": {
+        "title": "Nouvelle initiative scolaire",
+        "excerpt": "Partenariat avec les leaders locaux pour soutenir l’éducation."
+      }
+    }
+  },
+  "footer": {
+    "cta": {
+      "title": "Rejoignez-nous pour faire la différence",
+      "subtitle": "Chaque contribution compte pour améliorer des vies.",
+      "donate": "Faire un don",
+      "contact": "Nous contacter"
+    },
+    "links": {
+      "about": "À propos",
+      "projects": "Projets",
+      "news": "Actualités",
+      "contact": "Contact"
+    },
+    "legal": {
+      "rights": "Tous droits réservés",
+      "privacy": "Politique de confidentialité",
+      "terms": "Conditions générales"
+    }
+  }
+}

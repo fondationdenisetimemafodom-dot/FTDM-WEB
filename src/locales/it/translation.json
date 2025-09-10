@@ -1,0 +1,80 @@
+{
+  "header": {
+    "logo": "Insieme per la Solidarietà Umana",
+    "nav": {
+      "home": "Home",
+      "about": "Chi siamo",
+      "projects": "Progetti",
+      "news": "Notizie",
+      "contact": "Contatti"
+    },
+    "donate": "Dona ora"
+  },
+  "hero": {
+    "title": "Insieme per la Solidarietà Umana",
+    "subtitle": "Promuoviamo salute, istruzione ed emancipazione economica per un mondo migliore.",
+    "cta": {
+      "primary": "Dona ora",
+      "secondary": "Scopri di più"
+    }
+  },
+  "about": {
+    "title": "Chi siamo",
+    "description": "Promuoviamo salute, istruzione ed emancipazione economica per un mondo migliore. Insieme creiamo un impatto duraturo."
+  },
+  "projects": {
+    "title": "Progetti in corso",
+    "cta": "Vedi tutti i progetti",
+    "cards": {
+      "project1": {
+        "title": "Iniziativa Acqua Pulita",
+        "description": "Portare acqua sicura e pulita alle comunità rurali."
+      },
+      "project2": {
+        "title": "Supporto Educativo",
+        "description": "Sostenere scuole e giovani studenti con risorse."
+      },
+      "project3": {
+        "title": "Campagna Salute",
+        "description": "Fornire assistenza sanitaria e sensibilizzazione nelle aree svantaggiate."
+      }
+    }
+  },
+  "news": {
+    "title": "Ultime Notizie",
+    "cta": "Leggi tutte le notizie",
+    "items": {
+      "news1": {
+        "title": "Campagna sanitaria comunitaria",
+        "excerpt": "La nostra ultima campagna ha raggiunto oltre 500 famiglie."
+      },
+      "news2": {
+        "title": "Programma di emancipazione giovanile",
+        "excerpt": "Aiutare i giovani ad acquisire competenze per il futuro."
+      },
+      "news3": {
+        "title": "Nuova iniziativa scolastica",
+        "excerpt": "Collaborazione con i leader locali per sostenere l’istruzione."
+      }
+    }
+  },
+  "footer": {
+    "cta": {
+      "title": "Unisciti a noi per fare la differenza",
+      "subtitle": "Ogni contributo conta per migliorare la vita.",
+      "donate": "Dona",
+      "contact": "Contattaci"
+    },
+    "links": {
+      "about": "Chi siamo",
+      "projects": "Progetti",
+      "news": "Notizie",
+      "contact": "Contatti"
+    },
+    "legal": {
+      "rights": "Tutti i diritti riservati",
+      "privacy": "Informativa sulla privacy",
+      "terms": "Termini e condizioni"
+    }
+  }
+}
