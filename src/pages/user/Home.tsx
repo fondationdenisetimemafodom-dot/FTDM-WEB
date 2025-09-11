@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../../components/LanguageSwitcher";
 
 function Home() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("home");
 
   return (
     <div className="p-6">
