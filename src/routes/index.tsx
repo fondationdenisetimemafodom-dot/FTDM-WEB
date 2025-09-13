@@ -11,6 +11,7 @@ import DonationHistory from "../pages/admin/DonationHistory";
 import Forms from "../pages/admin/Forms";
 import MediaLibrary from "../pages/admin/MediaLibrary";
 import NewsArticles from "../pages/admin/NewsArticles";
+import AdminLogin from "../pages/admin/auth/AdminLogin";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       { path: "media-library", element: <MediaLibrary /> },
       { path: "news-articles", element: <NewsArticles /> },
     ],
+  },
+  {
+    path: "/admin/login",
+    element: <AdminLogin />,
   },
 ]);
 

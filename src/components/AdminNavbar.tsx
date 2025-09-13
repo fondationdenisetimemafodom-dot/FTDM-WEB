@@ -8,7 +8,7 @@
  -----------------------------------------------------------------------------------------------------*/
 
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   FaNewspaper,
   FaPhotoVideo,
@@ -24,6 +24,8 @@ import {
 import logo from "../../src/assets/images/logo.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import API_BASE_URL from "../lib/api";
+import axios from "axios";
 
 function AdminNavbar() {
   const [isOpen, setIsOpen] = useState(true);
@@ -32,6 +34,28 @@ function AdminNavbar() {
     setIsOpen((prev) => !prev);
   };
   const { t } = useTranslation("adminNavbar");
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const refreshToken = localStorage.getItem("adminRefreshToken");
+
+      if (refreshToken) {
+        const response = await axios.post(`${API_BASE_URL}/api/admin/logout`, {
+          token: refreshToken,
+        });
+        console.log(response);
+      }
+
+      // Clear tokens
+      localStorage.removeItem("adminAccessToken");
+      localStorage.removeItem("adminRefreshToken");
+
+      navigate("/admin/login");
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
+  };
   return (
     <aside className="h-screen w-64 bg-white shadow-sm flex flex-col justify-between sticky top-0">
       {/* Top Section */}
@@ -174,7 +198,10 @@ function AdminNavbar() {
         </div>
 
         {/* Logout */}
-        <button className="flex items-center gap-2 text-red-600 hover:text-red-700 text-lg">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-2 text-red-600 hover:text-red-700 text-lg"
+        >
           <FaSignOutAlt /> {t("logout")}
         </button>
       </div>
