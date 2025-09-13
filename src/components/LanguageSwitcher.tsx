@@ -1,6 +1,5 @@
 "use client";
 
-import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import i18n from "../lib/i18n";
 /*-----------------------------------------------------------------------------------------------------
@@ -10,10 +9,10 @@ import i18n from "../lib/i18n";
  | @return   Array of language objects
  -----------------------------------------------------------------------------------------------------*/
 const languages = [
-  { code: "en", name: "English", flag: "🇺🇸" },
-  { code: "fr", name: "Français", flag: "🇫🇷" },
-  { code: "it", name: "Italiano", flag: "🇮🇹" },
-  { code: "de", name: "Deutsch", flag: "🇩🇪" },
+  { code: "en", name: "English", flag: "EN" },
+  { code: "fr", name: "Français", flag: "FR" },
+  { code: "it", name: "Italiano", flag: "IT" },
+  { code: "de", name: "Deutsch", flag: "DE" },
 ];
 
 /*-----------------------------------------------------------------------------------------------------
@@ -45,25 +44,27 @@ export default function LanguageSwitcher() {
       {/* Trigger button */}
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 px-3 py-2 border rounded bg-white text-sm"
+        className="flex items-center gap-1 px-2 py-1 text-lg font-medium text-gray-700 hover:text-color-main-500"
       >
         <span>{currentLanguage.flag}</span>
-        <span className="hidden sm:inline">{currentLanguage.name}</span>
+        <span className="ml-1">▾</span>
       </button>
 
       {/* Dropdown list */}
       {open && (
-        <ul className="absolute right-0 mt-2 w-40 bg-white border rounded shadow-md">
+        <ul className="absolute right-0 mt-1 w-32 bg-white border rounded shadow-md text-sm">
           {languages.map((language) => (
             <li key={language.code}>
               <button
                 onClick={() => changeLanguage(language.code)}
-                className={`w-full text-left px-3 py-2 hover:bg-gray-100 ${
-                  i18n.language === language.code ? "bg-gray-200" : ""
+                className={`flex justify-between w-full px-3 py-2 hover:bg-gray-100 ${
+                  i18n.language === language.code
+                    ? "bg-gray-200 font-semibold"
+                    : ""
                 }`}
               >
-                <span className="mr-2">{language.flag}</span>
-                {language.name}
+                <span>{language.name}</span>
+                <span>{language.flag}</span>
               </button>
             </li>
           ))}

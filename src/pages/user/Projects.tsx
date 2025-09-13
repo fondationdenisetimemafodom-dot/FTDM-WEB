@@ -1,7 +1,13 @@
 import React from "react";
+import UserNavbar from "../../components/UserNavbar";
 
 function Projects() {
-  return <div>Projects</div>;
+  return (
+    <div>
+      <UserNavbar />
+      Projects
+    </div>
+  );
 }
 
 export default Projects;

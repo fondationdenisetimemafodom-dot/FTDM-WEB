@@ -1,7 +1,13 @@
 import React from "react";
+import UserNavbar from "../../components/UserNavbar";
 
 function AboutUs() {
-  return <div>AboutUs</div>;
+  return (
+    <div>
+      <UserNavbar />
+      AboutUs
+    </div>
+  );
 }
 
 export default AboutUs;
