@@ -1,0 +1,33 @@
+{
+  "title": "Fondazione Denise Time Mafodom",
+  "contact": {
+    "email": "fdtm@gmail.com",
+    "location": "Dschang, Camerun",
+    "phone": "+237 6666666"
+  },
+  "sections": {
+    "home": "Home",
+    "more": "Altro",
+    "connect": "Connettiti",
+    "message": "Inviaci un messaggio anonimo"
+  },
+  "links": {
+    "about": "Chi siamo",
+    "whatWeDo": "Cosa facciamo",
+    "contact": "Contatti",
+    "projects": "Progetti",
+    "events": "Eventi",
+    "donate": "Dona",
+    "blog": "Blog"
+  },
+  "social": {
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "twitter": "Twitter",
+    "linkedin": "LinkedIn"
+  },
+  "form": {
+    "placeholder": "Scrivi qui",
+    "send": "invia"
+  }
+}
