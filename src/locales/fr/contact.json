@@ -1,0 +1,23 @@
+{
+  "title": "CONTACTEZ-NOUS",
+  "headline": "Nous aimerions avoir de vos nouvelles",
+  "description": "Vous avez une question ou souhaitez vous renseigner ? N'hésitez pas à nous contacter via le formulaire ou les coordonnées suivantes.",
+  "letsTalk": "Parlons-en !",
+  "phone": "+237 690000000",
+  "email": "help@fdtm.org",
+  "headOffice": "Siège social",
+  "headOfficeAddress1": "Région de l’Ouest, Dschang",
+  "headOfficeAddress2": "Cameroun",
+  "branchOffice": "Bureau secondaire",
+  "branchOfficeAddress1": "Mafodom",
+  "branchOfficeAddress2": "Cameroun",
+  "formHeadline": "Voulez-vous nous laisser un message ?",
+  "form": {
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "Adresse e-mail",
+    "subject": "Sujet",
+    "message": "Laissez un message...",
+    "send": "Envoyer le message"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "title": "KONTAKTIEREN SIE UNS",
+  "headline": "Wir würden gerne von Ihnen hören",
+  "description": "Haben Sie eine Frage oder möchten Sie eine Anfrage stellen? Bitte kontaktieren Sie uns über das Formular oder die folgenden Details.",
+  "letsTalk": "Lass uns reden!",
+  "phone": "+237 690000000",
+  "email": "help@fdtm.org",
+  "headOffice": "Hauptsitz",
+  "headOfficeAddress1": "Westregion, Dschang",
+  "headOfficeAddress2": "Kamerun",
+  "branchOffice": "Zweigstelle",
+  "branchOfficeAddress1": "Mafodom",
+  "branchOfficeAddress2": "Kamerun",
+  "formHeadline": "Möchten Sie uns eine Nachricht hinterlassen?",
+  "form": {
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "subject": "Betreff",
+    "message": "Nachricht hinterlassen...",
+    "send": "Nachricht senden"
+  }
+}

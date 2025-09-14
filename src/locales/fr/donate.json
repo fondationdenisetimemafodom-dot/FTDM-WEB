@@ -1,0 +1,17 @@
+{
+  "header": "Faites une différence aujourd'hui",
+  "subheader": "Votre contribution crée des vagues de changement positif dans les communautés en Inde. Chaque don, grand ou petit, transforme des vies et construit des avenirs plus lumineux.",
+  "benefits": {
+    "updates": "Mises à jour régulières",
+    "secure": "Transactions sécurisées",
+    "transparent": "Utilisation transparente des fonds"
+  },
+  "amount": "Montant",
+  "amountPlaceholder": "Entrez le montant que vous souhaitez donner",
+  "personalInfo": "Informations personnelles",
+  "firstName": "Prénom",
+  "lastName": "Nom",
+  "email": "Email",
+  "comments": "Laissez un commentaire...",
+  "donateBtn": "Faire un don"
+}

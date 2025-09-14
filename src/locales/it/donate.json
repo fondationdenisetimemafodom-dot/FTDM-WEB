@@ -1,0 +1,17 @@
+{
+  "header": "Fai la differenza oggi",
+  "subheader": "Il tuo contributo crea onde di cambiamento positivo nelle comunità in India. Ogni donazione, grande o piccola, trasforma vite e costruisce futuri più luminosi.",
+  "benefits": {
+    "updates": "Aggiornamenti regolari",
+    "secure": "Transazioni sicure",
+    "transparent": "Utilizzo trasparente dei fondi"
+  },
+  "amount": "Importo",
+  "amountPlaceholder": "Inserisci l'importo che vuoi donare",
+  "personalInfo": "Informazioni personali",
+  "firstName": "Nome",
+  "lastName": "Cognome",
+  "email": "Email",
+  "comments": "Lascia un commento...",
+  "donateBtn": "Dona ora"
+}

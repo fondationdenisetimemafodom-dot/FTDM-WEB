@@ -1,0 +1,17 @@
+{
+  "header": "Machen Sie heute einen Unterschied",
+  "subheader": "Ihr Beitrag schafft positive Veränderungen in Gemeinschaften in Indien. Jede Spende, ob groß oder klein, verändert Leben und baut bessere Zukünfte.",
+  "benefits": {
+    "updates": "Regelmäßige Updates",
+    "secure": "Sichere Transaktionen",
+    "transparent": "Transparente Mittelverwendung"
+  },
+  "amount": "Betrag",
+  "amountPlaceholder": "Geben Sie den Betrag ein, den Sie spenden möchten",
+  "personalInfo": "Persönliche Informationen",
+  "firstName": "Vorname",
+  "lastName": "Nachname",
+  "email": "E-Mail",
+  "comments": "Hinterlassen Sie einen Kommentar...",
+  "donateBtn": "Jetzt spenden"
+}

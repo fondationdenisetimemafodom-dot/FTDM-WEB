@@ -1,0 +1,23 @@
+{
+  "title": "CONTACT US",
+  "headline": "We'd love to hear from you",
+  "description": "Have any question in mind or want to enquire? Please feel free to contact us through the form or the following details.",
+  "letsTalk": "Let's talk!",
+  "phone": "+237 690000000",
+  "email": "help@fdtm.org",
+  "headOffice": "Head Office",
+  "headOfficeAddress1": "West region, Dschang",
+  "headOfficeAddress2": "Cameroon",
+  "branchOffice": "Branch Office",
+  "branchOfficeAddress1": "Mafodom",
+  "branchOfficeAddress2": "Cameroon",
+  "formHeadline": "Want to leave us a message?",
+  "form": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email id",
+    "subject": "Subject",
+    "message": "Leave Message...",
+    "send": "Send message"
+  }
+}

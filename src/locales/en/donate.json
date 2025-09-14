@@ -1,0 +1,17 @@
+{
+  "header": "Make a Difference Today",
+  "subheader": "Your contribution creates ripples of positive change in communities across India. Every donation, big or small, transforms lives and builds brighter futures.",
+  "benefits": {
+    "updates": "Regular impact updates",
+    "secure": "Secure Transactions",
+    "transparent": "Transparent fund utilization"
+  },
+  "amount": "Amount",
+  "amountPlaceholder": "Enter amount you want to donate",
+  "personalInfo": "Personal info",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "email": "Email",
+  "comments": "Leave a comment...",
+  "donateBtn": "Donate now"
+}
