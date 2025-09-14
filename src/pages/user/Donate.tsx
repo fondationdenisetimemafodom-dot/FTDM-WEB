@@ -7,14 +7,22 @@
  | @return   Donation page JSX element
  -----------------------------------------------------------------------------------------------------*/
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import UserNavbar from "../../components/UserNavbar";
 import Footer from "../../components/Footer";
 import { FaCheckCircle } from "react-icons/fa";
+import ThankYouPopup from "../../components/ThankYouPopup";
 
 function Donate() {
   const { t } = useTranslation("donate");
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleDonation = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Process donation logic here...
+    setShowPopup(true);
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -43,7 +51,10 @@ function Donate() {
          | @return   Form JSX
          -----------------------------------------------------------------------------------------------------*/}
         <div className="bg-[#F3F5F8] w-full p-25">
-          <form className="max-w-[1074px] mx-auto bg-white rounded-xl p-10 space-y-6">
+          <form
+            className="max-w-[1074px] mx-auto bg-white rounded-xl p-10 space-y-6"
+            onSubmit={handleDonation}
+          >
             <div className="flex flex-col space-y-4">
               {/* Benefits section */}
               <div className="flex justify-between w-full mb-10">
@@ -132,6 +143,7 @@ function Donate() {
         </div>
       </div>
 
+      <ThankYouPopup show={showPopup} onClose={() => setShowPopup(false)} />
       <Footer />
     </div>
   );

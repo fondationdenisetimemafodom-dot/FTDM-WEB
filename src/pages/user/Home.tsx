@@ -65,6 +65,7 @@ function Home() {
 
       {/* Welcome Message */}
       <h1 className="text-3xl text-amber-400">{t("hero.title")}</h1>
+      <div className="min-h-96 w-full"></div>
 
       {/* Join Us section */}
       <div className="bg-secondary-500 text-white py-30 px-30 mt-auto border-b-4 border-b-white">
