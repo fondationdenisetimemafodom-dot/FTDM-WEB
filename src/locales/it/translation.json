@@ -3,5 +3,15 @@
     "title": "Grazie!",
     "message": "La tua donazione è stata ricevuta. Apprezziamo profondamente il tuo sostegno.",
     "close": "Chiudi"
+  },
+  "volunteerForm": {
+    "title": "Modulo per volontari",
+    "description": "Compila correttamente il modulo qui sotto e lo esamineremo prima di ricontattarti",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "email": "Email",
+    "whatsapp": "Numero WhatsApp",
+    "reason": "Dicci perché vorresti fare volontariato",
+    "submit": "Invia"
   }
 }

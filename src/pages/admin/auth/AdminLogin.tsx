@@ -29,7 +29,7 @@ function AdminLogin() {
       localStorage.setItem("adminRefreshToken", refreshToken);
 
       console.log("Admin logged in:", response.data);
-      navigate("/admin");
+      navigate("/admin/projects");
     } catch (err: any) {
       console.error("Login error:", err);
 

@@ -3,5 +3,15 @@
     "title": "Danke!",
     "message": "Ihre Spende wurde erhalten. Wir schätzen Ihre Unterstützung sehr.",
     "close": "Schließen"
+  },
+  "volunteerForm": {
+    "title": "Freiwilligenformular",
+    "description": "Füllen Sie das untenstehende Formular korrekt aus und wir werden es prüfen und uns bei Ihnen melden",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "whatsapp": "WhatsApp-Nummer",
+    "reason": "Erzählen Sie uns, warum Sie freiwillig helfen möchten",
+    "submit": "Absenden"
   }
 }

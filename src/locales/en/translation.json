@@ -3,5 +3,16 @@
     "title": "Thank You!",
     "message": "Your donation has been received. We deeply appreciate your support.",
     "close": "Close"
+  },
+
+  "volunteerForm": {
+    "title": "Volunteer form",
+    "description": "Fill the form below correctly and we will review and get to you",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "whatsapp": "Whatsapp number",
+    "reason": "Tell Us Why You Would Want To Volunteer",
+    "submit": "Submit"
   }
 }

@@ -26,13 +26,11 @@ function AdminDashboard() {
           },
         });
 
-        // Optionally store admin info
         console.log("Admin session:", response.data);
         setLoading(false);
       } catch (err: any) {
         console.error("Session check failed:", err);
 
-        // Try refresh token if available
         const refreshToken = localStorage.getItem("adminRefreshToken");
         if (refreshToken) {
           try {
@@ -47,7 +45,6 @@ function AdminDashboard() {
               "adminAccessToken",
               refreshResponse.data.accessToken
             );
-            // Retry session validation
             checkSession();
             return;
           } catch {
@@ -55,7 +52,6 @@ function AdminDashboard() {
           }
         }
 
-        // If all fails, redirect to login
         localStorage.removeItem("adminAccessToken");
         localStorage.removeItem("adminRefreshToken");
         navigate("/admin/login");
@@ -68,18 +64,22 @@ function AdminDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p>Loading...</p>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-500"></div>
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
       <AdminNavbar />
 
       {/* Main Content Area */}
-      <Outlet />
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <main className="flex-1 overflow-x-hidden overflow-y-auto">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }

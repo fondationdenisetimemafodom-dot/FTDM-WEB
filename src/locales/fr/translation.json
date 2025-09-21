@@ -3,5 +3,15 @@
     "title": "Merci !",
     "message": "Votre don a bien été reçu. Nous vous remercions sincèrement pour votre soutien.",
     "close": "Fermer"
+  },
+  "volunteerForm": {
+    "title": "Formulaire de bénévolat",
+    "description": "Remplissez correctement le formulaire ci-dessous et nous l'examinerons avant de vous recontacter",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "Email",
+    "whatsapp": "Numéro WhatsApp",
+    "reason": "Dites-nous pourquoi vous souhaitez faire du bénévolat",
+    "submit": "Soumettre"
   }
 }
