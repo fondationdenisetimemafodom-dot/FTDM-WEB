@@ -12,6 +12,7 @@ import Forms from "../pages/admin/Forms";
 import MediaLibrary from "../pages/admin/MediaLibrary";
 import NewsArticles from "../pages/admin/NewsArticles";
 import AdminLogin from "../pages/admin/auth/AdminLogin";
+import CreateProjectView from "../components/Admin/CreateProjectView";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="projects" replace /> },
       { path: "projects", element: <AdminProjects /> },
+      { path: "projects/create", element: <CreateProjectView /> },
+      { path: "projects/edit/:projectId", element: <CreateProjectView /> },
       { path: "donation-history", element: <DonationHistory /> },
       { path: "forms", element: <Forms /> },
       { path: "media-library", element: <MediaLibrary /> },

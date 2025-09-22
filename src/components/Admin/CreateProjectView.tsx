@@ -1,12 +1,12 @@
 "use client";
 /*-----------------------------------------------------------------------------------------------------
 | @component CreateProjectView
-| @brief    Form component for creating NGO projects with media upload, popup editor, and carousel
-| @param    --
-| @return   JSX element of project creation form
+| @brief    Enhanced form component for creating and editing NGO projects with media upload and editor
+| @param    projectId - optional project ID for editing mode
+| @return   JSX element of project creation/editing form
 -----------------------------------------------------------------------------------------------------*/
 
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import {
   FiUpload,
   FiCheck,
@@ -21,6 +21,8 @@ import {
   FiZoomIn,
   FiZoomOut,
   FiAlertCircle,
+  FiLoader,
+  FiArrowLeft,
 } from "react-icons/fi";
 import { useEditor, EditorContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -30,6 +32,7 @@ import axios from "axios";
 import API_BASE_URL from "../../lib/api";
 import CreateProjectSuccessPopUp from "../CreateProjectSuccessPopUp";
 import axiosInstance from "../../lib/axiosInstance";
+import { useParams, useNavigate } from "react-router";
 
 /*-----------------------------------------------------------------------------------------------------
 | @interface FileWithPreview
@@ -59,7 +62,51 @@ interface CropArea {
   height: number;
 }
 
+/*-----------------------------------------------------------------------------------------------------
+| @interface MediaItem
+| @brief    Interface for existing media items from backend
+| @param    _id - media item identifier
+| @param    url - media URL
+| @param    type - media type (image/video)
+| @param    publicId - cloud storage public ID
+-----------------------------------------------------------------------------------------------------*/
+interface MediaItem {
+  _id: string;
+  url: string;
+  type: string;
+  publicId: string;
+}
+
+/*-----------------------------------------------------------------------------------------------------
+| @interface ProjectData
+| @brief    Interface for project data from backend
+| @param    _id - project identifier
+| @param    title - project title
+| @param    category - project category/cause
+| @param    location - project location
+| @param    status - project status
+| @param    beneficiaries - number of beneficiaries
+| @param    startDate - project start date
+| @param    description - project description
+| @param    media - array of media items
+-----------------------------------------------------------------------------------------------------*/
+interface ProjectData {
+  _id: string;
+  title: string;
+  category: string;
+  location: string;
+  status: "ongoing" | "completed";
+  beneficiaries: string;
+  startDate: string;
+  description: string;
+  media: MediaItem[];
+}
+
 const CreateProjectView = () => {
+  const { projectId } = useParams();
+  const navigate = useNavigate();
+  const isEditMode = Boolean(projectId);
+
   // Form states
   const [title, setTitle] = useState("");
   const [cause, setCause] = useState("");
@@ -69,7 +116,9 @@ const CreateProjectView = () => {
   const [beneficiaries, setBeneficiaries] = useState("");
   const [description, setDescription] = useState("");
   const [mediaFiles, setMediaFiles] = useState<File[]>([]);
+  const [existingMedia, setExistingMedia] = useState<MediaItem[]>([]);
   const [loading, setLoading] = useState(false);
+  const [fetchLoading, setFetchLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   // Popup and file management states
@@ -99,7 +148,7 @@ const CreateProjectView = () => {
   // Drag and drop for reordering
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
 
-  //success message states
+  // Success message states
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   /*-----------------------------------------------------------------------------------------------------
@@ -128,6 +177,50 @@ const CreateProjectView = () => {
   });
 
   /*-----------------------------------------------------------------------------------------------------
+  | @function fetchProjectData
+  | @brief    Fetches project data for editing mode
+  | @param    projectId - ID of project to fetch
+  | @return   --
+  -----------------------------------------------------------------------------------------------------*/
+  // Add this useEffect to monitor existingMedia changes
+  useEffect(() => {
+    console.log("existingMedia state updated:", existingMedia);
+  }, [existingMedia]);
+
+  const fetchProjectData = async (projectId: string) => {
+    try {
+      setFetchLoading(true);
+      setErrorMsg("");
+
+      const response = await axiosInstance.get(`/api/projects/${projectId}`);
+      console.log(response);
+      const project: ProjectData = response.data.project;
+
+      // Populate form fields
+      setTitle(project.title);
+      setCause(project.category);
+      setLocation(project.location);
+      setMarkAs(project.status);
+      setStartDate(project.startDate.split("T")[0]);
+      setBeneficiaries(project.beneficiaries);
+      setDescription(project.description);
+
+      console.log("Setting existing media:", project.media);
+      setExistingMedia(project.media || []);
+      console.log(existingMedia);
+      // Set editor content
+      editor?.commands.setContent(project.description);
+    } catch (err: any) {
+      console.error("Failed to fetch project data:", err);
+      setErrorMsg(
+        err.response?.data?.message || "Failed to load project data."
+      );
+    } finally {
+      setFetchLoading(false);
+    }
+  };
+
+  /*-----------------------------------------------------------------------------------------------------
   | @function generateId
   | @brief    Generates unique identifier for files
   | @param    --
@@ -139,7 +232,7 @@ const CreateProjectView = () => {
 
   /*-----------------------------------------------------------------------------------------------------
   | @function handleFileChange
-  | @brief    Handles selection of media files, validates max 1 video rule, and opens popup
+  | @brief    Handles selection of media files and opens popup
   | @param    e - file input change event
   | @param    openPopup - whether to open popup after selection
   | @return   --
@@ -163,7 +256,6 @@ const CreateProjectView = () => {
       setCurrentFileIndex(0);
       setShowPopup(true);
     } else {
-      // Add directly to media files and update popup if it's open
       const selectedFiles = filesWithPreview.map((f) => f.file);
       setMediaFiles((prev) => [...prev, ...selectedFiles]);
 
@@ -173,7 +265,6 @@ const CreateProjectView = () => {
     }
 
     setErrorMsg("");
-    // Reset input
     e.target.value = "";
   };
 
@@ -205,7 +296,6 @@ const CreateProjectView = () => {
 
     setPopupFiles((prev) => prev.filter((_, idx) => idx !== currentFileIndex));
 
-    // Adjust current index if necessary
     if (currentFileIndex >= popupFiles.length - 1) {
       setCurrentFileIndex(Math.max(0, popupFiles.length - 2));
     }
@@ -240,19 +330,19 @@ const CreateProjectView = () => {
 
   /*-----------------------------------------------------------------------------------------------------
   | @function openEditPopup
-  | @brief    Opens popup editor with current media files
+  | @brief    Opens popup editor with current media files and existing media
   | @param    --
   | @return   --
   -----------------------------------------------------------------------------------------------------*/
   const openEditPopup = () => {
-    const filesWithPreview: FileWithPreview[] = mediaFiles.map((file) => ({
+    const newFilesWithPreview: FileWithPreview[] = mediaFiles.map((file) => ({
       file,
       preview: URL.createObjectURL(file),
       selected: true,
       id: generateId(),
     }));
 
-    setPopupFiles(filesWithPreview);
+    setPopupFiles(newFilesWithPreview);
     setCurrentFileIndex(currentCarouselIndex);
     setShowPopup(true);
   };
@@ -363,12 +453,10 @@ const CreateProjectView = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Calculate actual image dimensions vs display dimensions
     const displayRect = image.getBoundingClientRect();
     const scaleX = image.naturalWidth / displayRect.width;
     const scaleY = image.naturalHeight / displayRect.height;
 
-    // Apply scaling to crop coordinates
     const actualCropX = cropArea.x * scaleX * imageScale;
     const actualCropY = cropArea.y * scaleY * imageScale;
     const actualCropWidth = cropArea.width * scaleX * imageScale;
@@ -396,7 +484,6 @@ const CreateProjectView = () => {
         });
         const newPreview = URL.createObjectURL(croppedFile);
 
-        // Update in popup files
         setPopupFiles((prev) =>
           prev.map((file) =>
             file.id === cropFileId
@@ -405,7 +492,6 @@ const CreateProjectView = () => {
           )
         );
 
-        // Update in media files if it exists there
         setMediaFiles((prev) =>
           prev.map((file, idx) => {
             const popupFile = popupFiles.find((pf) => pf.id === cropFileId);
@@ -469,7 +555,6 @@ const CreateProjectView = () => {
     const allFiles = popupFiles.map((f) => f.file);
     setMediaFiles(allFiles);
 
-    // Clean up all file URLs since we're closing the popup
     popupFiles.forEach((file) => {
       URL.revokeObjectURL(file.preview);
     });
@@ -478,6 +563,7 @@ const CreateProjectView = () => {
     setShowPopup(false);
     setCurrentCarouselIndex(0);
   };
+
   /*-----------------------------------------------------------------------------------------------------
   | @function handlePopupClose
   | @brief    Closes popup and cleans up file URLs
@@ -492,25 +578,55 @@ const CreateProjectView = () => {
 
   /*-----------------------------------------------------------------------------------------------------
   | @function navigateCarousel
-  | @brief    Navigates through uploaded files in carousel
+  | @brief    Navigates through uploaded files and existing media in carousel
   | @param    direction - 'prev' or 'next'
   | @return   --
   -----------------------------------------------------------------------------------------------------*/
   const navigateCarousel = (direction: "prev" | "next") => {
+    const totalMedia = mediaFiles.length + existingMedia.length;
+
     if (direction === "prev") {
       setCurrentCarouselIndex((prev) =>
-        prev === 0 ? mediaFiles.length - 1 : prev - 1
+        prev === 0 ? totalMedia - 1 : prev - 1
       );
     } else {
       setCurrentCarouselIndex((prev) =>
-        prev === mediaFiles.length - 1 ? 0 : prev + 1
+        prev === totalMedia - 1 ? 0 : prev + 1
       );
     }
   };
 
   /*-----------------------------------------------------------------------------------------------------
+  | @function getCurrentMediaItem
+  | @brief    Gets current media item for carousel display
+  | @param    --
+  | @return   media item object with url and type
+  -----------------------------------------------------------------------------------------------------*/
+  const getCurrentMediaItem = () => {
+    const totalNewFiles = mediaFiles.length;
+
+    if (currentCarouselIndex < totalNewFiles) {
+      // Show new file
+      return {
+        url: URL.createObjectURL(mediaFiles[currentCarouselIndex]),
+        type: mediaFiles[currentCarouselIndex].type,
+        isNew: true,
+      };
+    } else {
+      // Show existing media
+      const existingIndex = currentCarouselIndex - totalNewFiles;
+      const existingItem = existingMedia[existingIndex];
+      return {
+        url: existingItem.url,
+        type: existingItem.type,
+        isNew: false,
+      };
+    }
+  };
+
+  /*-----------------------------------------------------------------------------------------------------
   | @function handleSubmit
-  | @brief    Submits project form data and files to backend API with automatic token refresh
+  | @brief    Submits project form data for creation or update using axios instance
   | @param    --
   | @return   --
   -----------------------------------------------------------------------------------------------------*/
@@ -528,50 +644,121 @@ const CreateProjectView = () => {
       formData.append("beneficiaries", beneficiaries);
       formData.append("description", description);
 
+      // Append new media files
       mediaFiles.forEach((file) => {
         formData.append("media", file);
       });
 
-      console.log(formData);
+      // For edit mode, include existing media IDs to keep
+      if (isEditMode) {
+        existingMedia.forEach((media) => {
+          formData.append("existingMedia", media._id);
+        });
+      }
 
-      await axiosInstance.post("/api/projects/create", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          // Authorization header is added automatically by interceptor
-        },
-      });
+      let response;
+      if (isEditMode) {
+        response = await axiosInstance.put(
+          `/api/projects/${projectId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } else {
+        response = await axiosInstance.post("/api/projects/create", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
 
       setShowSuccessPopup(true);
 
-      // Reset form
-      setTitle("");
-      setCause("");
-      setLocation("");
-      setStartDate("");
-      setMarkAs("ongoing");
-      setBeneficiaries("");
-      setDescription("");
-      setMediaFiles([]);
-      setCurrentCarouselIndex(0);
-      editor?.commands.setContent("");
+      // Reset form for create mode, keep data for edit mode
+      if (!isEditMode) {
+        setTitle("");
+        setCause("");
+        setLocation("");
+        setStartDate("");
+        setMarkAs("ongoing");
+        setBeneficiaries("");
+        setDescription("");
+        setMediaFiles([]);
+        setExistingMedia([]);
+        setCurrentCarouselIndex(0);
+        editor?.commands.setContent("");
+      }
     } catch (err: any) {
-      console.error("Project creation failed", err);
+      console.error(
+        `Project ${isEditMode ? "update" : "creation"} failed`,
+        err
+      );
       setErrorMsg(err.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
   };
 
+  /*-----------------------------------------------------------------------------------------------------
+  | @function handleRemoveExistingMedia
+  | @brief    Removes existing media item from edit mode
+  | @param    mediaId - ID of media to remove
+  | @return   --
+  -----------------------------------------------------------------------------------------------------*/
+  const handleRemoveExistingMedia = (mediaId: string) => {
+    setExistingMedia((prev) => prev.filter((media) => media._id !== mediaId));
+
+    // Adjust carousel index if needed
+    const newTotalMedia = mediaFiles.length + existingMedia.length - 1;
+    if (currentCarouselIndex >= newTotalMedia && newTotalMedia > 0) {
+      setCurrentCarouselIndex(newTotalMedia - 1);
+    } else if (newTotalMedia === 0) {
+      setCurrentCarouselIndex(0);
+    }
+  };
+
+  // Fetch project data for edit mode
+  useEffect(() => {
+    if (isEditMode && projectId) {
+      fetchProjectData(projectId);
+    }
+  }, [isEditMode, projectId]);
+
+  // Update editor content when description changes
+  useEffect(() => {
+    if (editor && description && editor.getHTML() !== description) {
+      editor.commands.setContent(description);
+    }
+  }, [editor, description]);
+
   const currentPopupFile = popupFiles[currentFileIndex];
+  const totalMedia = mediaFiles.length + existingMedia.length;
+  const hasMedia = totalMedia > 0;
 
   return (
     <>
       <div className="mx-8 mb-8 p-6 bg-white shadow-sm rounded-2xl">
-        <div className="mb-8">
-          <h1 className="text-xl font-semibold text-gray-900 mb-2">
-            NGO PROJECTS/CREATE PROJECT
-          </h1>
+        <div className="mb-8 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={() => navigate(-1)}
+              className="text-gray-500 hover:text-gray-700 p-2 rounded-md transition-colors"
+              title="Go back"
+            >
+              <FiArrowLeft className="w-5 h-5" />
+            </button>
+            <h1 className="text-xl font-semibold text-gray-900 mb-2">
+              {isEditMode ? "EDIT PROJECT" : "NGO PROJECTS/CREATE PROJECT"}
+            </h1>
+          </div>
+          {fetchLoading && (
+            <FiLoader className="animate-spin text-cyan-500 text-xl" />
+          )}
         </div>
+
         {/* Error Message */}
         {errorMsg && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
@@ -587,228 +774,253 @@ const CreateProjectView = () => {
             </button>
           </div>
         )}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left Column */}
-          <div className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Title
-              </label>
-              <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Project name"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
-              />
-            </div>
 
-            {/* File Upload Area */}
-            <div className="border-2 border-dashed flex flex-col items-center justify-center bg-blue-50 h-[296px] border-gray-300 rounded-lg p-8 text-center relative overflow-hidden">
-              {mediaFiles.length === 0 ? (
-                <>
-                  <FiUpload className="w-8 h-8 text-gray-400 mx-auto mb-4" />
-                  <p className="text-sm text-gray-600 mb-2">
-                    Browse to upload images and videos
-                  </p>
-                  <input
-                    type="file"
-                    multiple
-                    accept="image/*,video/*"
-                    onChange={(e) => handleFileChange(e, true)}
-                    className="hidden"
-                    id="file-upload"
-                  />
-                  <label
-                    htmlFor="file-upload"
-                    className="cursor-pointer text-sm text-cyan-500 hover:text-cyan-600"
-                  >
-                    Select Files
-                  </label>
-                </>
-              ) : (
-                <>
-                  {/* Carousel Display */}
-                  <div className="w-full h-full relative">
-                    {mediaFiles[currentCarouselIndex].type.startsWith(
-                      "image/"
-                    ) ? (
-                      <img
-                        src={URL.createObjectURL(
-                          mediaFiles[currentCarouselIndex]
-                        )}
-                        alt={`Media ${currentCarouselIndex + 1}`}
-                        className="w-full h-full object-cover rounded-md"
-                      />
-                    ) : (
-                      <video
-                        src={URL.createObjectURL(
-                          mediaFiles[currentCarouselIndex]
-                        )}
-                        controls
-                        className="w-full h-full rounded-md"
-                      />
-                    )}
-
-                    {/* Navigation Arrows */}
-                    {mediaFiles.length > 1 && (
-                      <>
-                        <button
-                          onClick={() => navigateCarousel("prev")}
-                          className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70"
-                        >
-                          <FiChevronLeft className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => navigateCarousel("next")}
-                          className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70"
-                        >
-                          <FiChevronRight className="w-4 h-4" />
-                        </button>
-                      </>
-                    )}
-
-                    {/* Media Counter */}
-                    <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
-                      {currentCarouselIndex + 1} / {mediaFiles.length}
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="absolute bottom-2 left-2 flex space-x-2">
-                      <button
-                        onClick={openEditPopup}
-                        className="bg-white bg-opacity-90 p-2 rounded-full shadow-md hover:bg-opacity-100"
-                      >
-                        <FiEdit2 className="w-4 h-4" />
-                      </button>
-                      <input
-                        type="file"
-                        multiple
-                        accept="image/*,video/*"
-                        onChange={(e) => handleFileChange(e, false)}
-                        className="hidden"
-                        id="add-carousel-files"
-                        required
-                      />
-                      <label
-                        htmlFor="add-carousel-files"
-                        className="cursor-pointer bg-white bg-opacity-90 p-2 rounded-full shadow-md hover:bg-opacity-100"
-                      >
-                        <FiPlus className="w-4 h-4" />
-                      </label>
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-
-            {/* Media Library Section */}
-            <div className="flex items-center mb-4 rounded-[6px] bg-gray-800 py-3 px-4 w-fit hover:cursor-pointer">
-              <span className="text-white bg-cyan-500 font-bold rounded-[6px] py-1 px-2 mr-2">
-                +
-              </span>
-              <span className="text-sm font-semibold text-white">
-                Choose images and videos from Media Library
-              </span>
+        {fetchLoading ? (
+          <div className="flex justify-center items-center h-96">
+            <div className="text-center">
+              <FiLoader className="animate-spin text-cyan-500 text-3xl mx-auto mb-4" />
+              <p className="text-gray-600">Loading project data...</p>
             </div>
           </div>
-
-          {/* Right Column */}
-          <div className="space-y-6">
-            <div className="px-4 space-y-6">
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Left Column */}
+            <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Cause
+                  Title
                 </label>
                 <input
-                  value={cause}
-                  onChange={(e) => setCause(e.target.value)}
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Project name"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
-                  placeholder="Cause"
                 />
               </div>
 
-              <div className="space-y-3">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Details
-                </label>
-                <input
-                  type="text"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  placeholder="Location"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 mb-3"
-                />
-                <input
-                  type="text"
-                  value={beneficiaries}
-                  onChange={(e) => setBeneficiaries(e.target.value)}
-                  placeholder="beneficiaries"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 mb-3"
-                />
-                <input
-                  type="date"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                  placeholder="Start date"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 mb-3"
-                />
+              {/* File Upload Area */}
+              <div className="border-2 border-dashed flex flex-col items-center justify-center bg-blue-50 h-[296px] border-gray-300 rounded-lg p-8 text-center relative overflow-hidden">
+                {!hasMedia ? (
+                  <>
+                    <FiUpload className="w-8 h-8 text-gray-400 mx-auto mb-4" />
+                    <p className="text-sm text-gray-600 mb-2">
+                      Browse to upload images and videos
+                    </p>
+                    <input
+                      type="file"
+                      multiple
+                      accept="image/*,video/*"
+                      onChange={(e) => handleFileChange(e, true)}
+                      className="hidden"
+                      id="file-upload"
+                    />
+                    <label
+                      htmlFor="file-upload"
+                      className="cursor-pointer text-sm text-cyan-500 hover:text-cyan-600"
+                    >
+                      Select Files
+                    </label>
+                  </>
+                ) : (
+                  <>
+                    {/* Carousel Display */}
+                    <div className="w-full h-full relative">
+                      {(() => {
+                        const currentMedia = getCurrentMediaItem();
+                        return currentMedia.type.startsWith("image/") ? (
+                          <img
+                            src={currentMedia.url}
+                            alt={`Media ${currentCarouselIndex + 1}`}
+                            className="w-full h-full object-cover rounded-md"
+                          />
+                        ) : (
+                          <video
+                            src={currentMedia.url}
+                            controls
+                            className="w-full h-full rounded-md"
+                          />
+                        );
+                      })()}
+
+                      {/* Navigation Arrows */}
+                      {totalMedia > 1 && (
+                        <>
+                          <button
+                            onClick={() => navigateCarousel("prev")}
+                            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70"
+                          >
+                            <FiChevronLeft className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => navigateCarousel("next")}
+                            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70"
+                          >
+                            <FiChevronRight className="w-4 h-4" />
+                          </button>
+                        </>
+                      )}
+
+                      {/* Media Counter */}
+                      <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
+                        {currentCarouselIndex + 1} / {totalMedia}
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="absolute bottom-2 left-2 flex space-x-2">
+                        <button
+                          onClick={openEditPopup}
+                          className="bg-white bg-opacity-90 p-2 rounded-full shadow-md hover:bg-opacity-100"
+                        >
+                          <FiEdit2 className="w-4 h-4" />
+                        </button>
+                        <input
+                          type="file"
+                          multiple
+                          accept="image/*,video/*"
+                          onChange={(e) => handleFileChange(e, false)}
+                          className="hidden"
+                          id="add-carousel-files"
+                        />
+                        <label
+                          htmlFor="add-carousel-files"
+                          className="cursor-pointer bg-white bg-opacity-90 p-2 rounded-full shadow-md hover:bg-opacity-100"
+                        >
+                          <FiPlus className="w-4 h-4" />
+                        </label>
+                      </div>
+
+                      {/* Remove button for existing media in edit mode */}
+                      {isEditMode &&
+                        currentCarouselIndex >= mediaFiles.length && (
+                          <div className="absolute bottom-2 right-2">
+                            <button
+                              onClick={() => {
+                                const existingIndex =
+                                  currentCarouselIndex - mediaFiles.length;
+                                const mediaToRemove =
+                                  existingMedia[existingIndex];
+                                handleRemoveExistingMedia(mediaToRemove._id);
+                              }}
+                              className="bg-red-500 bg-opacity-90 p-2 rounded-full shadow-md hover:bg-opacity-100 text-white"
+                            >
+                              <FiTrash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        )}
+                    </div>
+                  </>
+                )}
               </div>
 
-              <div className="mt-6">
-                <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Mark as
-                </label>
-                <div className="flex space-x-4">
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="markAs"
-                      value="ongoing"
-                      checked={markAs === "ongoing"}
-                      onChange={(e) => setMarkAs(e.target.value)}
-                      className="sr-only"
-                    />
-                    <div
-                      className={`w-4 h-4 rounded-sm border-2 mr-2 flex items-center justify-center ${
-                        markAs === "ongoing"
-                          ? "bg-green-500 border-green-500"
-                          : "border-gray-300"
-                      }`}
-                    >
-                      {markAs === "ongoing" && (
-                        <FiCheck className="w-3 h-3 text-white" />
-                      )}
-                    </div>
-                    <span className="text-sm text-gray-700">Ongoing</span>
+              {/* Media Library Section */}
+              <div className="flex items-center mb-4 rounded-[6px] bg-gray-800 py-3 px-4 w-fit hover:cursor-pointer">
+                <span className="text-white bg-cyan-500 font-bold rounded-[6px] py-1 px-2 mr-2">
+                  +
+                </span>
+                <span className="text-sm font-semibold text-white">
+                  Choose images and videos from Media Library
+                </span>
+              </div>
+            </div>
+
+            {/* Right Column */}
+            <div className="space-y-6">
+              <div className="px-4 space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Cause
                   </label>
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="markAs"
-                      value="completed"
-                      checked={markAs === "completed"}
-                      onChange={(e) => setMarkAs(e.target.value)}
-                      className="sr-only"
-                    />
-                    <div
-                      className={`w-4 h-4 rounded-sm border-2 mr-2 flex items-center justify-center ${
-                        markAs === "completed"
-                          ? "bg-green-500 border-green-500"
-                          : "border-gray-300"
-                      }`}
-                    >
-                      {markAs === "completed" && (
-                        <FiCheck className="w-3 h-3 text-white" />
-                      )}
-                    </div>
-                    <span className="text-sm text-gray-700">Completed</span>
+                  <input
+                    value={cause}
+                    onChange={(e) => setCause(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                    placeholder="Cause"
+                  />
+                </div>
+
+                <div className="space-y-3">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Details
                   </label>
+                  <input
+                    type="text"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    placeholder="Location"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 mb-3"
+                  />
+                  <input
+                    type="text"
+                    value={beneficiaries}
+                    onChange={(e) => setBeneficiaries(e.target.value)}
+                    placeholder="beneficiaries"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 mb-3"
+                  />
+                  <input
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    placeholder="Start date"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 mb-3"
+                  />
+                </div>
+
+                <div className="mt-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Mark as
+                  </label>
+                  <div className="flex space-x-4">
+                    <label className="flex items-center">
+                      <input
+                        type="radio"
+                        name="markAs"
+                        value="ongoing"
+                        checked={markAs === "ongoing"}
+                        onChange={(e) => setMarkAs(e.target.value)}
+                        className="sr-only"
+                      />
+                      <div
+                        className={`w-4 h-4 rounded-sm border-2 mr-2 flex items-center justify-center ${
+                          markAs === "ongoing"
+                            ? "bg-green-500 border-green-500"
+                            : "border-gray-300"
+                        }`}
+                      >
+                        {markAs === "ongoing" && (
+                          <FiCheck className="w-3 h-3 text-white" />
+                        )}
+                      </div>
+                      <span className="text-sm text-gray-700">Ongoing</span>
+                    </label>
+                    <label className="flex items-center">
+                      <input
+                        type="radio"
+                        name="markAs"
+                        value="completed"
+                        checked={markAs === "completed"}
+                        onChange={(e) => setMarkAs(e.target.value)}
+                        className="sr-only"
+                      />
+                      <div
+                        className={`w-4 h-4 rounded-sm border-2 mr-2 flex items-center justify-center ${
+                          markAs === "completed"
+                            ? "bg-green-500 border-green-500"
+                            : "border-gray-300"
+                        }`}
+                      >
+                        {markAs === "completed" && (
+                          <FiCheck className="w-3 h-3 text-white" />
+                        )}
+                      </div>
+                      <span className="text-sm text-gray-700">Completed</span>
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Bottom Section */}
         <div className="flex-col items-center justify-between mt-2 pt-6 space-y-2">
@@ -825,15 +1037,21 @@ const CreateProjectView = () => {
 
           <button
             onClick={handleSubmit}
-            disabled={loading}
+            disabled={loading || fetchLoading}
             className="bg-cyan-500 hover:bg-cyan-600 disabled:opacity-50 text-white px-6 py-2 rounded-md font-medium transition-colors"
           >
-            {loading ? "Publishing..." : "PUBLISH"}
+            {loading
+              ? isEditMode
+                ? "Updating..."
+                : "Publishing..."
+              : isEditMode
+              ? "UPDATE"
+              : "PUBLISH"}
           </button>
         </div>
       </div>
 
-      {/* Publishing Progress Loader */}
+      {/* Processing Loader */}
       {loading && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100]">
           <div className="bg-white rounded-lg p-8 text-center">
@@ -841,12 +1059,14 @@ const CreateProjectView = () => {
               <div className="absolute inset-0 border-4 border-gray-200 rounded-full"></div>
               <div className="absolute inset-0 border-4 border-cyan-500 rounded-full border-t-transparent animate-spin"></div>
             </div>
-            <p className="text-gray-600">Publishing project...</p>
+            <p className="text-gray-600">
+              {isEditMode ? "Updating project..." : "Publishing project..."}
+            </p>
           </div>
         </div>
       )}
 
-      {/* LinkedIn-style Crop Modal */}
+      {/* Crop Modal - Same as before */}
       {showCropModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[110] p-4">
           <div className="bg-white rounded-xl max-w-3xl w-full max-h-[95vh] overflow-hidden">
@@ -861,7 +1081,6 @@ const CreateProjectView = () => {
             </div>
 
             <div className="p-6">
-              {/* Crop Tools */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4">
                   <button
@@ -888,7 +1107,6 @@ const CreateProjectView = () => {
                 </div>
               </div>
 
-              {/* Crop Container */}
               <div
                 ref={cropContainerRef}
                 className="relative mx-auto bg-gray-100 rounded-lg overflow-hidden"
@@ -906,9 +1124,7 @@ const CreateProjectView = () => {
                   draggable={false}
                 />
 
-                {/* Crop Overlay */}
                 <div className="absolute inset-0 bg-black bg-opacity-50 pointer-events-none">
-                  {/* Crop Area */}
                   <div
                     className="absolute border-2 border-white shadow-lg cursor-move bg-transparent"
                     style={{
@@ -919,7 +1135,6 @@ const CreateProjectView = () => {
                     }}
                     onMouseDown={handleCropDragStart}
                   >
-                    {/* Crop Area Content (transparent) */}
                     <div
                       className="w-full h-full"
                       style={{
@@ -931,14 +1146,10 @@ const CreateProjectView = () => {
                         backgroundRepeat: "no-repeat",
                       }}
                     />
-
-                    {/* Corner handles */}
                     <div className="absolute -top-1 -left-1 w-3 h-3 bg-white border border-gray-400 cursor-nw-resize"></div>
                     <div className="absolute -top-1 -right-1 w-3 h-3 bg-white border border-gray-400 cursor-ne-resize"></div>
                     <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-white border border-gray-400 cursor-sw-resize"></div>
                     <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-white border border-gray-400 cursor-se-resize"></div>
-
-                    {/* Grid lines */}
                     <div className="absolute inset-0 pointer-events-none">
                       <div className="absolute top-1/3 left-0 right-0 border-t border-white opacity-50"></div>
                       <div className="absolute top-2/3 left-0 right-0 border-t border-white opacity-50"></div>
@@ -949,7 +1160,6 @@ const CreateProjectView = () => {
                 </div>
               </div>
 
-              {/* Crop Dimensions */}
               <div className="flex items-center justify-center mt-4 space-x-6">
                 <div className="flex items-center space-x-2">
                   <label className="text-sm font-medium text-gray-700">
@@ -1016,11 +1226,10 @@ const CreateProjectView = () => {
         </div>
       )}
 
-      {/* File Editor Popup */}
+      {/* File Editor Popup - Same as before */}
       {showPopup && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[60] p-4">
           <div className="bg-white rounded-lg max-w-5xl w-full max-h-[90vh] overflow-hidden">
-            {/* Header */}
             <div className="flex items-center justify-between p-4 border-b">
               <h2 className="text-lg font-semibold">Editor</h2>
               <button
@@ -1031,9 +1240,7 @@ const CreateProjectView = () => {
               </button>
             </div>
 
-            {/* Content */}
             <div className="flex h-[70vh]">
-              {/* Main Preview */}
               <div className="flex-1 bg-gray-100 relative">
                 {popupFiles.length > 0 && currentPopupFile && (
                   <div className="w-full h-full flex items-center justify-center p-4">
@@ -1053,7 +1260,6 @@ const CreateProjectView = () => {
                   </div>
                 )}
 
-                {/* Navigation for main preview */}
                 {popupFiles.length > 1 && (
                   <>
                     <button
@@ -1079,7 +1285,6 @@ const CreateProjectView = () => {
                   </>
                 )}
 
-                {/* Action Buttons */}
                 <div className="absolute bottom-4 left-4 flex space-x-2">
                   {currentPopupFile &&
                     currentPopupFile.file.type.startsWith("image/") && (
@@ -1107,13 +1312,11 @@ const CreateProjectView = () => {
                   </button>
                 </div>
 
-                {/* File counter */}
                 <div className="absolute top-4 right-4 bg-black bg-opacity-70 text-white text-sm px-3 py-1 rounded-full">
                   {currentFileIndex + 1} of {popupFiles.length}
                 </div>
               </div>
 
-              {/* Sidebar */}
               <div className="w-80 border-l bg-white flex flex-col">
                 <div className="p-4 border-b">
                   <div className="text-sm text-gray-600">
@@ -1179,7 +1382,6 @@ const CreateProjectView = () => {
                           </div>
                         )}
 
-                        {/* Drag handle */}
                         <div className="absolute top-2 left-2 bg-black bg-opacity-60 text-white rounded p-1 cursor-move">
                           <FiMove className="w-3 h-3" />
                         </div>
@@ -1194,7 +1396,6 @@ const CreateProjectView = () => {
               </div>
             </div>
 
-            {/* Footer */}
             <div className="flex items-center justify-between p-4 border-t bg-gray-50">
               <button
                 onClick={handlePopupClose}
