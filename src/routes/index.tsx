@@ -13,6 +13,9 @@ import MediaLibrary from "../pages/admin/MediaLibrary";
 import NewsArticles from "../pages/admin/NewsArticles";
 import AdminLogin from "../pages/admin/auth/AdminLogin";
 import CreateProjectView from "../components/Admin/CreateProjectView";
+import ForgotPassword from "../pages/admin/auth/ForgotPassword";
+import VerifyCode from "../pages/admin/auth/VerifyCode";
+import ResetPassword from "../pages/admin/auth/ResetPassword";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +43,7 @@ const router = createBrowserRouter([
     element: <Projects />,
   },
   {
-    path: "/admin",
+    path: "/fdtm-admin",
     element: <AdminDashboard />,
     children: [
       { index: true, element: <Navigate to="projects" replace /> },
@@ -54,8 +57,17 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/admin/login",
+    path: "/fdtm-admin/login",
     element: <AdminLogin />,
+  },
+  {
+    path: "/fdtm-admin/forgot-password",
+    element: <ForgotPassword />,
+  },
+
+  {
+    path: "/fdtm-admin/reset-password",
+    element: <ResetPassword />,
   },
 ]);
 

@@ -15,7 +15,7 @@ function AdminDashboard() {
       const token = localStorage.getItem("adminAccessToken");
 
       if (!token) {
-        navigate("/admin/login");
+        navigate("/fdtm-admin/login");
         return;
       }
 
@@ -54,7 +54,7 @@ function AdminDashboard() {
 
         localStorage.removeItem("adminAccessToken");
         localStorage.removeItem("adminRefreshToken");
-        navigate("/admin/login");
+        navigate("/fdtm-admin/login");
       }
     };
 

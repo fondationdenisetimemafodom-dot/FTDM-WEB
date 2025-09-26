@@ -348,16 +348,21 @@ const CreateProjectView = () => {
   };
 
   /*-----------------------------------------------------------------------------------------------------
-  | @function handleCropStart
-  | @brief    Initiates crop mode for current image
-  | @param    --
-  | @return   --
-  -----------------------------------------------------------------------------------------------------*/
+| @function handleCropStart - Updated
+| @brief    Initiates crop mode for current image with improved type detection
+| @param    --
+| @return   --
+-----------------------------------------------------------------------------------------------------*/
   const handleCropStart = () => {
     if (popupFiles.length === 0) return;
 
     const currentFile = popupFiles[currentFileIndex];
-    if (!currentFile.file.type.startsWith("image/")) return;
+
+    // Use the improved type detection
+    if (!isImageType(currentFile.file.type)) {
+      console.log("Cannot crop non-image file:", currentFile.file.type);
+      return;
+    }
 
     setCropImageSrc(currentFile.preview);
     setCropFileId(currentFile.id);
@@ -577,13 +582,117 @@ const CreateProjectView = () => {
   };
 
   /*-----------------------------------------------------------------------------------------------------
-  | @function navigateCarousel
-  | @brief    Navigates through uploaded files and existing media in carousel
-  | @param    direction - 'prev' or 'next'
-  | @return   --
-  -----------------------------------------------------------------------------------------------------*/
+| @function isImageType
+| @brief    Determines if media type represents an image
+| @param    mediaType - type string from either File.type or backend
+| @return   boolean indicating if it's an image
+-----------------------------------------------------------------------------------------------------*/
+  const isImageType = (mediaType: string): boolean => {
+    // Handle both formats: "image/jpeg" (from File) and "image" (from backend)
+    return mediaType.startsWith("image/") || mediaType === "image";
+  };
+
+  /*-----------------------------------------------------------------------------------------------------
+| @function isVideoType
+| @brief    Determines if media type represents a video
+| @param    mediaType - type string from either File.type or backend
+| @return   boolean indicating if it's a video
+-----------------------------------------------------------------------------------------------------*/
+  const isVideoType = (mediaType: string): boolean => {
+    // Handle both formats: "video/mp4" (from File) and "video" (from backend)
+    return mediaType.startsWith("video/") || mediaType === "video";
+  };
+
+  /*-----------------------------------------------------------------------------------------------------
+| @function getCurrentMediaItem - Updated
+| @brief    Gets current media item for carousel display with improved type detection
+| @param    --
+| @return   media item object with url and type
+-----------------------------------------------------------------------------------------------------*/
+  const getCurrentMediaItem = () => {
+    const totalNewFiles = mediaFiles.length;
+    const totalExistingMedia = existingMedia.length;
+
+    // Debug logging
+    console.log("Carousel Debug:", {
+      currentCarouselIndex,
+      totalNewFiles,
+      totalExistingMedia,
+      existingMedia,
+    });
+
+    if (currentCarouselIndex < totalNewFiles) {
+      // Show new file
+      const file = mediaFiles[currentCarouselIndex];
+      return {
+        url: URL.createObjectURL(file),
+        type: file.type,
+        isNew: true,
+        isImage: isImageType(file.type),
+        isVideo: isVideoType(file.type),
+      };
+    } else {
+      // Show existing media
+      const existingIndex = currentCarouselIndex - totalNewFiles;
+
+      // Safety check
+      if (existingIndex >= 0 && existingIndex < totalExistingMedia) {
+        const existingItem = existingMedia[existingIndex];
+        console.log("Showing existing media:", existingItem);
+
+        return {
+          url: existingItem.url,
+          type: existingItem.type,
+          isNew: false,
+          isImage: isImageType(existingItem.type),
+          isVideo: isVideoType(existingItem.type),
+        };
+      } else {
+        // Fallback - reset carousel index if out of bounds
+        console.warn("Carousel index out of bounds, resetting to 0");
+        setCurrentCarouselIndex(0);
+
+        if (totalNewFiles > 0) {
+          const file = mediaFiles[0];
+          return {
+            url: URL.createObjectURL(file),
+            type: file.type,
+            isNew: true,
+            isImage: isImageType(file.type),
+            isVideo: isVideoType(file.type),
+          };
+        } else if (totalExistingMedia > 0) {
+          const existingItem = existingMedia[0];
+          return {
+            url: existingItem.url,
+            type: existingItem.type,
+            isNew: false,
+            isImage: isImageType(existingItem.type),
+            isVideo: isVideoType(existingItem.type),
+          };
+        } else {
+          return null;
+        }
+      }
+    }
+  };
+
+  /*-----------------------------------------------------------------------------------------------------
+| @function navigateCarousel
+| @brief    Navigates through uploaded files and existing media in carousel
+| @param    direction - 'prev' or 'next'
+| @return   --
+-----------------------------------------------------------------------------------------------------*/
   const navigateCarousel = (direction: "prev" | "next") => {
     const totalMedia = mediaFiles.length + existingMedia.length;
+
+    console.log("Navigate carousel:", {
+      direction,
+      totalMedia,
+      currentCarouselIndex,
+    });
+
+    if (totalMedia === 0) return;
 
     if (direction === "prev") {
       setCurrentCarouselIndex((prev) =>
@@ -593,34 +702,6 @@ const CreateProjectView = () => {
       setCurrentCarouselIndex((prev) =>
         prev === totalMedia - 1 ? 0 : prev + 1
       );
-    }
-  };
-
-  /*-----------------------------------------------------------------------------------------------------
-  | @function getCurrentMediaItem
-  | @brief    Gets current media item for carousel display
-  | @param    --
-  | @return   media item object with url and type
-  -----------------------------------------------------------------------------------------------------*/
-  const getCurrentMediaItem = () => {
-    const totalNewFiles = mediaFiles.length;
-
-    if (currentCarouselIndex < totalNewFiles) {
-      // Show new file
-      return {
-        url: URL.createObjectURL(mediaFiles[currentCarouselIndex]),
-        type: mediaFiles[currentCarouselIndex].type,
-        isNew: true,
-      };
-    } else {
-      // Show existing media
-      const existingIndex = currentCarouselIndex - totalNewFiles;
-      const existingItem = existingMedia[existingIndex];
-      return {
-        url: existingItem.url,
-        type: existingItem.type,
-        isNew: false,
-      };
     }
   };
 
@@ -658,6 +739,9 @@ const CreateProjectView = () => {
 
       let response;
       if (isEditMode) {
+        for (let [key, value] of formData.entries()) {
+  console.log(key, value);
+}
         response = await axiosInstance.put(
           `/api/projects/${projectId}`,
           formData,
@@ -824,22 +908,102 @@ const CreateProjectView = () => {
                   </>
                 ) : (
                   <>
-                    {/* Carousel Display */}
+                    {/* Updated Carousel Display with improved type detection */}
                     <div className="w-full h-full relative">
                       {(() => {
                         const currentMedia = getCurrentMediaItem();
-                        return currentMedia.type.startsWith("image/") ? (
-                          <img
-                            src={currentMedia.url}
-                            alt={`Media ${currentCarouselIndex + 1}`}
-                            className="w-full h-full object-cover rounded-md"
-                          />
-                        ) : (
-                          <video
-                            src={currentMedia.url}
-                            controls
-                            className="w-full h-full rounded-md"
-                          />
+
+                        // Handle null case
+                        if (!currentMedia) {
+                          return (
+                            <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-md">
+                              <p className="text-gray-500">
+                                No media available
+                              </p>
+                            </div>
+                          );
+                        }
+
+                        console.log("Rendering media:", {
+                          url: currentMedia.url,
+                          type: currentMedia.type,
+                          isImage: currentMedia.isImage,
+                          isVideo: currentMedia.isVideo,
+                          isNew: currentMedia.isNew,
+                        });
+
+                        // Handle image display
+                        if (currentMedia.isImage) {
+                          return (
+                            <img
+                              src={currentMedia.url}
+                              alt={`Media ${currentCarouselIndex + 1}`}
+                              className="w-full h-full object-cover rounded-md"
+                              onError={(e) => {
+                                console.error(
+                                  "Image failed to load:",
+                                  currentMedia.url
+                                );
+                                // Fallback to a placeholder or retry logic
+                                const target = e.currentTarget;
+                                if (!target.dataset.retried) {
+                                  target.dataset.retried = "true";
+                                  // You could add retry logic here or show an error placeholder
+                                }
+                              }}
+                              onLoad={() => {
+                                console.log(
+                                  "Image loaded successfully:",
+                                  currentMedia.url
+                                );
+                              }}
+                            />
+                          );
+                        }
+
+                        // Handle video display
+                        if (currentMedia.isVideo) {
+                          return (
+                            <video
+                              src={currentMedia.url}
+                              controls
+                              className="w-full h-full rounded-md"
+                              onError={(e) => {
+                                console.error(
+                                  "Video failed to load:",
+                                  currentMedia.url
+                                );
+                              }}
+                              onLoadedData={() => {
+                                console.log(
+                                  "Video loaded successfully:",
+                                  currentMedia.url
+                                );
+                              }}
+                            />
+                          );
+                        }
+
+                        // Fallback for unknown media types
+                        return (
+                          <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-md">
+                            <div className="text-center">
+                              <p className="text-gray-500 mb-2">
+                                Unsupported media type
+                              </p>
+                              <p className="text-xs text-gray-400">
+                                Type: {currentMedia.type}
+                              </p>
+                              <a
+                                href={currentMedia.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-500 hover:text-blue-700 text-sm mt-2 inline-block"
+                              >
+                                Open in new tab
+                              </a>
+                            </div>
+                          </div>
                         );
                       })()}
 
@@ -848,13 +1012,13 @@ const CreateProjectView = () => {
                         <>
                           <button
                             onClick={() => navigateCarousel("prev")}
-                            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70"
+                            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 z-10"
                           >
                             <FiChevronLeft className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => navigateCarousel("next")}
-                            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70"
+                            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 z-10"
                           >
                             <FiChevronRight className="w-4 h-4" />
                           </button>
@@ -862,15 +1026,18 @@ const CreateProjectView = () => {
                       )}
 
                       {/* Media Counter */}
-                      <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
-                        {currentCarouselIndex + 1} / {totalMedia}
-                      </div>
+                      {totalMedia > 0 && (
+                        <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded z-10">
+                          {currentCarouselIndex + 1} / {totalMedia}
+                        </div>
+                      )}
 
                       {/* Action Buttons */}
-                      <div className="absolute bottom-2 left-2 flex space-x-2">
+                      <div className="absolute bottom-2 left-2 flex space-x-2 z-10">
                         <button
                           onClick={openEditPopup}
                           className="bg-white bg-opacity-90 p-2 rounded-full shadow-md hover:bg-opacity-100"
+                          title="Edit media"
                         >
                           <FiEdit2 className="w-4 h-4" />
                         </button>
@@ -885,6 +1052,7 @@ const CreateProjectView = () => {
                         <label
                           htmlFor="add-carousel-files"
                           className="cursor-pointer bg-white bg-opacity-90 p-2 rounded-full shadow-md hover:bg-opacity-100"
+                          title="Add more media"
                         >
                           <FiPlus className="w-4 h-4" />
                         </label>
@@ -892,17 +1060,24 @@ const CreateProjectView = () => {
 
                       {/* Remove button for existing media in edit mode */}
                       {isEditMode &&
-                        currentCarouselIndex >= mediaFiles.length && (
-                          <div className="absolute bottom-2 right-2">
+                        currentCarouselIndex >= mediaFiles.length &&
+                        totalMedia > 0 && (
+                          <div className="absolute bottom-2 right-2 z-10">
                             <button
                               onClick={() => {
                                 const existingIndex =
                                   currentCarouselIndex - mediaFiles.length;
-                                const mediaToRemove =
-                                  existingMedia[existingIndex];
-                                handleRemoveExistingMedia(mediaToRemove._id);
+                                if (
+                                  existingIndex >= 0 &&
+                                  existingIndex < existingMedia.length
+                                ) {
+                                  const mediaToRemove =
+                                    existingMedia[existingIndex];
+                                  handleRemoveExistingMedia(mediaToRemove._id);
+                                }
                               }}
                               className="bg-red-500 bg-opacity-90 p-2 rounded-full shadow-md hover:bg-opacity-100 text-white"
+                              title="Remove media"
                             >
                               <FiTrash2 className="w-4 h-4" />
                             </button>
