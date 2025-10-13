@@ -1,9 +1,11 @@
 {
-  "dashboard": "Übersicht",
+  "dashboard": "Dashboard",
   "projects": "Projekte",
-  "donationHistory": "Spendenverlauf",
-  "newsArticles": "Nachrichten/Artikel",
-  "mediaLibrary": "Mediathek",
+  "donationHistory": "Spendenhistorie",
+  "newsArticles": "News/Artikel",
+  "mediaLibrary": "Medienbibliothek",
+  "contributorsPartners": "Mitwirkende/Partner",
+  "socialMedia": "Soziale Medien",
   "forms": "Formulare",
   "language": "Sprache",
   "logout": "Abmelden"

@@ -58,6 +58,15 @@
       }
     }
   },
+  "joinUs": {
+    "title": "Unisciti a noi per fare la differenza",
+    "subtitle": "Ogni contributo, per quanto piccolo, crea onde di cambiamento positivo nelle comunità",
+    "buttons": {
+      "donate": "Dona",
+      "volunteer": "Diventa volontario",
+      "partner": "Collabora con noi"
+    }
+  },
   "footer": {
     "cta": {
       "title": "Unisciti a noi per fare la differenza",

@@ -6,6 +6,7 @@
   --color-secondary-text-500: #525560;
   --color-bg-blue-100: #f9fafb;
   --color-soft-dark-500: #0e1115;
+  --color-primary-text: #1d2130;
 }
 /* Additional Tiptap placeholder styling */
 .tiptap p.is-editor-empty::before {

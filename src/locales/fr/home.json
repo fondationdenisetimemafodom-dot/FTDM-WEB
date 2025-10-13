@@ -58,6 +58,15 @@
       }
     }
   },
+  "joinUs": {
+    "title": "Rejoignez-nous pour faire la différence",
+    "subtitle": "Chaque contribution, même petite, crée des ondulations de changement positif dans les communautés",
+    "buttons": {
+      "donate": "Faire un don",
+      "volunteer": "Devenir bénévole",
+      "partner": "Partenariat"
+    }
+  },
   "footer": {
     "cta": {
       "title": "Rejoignez-nous pour faire la différence",

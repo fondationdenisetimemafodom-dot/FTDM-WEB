@@ -14,8 +14,9 @@ import NewsArticles from "../pages/admin/NewsArticles";
 import AdminLogin from "../pages/admin/auth/AdminLogin";
 import CreateProjectView from "../components/Admin/CreateProjectView";
 import ForgotPassword from "../pages/admin/auth/ForgotPassword";
-import VerifyCode from "../pages/admin/auth/VerifyCode";
 import ResetPassword from "../pages/admin/auth/ResetPassword";
+import SocialMedia from "../pages/admin/SocialMedia";
+import ContributorsPartners from "../pages/admin/ContributorsPartners";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,8 @@ const router = createBrowserRouter([
       { path: "forms", element: <Forms /> },
       { path: "media-library", element: <MediaLibrary /> },
       { path: "news-articles", element: <NewsArticles /> },
+      { path: "social-media", element: <SocialMedia /> },
+      { path: "contributors-partners", element: <ContributorsPartners /> },
     ],
   },
   {

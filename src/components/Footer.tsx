@@ -1,12 +1,22 @@
 /*-----------------------------------------------------------------------------------------------------
 | @component Footer
-| @brief Footer component with contact info, navigation links, social media, and anonymous message form
+| @brief Footer component with contact info, navigation links, dynamic social media, and anonymous message form
 | @param --
-| @return Footer JSX element with secure message submission
+| @return Footer JSX element with secure message submission and fetched social links
 -----------------------------------------------------------------------------------------------------*/
 
-import { useState, useRef } from "react";
-import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { useState, useRef, useEffect } from "react";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+  FaLinkedin,
+  FaYoutube,
+  FaTiktok,
+  FaWhatsapp,
+  FaTelegram,
+  FaGlobe,
+} from "react-icons/fa";
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -51,6 +61,21 @@ interface ApiResponse {
   error?: string;
 }
 
+interface SocialLinksData {
+  facebook?: string;
+  twitter?: string;
+  instagram?: string;
+  linkedin?: string;
+  youtube?: string;
+  tiktok?: string;
+  whatsapp?: string;
+  telegram?: string;
+  email?: string;
+  phone?: string;
+  website?: string;
+  isActive: boolean;
+}
+
 /*-----------------------------------------------------------------------------------------------------
 | @function sanitizeInput
 | @brief Sanitizes user input to prevent XSS attacks and other malicious content
@@ -61,10 +86,10 @@ const sanitizeInput = (input: string): string => {
   if (!input) return "";
 
   return input
-    .replace(/[<>]/g, "") // Remove potential HTML tags
-    .replace(/javascript:/gi, "") // Remove javascript: protocol
-    .replace(/on\w+\s*=/gi, "") // Remove event handlers
-    .substring(0, 1000); // Limit length - keep spaces intact
+    .replace(/[<>]/g, "")
+    .replace(/javascript:/gi, "")
+    .replace(/on\w+\s*=/gi, "")
+    .substring(0, 1000);
 };
 
 /*-----------------------------------------------------------------------------------------------------
@@ -88,17 +113,12 @@ const validateMessageContent = (content: string): ValidationResult => {
     };
   }
 
-  // Check for excessive links
   const linkCount = (content.match(/(https?:\/\/[^\s]+)/gi) || []).length;
   if (linkCount > 2) {
     return { isValid: false, error: "Too many links in message" };
   }
 
-  // Check for spam patterns
-  const spamPatterns = [
-    /(.)\1{10,}/, // Excessive repetition
-    /^[A-Z\s!]{20,}$/, // All caps messages
-  ];
+  const spamPatterns = [/(.)\1{10,}/, /^[A-Z\s!]{20,}$/];
 
   for (const pattern of spamPatterns) {
     if (pattern.test(content)) {
@@ -127,7 +147,6 @@ const useRateLimit = (limit: number = 3, windowMs: number = 60000) => {
       return false;
     }
 
-    // Only add to requests when actually making a request
     setRequests([...validRequests, now]);
     return true;
   };
@@ -156,14 +175,102 @@ const Footer: React.FC = () => {
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus | null>(null);
   const [showForm, setShowForm] = useState<boolean>(false);
 
+  // Social links state
+  const [socialLinks, setSocialLinks] = useState<SocialLinksData | null>(null);
+  const [socialLinksLoading, setSocialLinksLoading] = useState<boolean>(true);
+
   // Security features
-  const [honeypot, setHoneypot] = useState<string>(""); // Honeypot field
+  const [honeypot, setHoneypot] = useState<string>("");
   const { canMakeRequest, getResetTime, checkCanMakeRequest } = useRateLimit(
     3,
     60000
-  ); // 3 requests per minute
+  );
   const formStartTime = useRef<number>(Date.now());
   const interactionCount = useRef<number>(0);
+
+  /*-----------------------------------------------------------------------------------------------------
+  | @function fetchSocialLinks
+  | @brief Fetches active social media links from backend API
+  | @param --
+  | @return --
+  ------------------------------------------------------------------------------------------------------*/
+  const fetchSocialLinks = async (): Promise<void> => {
+    try {
+      setSocialLinksLoading(true);
+      const response = await axios.get<{ socialLinks: SocialLinksData }>(
+        `${API_BASE_URL}/api/social-links/active`,
+        { timeout: 5000 }
+      );
+
+      if (response.data.socialLinks && response.data.socialLinks.isActive) {
+        setSocialLinks(response.data.socialLinks);
+      }
+    } catch (error) {
+      console.error("Failed to fetch social links:", error);
+      // Fail silently - social links are not critical
+    } finally {
+      setSocialLinksLoading(false);
+    }
+  };
+
+  // Fetch social links on component mount
+  useEffect(() => {
+    fetchSocialLinks();
+  }, []);
+
+  /*-----------------------------------------------------------------------------------------------------
+  | @function getSocialIcon
+  | @brief Returns the appropriate icon component for a social platform
+  | @param platform - social media platform name
+  | @return React icon component
+  ------------------------------------------------------------------------------------------------------*/
+  const getSocialIcon = (platform: string): JSX.Element => {
+    const iconProps = { size: 20 };
+
+    switch (platform) {
+      case "facebook":
+        return <FaFacebook {...iconProps} />;
+      case "instagram":
+        return <FaInstagram {...iconProps} />;
+      case "twitter":
+        return <FaTwitter {...iconProps} />;
+      case "linkedin":
+        return <FaLinkedin {...iconProps} />;
+      case "youtube":
+        return <FaYoutube {...iconProps} />;
+      case "tiktok":
+        return <FaTiktok {...iconProps} />;
+      case "whatsapp":
+        return <FaWhatsapp {...iconProps} />;
+      case "telegram":
+        return <FaTelegram {...iconProps} />;
+      case "website":
+        return <FaGlobe {...iconProps} />;
+      default:
+        return <FaGlobe {...iconProps} />;
+    }
+  };
+
+  /*-----------------------------------------------------------------------------------------------------
+  | @function getSocialPlatformName
+  | @brief Returns the display name for a social platform
+  | @param platform - social media platform key
+  | @return formatted platform name
+  ------------------------------------------------------------------------------------------------------*/
+  const getSocialPlatformName = (platform: string): string => {
+    const names: Record<string, string> = {
+      facebook: "Facebook",
+      twitter: "Twitter",
+      instagram: "Instagram",
+      linkedin: "LinkedIn",
+      youtube: "YouTube",
+      tiktok: "TikTok",
+      whatsapp: "WhatsApp",
+      telegram: "Telegram",
+      website: "Website",
+    };
+    return names[platform] || platform;
+  };
 
   /*-----------------------------------------------------------------------------------------------------
   | @function handleInputChange
@@ -198,29 +305,23 @@ const Footer: React.FC = () => {
   const performSecurityChecks = (): SecurityCheckResult => {
     const issues: string[] = [];
 
-    // Honeypot check - bots often fill hidden fields
     if (honeypot.trim() !== "") {
       issues.push("Honeypot field filled");
     }
 
-    // Timing check - too fast submission indicates bot
     const submissionTime = Date.now() - formStartTime.current;
     if (submissionTime < 5000) {
-      // Less than 5 seconds
       issues.push("Form submitted too quickly");
     }
 
-    // Interaction check - bots often don't interact naturally
     if (interactionCount.current < 3) {
       issues.push("Insufficient user interaction");
     }
 
-    // Rate limiting check
     if (!checkCanMakeRequest()) {
       issues.push("Rate limit exceeded");
     }
 
-    // Content validation
     const contentValidation = validateMessageContent(message);
     if (!contentValidation.isValid) {
       issues.push(contentValidation.error || "Content validation failed");
@@ -249,7 +350,6 @@ const Footer: React.FC = () => {
     setSubmitStatus(null);
 
     try {
-      // Perform security checks
       const securityCheck = performSecurityChecks();
 
       if (!securityCheck.isSecure) {
@@ -261,28 +361,25 @@ const Footer: React.FC = () => {
         return;
       }
 
-      // Prepare secure payload
       const payload: MessagePayload = {
         content: message.trim(),
-        purpose: "general", // Always general for anonymous messages
+        purpose: "general",
         message_type: "anonymous",
-        // Security metadata (will be filtered by backend)
         client_timestamp: Date.now(),
         interaction_count: interactionCount.current,
         form_duration: Date.now() - formStartTime.current,
       };
 
-      // Submit to backend using axios
       const response = await axios.post<ApiResponse>(
         `${API_BASE_URL}/api/messages/create/anonymous`,
         payload,
         {
           headers: {
             "Content-Type": "application/json",
-            "X-Requested-With": "XMLHttpRequest", // CSRF protection
+            "X-Requested-With": "XMLHttpRequest",
           },
-          withCredentials: true, // Include cookies for CSRF token
-          timeout: 10000, // 10 second timeout
+          withCredentials: true,
+          timeout: 10000,
         }
       );
 
@@ -292,13 +389,11 @@ const Footer: React.FC = () => {
           message: response.data.message || "Message sent successfully!",
         });
 
-        // Reset form
         setMessage("");
         setHoneypot("");
         formStartTime.current = Date.now();
         interactionCount.current = 0;
 
-        // Hide form after successful submission
         setTimeout(() => setShowForm(false), 3000);
       } else {
         throw new Error(response.data.error || "Failed to send message");
@@ -367,15 +462,19 @@ const Footer: React.FC = () => {
             <img src={logo} alt="Foundation Logo" className="w-16 mb-3" />
             <div className="ml-3 space-y-2 text-sm">
               <h2 className="font-bold max-w-54 text-2xl">{t("title")}</h2>
-              <p className="flex items-center gap-2">
-                <MdEmail /> {t("contact.email")}
-              </p>
+              {socialLinks?.email && (
+                <p className="flex items-center gap-2">
+                  <MdEmail /> {socialLinks.email}
+                </p>
+              )}
               <p className="flex items-center gap-2">
                 <MdLocationOn /> {t("contact.location")}
               </p>
-              <p className="flex items-center gap-2">
-                <MdPhone /> {t("contact.phone")}
-              </p>
+              {socialLinks?.phone && (
+                <p className="flex items-center gap-2">
+                  <MdPhone /> {socialLinks.phone}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -429,23 +528,60 @@ const Footer: React.FC = () => {
           </ul>
         </div>
 
-        {/* Connect Links */}
+        {/* Connect Links - Dynamic Social Media */}
         <div>
           <h3 className="font-semibold mb-3">{t("sections.connect")}</h3>
-          <ul className="space-y-2 text-sm">
-            <li className="flex items-center gap-2">
-              <FaFacebook /> {t("social.facebook")}
-            </li>
-            <li className="flex items-center gap-2">
-              <FaInstagram /> {t("social.instagram")}
-            </li>
-            <li className="flex items-center gap-2">
-              <FaTwitter /> {t("social.twitter")}
-            </li>
-            <li className="flex items-center gap-2">
-              <FaLinkedin /> {t("social.linkedin")}
-            </li>
-          </ul>
+          {socialLinksLoading ? (
+            <div className="text-sm text-gray-300">Loading...</div>
+          ) : socialLinks && socialLinks.isActive ? (
+            <ul className="space-y-2 text-sm">
+              {Object.entries(socialLinks).map(([platform, url]) => {
+                // Skip non-social fields and empty values
+                if (
+                  platform === "isActive" ||
+                  platform === "email" ||
+                  platform === "phone" ||
+                  platform === "_id" ||
+                  platform === "updatedAt" ||
+                  platform === "createdAt" ||
+                  !url ||
+                  typeof url !== "string" ||
+                  url.trim() === ""
+                ) {
+                  return null;
+                }
+
+                return (
+                  <li key={platform}>
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 hover:underline transition-all hover:text-gray-200"
+                    >
+                      {getSocialIcon(platform)}
+                      <span>{getSocialPlatformName(platform)}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <ul className="space-y-2 text-sm">
+              <li className="flex items-center gap-2">
+                <FaFacebook /> {t("social.facebook")}
+              </li>
+              <li className="flex items-center gap-2">
+                <FaInstagram /> {t("social.instagram")}
+              </li>
+              <li className="flex items-center gap-2">
+                <FaTwitter /> {t("social.twitter")}
+              </li>
+              <li className="flex items-center gap-2">
+                <FaLinkedin /> {t("social.linkedin")}
+              </li>
+            </ul>
+          )}
         </div>
 
         {/* Anonymous Message Section */}
@@ -453,7 +589,6 @@ const Footer: React.FC = () => {
           <h3 className="font-bold text-3xl mb-2">{t("sections.message")}</h3>
 
           {!showForm ? (
-            // Quick message input
             <div className="flex border-2 mt-4 border-white rounded-md overflow-hidden">
               <input
                 type="text"
@@ -475,9 +610,8 @@ const Footer: React.FC = () => {
               </button>
             </div>
           ) : (
-            // Full message form
             <form onSubmit={submitMessage} className="space-y-3 mt-4">
-              {/* Honeypot field - hidden from users */}
+              {/* Honeypot field */}
               <input
                 type="text"
                 name="website"
@@ -495,7 +629,6 @@ const Footer: React.FC = () => {
                 autoComplete="off"
               />
 
-              {/* Message content */}
               <div>
                 <textarea
                   value={message}
@@ -511,7 +644,6 @@ const Footer: React.FC = () => {
                 </div>
               </div>
 
-              {/* Status messages */}
               {submitStatus && (
                 <div
                   className={`text-sm p-2 rounded ${
@@ -524,14 +656,12 @@ const Footer: React.FC = () => {
                 </div>
               )}
 
-              {/* Rate limit warning */}
               {!checkCanMakeRequest() && (
                 <div className="text-sm text-yellow-300">
                   {getRateLimitMessage()}
                 </div>
               )}
 
-              {/* Action buttons */}
               <div className="flex gap-2">
                 <button
                   type="submit"

@@ -58,6 +58,15 @@
       }
     }
   },
+  "joinUs": {
+    "title": "Machen Sie mit uns einen Unterschied",
+    "subtitle": "Jeder Beitrag, egal wie klein, erzeugt Wellen positiver Veränderung in Gemeinschaften",
+    "buttons": {
+      "donate": "Spenden",
+      "volunteer": "Ehrenamtlich tätig werden",
+      "partner": "Partner werden"
+    }
+  },
   "footer": {
     "cta": {
       "title": "Schließen Sie sich uns an, um einen Unterschied zu machen",

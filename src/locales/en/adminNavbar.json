@@ -4,7 +4,13 @@
   "donationHistory": "Donation History",
   "newsArticles": "News/Articles",
   "mediaLibrary": "Media Library",
+  "contributorsPartners": "Contributors/Partners",
+  "socialMedia": "Social Media",
   "forms": "Forms",
   "language": "Language",
-  "logout": "Logout"
+  "logout": "Logout",
+  "logoutConfirmTitle": "Confirm Logout",
+  "logoutConfirmMessage": "Are you sure you want to logout?",
+  "cancel": "Cancel",
+  "confirmLogout": "Logout"
 }
