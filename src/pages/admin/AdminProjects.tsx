@@ -3,15 +3,6 @@ import React, { useState } from "react";
 import CreateProjectView from "../../components/Admin/CreateProjectView";
 import ViewProjectsView from "../../components/Admin/ViewProjectsView";
 
-interface Project {
-  id: string;
-  name: string;
-  client: string;
-  status: "Active" | "Pending" | "Inactive";
-  lastUpdate: string;
-  image: string;
-}
-
 const AdminProjects: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"create" | "view">("create");
 
