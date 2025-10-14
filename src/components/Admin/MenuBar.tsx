@@ -1,12 +1,9 @@
 import { Editor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Underline from "@tiptap/extension-underline";
 import {
   FiBold,
   FiItalic,
   FiList,
   FiType,
-  FiLink,
   FiUnderline,
   FiHash,
 } from "react-icons/fi";

@@ -193,21 +193,19 @@ function VolunteerForm() {
         }, 5000);
       }
     } catch (error) {
-      // Debug logging
-      console.error("Full error:", error);
-      console.error("Error response:", error.response?.data);
-      console.error("Error status:", error.response?.status);
+      console.error("Full partnership error:", error);
 
-      // Enhanced error handling for different failure scenarios
       let errorMessage =
-        "Failed to submit application. Please try again later.";
+        "Failed to submit partnership request. Please try again later.";
 
       if (axios.isAxiosError(error)) {
+        console.error("Error response:", error.response?.data);
+        console.error("Error status:", error.response?.status);
+
         if (error.response?.status === 429) {
           errorMessage =
             "Too many requests. Please wait a moment before trying again.";
         } else if (error.response?.status === 400) {
-          // Show the actual backend error message if available
           errorMessage =
             error.response?.data?.message ||
             "Please check your information and try again.";

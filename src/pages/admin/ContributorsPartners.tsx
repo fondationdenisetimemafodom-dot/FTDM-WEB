@@ -155,13 +155,9 @@ const CreateContributorView: React.FC = () => {
       }
       submitData.append("socialMedia", JSON.stringify(formData.socialMedia));
       console.log(submitData.get("socialMedia"));
-      const response = await axiosInstance.post(
-        "/api/contributors-partners",
-        submitData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      await axiosInstance.post("/api/contributors-partners", submitData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       setShowSuccessPopup(true);
 

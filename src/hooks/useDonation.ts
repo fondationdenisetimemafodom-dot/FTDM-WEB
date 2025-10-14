@@ -11,7 +11,6 @@ import {
   type DonationFormData,
   type DonationResponse,
   type FormValidationErrors,
-  type DonationStatus,
 } from "../types/donationTypes";
 import { DonationService } from "../services/donationService";
 

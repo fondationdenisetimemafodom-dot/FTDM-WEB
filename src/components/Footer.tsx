@@ -181,10 +181,7 @@ const Footer: React.FC = () => {
 
   // Security features
   const [honeypot, setHoneypot] = useState<string>("");
-  const { canMakeRequest, getResetTime, checkCanMakeRequest } = useRateLimit(
-    3,
-    60000
-  );
+  const { getResetTime, checkCanMakeRequest } = useRateLimit(3, 60000);
   const formStartTime = useRef<number>(Date.now());
   const interactionCount = useRef<number>(0);
 
@@ -224,7 +221,7 @@ const Footer: React.FC = () => {
   | @param platform - social media platform name
   | @return React icon component
   ------------------------------------------------------------------------------------------------------*/
-  const getSocialIcon = (platform: string): JSX.Element => {
+  const getSocialIcon = (platform: string): React.ReactElement => {
     const iconProps = { size: 20 };
 
     switch (platform) {
@@ -411,7 +408,7 @@ const Footer: React.FC = () => {
         } else if (axiosError.response?.status === 400) {
           errorMessage =
             axiosError.response.data.error || "Invalid message data.";
-        } else if (axiosError.response?.status >= 500) {
+        } else if (axiosError.response && axiosError.response.status >= 500) {
           errorMessage = "Server error. Please try again later.";
         } else if (axiosError.code === "ECONNABORTED") {
           errorMessage = "Request timeout. Please check your connection.";

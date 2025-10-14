@@ -172,7 +172,7 @@ function ForgotPassword() {
     }
 
     try {
-      const response = await axios.post(
+      await axios.post(
         `${API_BASE_URL}/api/admin/reset-password-request`,
         {
           email: sanitizedEmail,
@@ -423,7 +423,7 @@ function ForgotPassword() {
                 maxLength={6}
                 minLength={6}
                 pattern="\d{6}"
-                className="mt-1 w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main-500 focus:border-main-500 disabled:bg-gray-100 disabled:cursor-not-allowed text-center text-2xl tracking-widest"
+                className="mt-1 w-full px-3 sm:px-4 py-2  sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main-500 focus:border-main-500 disabled:bg-gray-100 disabled:cursor-not-allowed text-center text-2xl tracking-widest"
                 placeholder="123456"
               />
             </div>

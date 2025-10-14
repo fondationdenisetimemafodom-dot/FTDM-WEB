@@ -157,7 +157,7 @@ const EditSocialLinksView: React.FC = () => {
       setLoading(true);
       setErrorMsg("");
 
-      const response = await axiosInstance.put("/api/social-links", formData);
+      await axiosInstance.put("/api/social-links", formData);
 
       setShowSuccessPopup(true);
     } catch (err: any) {

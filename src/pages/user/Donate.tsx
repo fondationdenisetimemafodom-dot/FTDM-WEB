@@ -94,7 +94,7 @@ function Donate() {
   ): Promise<boolean> => {
     const maxAttempts = 30; // Poll for up to 5 minutes (30 * 10 seconds)
     let attempts = 0;
-
+    console.log(transactionId);
     return new Promise((resolve) => {
       const pollInterval = setInterval(async () => {
         attempts++;
@@ -211,6 +211,7 @@ function Donate() {
       setShowErrorPopup(true);
     }
   };
+  console.log(transactionId);
 
   return (
     <div className="flex flex-col min-h-screen">

@@ -17,7 +17,6 @@ import {
   FiChevronLeft,
   FiChevronRight,
   FiMove,
-  FiRotateCw,
   FiZoomIn,
   FiZoomOut,
   FiAlertCircle,
@@ -28,8 +27,6 @@ import { useEditor, EditorContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import MenuBar from "./MenuBar";
-import axios from "axios";
-import API_BASE_URL from "../../lib/api";
 import CreateProjectSuccessPopUp from "../CreateProjectSuccessPopUp";
 import axiosInstance from "../../lib/axiosInstance";
 import { useParams, useNavigate } from "react-router";
@@ -737,22 +734,17 @@ const CreateProjectView = () => {
         });
       }
 
-      let response;
       if (isEditMode) {
         for (let [key, value] of formData.entries()) {
-  console.log(key, value);
-}
-        response = await axiosInstance.put(
-          `/api/projects/${projectId}`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+          console.log(key, value);
+        }
+        await axiosInstance.put(`/api/projects/${projectId}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
       } else {
-        response = await axiosInstance.post("/api/projects/create", formData, {
+        await axiosInstance.post("/api/projects/create", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -968,7 +960,7 @@ const CreateProjectView = () => {
                               src={currentMedia.url}
                               controls
                               className="w-full h-full rounded-md"
-                              onError={(e) => {
+                              onError={() => {
                                 console.error(
                                   "Video failed to load:",
                                   currentMedia.url

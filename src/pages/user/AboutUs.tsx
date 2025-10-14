@@ -5,7 +5,7 @@
 | @return About Us page JSX with mission, vision, and supporters sections
 -----------------------------------------------------------------------------------------------------*/
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import UserNavbar from "../../components/UserNavbar";
 import Footer from "../../components/Footer";

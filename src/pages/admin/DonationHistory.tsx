@@ -213,7 +213,10 @@ function DonationHistory() {
                 </tbody>
               </table>
             </div>
-
+            {/*Balance */}
+            <div>
+              <span>{balance}</span>
+            </div>
             {/* Total and Withdrawal Section */}
             <div className="bg-gray-50 px-6 py-4 border-t border-gray-200">
               <div className="flex justify-between items-center">

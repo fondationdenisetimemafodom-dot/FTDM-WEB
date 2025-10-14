@@ -191,10 +191,7 @@ function ContactUs() {
   const [honeypot, setHoneypot] = useState<string>(""); // Honeypot field
 
   // Security features
-  const { canMakeRequest, getResetTime, checkCanMakeRequest } = useRateLimit(
-    2,
-    120000
-  );
+  const { getResetTime, checkCanMakeRequest } = useRateLimit(2, 120000);
   const formStartTime = useRef<number>(Date.now());
   const interactionCount = useRef<number>(0);
 
@@ -363,7 +360,7 @@ function ContactUs() {
           errorMessage = "Too many requests. Please wait before trying again.";
         } else if (axiosError.response?.status === 400) {
           errorMessage = axiosError.response.data.error || "Invalid form data.";
-        } else if (axiosError.response?.status >= 500) {
+        } else if (axiosError.response && axiosError.response.status >= 500) {
           errorMessage = "Server error. Please try again later.";
         } else if (axiosError.code === "ECONNABORTED") {
           errorMessage = "Request timeout. Please check your connection.";
