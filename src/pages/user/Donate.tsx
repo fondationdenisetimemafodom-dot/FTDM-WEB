@@ -218,7 +218,7 @@ function Donate() {
        -----------------------------------------------------------------------------------------------------*/}
       <div className="flex flex-col items-center w-screen">
         <div className="flex flex-col items-center max-w-[1074px] gap-6 lg:gap-10 px-4 py-10 lg:py-25">
-          <span className="text-3xl lg:text-[56px] font-bold text-main-500 text-center">
+          <span className="text-[40px] lg:text-[56px] font-bold text-main-500 text-center">
             {t("header")}
           </span>
           <span className="text-lg lg:text-3xl font-semibold text-secondary-text-500 text-center">

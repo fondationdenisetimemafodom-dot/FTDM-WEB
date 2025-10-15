@@ -1,16 +1,26 @@
 /*-----------------------------------------------------------------------------------------------------
 | @file ContactUs.tsx
-| @brief Contact page with i18n translation, contact details, social links, and message form
+| @brief Contact page with i18n translation, contact details, dynamic social links, and message form
 | @param --
 | @return Contact page JSX with responsive layout and secure message submission
 -----------------------------------------------------------------------------------------------------*/
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import axios, { AxiosError } from "axios";
 import UserNavbar from "../../components/UserNavbar";
 import Footer from "../../components/Footer";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+  FaYoutube,
+  FaTiktok,
+  FaWhatsapp,
+  FaTelegram,
+  FaGlobe,
+} from "react-icons/fa";
 import API_BASE_URL from "../../lib/api";
 
 /*-----------------------------------------------------------------------------------------------------
@@ -57,6 +67,21 @@ interface ApiResponse {
     created_at: string;
   };
   error?: string;
+}
+
+interface SocialLinksData {
+  facebook?: string;
+  twitter?: string;
+  instagram?: string;
+  linkedin?: string;
+  youtube?: string;
+  tiktok?: string;
+  whatsapp?: string;
+  telegram?: string;
+  email?: string;
+  phone?: string;
+  website?: string;
+  isActive: boolean;
 }
 
 /*-----------------------------------------------------------------------------------------------------
@@ -184,9 +209,78 @@ function ContactUs() {
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus | null>(null);
   const [honeypot, setHoneypot] = useState<string>("");
 
+  // Social links state
+  const [socialLinks, setSocialLinks] = useState<SocialLinksData | null>(null);
+  const [socialLinksLoading, setSocialLinksLoading] = useState<boolean>(true);
+
   const { getResetTime, checkCanMakeRequest } = useRateLimit(2, 120000);
   const formStartTime = useRef<number>(Date.now());
   const interactionCount = useRef<number>(0);
+
+  /*-----------------------------------------------------------------------------------------------------
+  | @function fetchSocialLinks
+  | @brief Fetches active social media links from backend API
+  | @param --
+  | @return --
+  ------------------------------------------------------------------------------------------------------*/
+  const fetchSocialLinks = async (): Promise<void> => {
+    try {
+      setSocialLinksLoading(true);
+      const response = await axios.get<{ socialLinks: SocialLinksData }>(
+        `${API_BASE_URL}/api/social-links/active`,
+        { timeout: 5000 }
+      );
+
+      if (response.data.socialLinks && response.data.socialLinks.isActive) {
+        setSocialLinks(response.data.socialLinks);
+      }
+    } catch (error) {
+      console.error("Failed to fetch social links:", error);
+      // Fail silently - social links are not critical
+    } finally {
+      setSocialLinksLoading(false);
+    }
+  };
+
+  // Fetch social links on component mount
+  useEffect(() => {
+    fetchSocialLinks();
+  }, []);
+
+  /*-----------------------------------------------------------------------------------------------------
+  | @function getSocialIcon
+  | @brief Returns the appropriate icon component for a social platform
+  | @param platform - social media platform name
+  | @return React icon component
+  ------------------------------------------------------------------------------------------------------*/
+  const getSocialIcon = (platform: string): React.ReactElement => {
+    const iconProps = {
+      className: "text-secondary-500 hover:text-secondary-600 text-xl",
+    };
+
+    switch (platform) {
+      case "facebook":
+        return <FaFacebook {...iconProps} />;
+      case "instagram":
+        return <FaInstagram {...iconProps} />;
+      case "twitter":
+        return <FaTwitter {...iconProps} />;
+      case "linkedin":
+        return <FaLinkedin {...iconProps} />;
+      case "youtube":
+        return <FaYoutube {...iconProps} />;
+      case "tiktok":
+        return <FaTiktok {...iconProps} />;
+      case "whatsapp":
+        return <FaWhatsapp {...iconProps} />;
+      case "telegram":
+        return <FaTelegram {...iconProps} />;
+      case "website":
+        return <FaGlobe {...iconProps} />;
+      default:
+        return <FaGlobe {...iconProps} />;
+    }
+  };
 
   /*-----------------------------------------------------------------------------------------------------
   | @function handleInputChange
@@ -367,13 +461,93 @@ function ContactUs() {
     return `Please wait ${resetTime} seconds before sending another message.`;
   };
 
+  /*-----------------------------------------------------------------------------------------------------
+  | @function renderSocialLinks
+  | @brief Renders dynamic social media links or fallback static links
+  | @param --
+  | @return JSX elements for social media links
+  ------------------------------------------------------------------------------------------------------*/
+  const renderSocialLinks = (): React.ReactElement => {
+    if (socialLinksLoading) {
+      return (
+        <div className="flex gap-4 mt-4">
+          <div className="text-gray-400 text-sm">Loading...</div>
+        </div>
+      );
+    }
+
+    if (socialLinks && socialLinks.isActive) {
+      // Filter and map over available social platforms
+      const availablePlatforms = Object.entries(socialLinks).filter(
+        ([platform, url]) =>
+          platform !== "isActive" &&
+          platform !== "email" &&
+          platform !== "phone" &&
+          platform !== "_id" &&
+          platform !== "updatedAt" &&
+          platform !== "createdAt" &&
+          url &&
+          typeof url === "string" &&
+          url.trim() !== ""
+      );
+
+      if (availablePlatforms.length > 0) {
+        return (
+          <div className="flex gap-4 mt-4">
+            {availablePlatforms.map(([platform, url]) => (
+              <a
+                key={platform}
+                href={url as string}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-all"
+              >
+                {getSocialIcon(platform)}
+              </a>
+            ))}
+          </div>
+        );
+      }
+    }
+
+    // Fallback to static social links if no dynamic links available
+    return (
+      <div className="flex gap-4 mt-4">
+        <a
+          href="#"
+          className="text-secondary-500 hover:text-secondary-600 text-xl"
+        >
+          <FaFacebook />
+        </a>
+        <a
+          href="#"
+          className="text-secondary-500 hover:text-secondary-600 text-xl"
+        >
+          <FaInstagram />
+        </a>
+        <a
+          href="#"
+          className="text-secondary-500 hover:text-secondary-600 text-xl"
+        >
+          <FaTwitter />
+        </a>
+        <a
+          href="#"
+          className="text-secondary-500 hover:text-secondary-600 text-xl"
+        >
+          <FaLinkedin />
+        </a>
+      </div>
+    );
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <UserNavbar />
 
       {/*-----------------------------------------------------------------------------------------------------
        | @blocktype ContactSection
-       | @brief Displays main contact details, description, and office addresses
+       | @brief Displays main contact details, description, and office addresses with dynamic social links
        | @param --
        | @return --
        -----------------------------------------------------------------------------------------------------*/}
@@ -390,7 +564,7 @@ function ContactUs() {
                 </p>
               </div>
               <div className="flex flex-col gap-2 max-w-full lg:max-w-[480px]">
-                <h2 className="text-3xl lg:text-[56px] font-bold text-main-500 mt-2">
+                <h2 className="text-[40px] lg:text-[56px] font-bold text-main-500 mt-2">
                   {t("headline")}
                 </h2>
                 <p className="text-secondary-text-500 text-lg lg:text-3xl">
@@ -436,32 +610,7 @@ function ContactUs() {
                   {t("branchOfficeAddress2")}
                 </p>
               </div>
-              <div className="flex gap-4 mt-4">
-                <a
-                  href="#"
-                  className="text-secondary-500 hover:text-secondary-600 text-xl"
-                >
-                  <FaFacebook />
-                </a>
-                <a
-                  href="#"
-                  className="text-secondary-500 hover:text-secondary-600 text-xl"
-                >
-                  <FaInstagram />
-                </a>
-                <a
-                  href="#"
-                  className="text-secondary-500 hover:text-secondary-600 text-xl"
-                >
-                  <FaTwitter />
-                </a>
-                <a
-                  href="#"
-                  className="text-secondary-500 hover:text-secondary-600 text-xl"
-                >
-                  <FaLinkedin />
-                </a>
-              </div>
+              {renderSocialLinks()}
             </div>
           </div>
 

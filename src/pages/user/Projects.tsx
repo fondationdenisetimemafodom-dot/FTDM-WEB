@@ -158,7 +158,7 @@ function Projects() {
       {/* Hero Section */}
       <div className="flex flex-col items-center w-full bg-white py-12 md:py-16 lg:py-20">
         <div className="flex flex-col items-center max-w-[1074px] gap-6 md:gap-10 px-4 md:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl lg:text-[56px] text-center font-bold text-main-500 leading-tight">
+          <h1 className="text-[40px] md:text-4xl lg:text-[56px] text-center font-bold text-main-500 leading-tight">
             Our Projects and work
           </h1>
           <p className="text-lg md:text-xl lg:text-3xl font-semibold text-secondary-text-500 text-center">

@@ -169,7 +169,7 @@ function Home() {
             <div className="flex items-center gap-10 md:gap-24 mt-12 ">
               <NavLink
                 to="/donate"
-                className="flex items-center justify-center bg-main-500 w-28 lg:w-50 py-2 text-white text-2xl font-semibold rounded-[12px] hover:cursor-pointer"
+                className="flex items-center justify-center bg-main-500 w-28 lg:w-50 p-2 text-white text-2xl font-semibold rounded-[12px] hover:cursor-pointer"
               >
                 Donate
               </NavLink>
