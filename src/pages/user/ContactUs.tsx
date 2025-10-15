@@ -1,12 +1,11 @@
-"use client";
 /*-----------------------------------------------------------------------------------------------------
- | @component Contact
- | @brief    Contact page with i18n translation, contact details, social links, and message form
- | @param    --
- | @return   Contact JSX element
- -----------------------------------------------------------------------------------------------------*/
+| @file ContactUs.tsx
+| @brief Contact page with i18n translation, contact details, social links, and message form
+| @param --
+| @return Contact page JSX with responsive layout and secure message submission
+-----------------------------------------------------------------------------------------------------*/
 
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import axios, { AxiosError } from "axios";
 import UserNavbar from "../../components/UserNavbar";
@@ -14,7 +13,10 @@ import Footer from "../../components/Footer";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import API_BASE_URL from "../../lib/api";
 
-// TypeScript interfaces
+/*-----------------------------------------------------------------------------------------------------
+| TypeScript Interfaces
+-----------------------------------------------------------------------------------------------------*/
+
 interface FormData {
   firstName: string;
   lastName: string;
@@ -67,10 +69,10 @@ const sanitizeInput = (input: string): string => {
   if (!input) return "";
 
   return input
-    .replace(/[<>]/g, "") // Remove potential HTML tags
-    .replace(/javascript:/gi, "") // Remove javascript: protocol
-    .replace(/on\w+\s*=/gi, "") // Remove event handlers
-    .substring(0, 1000); // Limit length - keep spaces intact
+    .replace(/[<>]/g, "")
+    .replace(/javascript:/gi, "")
+    .replace(/on\w+\s*=/gi, "")
+    .substring(0, 1000);
 };
 
 /*-----------------------------------------------------------------------------------------------------
@@ -82,21 +84,18 @@ const sanitizeInput = (input: string): string => {
 const validateForm = (formData: FormData): ValidationResult => {
   const errors: { [key: string]: string } = {};
 
-  // First name validation
   if (!formData.firstName.trim()) {
     errors.firstName = "First name is required";
   } else if (formData.firstName.trim().length < 2) {
     errors.firstName = "First name must be at least 2 characters";
   }
 
-  // Last name validation
   if (!formData.lastName.trim()) {
     errors.lastName = "Last name is required";
   } else if (formData.lastName.trim().length < 2) {
     errors.lastName = "Last name must be at least 2 characters";
   }
 
-  // Email validation
   if (!formData.email.trim()) {
     errors.email = "Email is required";
   } else {
@@ -106,14 +105,12 @@ const validateForm = (formData: FormData): ValidationResult => {
     }
   }
 
-  // Subject validation
   if (!formData.subject.trim()) {
     errors.subject = "Subject is required";
   } else if (formData.subject.trim().length < 3) {
     errors.subject = "Subject must be at least 3 characters";
   }
 
-  // Message validation
   if (!formData.message.trim()) {
     errors.message = "Message is required";
   } else if (formData.message.trim().length < 10) {
@@ -122,7 +119,6 @@ const validateForm = (formData: FormData): ValidationResult => {
     errors.message = "Message is too long (max 5000 characters)";
   }
 
-  // Check for excessive links
   const linkCount = (formData.message.match(/(https?:\/\/[^\s]+)/gi) || [])
     .length;
   if (linkCount > 5) {
@@ -143,7 +139,6 @@ const validateForm = (formData: FormData): ValidationResult => {
 | @return object with rate limiting functions
 -----------------------------------------------------------------------------------------------------*/
 const useRateLimit = (limit: number = 2, windowMs: number = 120000) => {
-  // 2 requests per 2 minutes for identified messages
   const [requests, setRequests] = useState<number[]>([]);
 
   const canMakeRequest = (): boolean => {
@@ -174,9 +169,8 @@ const useRateLimit = (limit: number = 2, windowMs: number = 120000) => {
 };
 
 function ContactUs() {
-  const { t } = useTranslation("contact"); // Load "contact.json" namespace
+  const { t } = useTranslation("contact");
 
-  // Form state
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
@@ -188,9 +182,8 @@ function ContactUs() {
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus | null>(null);
-  const [honeypot, setHoneypot] = useState<string>(""); // Honeypot field
+  const [honeypot, setHoneypot] = useState<string>("");
 
-  // Security features
   const { getResetTime, checkCanMakeRequest } = useRateLimit(2, 120000);
   const formStartTime = useRef<number>(Date.now());
   const interactionCount = useRef<number>(0);
@@ -219,7 +212,6 @@ function ContactUs() {
       [field]: sanitizedValue,
     }));
 
-    // Clear field error when user starts typing
     if (formErrors[field]) {
       setFormErrors((prev) => ({
         ...prev,
@@ -235,28 +227,22 @@ function ContactUs() {
   | @return boolean indicating if submission should proceed
   ------------------------------------------------------------------------------------------------------*/
   const performSecurityChecks = (): boolean => {
-    // Honeypot check - bots often fill hidden fields
     if (honeypot.trim() !== "") {
       console.log("Security check failed: Honeypot field filled");
       return false;
     }
 
-    // Timing check - too fast submission indicates bot
     const submissionTime = Date.now() - formStartTime.current;
     if (submissionTime < 10000) {
-      // Less than 10 seconds for longer form
       console.log("Security check failed: Form submitted too quickly");
       return false;
     }
 
-    // Interaction check - bots often don't interact naturally
     if (interactionCount.current < 5) {
-      // More interactions required for longer form
       console.log("Security check failed: Insufficient user interaction");
       return false;
     }
 
-    // Rate limiting check
     if (!checkCanMakeRequest()) {
       console.log("Security check failed: Rate limit exceeded");
       return false;
@@ -278,10 +264,8 @@ function ContactUs() {
 
     if (isSubmitting) return;
 
-    // Clear previous status
     setSubmitStatus(null);
 
-    // Validate form
     const validation = validateForm(formData);
     if (!validation.isValid) {
       setFormErrors(validation.errors);
@@ -291,7 +275,6 @@ function ContactUs() {
     setIsSubmitting(true);
 
     try {
-      // Perform security checks
       if (!performSecurityChecks()) {
         setSubmitStatus({
           type: "error",
@@ -300,7 +283,6 @@ function ContactUs() {
         return;
       }
 
-      // Prepare payload
       const payload: MessagePayload = {
         first_name: formData.firstName.trim(),
         last_name: formData.lastName.trim(),
@@ -313,7 +295,6 @@ function ContactUs() {
         form_duration: Date.now() - formStartTime.current,
       };
 
-      // Submit to backend
       const response = await axios.post<ApiResponse>(
         `${API_BASE_URL}/api/messages/create/identified`,
         payload,
@@ -323,7 +304,7 @@ function ContactUs() {
             "X-Requested-With": "XMLHttpRequest",
           },
           withCredentials: true,
-          timeout: 15000, // 15 second timeout for identified messages
+          timeout: 15000,
         }
       );
 
@@ -333,7 +314,6 @@ function ContactUs() {
           message: response.data.message || "Message sent successfully!",
         });
 
-        // Reset form
         setFormData({
           firstName: "",
           lastName: "",
@@ -393,76 +373,91 @@ function ContactUs() {
 
       {/*-----------------------------------------------------------------------------------------------------
        | @blocktype ContactSection
-       | @brief    Displays main contact details, description, and office addresses
-       | @param    --
-       | @return   --
+       | @brief Displays main contact details, description, and office addresses
+       | @param --
+       | @return --
        -----------------------------------------------------------------------------------------------------*/}
       <section>
         <div className="flex flex-col gap-12 items-center">
-          <div className="flex items-start justify-center bg-[#F3F5F8] w-full py-20 px-25 gap-28 ">
-            <div className="mt-2 bg-soft-dark-500 h-4 w-20"></div>
+          <div className="flex flex-col lg:flex-row items-start justify-center bg-[#F3F5F8] w-full py-10 lg:py-20 px-4 lg:px-25 gap-8 lg:gap-28">
+            <div className=" hidden lg:block mt-2 bg-soft-dark-500 h-4 w-20"></div>
 
-            <div>
-              <p className="uppercase text-2xl font-bold text-soft-dark-500">
-                {t("title")}
-              </p>
-              <div className="flex flex-col gap-2 max-w-[480px]">
-                <h2 className="text-[56px] font-bold text-main-500 mt-2">
+            <div className="w-full lg:w-auto">
+              <div className="flex flex-row items-center gap-4">
+                <div className=" block lg:hidden  bg-soft-dark-500 h-3 w-15"></div>
+                <p className="uppercase text-xl lg:text-2xl font-bold text-soft-dark-500">
+                  {t("title")}
+                </p>
+              </div>
+              <div className="flex flex-col gap-2 max-w-full lg:max-w-[480px]">
+                <h2 className="text-3xl lg:text-[56px] font-bold text-main-500 mt-2">
                   {t("headline")}
                 </h2>
-                <p className="text-secondary-text-500 text-3xl">
+                <p className="text-secondary-text-500 text-lg lg:text-3xl">
                   {t("description")}
                 </p>
               </div>
             </div>
 
-            <div className="space-y-12 text-gray-700">
+            <div className="space-y-8 lg:space-y-12 text-gray-700 w-full lg:w-auto">
               <div>
-                <h3 className="font-bold text-2xl text-secondary-500">
+                <h3 className="font-bold text-xl lg:text-2xl text-secondary-500">
                   {t("letsTalk")}
                 </h3>
-                <div className="flex space-x-10">
-                  <span className="text-gray-500">{t("phone")}</span>
-                  <span className="text-gray-500">{t("email")}</span>
+                <div className="flex flex-col lg:flex-row lg:space-x-10 space-y-2 lg:space-y-0">
+                  <span className="text-gray-500 text-sm lg:text-base">
+                    {t("phone")}
+                  </span>
+                  <span className="text-gray-500 text-sm lg:text-base">
+                    {t("email")}
+                  </span>
                 </div>
                 <hr className="mt-3 text-gray-300" />
               </div>
               <div>
-                <h3 className="font-bold text-2xl text-secondary-500">
+                <h3 className="font-bold text-xl lg:text-2xl text-secondary-500">
                   {t("headOffice")}
                 </h3>
-                <p className="text-gray-500">{t("headOfficeAddress1")}</p>
-                <p className="text-gray-500">{t("headOfficeAddress2")}</p>
+                <p className="text-gray-500 text-sm lg:text-base">
+                  {t("headOfficeAddress1")}
+                </p>
+                <p className="text-gray-500 text-sm lg:text-base">
+                  {t("headOfficeAddress2")}
+                </p>
               </div>
               <div>
-                <h3 className="font-bold text-2xl text-secondary-500">
+                <h3 className="font-bold text-xl lg:text-2xl text-secondary-500">
                   {t("branchOffice")}
                 </h3>
-                <p className="text-gray-500">{t("branchOfficeAddress1")}</p>
-                <p className="text-gray-500">{t("branchOfficeAddress2")}</p>
+                <p className="text-gray-500 text-sm lg:text-base">
+                  {t("branchOfficeAddress1")}
+                </p>
+                <p className="text-gray-500 text-sm lg:text-base">
+                  {t("branchOfficeAddress2")}
+                </p>
               </div>
               <div className="flex gap-4 mt-4">
                 <a
                   href="#"
-                  className="text-secondary-500 hover:text-secondary-500"
+                  className="text-secondary-500 hover:text-secondary-600 text-xl"
                 >
                   <FaFacebook />
                 </a>
                 <a
                   href="#"
-                  className="text-secondary-500 hover:text-secondary-500"
+                  className="text-secondary-500 hover:text-secondary-600 text-xl"
                 >
                   <FaInstagram />
                 </a>
                 <a
                   href="#"
-                  className="text-secondary-500 hover:text-secondary-500"
+                  className="text-secondary-500 hover:text-secondary-600 text-xl"
                 >
                   <FaTwitter />
                 </a>
                 <a
                   href="#"
-                  className="text-secondary-500 hover:text-secondary-500"
+                  className="text-secondary-500 hover:text-secondary-600 text-xl"
                 >
                   <FaLinkedin />
                 </a>
@@ -472,16 +467,15 @@ function ContactUs() {
 
           {/*-----------------------------------------------------------------------------------------------------
            | @blocktype MessageForm
-           | @brief    Contact form for sending identified messages with security features
-           | @param    --
-           | @return   --
+           | @brief Contact form for sending identified messages with security features
+           | @param --
+           | @return --
            -----------------------------------------------------------------------------------------------------*/}
-          <div className="bg-white rounded-xl p-8 max-w-4xl w-full">
-            <h3 className="text-[40px] text-soft-dark-500 font-bold mb-6 text-center">
+          <div className="bg-white rounded-xl p-4 lg:p-8 max-w-4xl w-full px-4">
+            <h3 className="text-2xl lg:text-[40px] text-soft-dark-500 font-bold mb-6 text-center">
               {t("formHeadline")}
             </h3>
 
-            {/* Status messages */}
             {submitStatus && (
               <div
                 className={`text-sm p-4 rounded-lg mb-6 ${
@@ -494,7 +488,6 @@ function ContactUs() {
               </div>
             )}
 
-            {/* Rate limit warning */}
             {!checkCanMakeRequest() && (
               <div className="text-sm text-amber-600 bg-amber-50 p-3 rounded-lg mb-6 border border-amber-200">
                 {getRateLimitMessage()}
@@ -502,7 +495,6 @@ function ContactUs() {
             )}
 
             <form onSubmit={submitForm} className="space-y-4">
-              {/* Honeypot field - hidden from users */}
               <input
                 type="text"
                 name="company"
@@ -520,7 +512,7 @@ function ContactUs() {
                 autoComplete="off"
               />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-20">
                 <div>
                   <input
                     type="text"
@@ -568,7 +560,7 @@ function ContactUs() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-20">
                 <div>
                   <input
                     type="email"
