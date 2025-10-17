@@ -34,6 +34,7 @@ function AdminNavbar() {
   const [isOpen, setIsOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const toggleDashboard = () => {
     setIsOpen((prev) => !prev);
@@ -57,6 +58,7 @@ function AdminNavbar() {
 
   const handleLogoutConfirm = async () => {
     try {
+      setLoading(true);
       const refreshToken = localStorage.getItem("adminRefreshToken");
 
       if (refreshToken) {
@@ -75,6 +77,7 @@ function AdminNavbar() {
       console.error("Logout failed:", err);
     } finally {
       setShowLogoutModal(false);
+      setLoading(false);
     }
   };
 
@@ -494,7 +497,7 @@ function AdminNavbar() {
 
       {/* Logout Confirmation Modal */}
       {showLogoutModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100] p-4">
+        <div className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">
               {t("logoutConfirmTitle")}
@@ -511,7 +514,12 @@ function AdminNavbar() {
                 onClick={handleLogoutConfirm}
                 className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition font-medium"
               >
-                {t("confirmLogout")}
+                {" "}
+                {loading ? (
+                  <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-white"></div>
+                ) : (
+                  t("confirmLogout")
+                )}
               </button>
             </div>
           </div>
