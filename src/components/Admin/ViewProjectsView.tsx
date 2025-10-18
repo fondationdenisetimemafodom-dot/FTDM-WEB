@@ -6,7 +6,8 @@
 | @return   JSX element displaying projects table with search and modal functionality
 -----------------------------------------------------------------------------------------------------*/
 
-import React, { useState, useEffect } from "react";
+import type React from "react";
+import { useState, useEffect } from "react";
 import {
   FiTrash2,
   FiEdit,
@@ -107,26 +108,26 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-lg max-w-md w-full p-6">
+      <div className="bg-white rounded-2xl shadow-lg max-w-md w-full p-4 sm:p-6">
         <div className="flex items-center mb-4">
           <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
             <FiAlertCircle className="text-red-500 text-xl" />
           </div>
-          <h2 className="text-lg font-semibold text-gray-800">
+          <h2 className="text-base sm:text-lg font-semibold text-gray-800">
             Delete Project
           </h2>
         </div>
 
-        <p className="text-gray-600 mb-6">
+        <p className="text-sm sm:text-base text-gray-600 mb-6">
           Are you sure you want to delete <strong>"{projectTitle}"</strong>?
           This action cannot be undone.
         </p>
 
-        <div className="flex space-x-3">
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
           <button
             onClick={onClose}
             disabled={loading}
-            className="flex-1 px-4 py-2 text-gray-600 hover:text-gray-800 font-medium disabled:opacity-50"
+            className="flex-1 px-4 py-2 text-gray-600 hover:text-gray-800 font-medium disabled:opacity-50 border border-gray-300 rounded-lg sm:border-0"
           >
             Cancel
           </button>
@@ -215,7 +216,6 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
     }
   };
 
-  // Reset media index when project changes
   useEffect(() => {
     setCurrentMediaIndex(0);
   }, [project]);
@@ -227,30 +227,27 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-lg max-w-4xl w-full max-h-[90vh] overflow-hidden">
-        {/* Modal Header */}
-        <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-xl font-semibold text-gray-800">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-800 pr-4 line-clamp-2">
             {project.title}
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 p-1"
+            className="text-gray-500 hover:text-gray-700 p-1 flex-shrink-0"
           >
-            <FiX className="w-6 h-6" />
+            <FiX className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
         </div>
 
-        {/* Modal Content */}
-        <div className="p-6 max-h-[75vh] overflow-y-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Media Section */}
+        <div className="p-4 sm:p-6 max-h-[75vh] overflow-y-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
             <div className="space-y-4">
               {project.media && project.media.length > 0 ? (
                 <>
-                  <div className="relative bg-gray-100 rounded-lg overflow-hidden h-80">
+                  <div className="relative bg-gray-100 rounded-lg overflow-hidden h-64 sm:h-80">
                     {currentMedia.type === "image" ? (
                       <img
-                        src={currentMedia.url}
+                        src={currentMedia.url || "/placeholder.svg"}
                         alt={project.title}
                         className="w-full h-full object-cover"
                       />
@@ -262,7 +259,6 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                       />
                     )}
 
-                    {/* Media Navigation */}
                     {project.media.length > 1 && (
                       <>
                         <button
@@ -284,14 +280,13 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                     )}
                   </div>
 
-                  {/* Media Thumbnails */}
                   {project.media.length > 1 && (
-                    <div className="flex space-x-2 overflow-x-auto">
+                    <div className="flex space-x-2 overflow-x-auto pb-2">
                       {project.media.map((media, index) => (
                         <button
                           key={media._id}
                           onClick={() => setCurrentMediaIndex(index)}
-                          className={`flex-shrink-0 w-16 h-16 rounded border-2 overflow-hidden ${
+                          className={`flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded border-2 overflow-hidden ${
                             index === currentMediaIndex
                               ? "border-blue-500"
                               : "border-gray-200"
@@ -299,14 +294,14 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                         >
                           {media.type === "image" ? (
                             <img
-                              src={media.url}
+                              src={media.url || "/placeholder.svg"}
                               alt={`Thumbnail ${index + 1}`}
                               className="w-full h-full object-cover"
                             />
                           ) : (
                             <div className="w-full h-full bg-gray-800 flex items-center justify-center">
                               <svg
-                                className="w-6 h-6 text-white"
+                                className="w-5 h-5 sm:w-6 sm:h-6 text-white"
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                               >
@@ -324,68 +319,64 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                   )}
                 </>
               ) : (
-                <div className="h-80 bg-gray-100 rounded-lg flex items-center justify-center">
-                  <p className="text-gray-500">No media available</p>
+                <div className="h-64 sm:h-80 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <p className="text-gray-500 text-sm sm:text-base">
+                    No media available
+                  </p>
                 </div>
               )}
             </div>
 
-            {/* Project Details */}
-            <div className="space-y-6">
-              {/* Status Badge */}
-              <div className="flex items-center space-x-3">
+            <div className="space-y-4 sm:space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
                 <span
-                  className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white ${getStatusColor(
+                  className={`inline-flex items-center px-3 py-1 rounded-full text-xs sm:text-sm font-medium text-white ${getStatusColor(
                     project.status
-                  )}`}
+                  )} w-fit`}
                 >
                   {project.status === "ongoing" ? "Ongoing" : "Completed"}
                 </span>
-                <span className="text-sm text-gray-500">
+                <span className="text-xs sm:text-sm text-gray-500">
                   Created {formatDate(project.createdAt)}
                 </span>
               </div>
 
-              {/* Project Info */}
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3 text-gray-600">
-                  <FiMapPin className="w-5 h-5 text-gray-400" />
-                  <span>{project.location}</span>
+              <div className="space-y-3 sm:space-y-4">
+                <div className="flex items-center space-x-3 text-gray-600 text-sm sm:text-base">
+                  <FiMapPin className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />
+                  <span className="break-words">{project.location}</span>
                 </div>
 
-                <div className="flex items-center space-x-3 text-gray-600">
-                  <FiCalendar className="w-5 h-5 text-gray-400" />
+                <div className="flex items-center space-x-3 text-gray-600 text-sm sm:text-base">
+                  <FiCalendar className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />
                   <span>Started {formatDate(project.startDate)}</span>
                 </div>
 
-                <div className="flex items-center space-x-3 text-gray-600">
-                  <FiUsers className="w-5 h-5 text-gray-400" />
+                <div className="flex items-center space-x-3 text-gray-600 text-sm sm:text-base">
+                  <FiUsers className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />
                   <span>{project.beneficiaries} beneficiaries</span>
                 </div>
               </div>
 
-              {/* Category */}
               <div>
                 <h3 className="text-sm font-semibold text-gray-700 mb-2">
                   Category
                 </h3>
-                <span className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
+                <span className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs sm:text-sm">
                   {project.category}
                 </span>
               </div>
 
-              {/* Description */}
               <div>
                 <h3 className="text-sm font-semibold text-gray-700 mb-2">
                   Description
                 </h3>
                 <div
-                  className="text-gray-600 text-sm leading-relaxed"
+                  className="text-gray-600 text-xs sm:text-sm leading-relaxed"
                   dangerouslySetInnerHTML={{ __html: project.description }}
                 />
               </div>
 
-              {/* Last Updated */}
               <div className="pt-4 border-t">
                 <p className="text-xs text-gray-500">
                   Last updated {formatDate(project.updatedAt)}
@@ -400,7 +391,6 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 };
 
 const ViewProjectsView = () => {
-  // State management
   const [projects, setProjects] = useState<Project[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -550,14 +540,12 @@ const ViewProjectsView = () => {
 
       await axiosInstance.delete(`/api/projects/${deleteModal.projectId}`);
 
-      // Remove project from local state
       const updatedProjects = projects.filter(
         (project) => project._id !== deleteModal.projectId
       );
       setProjects(updatedProjects);
       setFilteredProjects(updatedProjects);
 
-      // Close modal
       setDeleteModal({
         isOpen: false,
         projectId: "",
@@ -611,28 +599,27 @@ const ViewProjectsView = () => {
     fetchProjects();
   };
 
-  // Fetch projects on component mount
   useEffect(() => {
     fetchProjects();
   }, []);
 
   return (
     <>
-      <div className="mx-8 mb-8 p-6 bg-white shadow-sm rounded-2xl">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center space-x-4">
-            <h1 className="text-xl font-semibold text-gray-900">
+      <div className="mx-4 sm:mx-6 lg:mx-8 mb-6 sm:mb-8 p-4 sm:p-6 bg-white shadow-sm rounded-2xl">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 space-y-4 sm:space-y-0">
+          <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+            <h1 className="text-lg sm:text-xl font-semibold text-gray-900">
               All Projects
             </h1>
             {filteredProjects.length > 0 && (
-              <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+              <span className="text-xs sm:text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full w-fit">
                 {filteredProjects.length} project
                 {filteredProjects.length !== 1 ? "s" : ""}
                 {searchQuery && ` matching "${searchQuery}"`}
               </span>
             )}
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4">
             <button
               onClick={retryFetch}
               disabled={loading}
@@ -643,15 +630,14 @@ const ViewProjectsView = () => {
                 className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
               />
             </button>
-            {/* Search Bar */}
-            <div className="relative">
+            <div className="relative flex-1 sm:flex-initial">
               <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Search projects by title..."
+                placeholder="Search projects..."
                 value={searchQuery}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 text-sm w-64"
+                className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 text-sm w-full sm:w-64"
               />
               {searchQuery && (
                 <button
@@ -665,25 +651,23 @@ const ViewProjectsView = () => {
           </div>
         </div>
 
-        {/* Error Message */}
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
+          <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-lg flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
             <FiAlertCircle className="text-red-500 flex-shrink-0" />
             <div className="flex-1">
-              <p className="text-red-700">{error}</p>
+              <p className="text-sm sm:text-base text-red-700">{error}</p>
             </div>
             <button
               onClick={retryFetch}
-              className="text-red-600 hover:text-red-800 text-sm font-medium"
+              className="text-red-600 hover:text-red-800 text-sm font-medium w-fit"
             >
               Try Again
             </button>
           </div>
         )}
 
-        {/* Projects Table */}
         <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-          <div className="overflow-x-auto">
+          <div className="hidden lg:block overflow-x-auto">
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
@@ -718,7 +702,8 @@ const ViewProjectsView = () => {
                   <tr>
                     <td colSpan={8} className="py-12 text-center">
                       <div className="flex flex-col items-center justify-center space-y-3">
-                        <FiLoader className="animate-spin text-cyan-500 text-2xl" />
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+
                         <p className="text-gray-500">Loading projects...</p>
                       </div>
                     </td>
@@ -752,7 +737,10 @@ const ViewProjectsView = () => {
                       <td className="py-3 px-4">
                         <div className="flex items-center space-x-3">
                           <img
-                            src={getThumbnailUrl(project.media)}
+                            src={
+                              getThumbnailUrl(project.media) ||
+                              "/placeholder.svg"
+                            }
                             alt={project.title}
                             className="w-10 h-10 rounded-[6px] cursor-pointer object-cover hover:opacity-80 transition-opacity"
                             onClick={() => handleViewProject(project)}
@@ -822,17 +810,125 @@ const ViewProjectsView = () => {
               </tbody>
             </table>
           </div>
+
+          <div className="lg:hidden">
+            {loading ? (
+              <div className="py-12 text-center">
+                <div className="flex flex-col items-center justify-center space-y-3">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                  <p className="text-gray-500 text-sm">Loading projects...</p>
+                </div>
+              </div>
+            ) : filteredProjects.length === 0 ? (
+              <div className="py-12 text-center px-4">
+                <div className="flex flex-col items-center justify-center space-y-3">
+                  <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
+                    <FiAlertCircle className="text-gray-400 text-2xl" />
+                  </div>
+                  <p className="text-gray-500 text-sm">
+                    {searchQuery
+                      ? `No projects found matching "${searchQuery}"`
+                      : "No projects found"}
+                  </p>
+                  {!searchQuery && (
+                    <p className="text-xs text-gray-400">
+                      Create your first project to get started
+                    </p>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="divide-y divide-gray-200">
+                {filteredProjects.map((project) => (
+                  <div
+                    key={project._id}
+                    className="p-4 hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex items-start space-x-3 mb-3">
+                      <img
+                        src={
+                          getThumbnailUrl(project.media) || "/placeholder.svg"
+                        }
+                        alt={project.title}
+                        className="w-16 h-16 rounded-lg cursor-pointer object-cover hover:opacity-80 transition-opacity flex-shrink-0"
+                        onClick={() => handleViewProject(project)}
+                      />
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-medium text-gray-900 text-sm mb-1 line-clamp-2">
+                          {project.title}
+                        </h3>
+                        <div className="flex flex-wrap items-center gap-2 mb-2">
+                          <span
+                            className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium text-white ${getStatusColor(
+                              project.status
+                            )}`}
+                          >
+                            {project.status === "ongoing"
+                              ? "Ongoing"
+                              : "Completed"}
+                          </span>
+                          <span className="text-xs text-gray-500">
+                            {project.category}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 mb-3 text-xs text-gray-600">
+                      <div className="flex items-center space-x-2">
+                        <FiMapPin className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
+                        <span className="truncate">{project.location}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <FiUsers className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
+                        <span>{project.beneficiaries} beneficiaries</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <FiCalendar className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
+                        <span>Updated {formatDate(project.updatedAt)}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                      <button
+                        onClick={() => handleViewProject(project)}
+                        className="text-cyan-500 text-sm font-medium hover:text-cyan-600 transition-colors"
+                      >
+                        View Details
+                      </button>
+                      <div className="flex items-center space-x-3">
+                        <button
+                          onClick={() => handleUpdateProject(project._id)}
+                          className="text-cyan-500 hover:text-cyan-600 transition-colors p-1"
+                          title="Edit project"
+                        >
+                          <FiEdit className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleDeleteProject(project._id, project.title)
+                          }
+                          className="text-red-500 hover:text-red-600 transition-colors p-1"
+                          title="Delete project"
+                        >
+                          <FiTrash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Project Detail Modal */}
       <ProjectDetailModal
         isOpen={showProjectModal}
         onClose={() => setShowProjectModal(false)}
         project={selectedProject}
       />
 
-      {/* Delete Confirmation Modal */}
       <DeleteConfirmationModal
         isOpen={deleteModal.isOpen}
         onClose={closeDeleteModal}
