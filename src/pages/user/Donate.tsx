@@ -95,15 +95,16 @@ function Donate() {
 
         try {
           const response = await axios.get(
-            `${API_BASE_URL}/api/payments/webhook`,
+            `${API_BASE_URL}/api/donations/status/${transactionId}`,
             {
               headers: { "Content-Type": "application/json" },
             }
           );
-
+          console.log("Checking donation status:");
+          console.log("Polling response:", response.data);
           const { status } = response.data;
-
-          if (status === "completed") {
+          console.log("Donation status:", status);
+          if (status === "successful") {
             clearInterval(pollInterval);
             resolve(true);
           } else if (status === "failed" || status === "expired") {
@@ -198,6 +199,7 @@ function Donate() {
       }
     } catch (error: any) {
       setShowPendingPopup(false);
+      console.log(error);
       setErrorMessage(
         error?.response?.data?.message || "Network error, please try again."
       );
