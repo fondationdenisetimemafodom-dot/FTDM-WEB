@@ -22,6 +22,8 @@ import {
   FaGlobe,
 } from "react-icons/fa";
 import API_BASE_URL from "../../lib/api";
+import BgImage from "../../assets/images/contact.jpg";
+import { motion } from "framer-motion";
 
 /*-----------------------------------------------------------------------------------------------------
 | TypeScript Interfaces
@@ -552,13 +554,50 @@ function ContactUs() {
        | @return --
        -----------------------------------------------------------------------------------------------------*/}
       <section>
+        {/* Hero Section */}
+        <div
+          className="flex flex-col items-center justify-center md:min-h-screen w-full px-4 py-20"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(${BgImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <div className="flex flex-col items-center text-center max-w-[1074px] gap-6 md:gap-10">
+            <motion.span
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5, delay: 0.8 }}
+              className="text-[40px] md:text-4xl lg:text-[56px] text-center font-bold text-white leading-tight"
+            >
+              Let's Start a Conversation
+            </motion.span>
+
+            <motion.span
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.5 }}
+              className="text-lg md:text-xl lg:text-3xl font-regular text-white text-center"
+            >
+              Whether you're interested in partnering with us, volunteering your
+              time and skills, learning more about our initiatives, or simply
+              want to share your thoughts, we're here to listen. Your voice
+              matters in our mission to build stronger, more compassionate
+              communities. Reach out through any of our channels below, and
+              let's explore how we can work together to create meaningful
+              change.
+            </motion.span>
+          </div>
+        </div>
+
         <div className="flex flex-col gap-12 items-center">
           <div className="flex flex-col lg:flex-row items-start justify-center bg-[#F3F5F8] w-full py-10 lg:py-20 px-4 lg:px-25 gap-8 lg:gap-28">
-            <div className=" hidden lg:block mt-2 bg-soft-dark-500 h-4 w-20"></div>
+            <div className="hidden lg:block mt-2 bg-soft-dark-500 h-4 w-20"></div>
 
             <div className="w-full lg:w-auto">
               <div className="flex flex-row items-center gap-4">
-                <div className=" block lg:hidden  bg-soft-dark-500 h-3 w-15"></div>
+                <div className="block lg:hidden bg-soft-dark-500 h-3 w-15"></div>
                 <p className="uppercase text-xl lg:text-2xl font-bold text-soft-dark-500">
                   {t("title")}
                 </p>
@@ -615,11 +654,11 @@ function ContactUs() {
           </div>
 
           {/*-----------------------------------------------------------------------------------------------------
-           | @blocktype MessageForm
-           | @brief Contact form for sending identified messages with security features
-           | @param --
-           | @return --
-           -----------------------------------------------------------------------------------------------------*/}
+     | @blocktype MessageForm
+     | @brief Contact form for sending identified messages with security features
+     | @param --
+     | @return --
+     -----------------------------------------------------------------------------------------------------*/}
           <div className="bg-white rounded-xl p-4 lg:p-8 max-w-4xl w-full px-4">
             <h3 className="text-2xl lg:text-[40px] text-soft-dark-500 font-bold mb-6 text-center">
               {t("formHeadline")}

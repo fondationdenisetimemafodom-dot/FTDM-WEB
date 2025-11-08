@@ -19,7 +19,7 @@ import axiosInstance from "../../lib/axiosInstance";
 import homeImage from "../../assets/images/home-image.png";
 import BgImage from "../../assets/images/home-bg.png";
 import { Loader2 } from "lucide-react";
-
+import { motion } from "framer-motion";
 type MediaItem = {
   publicId: string;
   type: string;
@@ -158,28 +158,46 @@ function Home() {
           }}
         >
           <div>
-            <span className=" block max-w-[500px] font-bold text-[40px] md:text-[60px] text-main-500 ">
+            <motion.span
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5, delay: 0.8 }}
+              className="block max-w-[500px] font-bold text-[40px] md:text-[60px] text-main-500"
+            >
               Together for Human Solidarity
-            </span>
-            <span className=" text-[20px] md:text-[30px] font-medium  text-secondary-500 block mt-6 max-w-[567px]">
+            </motion.span>
+
+            <motion.span
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.8 }}
+              className="text-[20px] md:text-[30px] font-medium text-secondary-500 block mt-6 max-w-[567px]"
+            >
               Fondation Denise Time Mafodom is committed to philanthropic,
               educational, cultural, scientific, and social initiatives that
               empower communities.
-            </span>
-            <div className="flex items-center gap-10 md:gap-24 mt-12 ">
+            </motion.span>
+
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.5, delay: 0.8 }}
+              className="flex items-center gap-10 md:gap-24 mt-12"
+            >
               <NavLink
                 to="/donate"
-                className="flex items-center justify-center bg-main-500 w-28 lg:w-50 p-2 text-white text-2xl font-semibold rounded-[12px] hover:cursor-pointer"
+                className="flex items-center justify-center bg-main-500 w-28 lg:w-50 p-2 text-white text-2xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
                 Donate
               </NavLink>
+
               <button
                 onClick={() => setShowVolunteer(true)}
-                className="border-[3px] border-main-500  py-2 px-4 text-main-500 text-2xl font-semibold rounded-[12px] hover:cursor-pointer"
+                className="border-[3px] border-main-500 py-2 px-4 text-main-500 text-2xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
                 Volunteer with us
               </button>
-            </div>
+            </motion.div>
           </div>
           <img
             src={homeImage}

@@ -15,6 +15,8 @@ import Mission3 from "../../assets/images/mission3.png";
 import API_BASE_URL from "../../lib/api";
 import ContributorCard from "../../components/ContributorCard";
 import { NavLink } from "react-router";
+import BgImage from "../../assets/images/aboutus.jpg";
+import { motion } from "framer-motion";
 
 interface SocialMediaLinks {
   facebook?: string;
@@ -88,16 +90,40 @@ function AboutUs() {
       <UserNavbar />
 
       {/* Hero section */}
-      <div className="flex flex-col items-center w-screen">
-        <div className="flex flex-col items-center max-w-[1074px] gap-10 px-4 py-25">
-          <span className="text-[40px] lg:text-[56px] text-center font-bold text-main-500">
-            We are a non-governmental organization
-          </span>
-          <span className="text-lg font-semibold text-secondary-text-500 text-center">
-            Fondation Denise Time Mafodom is committed to philanthropic,
-            educational, cultural, scientific, and social initiatives that
-            empower communities.
-          </span>
+      <div
+        className="flex flex-col items-center justify-center w-full px-4 py-20"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(${BgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="flex flex-col items-center text-center max-w-[1074px] gap-6 md:gap-10">
+          <motion.span
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, delay: 0.8 }}
+            className="text-[40px]  md:text-4xl lg:text-[56px] text-center font-bold text-white leading-tight"
+          >
+            Building Bridges of Hope Across Communities
+          </motion.span>
+
+          <motion.span
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.5 }}
+            className="text-lg md:text-xl lg:text-3xl font-regular text-white text-center"
+          >
+            Born from a vision of boundless human solidarity, Fondation Denise
+            Time Mafodom transforms lives through compassionate action. From the
+            vibrant heart of Dschang, Cameroon, we weave together philanthropic
+            dreams, educational opportunities, cultural celebrations, scientific
+            innovation, and humanitarian missions—creating ripples of positive
+            change that touch communities near and far. Every project we
+            undertake, every hand we extend, carries the promise of a brighter
+            tomorrow built on dignity, knowledge, and shared humanity.
+          </motion.span>
         </div>
       </div>
 

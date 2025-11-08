@@ -6,6 +6,8 @@ import axiosInstance from "../../lib/axiosInstance";
 import { Loader2 } from "lucide-react";
 import ProjectModal from "../../components/ProjectModal";
 import { NavLink } from "react-router";
+import BgImage from "../../assets/images/projects.jpg";
+import { motion } from "framer-motion";
 
 type MediaItem = {
   publicId: string;
@@ -156,15 +158,37 @@ function Projects() {
       <UserNavbar />
 
       {/* Hero Section */}
-      <div className="flex flex-col items-center w-full bg-white py-12 md:py-16 lg:py-20">
-        <div className="flex flex-col items-center max-w-[1074px] gap-6 md:gap-10 px-4 md:px-6 lg:px-8">
-          <h1 className="text-[40px] md:text-4xl lg:text-[56px] text-center font-bold text-main-500 leading-tight">
-            Our Projects and work
-          </h1>
-          <p className="text-lg md:text-xl lg:text-3xl font-semibold text-secondary-text-500 text-center">
-            Discover the comprehensive initiatives we've undertaken to create
-            lasting positive change in communities across India.
-          </p>
+      <div
+        className=" w-full  p-10 lg:p-25 flex flex-col lg:flex-row justify-center items-center "
+        style={{
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(${BgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="flex flex-col items-center justify-center text-center max-w-[1074px] gap-6 md:gap-10 px-4 md:px-6 lg:px-8">
+          <motion.h1
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, delay: 0.8 }}
+            className="text-[40px]  md:text-4xl lg:text-[56px] text-center font-bold text-white leading-tight"
+          >
+            Transforming Vision Into Tangible Impact
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.5 }}
+            className="text-lg md:text-xl lg:text-3xl font-regular text-white text-center"
+          >
+            From building healthcare facilities to empowering youth through
+            education, explore the multifaceted initiatives we've brought to
+            life across Cameroon and beyond. Each project represents a
+            commitment fulfilled, a community uplifted, and a step forward in
+            our mission to foster human solidarity through meaningful action
+            that creates ripples of lasting change for generations to come.
+          </motion.p>
         </div>
       </div>
 
