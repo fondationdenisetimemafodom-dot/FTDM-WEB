@@ -110,15 +110,19 @@ function UserNavbar() {
             {t("donate")}
           </NavLink>
         </div>
-
-        {/* Mobile Hamburger Icon */}
-        <button
-          onClick={toggleMenu}
-          className="lg:hidden text-main-500 p-2"
-          aria-label="Toggle menu"
-        >
-          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        <div className="flex  items-center gap-2">
+          <div className="lg:hidden relative">
+            <LanguageSwitcher />
+          </div>
+          {/* Mobile Hamburger Icon */}
+          <button
+            onClick={toggleMenu}
+            className="lg:hidden text-main-500 p-2"
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
