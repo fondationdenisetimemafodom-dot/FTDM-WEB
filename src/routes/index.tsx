@@ -17,6 +17,8 @@ import ForgotPassword from "../pages/admin/auth/ForgotPassword";
 import ResetPassword from "../pages/admin/auth/ResetPassword";
 import SocialMedia from "../pages/admin/SocialMedia";
 import ContributorsPartners from "../pages/admin/ContributorsPartners";
+import ProjectDetailsPage from "../pages/user/ProjectDetail";
+import ProjectDetails from "../pages/user/ProjectDetail";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,11 @@ const router = createBrowserRouter([
     path: "/projects",
     element: <Projects />,
   },
+  {
+    path: "/projects/:id",
+    element: <ProjectDetails />,
+  },
+
   {
     path: "/fdtm-admin",
     element: <AdminDashboard />,

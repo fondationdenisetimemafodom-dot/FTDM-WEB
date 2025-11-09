@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Add this import
 import UserNavbar from "../../components/UserNavbar";
 import Footer from "../../components/Footer";
 import ProjectCard from "../../components/ProjectCard";
 import axiosInstance from "../../lib/axiosInstance";
 import { Loader2 } from "lucide-react";
-import ProjectModal from "../../components/ProjectModal";
+// Remove ProjectModal import
 import { NavLink } from "react-router";
 import BgImage from "../../assets/images/projects.jpg";
 import { motion } from "framer-motion";
@@ -19,17 +20,6 @@ type MediaItem = {
 /*-----------------------------------------------------------------------------------------------------
 | @interface Project
 | @brief    Interface defining project structure from backend
-| @param    _id - unique project identifier
-| @param    title - project title/name
-| @param    category - project cause/category
-| @param    location - project location
-| @param    status - project status (ongoing/completed)
-| @param    beneficiaries - number of beneficiaries
-| @param    startDate - project start date
-| @param    description - project description
-| @param    media - array of project media items
-| @param    createdAt - project creation timestamp
-| @param    updatedAt - last update timestamp
 -----------------------------------------------------------------------------------------------------*/
 interface Project {
   _id: string;
@@ -51,7 +41,7 @@ interface Project {
 -----------------------------------------------------------------------------------------------------*/
 const CATEGORIES = [
   "All Projects",
-  "Health",
+  "Health Care",
   "Education",
   "Culture",
   "Social Development",
@@ -59,6 +49,7 @@ const CATEGORIES = [
 ];
 
 function Projects() {
+  const navigate = useNavigate(); // Add this hook
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [projects, setProjects] = useState<Project[]>([]);
@@ -66,13 +57,11 @@ function Projects() {
   const [activeFilter, setActiveFilter] = useState("All Projects");
   const [totalProjects, setTotalProjects] = useState(0);
   const [totalBeneficiaries, setTotalBeneficiaries] = useState(0);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  // Remove selectedProject state
 
   /*-----------------------------------------------------------------------------------------------------
   | @function fetchProjects
   | @brief    Fetches all projects from backend API and calculates totals
-  | @param    --
-  | @return   --
   -----------------------------------------------------------------------------------------------------*/
   const fetchProjects = async () => {
     try {
@@ -109,8 +98,6 @@ function Projects() {
   /*-----------------------------------------------------------------------------------------------------
   | @function handleFilterChange
   | @brief    Filters projects based on selected category
-  | @param    category - selected category to filter by
-  | @return   --
   -----------------------------------------------------------------------------------------------------*/
   const handleFilterChange = (category: string) => {
     setActiveFilter(category);
@@ -118,7 +105,6 @@ function Projects() {
     if (category === "All Projects") {
       setFilteredProjects(projects);
     } else {
-      // Filter projects by category (case-insensitive comparison)
       const filtered = projects.filter(
         (project) =>
           project.category.trim().toLowerCase() ===
@@ -130,22 +116,11 @@ function Projects() {
 
   /*-----------------------------------------------------------------------------------------------------
   | @function handleProjectClick
-  | @brief    Opens modal with selected project details
-  | @param    project - project object to display in modal
-  | @return   --
+  | @brief    Navigates to project details page
+  | @param    project - project object to view details
   -----------------------------------------------------------------------------------------------------*/
   const handleProjectClick = (project: Project) => {
-    setSelectedProject(project);
-  };
-
-  /*-----------------------------------------------------------------------------------------------------
-  | @function handleCloseModal
-  | @brief    Closes project details modal
-  | @param    --
-  | @return   --
-  -----------------------------------------------------------------------------------------------------*/
-  const handleCloseModal = () => {
-    setSelectedProject(null);
+    navigate(`/projects/${project._id}`, { state: { project } });
   };
 
   // Fetch projects on component mount
@@ -159,7 +134,7 @@ function Projects() {
 
       {/* Hero Section */}
       <div
-        className=" w-full  p-10 lg:p-25 flex flex-col lg:flex-row justify-center items-center "
+        className="w-full p-10 lg:p-25 flex flex-col lg:flex-row justify-center items-center"
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(${BgImage})`,
           backgroundSize: "cover",
@@ -172,7 +147,7 @@ function Projects() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 0.8 }}
-            className="text-[40px]  md:text-4xl lg:text-[56px] text-center font-bold text-white leading-tight"
+            className="text-[40px] md:text-4xl lg:text-[56px] text-center font-bold text-white leading-tight"
           >
             Transforming Vision Into Tangible Impact
           </motion.h1>
@@ -262,6 +237,7 @@ function Projects() {
           )}
         </div>
       </div>
+
       {/* Collective Impact Objectives Section */}
       <div className="flex flex-col items-center py-12 md:py-16 lg:py-20 gap-6 px-4 md:px-6 lg:px-8 bg-white">
         <h2 className="font-bold text-3xl md:text-4xl lg:text-[48px] text-center text-gray-800">
@@ -311,8 +287,8 @@ function Projects() {
           Donate
         </NavLink>
       </div>
-      {/* Project Modal */}
-      <ProjectModal project={selectedProject} onClose={handleCloseModal} />
+
+      {/* Remove ProjectModal component */}
 
       <Footer />
     </div>

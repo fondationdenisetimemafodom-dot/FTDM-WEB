@@ -14,7 +14,7 @@ import { NavLink } from "react-router-dom";
 import VolunteerForm from "../../components/VolunteerForm";
 import PartnershipForm from "../../components/PartnershipForm";
 import ProjectCard from "../../components/ProjectCard";
-import ProjectModal from "../../components/ProjectModal";
+import ProjectModal from "../../components/ProjectDetailsPage";
 import axiosInstance from "../../lib/axiosInstance";
 import homeImage from "../../assets/images/home-image.png";
 import BgImage from "../../assets/images/home-bg.png";
@@ -562,9 +562,6 @@ function Home() {
           <PartnershipForm />
         </Modal>
       )}
-
-      {/* Project Modal */}
-      <ProjectModal project={selectedProject} onClose={handleCloseModal} />
     </div>
   );
 }
