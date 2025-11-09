@@ -101,48 +101,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const plainDescription = stripHtmlTags(description);
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
-      {/* Project Media */}
-      <div className="relative w-full h-48 md:h-56 overflow-hidden bg-gray-200">
-        {mediaData.type === "video" ? (
-          <video
-            src={mediaData.url}
-            className="w-full h-full object-cover"
-            muted
-            loop
-            playsInline
-          />
-        ) : (
-          <img
-            src={mediaData.url}
-            alt={title}
-            className="w-full h-full object-cover"
-          />
-        )}
-
-        {/* Status Badge */}
-        <div className="absolute top-4 left-4">
-          <span
-            className={`px-3 py-1 rounded-full text-xs font-semibold ${
-              status === "ongoing"
-                ? "bg-green-500 text-white"
-                : "bg-gray-500 text-white"
-            }`}
-          >
-            {status === "ongoing" ? "Ongoing" : "Completed"}
-          </span>
-        </div>
-
-        {/* Category Badge */}
-        <div className="absolute top-4 right-4">
-          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white text-gray-700 border border-gray-200">
-            {category}
-          </span>
-        </div>
-      </div>
-
+    <div className="w-[90vw] p-10  overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col md:flex-row justify-between md:h-[75vh] h-[90vh]">
       {/* Project Details */}
-      <div className="p-5 flex flex-col flex-grow">
+      <div className="p-5 flex flex-col flex-1">
         {/* Title */}
         <h3 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2">
           {title}
@@ -184,6 +145,45 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         >
           Read more
         </button>
+      </div>
+
+      {/* Project Media */}
+      <div className="flex-1 relative rounded-3xl overflow-hidden bg-gray-200">
+        {mediaData.type === "video" ? (
+          <video
+            src={mediaData.url}
+            className="w-full h-full object-cover"
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <img
+            src={mediaData.url}
+            alt={title}
+            className="w-full h-full object-cover"
+          />
+        )}
+
+        {/* Status Badge */}
+        <div className="absolute top-4 left-4">
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-semibold ${
+              status === "ongoing"
+                ? " bg-gray-500 text-white"
+                : "bg-green-500 text-white"
+            }`}
+          >
+            {status === "ongoing" ? "Ongoing" : "Completed"}
+          </span>
+        </div>
+
+        {/* Category Badge */}
+        <div className="absolute top-4 right-4">
+          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white text-gray-700 border border-gray-200">
+            {category}
+          </span>
+        </div>
       </div>
     </div>
   );

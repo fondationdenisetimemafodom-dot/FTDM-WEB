@@ -100,7 +100,7 @@ function UserNavbar() {
           <NavLink
             to="/donate"
             className={({ isActive }) =>
-              `px-8 py-3 rounded-[12px] text-lg font-medium transition ${
+              `px-8 py-3 hover:vibrate rounded-[12px] text-lg font-medium transition ${
                 isActive
                   ? "bg-white text-main-500 border-b-4 border-main-500"
                   : "bg-main-500 text-white hover:opacity-90"
@@ -203,7 +203,7 @@ function UserNavbar() {
               to="/donate"
               onClick={closeMenu}
               className={({ isActive }) =>
-                `px-6 py-3 rounded-[12px] text-lg font-medium text-center transition ${
+                `px-6 py-3 hover:vibrate rounded-[12px] text-lg font-medium text-center transition ${
                   isActive
                     ? "bg-white text-main-500 border-2 border-main-500"
                     : "bg-main-500 text-white hover:opacity-90"

@@ -433,8 +433,8 @@ function Home() {
               className="w-full flex justify-center"
             >
               <NavLink
-                to="/donations"
-                className="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-12 rounded-lg transition-colors duration-300"
+                to="/donate"
+                className="bg-blue-600 hover:vibrate text-white text-lg font-semibold py-3 px-12 rounded-lg transition-colors duration-300"
               >
                 Donate today
               </NavLink>

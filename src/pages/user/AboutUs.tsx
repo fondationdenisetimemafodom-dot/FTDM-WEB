@@ -129,11 +129,25 @@ function AboutUs() {
 
       {/* Mission section */}
       <div className="w-full p-10 lg:p-25 flex flex-col justify-between items-center bg-[#F3F5F8]">
-        <span className="text-[40px] font-bold self-center">
+        <motion.span
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-[40px] font-bold self-center"
+        >
           Our Mission And Vision
-        </span>
+        </motion.span>
+
         <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-30 mt-10">
-          <div className="flex flex-col items-start gap-10 self-start mt-8">
+          {/* Mission */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-col items-start gap-10 self-start mt-8"
+          >
             <div className="flex flex-row items-start gap-5 self-start mt-8">
               <div className="mt-2 bg-soft-dark-500 h-4 w-20"></div>
               <p className="uppercase text-lg md:text-2xl font-bold text-soft-dark-500">
@@ -142,17 +156,29 @@ function AboutUs() {
             </div>
             <div className="max-w-[496px]">
               <p className="text-lg md:text-3xl font-bold text-secondary-text-500">
-                We empower communities through education, culture, and
-                solidarity
+                Igniting hope, empowering lives, transforming communities
+                through shared humanity
               </p>
               <p className="text-[16px] md:text-[20px] font-bold text-gray-400 mt-8">
-                To promote human solidarity by empowering communities through
-                education, cultural exchange, humanitarian aid, scientific
-                collaboration, and social development
+                To champion human solidarity by creating pathways to opportunity
+                through transformative education, vibrant cultural exchange,
+                compassionate humanitarian aid, groundbreaking scientific
+                collaboration, and sustainable social development. We believe
+                that when communities are equipped with knowledge, resources,
+                and unwavering support, they don't just survive—they flourish,
+                innovate, and inspire generations to come.
               </p>
             </div>
-          </div>
-          <div className="flex flex-col items-start gap-10 self-start mt-8">
+          </motion.div>
+
+          {/* Vision */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex flex-col items-start gap-10 self-start mt-8"
+          >
             <div className="flex flex-row items-start gap-5 self-start mt-8">
               <div className="mt-2 bg-soft-dark-500 h-4 w-20"></div>
               <p className="uppercase text-lg md:text-2xl font-bold text-soft-dark-500">
@@ -161,21 +187,29 @@ function AboutUs() {
             </div>
             <div className="max-w-[496px]">
               <p className="text-lg md:text-3xl font-bold text-secondary-text-500">
-                We empower communities through education, culture, and
-                solidarity
+                A world united by compassion, where every community thrives with
+                dignity and purpose
               </p>
               <p className="text-[16px] md:text-[20px] font-bold text-gray-400 mt-8">
-                A world where compassion and solidarity transcend borders, and
-                every community has the knowledge, resources, and support to
-                thrive
+                We envision a future where compassion and solidarity transcend
+                all borders—geographic, cultural, and economic. A world where
+                every community, regardless of circumstance, possesses the
+                knowledge to grow, the resources to prosper, and the support
+                network to overcome any challenge. Where children dream without
+                limits, where traditions are celebrated as bridges rather than
+                barriers, and where human potential knows no boundaries.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Mission Cards */}
         <div className="w-full flex flex-col md:flex-row items-center justify-center gap-10 mt-20">
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="shadow-md rounded-2xl p-8 py-16 max-w-[350px] flex flex-col items-start justify-center gap-6"
             style={{
               backgroundImage: `url(${Mission2})`,
@@ -188,12 +222,18 @@ function AboutUs() {
               Education
             </span>
             <span className="text-[12px] md:text-[16px] font-bold text-white">
-              Gender equality is fundamental to the realization of human rights
-              and a desire to benefit society as a whole, including girls and
-              women.
+              Unlocking potential through knowledge and learning opportunities.
+              We believe education is the cornerstone of empowerment, opening
+              doors to brighter futures and breaking cycles of poverty across
+              generations.
             </span>
-          </div>
-          <div
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
             className="shadow-md rounded-2xl p-8 py-16 max-w-[350px] flex flex-col items-start justify-center gap-6"
             style={{
               backgroundImage: `url(${Mission3})`,
@@ -206,12 +246,18 @@ function AboutUs() {
               Culture
             </span>
             <span className="text-[12px] md:text-[16px] font-bold text-white">
-              Gender equality is fundamental to the realization of human rights
-              and a desire to benefit society as a whole, including girls and
-              women.
+              Celebrating heritage while building bridges between communities.
+              We honor cultural traditions as sources of strength and identity,
+              fostering mutual understanding and respect across diverse
+              backgrounds.
             </span>
-          </div>
-          <div
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
             className="shadow-md rounded-2xl p-8 py-16 max-w-[350px] flex flex-col items-start justify-center gap-6"
             style={{
               backgroundImage: `url(${Mission1})`,
@@ -224,14 +270,14 @@ function AboutUs() {
               Health Endeavours
             </span>
             <span className="text-[12px] md:text-[16px] font-bold text-white">
-              Gender equality is fundamental to the realization of human rights
-              and a desire to benefit society as a whole, including girls and
-              women.
+              Building healthier communities through accessible healthcare and
+              wellness initiatives. We ensure that quality health services reach
+              those who need them most, because well-being is a fundamental
+              human right.
             </span>
-          </div>
+          </motion.div>
         </div>
       </div>
-
       {/* Contributors section */}
       <div className="w-full p-10 lg:p-25 flex flex-col justify-between items-center bg-white">
         <div className="flex flex-col justify-between items-center mb-12">
@@ -343,7 +389,7 @@ function AboutUs() {
         </span>
         <NavLink
           to="/donate"
-          className="flex items-center justify-center bg-main-500  py-3 px-5 text-white text-2xl font-semibold rounded-[12px] hover:cursor-pointer"
+          className="flex items-center hover:vibrate justify-center bg-main-500  py-3 px-5 text-white text-2xl font-semibold rounded-[12px] hover:cursor-pointer"
         >
           Donate to become
         </NavLink>

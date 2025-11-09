@@ -215,7 +215,7 @@ function Projects() {
 
       {/* Projects Section */}
       <div className="flex-grow w-full py-12 bg-white md:py-16">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+        <div className="w-[90%] mx-auto px-4 md:px-6 lg:px-8">
           {/* Loading State */}
           {loading && (
             <div className="flex flex-col items-center justify-center py-20">
@@ -250,7 +250,7 @@ function Projects() {
 
           {/* Projects Grid */}
           {!loading && !error && filteredProjects.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="flex flex-col gap-6 md:gap-8">
               {filteredProjects.map((project) => (
                 <ProjectCard
                   key={project._id}
