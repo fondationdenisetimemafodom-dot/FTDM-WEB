@@ -10,11 +10,10 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import UserNavbar from "../../components/UserNavbar";
 import Footer from "../../components/Footer";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import VolunteerForm from "../../components/VolunteerForm";
 import PartnershipForm from "../../components/PartnershipForm";
 import ProjectCard from "../../components/ProjectCard";
-import ProjectModal from "../../components/ProjectDetailsPage";
 import axiosInstance from "../../lib/axiosInstance";
 import homeImage from "../../assets/images/home-image.png";
 import BgImage from "../../assets/images/home-bg.png";
@@ -97,8 +96,7 @@ function Home() {
   const [showPartnership, setShowPartnership] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
+  const navigate = useNavigate();
   /*-----------------------------------------------------------------------------------------------------
   | @function fetchProjects
   | @brief    Fetches first 3 projects from backend API for home page display
@@ -127,7 +125,7 @@ function Home() {
   | @return   --
   -----------------------------------------------------------------------------------------------------*/
   const handleProjectClick = (project: Project) => {
-    setSelectedProject(project);
+    navigate(`/projects/${project._id}`, { state: { project } });
   };
 
   /*-----------------------------------------------------------------------------------------------------
@@ -136,9 +134,6 @@ function Home() {
   | @param    --
   | @return   --
   -----------------------------------------------------------------------------------------------------*/
-  const handleCloseModal = () => {
-    setSelectedProject(null);
-  };
 
   // Fetch projects on component mount
   useEffect(() => {
