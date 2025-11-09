@@ -17,7 +17,7 @@ import ErrorPopup from "../../components/ErrorPopup";
 import axios from "axios";
 import API_BASE_URL from "../../lib/api";
 import { motion } from "framer-motion";
-import BgImage from "../../assets/images/donate.jpg";
+import BgImage from "../../assets/images/Donate.jpg";
 /*-----------------------------------------------------------------------------------------------------
 | @function Donate
 | @brief Enhanced donation component with webhook verification and comprehensive state management
