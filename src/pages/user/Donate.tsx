@@ -16,7 +16,8 @@ import PendingPopup from "../../components/PendingPopup";
 import ErrorPopup from "../../components/ErrorPopup";
 import axios from "axios";
 import API_BASE_URL from "../../lib/api";
-
+import { motion } from "framer-motion";
+import BgImage from "../../assets/images/donate.jpg";
 /*-----------------------------------------------------------------------------------------------------
 | @function Donate
 | @brief Enhanced donation component with webhook verification and comprehensive state management
@@ -219,13 +220,40 @@ function Donate() {
        | @return --
        -----------------------------------------------------------------------------------------------------*/}
       <div className="flex flex-col items-center w-screen">
-        <div className="flex flex-col items-center max-w-[1074px] gap-6 lg:gap-10 px-4 py-10 lg:py-25">
-          <span className="text-[40px] lg:text-[56px] font-bold text-main-500 text-center">
-            {t("header")}
-          </span>
-          <span className="text-lg lg:text-3xl font-semibold text-secondary-text-500 text-center">
-            {t("subheader")}
-          </span>
+        <div
+          className="flex flex-col items-center justify-center md:min-h-screen w-full px-4 py-20"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(${BgImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <div className="flex flex-col items-center text-center max-w-[1074px] gap-6 md:gap-10">
+            <motion.span
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5, delay: 0.8 }}
+              className="text-[40px] md:text-4xl lg:text-[56px] text-center font-bold text-white leading-tight"
+            >
+              Be the Change You Wish to See
+            </motion.span>
+
+            <motion.span
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.5 }}
+              className="text-lg md:text-xl lg:text-3xl font-regular text-white text-center"
+            >
+              Your generosity fuels our mission of human solidarity and
+              transforms lives across Cameroon and beyond. Whether through
+              Mobile Money, PayPal, or other channels, every contribution—no
+              matter the size—becomes a beacon of hope, empowering education,
+              healthcare, cultural initiatives, and community development.
+              Together, we turn compassion into action and dreams into reality
+              for those who need it most.
+            </motion.span>
+          </div>
         </div>
 
         {/*-----------------------------------------------------------------------------------------------------

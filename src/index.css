@@ -12,3 +12,35 @@
 .tiptap p.is-editor-empty::before {
   @apply text-gray-400 content-[attr(data-placeholder)] float-left pointer-events-none h-0;
 }
+
+.text-stroke-white {
+  -webkit-text-stroke: 4px white;
+}
+.text-stroke-white-2 {
+  -webkit-text-stroke: 8px white;
+}
+/* Vibrate animation */
+@keyframes vibing {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-4px);
+  }
+  40% {
+    transform: translateX(4px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.hover\:vibrate:hover {
+  animation: vibing 0.4s ease-in-out;
+}

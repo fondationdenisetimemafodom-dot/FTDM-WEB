@@ -67,15 +67,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   /*-----------------------------------------------------------------------------------------------------
-  | @function stripHtmlTags
-  | @brief    Removes HTML tags from description text for preview
+  | @function sanitizeHtml
+  | @brief    Sanitizes HTML content to only allow safe formatting tags
   | @param    html - HTML string from text editor
-  | @return   string - plain text without HTML tags
+  | @return   string - sanitized HTML with only safe tags
   -----------------------------------------------------------------------------------------------------*/
-  const stripHtmlTags = (html: string): string => {
+  const sanitizeHtml = (html: string): string => {
+    // Create a temporary div to parse HTML
     const temp = document.createElement("div");
     temp.innerHTML = html;
-    return temp.textContent || temp.innerText || "";
+
+    // Remove dangerous tags (script, style, etc.)
+    const dangerousTags = temp.querySelectorAll(
+      "script, style, iframe, object, embed"
+    );
+    dangerousTags.forEach((tag) => tag.remove());
+
+    return temp.innerHTML;
   };
 
   /*-----------------------------------------------------------------------------------------------------
@@ -98,60 +106,32 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   const mediaData = getMediaUrl();
-  const plainDescription = stripHtmlTags(description);
+  const sanitizedDescription = sanitizeHtml(description);
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
-      {/* Project Media */}
-      <div className="relative w-full h-48 md:h-56 overflow-hidden bg-gray-200">
-        {mediaData.type === "video" ? (
-          <video
-            src={mediaData.url}
-            className="w-full h-full object-cover"
-            muted
-            loop
-            playsInline
-          />
-        ) : (
-          <img
-            src={mediaData.url}
-            alt={title}
-            className="w-full h-full object-cover"
-          />
-        )}
-
-        {/* Status Badge */}
-        <div className="absolute top-4 left-4">
-          <span
-            className={`px-3 py-1 rounded-full text-xs font-semibold ${
-              status === "ongoing"
-                ? "bg-green-500 text-white"
-                : "bg-gray-500 text-white"
-            }`}
-          >
-            {status === "ongoing" ? "Ongoing" : "Completed"}
-          </span>
-        </div>
-
-        {/* Category Badge */}
-        <div className="absolute top-4 right-4">
-          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white text-gray-700 border border-gray-200">
-            {category}
-          </span>
-        </div>
-      </div>
-
+    <div className="w-[90vw] p-10 overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col md:flex-row justify-between md:h-[75vh] h-[90vh]">
       {/* Project Details */}
-      <div className="p-5 flex flex-col flex-grow">
+      <div className="p-5 flex flex-col flex-1">
         {/* Title */}
         <h3 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2">
           {title}
         </h3>
 
-        {/* Description - stripped of HTML */}
-        <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">
-          {plainDescription}
-        </p>
+        {/* Description - with HTML formatting preserved */}
+        <div
+          className="text-gray-600 text-sm mb-4 flex-grow overflow-hidden relative"
+          style={{
+            display: "-webkit-box",
+            WebkitLineClamp: 6,
+            WebkitBoxOrient: "vertical",
+            maxHeight: "9rem", // Approximately 6 lines
+          }}
+        >
+          <div
+            dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
+            className="prose prose-sm max-w-none [&>p]:mb-2 [&>strong]:font-bold [&>em]:italic [&>ul]:list-disc [&>ul]:ml-4 [&>ol]:list-decimal [&>ol]:ml-4"
+          />
+        </div>
 
         {/* Project Stats */}
         <div className="space-y-2 mb-4">
@@ -184,6 +164,45 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         >
           Read more
         </button>
+      </div>
+
+      {/* Project Media */}
+      <div className="flex-1 relative rounded-3xl overflow-hidden bg-gray-200">
+        {mediaData.type === "video" ? (
+          <video
+            src={mediaData.url}
+            className="w-full h-full object-cover"
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <img
+            src={mediaData.url}
+            alt={title}
+            className="w-full h-full object-cover"
+          />
+        )}
+
+        {/* Status Badge */}
+        <div className="absolute top-4 left-4">
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-semibold ${
+              status === "ongoing"
+                ? "bg-gray-500 text-white"
+                : "bg-green-500 text-white"
+            }`}
+          >
+            {status === "ongoing" ? "Ongoing" : "Completed"}
+          </span>
+        </div>
+
+        {/* Category Badge */}
+        <div className="absolute top-4 right-4">
+          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white text-gray-700 border border-gray-200">
+            {category}
+          </span>
+        </div>
       </div>
     </div>
   );

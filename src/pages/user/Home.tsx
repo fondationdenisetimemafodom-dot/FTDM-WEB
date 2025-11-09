@@ -14,12 +14,15 @@ import { NavLink } from "react-router-dom";
 import VolunteerForm from "../../components/VolunteerForm";
 import PartnershipForm from "../../components/PartnershipForm";
 import ProjectCard from "../../components/ProjectCard";
-import ProjectModal from "../../components/ProjectModal";
+import ProjectModal from "../../components/ProjectDetailsPage";
 import axiosInstance from "../../lib/axiosInstance";
 import homeImage from "../../assets/images/home-image.png";
 import BgImage from "../../assets/images/home-bg.png";
+import BgImageBottom from "../../assets/images/home_bottom.jpg";
+import home_donate_image from "../../assets/images/home_donate.jpg";
+import video from "../../assets/videos/fdtmvideo.mp4";
 import { Loader2 } from "lucide-react";
-
+import { motion } from "framer-motion";
 type MediaItem = {
   publicId: string;
   type: string;
@@ -149,7 +152,7 @@ function Home() {
       <div className=" w-full ">
         {/*hero section*/}
         <div
-          className=" w-full  p-10 lg:p-25 flex flex-col lg:flex-row justify-between items-center "
+          className=" w-full  p-2 px-10 lg:px-25 flex flex-col lg:flex-row justify-between items-center "
           style={{
             backgroundImage: `linear-gradient(to right, #ffffffcc 30%, #dbeafe), url(${BgImage})`,
             backgroundSize: "cover",
@@ -158,66 +161,167 @@ function Home() {
           }}
         >
           <div>
-            <span className=" block max-w-[500px] font-bold text-[40px] md:text-[60px] text-main-500 ">
+            <motion.span
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5, delay: 0.8 }}
+              className="block max-w-[500px] font-bold text-[40px] md:text-[60px] text-main-500"
+            >
               Together for Human Solidarity
-            </span>
-            <span className=" text-[20px] md:text-[30px] font-medium  text-secondary-500 block mt-6 max-w-[567px]">
-              Fondation Denise Time Mafodom is committed to philanthropic,
-              educational, cultural, scientific, and social initiatives that
-              empower communities.
-            </span>
-            <div className="flex items-center gap-10 md:gap-24 mt-12 ">
+            </motion.span>
+
+            <motion.span
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.5 }}
+              className="text-[20px] md:text-[30px] font-medium text-secondary-500 block mt-6 max-w-[567px]"
+            >
+              Where compassion meets action. From Dschang to the world, we're
+              building bridges of hope through education, healthcare, cultural
+              enrichment, and humanitarian outreach—transforming lives one
+              community at a time.
+            </motion.span>
+
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.5, delay: 0.8 }}
+              className="flex items-center gap-10 md:gap-24 mt-12"
+            >
               <NavLink
                 to="/donate"
-                className="flex items-center justify-center bg-main-500 w-28 lg:w-50 p-2 text-white text-2xl font-semibold rounded-[12px] hover:cursor-pointer"
+                className="flex items-center justify-center bg-main-500 w-28 lg:w-50 p-2 text-white text-2xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
                 Donate
               </NavLink>
+
               <button
                 onClick={() => setShowVolunteer(true)}
-                className="border-[3px] border-main-500  py-2 px-4 text-main-500 text-2xl font-semibold rounded-[12px] hover:cursor-pointer"
+                className="border-[3px] border-main-500 py-2 px-4 text-main-500 text-2xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
                 Volunteer with us
               </button>
-            </div>
+            </motion.div>
           </div>
-          <img
+          <motion.img
+            initial={{
+              opacity: 0,
+              scale: 0.1,
+              rotate: 0,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              rotate: 360,
+            }}
+            transition={{
+              duration: 1.5,
+              delay: 1,
+              ease: "easeOut",
+            }}
             src={homeImage}
             className="w-[400px] h-[319px] mt-20 lg:mt-0 lg:w-[574px] lg:h-[496px]"
           />
         </div>
         {/* About us section */}
         <div className="w-full p-10 lg:p-25 flex flex-col md:flex-row justify-between items-center">
-          {/* Video placeholder with proper styling */}
-          <div className="w-full max-w-[350px] md:max-w-[400px] h-[250px] md:h-[300px] rounded-xl bg-gray-200 mb-8 md:mb-0 md:mr-12 flex items-center justify-center">
-            <span className="text-gray-500 text-lg font-medium">
-              Video Coming Soon
-            </span>
+          {/* Video */}
+          <div className="w-full max-w-[440px] md:max-w-[500px] h-[250px] md:h-[600px] rounded-xl overflow-hidden mb-8 md:mb-0 md:mr-12 shadow-lg flex items-center justify-center">
+            <video
+              className="w-full h-[100%] object-cover rounded-xl"
+              autoPlay
+              loop
+              muted
+              playsInline
+              ref={(video) => {
+                if (video) {
+                  video.play().catch((error) => {
+                    console.log("Autoplay prevented:", error);
+                  });
+
+                  const observer = new IntersectionObserver(
+                    (entries) => {
+                      entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                          video.play().catch((error) => {
+                            console.log("Play prevented:", error);
+                          });
+                        } else {
+                          video.pause();
+                        }
+                      });
+                    },
+                    { threshold: 0.5 }
+                  );
+                  observer.observe(video);
+                }
+              }}
+            >
+              <source src={video} type="video/mp4" />
+              <source src="/path-to-video.webm" type="video/webm" />
+              Your browser does not support the video tag.
+            </video>
           </div>
 
           <div className="flex flex-col items-start justify-center gap-8">
             <div className="flex flex-row items-start gap-5">
               <div className="mt-2 bg-soft-dark-500 h-4 w-20"></div>
-              <p className="uppercase text-lg md:text-2xl font-bold text-soft-dark-500">
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 1, delay: 0.2 }}
+                className="uppercase text-lg md:text-2xl font-bold text-soft-dark-500"
+              >
                 Know about us
-              </p>
+              </motion.p>
             </div>
             <div className="flex flex-col gap-2 max-w-[682px]">
-              <h2 className="text-[28px] md:text-[48px] font-bold mt-2">
-                We promote health, developement and culture, for a better
-                tomorrow
-              </h2>
-              <p className="text-secondary-text-500 text-base md:text-2xl">
-                Every step forward is built on resilience, knowledge, and the
-                richness of shared culture
-              </p>
-              <p className="text-secondary-text-500 text-base md:text-2xl mt-4">
-                By fostering well-being, encouraging growth, and strengthening
-                community ties, we create meaningful impact.
-              </p>
+              <motion.span
+                initial={{ opacity: 0, y: -30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1.5, delay: 0.4 }}
+                className="text-[28px] md:text-[48px] font-bold mt-2"
+              >
+                Weaving Health, Progress, and Heritage Into the Fabric of
+                Tomorrow
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, y: -30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1, delay: 0.8 }}
+                className="text-secondary-text-500 text-base md:text-2xl"
+              >
+                In every community we serve, from the vibrant streets of Dschang
+                to villages across Cameroon and beyond, we see untapped
+                potential waiting to flourish. Our mission transcends borders
+                and barriers—we don't just build clinics and schools; we
+                cultivate ecosystems where health thrives, where education opens
+                doors once thought permanently closed, and where cultural
+                traditions become sources of pride and economic opportunity.
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, y: -30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1, delay: 1.2 }}
+                className="text-secondary-text-500 text-base md:text-2xl mt-4"
+              >
+                Every initiative we launch is rooted in the belief that
+                sustainable development begins with people—their stories, their
+                strengths, their dreams. By honoring cultural wisdom while
+                embracing innovation, by treating health as a fundamental right
+                rather than a privilege, and by investing in education that
+                transforms generations, we're not simply creating projects.
+                We're nurturing movements of change that ripple outward,
+                touching countless lives and reshaping what's possible for
+                entire communities.
+              </motion.span>
               <NavLink
                 to="/about-us"
-                className="bg-main-500 text-lg md:text-2xl font-semibold mt-4 text-white hover:cursor-pointer py-4 px-6 max-w-[70%] md:max-w-[40%] rounded-2xl flex items-center justify-center gap-2"
+                className="bg-main-500 hover:vibrate text-lg md:text-2xl font-semibold mt-4 text-white hover:cursor-pointer py-4 px-6 max-w-[70%] md:max-w-[40%] rounded-2xl flex items-center justify-center gap-2"
               >
                 Learn more
                 <span>
@@ -248,6 +352,93 @@ function Home() {
                 </span>
               </NavLink>
             </div>
+          </div>
+        </div>
+        {/* Support Our Work Section */}
+        <div className="w-screen bg-white p-4  flex justify-center">
+          <div className="p-10 md-p25 flex flex-col items-start gap-6">
+            {/* Header */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex flex-col gap-2"
+            >
+              <div className="flex flex-row items-start gap-5">
+                <div className="mt-2 bg-soft-dark-500 h-4 w-20"></div>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 1, delay: 0.2 }}
+                  className="uppercase text-lg md:text-2xl font-bold text-soft-dark-500"
+                >
+                  Donate
+                </motion.p>
+              </div>
+              <h2 className="text-[28px] lg:text-[36px] font-bold text-gray-900 leading-tight">
+                Support our work - Your gifts- Births dreams
+              </h2>
+            </motion.div>
+
+            {/* Description Paragraphs */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="flex flex-col gap-4 text-gray-700 text-lg lg:text-2xl"
+            >
+              <p>
+                Your support fuels real change in communities that need it most.
+                Every gift helps provide healthcare, education, and essential
+                resources.
+              </p>
+              <p>
+                With your generosity, we build schools, clinics, and safe
+                spaces. You empower families to dream bigger and achieve more.
+              </p>
+              <p>
+                Together, we turn hope into action and ideas into reality. Your
+                contribution breathes life into projects that transform lives.
+              </p>
+              <p>
+                From newborns to elders, your kindness creates lasting impact.
+                Join us—because every gift births a brighter tomorrow.
+              </p>
+            </motion.div>
+
+            {/* Image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="w-full"
+            >
+              <img
+                src={home_donate_image}
+                alt="Children being supported by the foundation"
+                className="w-[90%] h-[550px] rounded-lg shadow-lg"
+              />
+            </motion.div>
+
+            {/* Donate Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="w-full flex justify-center"
+            >
+              <NavLink
+                to="/donate"
+                className="bg-blue-600 hover:vibrate text-white text-lg font-semibold py-3 px-12 rounded-lg transition-colors duration-300"
+              >
+                Donate today
+              </NavLink>
+            </motion.div>
           </div>
         </div>
         {/*projects section*/}
@@ -317,7 +508,15 @@ function Home() {
       </div>
 
       {/* Join Us section */}
-      <div className="bg-secondary-500 text-white py-16 md:py-20 lg:py-30 px-6 md:px-12 lg:px-30 mt-auto border-b-4 border-b-white">
+      <div
+        className="bg-secondary-500 text-white py-16 md:py-20 lg:py-30 px-6 md:px-12 lg:px-30 mt-auto border-b-4 border-b-white"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(${BgImageBottom})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <div className="text-center ">
           <span className="text-3xl md:text-[40px] font-bold">
             {t("joinUs.title")}
@@ -329,19 +528,19 @@ function Home() {
         <div className="flex flex-col md:flex-row justify-center md:justify-between items-center gap-6 md:gap-8 lg:gap-12 mt-12 text-xl md:text-2xl lg:text-[30px] max-w-6xl mx-auto font-semibold">
           <NavLink
             to="/donate"
-            className="bg-white text-main-500 py-4 px-6 w-full md:w-auto md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:cursor-pointer hover:bg-gray-50 transition-colors"
+            className="bg-white hover:vibrate text-main-500 py-4 px-6 w-full md:w-auto md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:cursor-pointer hover:bg-gray-50 transition-colors"
           >
             {t("joinUs.buttons.donate")}
           </NavLink>
           <button
             onClick={() => setShowVolunteer(true)}
-            className="bg-main-500 text-white hover:cursor-pointer py-4 px-6 w-full md:w-auto md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:bg-main-600 transition-colors"
+            className="bg-main-500 hover:vibrate text-white hover:cursor-pointer py-4 px-6 w-full md:w-auto md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:bg-main-600 transition-colors"
           >
             {t("joinUs.buttons.volunteer")}
           </button>
           <button
             onClick={() => setShowPartnership(true)}
-            className="bg-main-500 hover:cursor-pointer text-white py-4 px-6 w-full md:w-auto md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:bg-main-600 transition-colors"
+            className="bg-main-500 hover:vibrate hover:cursor-pointer text-white py-4 px-6 w-full md:w-auto md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:bg-main-600 transition-colors"
           >
             {t("joinUs.buttons.partner")}
           </button>
@@ -363,9 +562,6 @@ function Home() {
           <PartnershipForm />
         </Modal>
       )}
-
-      {/* Project Modal */}
-      <ProjectModal project={selectedProject} onClose={handleCloseModal} />
     </div>
   );
 }
