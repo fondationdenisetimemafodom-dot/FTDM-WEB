@@ -162,7 +162,7 @@ function Home() {
               transition={{ duration: 1.5, delay: 0.8 }}
               className="block max-w-[500px] font-bold text-[40px] md:text-[60px] text-main-500"
             >
-              Together for Human Solidarity
+              Transforming Lives Through Solidarity
             </motion.span>
 
             <motion.span
@@ -181,11 +181,11 @@ function Home() {
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.5, delay: 0.8 }}
-              className="flex items-center gap-10 md:gap-24 mt-12"
+              className="flex flex-col md:flex-row items-center gap-10 md:gap-24 mt-12"
             >
               <NavLink
                 to="/donate"
-                className="flex items-center justify-center bg-main-500 w-28 lg:w-50 p-2 text-white text-2xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
+                className="flex items-center justify-center bg-main-500 w-58 md:w-28 lg:w-50 p-2 text-white text-2xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
                 Donate
               </NavLink>
