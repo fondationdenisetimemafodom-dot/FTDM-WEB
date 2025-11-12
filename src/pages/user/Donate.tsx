@@ -1,26 +1,34 @@
 /*-----------------------------------------------------------------------------------------------------
 | @file Donate.tsx
-| @brief Donation page with webhook verification, pending states, and enhanced error handling
+| @brief Enhanced donation page with instant and monthly subscription options
 | @param --
-| @return Responsive donation page JSX element
+| @return Responsive donation page with subscription management JSX element
 -----------------------------------------------------------------------------------------------------*/
 
 import type React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import UserNavbar from "../../components/UserNavbar";
 import Footer from "../../components/Footer";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle, FaCalendarAlt, FaBolt } from "react-icons/fa";
 import ThankYouPopup from "../../components/ThankYouPopup";
 import PendingPopup from "../../components/PendingPopup";
 import ErrorPopup from "../../components/ErrorPopup";
+import SubscriptionManagementModal from "../../components/SubscriptionManagementModal";
 import axios from "axios";
 import API_BASE_URL from "../../lib/api";
 import { motion } from "framer-motion";
 import BgImage from "../../assets/images/Donate.jpg";
+
+/*-----------------------------------------------------------------------------------------------------
+| @type DonationType
+| @brief Defines the type of donation (instant or monthly subscription)
+-----------------------------------------------------------------------------------------------------*/
+type DonationType = "instant" | "monthly";
+
 /*-----------------------------------------------------------------------------------------------------
 | @function Donate
-| @brief Enhanced donation component with webhook verification and comprehensive state management
+| @brief Enhanced donation component with instant and monthly subscription options
 | @param --
 | @return JSX element for donation page
 -----------------------------------------------------------------------------------------------------*/
@@ -31,7 +39,9 @@ function Donate() {
   const [showPendingPopup, setShowPendingPopup] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showManagementModal, setShowManagementModal] = useState(false);
 
+  const [donationType, setDonationType] = useState<DonationType>("instant");
   const [amount, setAmount] = useState<number | "">("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -40,8 +50,40 @@ function Donate() {
   const [phone, setPhone] = useState("");
 
   const [transactionId, setTransactionId] = useState<string | null>(null);
+  const [hasActiveSubscription, setHasActiveSubscription] = useState(false);
 
   const suggestedAmounts = [1000, 2500, 5000, 10000];
+
+  /*-----------------------------------------------------------------------------------------------------
+  | @function checkExistingSubscription
+  | @brief Checks if user has an active subscription when email is entered
+  | @param --
+  | @return --
+  ------------------------------------------------------------------------------------------------------*/
+  useEffect(() => {
+    const checkSubscription = async () => {
+      if (email && email.includes("@")) {
+        try {
+          const response = await axios.get(
+            `${API_BASE_URL}/api/subscriptions/my-subscription?email=${email}`
+          );
+          if (response.data.success) {
+            setHasActiveSubscription(true);
+          }
+        } catch (error: any) {
+          if (error.response?.status === 404) {
+            setHasActiveSubscription(false);
+          }
+        }
+      }
+    };
+
+    const debounce = setTimeout(() => {
+      checkSubscription();
+    }, 500);
+
+    return () => clearTimeout(debounce);
+  }, [email]);
 
   /*-----------------------------------------------------------------------------------------------------
   | @function validateForm
@@ -52,6 +94,11 @@ function Donate() {
   const validateForm = (): boolean => {
     if (!amount || amount <= 0) {
       setErrorMessage("Please enter a valid donation amount.");
+      setShowErrorPopup(true);
+      return false;
+    }
+    if (donationType === "monthly" && amount < 500) {
+      setErrorMessage("Minimum monthly subscription amount is 500 XAF.");
       setShowErrorPopup(true);
       return false;
     }
@@ -89,7 +136,7 @@ function Donate() {
   ): Promise<boolean> => {
     const maxAttempts = 30;
     let attempts = 0;
-    console.log(transactionId);
+
     return new Promise((resolve) => {
       const pollInterval = setInterval(async () => {
         attempts++;
@@ -101,10 +148,9 @@ function Donate() {
               headers: { "Content-Type": "application/json" },
             }
           );
-          console.log("Checking donation status:");
-          console.log("Polling response:", response.data);
+
           const { status } = response.data;
-          console.log("Donation status:", status);
+
           if (status === "successful") {
             clearInterval(pollInterval);
             resolve(true);
@@ -143,12 +189,12 @@ function Donate() {
   };
 
   /*-----------------------------------------------------------------------------------------------------
-  | @function handleDonation
-  | @brief Handles donation submission with webhook verification and comprehensive error handling
+  | @function handleInstantDonation
+  | @brief Handles instant one-time donation submission
   | @param e - Form event
   | @return --
   ------------------------------------------------------------------------------------------------------*/
-  const handleDonation = async (e: React.FormEvent) => {
+  const handleInstantDonation = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validateForm()) {
@@ -172,12 +218,11 @@ function Donate() {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log(response);
+
       if (response.status === 200 || response.status === 201) {
         const newTransactionId = response.data.data.transactionId;
         setTransactionId(newTransactionId);
-        console.log("Transaction ID:", newTransactionId);
-
+        console.log("Transaction ID:", transactionId);
         const isSuccessful = await pollTransactionStatus(newTransactionId);
 
         setShowPendingPopup(false);
@@ -200,14 +245,87 @@ function Donate() {
       }
     } catch (error: any) {
       setShowPendingPopup(false);
-      console.log(error);
       setErrorMessage(
         error?.response?.data?.message || "Network error, please try again."
       );
       setShowErrorPopup(true);
     }
   };
-  console.log(transactionId);
+
+  /*-----------------------------------------------------------------------------------------------------
+  | @function handleMonthlySubscription
+  | @brief Handles monthly subscription creation
+  | @param e - Form event
+  | @return --
+  ------------------------------------------------------------------------------------------------------*/
+  const handleMonthlySubscription = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    if (hasActiveSubscription) {
+      setErrorMessage(
+        "You already have an active subscription. Please manage your existing subscription."
+      );
+      setShowErrorPopup(true);
+      return;
+    }
+
+    setShowPendingPopup(true);
+
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/api/subscriptions/subscribe`,
+        {
+          donorName: `${firstName} ${lastName}`,
+          donorEmail: email,
+          phone: phone,
+          amount: amount,
+          message: comments,
+          isAnonymous: false,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      setShowPendingPopup(false);
+
+      if (response.data.success) {
+        setShowThankYouPopup(true);
+        setHasActiveSubscription(true);
+        resetForm();
+      } else {
+        setErrorMessage(
+          response.data.message || "Failed to create subscription."
+        );
+        setShowErrorPopup(true);
+      }
+    } catch (error: any) {
+      setShowPendingPopup(false);
+      setErrorMessage(
+        error?.response?.data?.message ||
+          "Failed to create subscription. Please try again."
+      );
+      setShowErrorPopup(true);
+    }
+  };
+
+  /*-----------------------------------------------------------------------------------------------------
+  | @function handleDonation
+  | @brief Routes donation to appropriate handler based on donation type
+  | @param e - Form event
+  | @return --
+  ------------------------------------------------------------------------------------------------------*/
+  const handleDonation = async (e: React.FormEvent) => {
+    if (donationType === "instant") {
+      await handleInstantDonation(e);
+    } else {
+      await handleMonthlySubscription(e);
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -247,8 +365,8 @@ function Donate() {
             >
               Your generosity fuels our mission of human solidarity and
               transforms lives across Cameroon and beyond. Whether through
-              Mobile Money, PayPal, or other channels, every contribution—no
-              matter the size—becomes a beacon of hope, empowering education,
+              Mobile Money, PayPal, or other channels, every contribution no
+              matter the size becomes a beacon of hope, empowering education,
               healthcare, cultural initiatives, and community development.
               Together, we turn compassion into action and dreams into reality
               for those who need it most.
@@ -258,7 +376,7 @@ function Donate() {
 
         {/*-----------------------------------------------------------------------------------------------------
          | @blocktype DonationForm
-         | @brief Enhanced donation form with validation and webhook integration
+         | @brief Enhanced donation form with instant and monthly subscription options
          | @param --
          | @return Form JSX
          -----------------------------------------------------------------------------------------------------*/}
@@ -268,6 +386,87 @@ function Donate() {
             onSubmit={handleDonation}
           >
             <div className="flex flex-col space-y-4">
+              {/* Donation Type Toggle */}
+              <div className="flex flex-col gap-4 mb-6">
+                <h2 className="text-main-500 text-2xl lg:text-3xl font-bold">
+                  Choose Donation Type
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setDonationType("instant")}
+                    className={`p-6 rounded-xl border-2 transition-all duration-300 ${
+                      donationType === "instant"
+                        ? "border-main-500 bg-blue-50"
+                        : "border-gray-300 hover:border-main-400"
+                    }`}
+                  >
+                    <div className="flex flex-col items-center gap-3">
+                      <FaBolt
+                        className={`text-4xl ${
+                          donationType === "instant"
+                            ? "text-main-500"
+                            : "text-gray-400"
+                        }`}
+                      />
+                      <h3 className="text-xl font-bold text-gray-800">
+                        Instant Donation
+                      </h3>
+                      <p className="text-sm text-gray-600 text-center">
+                        Make a one-time donation now
+                      </p>
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setDonationType("monthly")}
+                    className={`p-6 rounded-xl border-2 transition-all duration-300 ${
+                      donationType === "monthly"
+                        ? "border-main-500 bg-blue-50"
+                        : "border-gray-300 hover:border-main-400"
+                    }`}
+                  >
+                    <div className="flex flex-col items-center gap-3">
+                      <FaCalendarAlt
+                        className={`text-4xl ${
+                          donationType === "monthly"
+                            ? "text-main-500"
+                            : "text-gray-400"
+                        }`}
+                      />
+                      <h3 className="text-xl font-bold text-gray-800">
+                        Monthly Subscription
+                      </h3>
+                      <p className="text-sm text-gray-600 text-center">
+                        Support us every month automatically
+                      </p>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              {/* Manage Subscription Button */}
+              {hasActiveSubscription && (
+                <div className="bg-blue-50 border border-blue-300 rounded-lg p-4 mb-4">
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div className="flex items-center gap-2">
+                      <FaCheckCircle className="text-green-500 text-xl" />
+                      <span className="text-gray-700 font-medium">
+                        You have an active monthly subscription
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowManagementModal(true)}
+                      className="bg-main-500 text-white px-6 py-2 rounded-lg hover:bg-main-600 transition duration-300"
+                    >
+                      Manage Subscription
+                    </button>
+                  </div>
+                </div>
+              )}
+
               {/* Benefits section */}
               <div className="flex flex-col lg:flex-row lg:justify-between w-full mb-6 lg:mb-10 gap-4">
                 <div className="flex gap-3 lg:gap-5 items-center">
@@ -292,8 +491,13 @@ function Donate() {
 
               {/* Amount */}
               <label className="text-main-500 text-2xl lg:text-3xl font-bold mb-3 lg:mb-5">
-                {t("amount")}
+                {donationType === "monthly" ? "Monthly Amount" : t("amount")}
               </label>
+              {donationType === "monthly" && (
+                <p className="text-sm text-gray-600 -mt-2 mb-2">
+                  Minimum 500 XAF per month
+                </p>
+              )}
               <div className="grid grid-cols-2 lg:flex lg:flex-wrap gap-3 mb-4">
                 {suggestedAmounts.map((amt) => (
                   <button
@@ -307,6 +511,9 @@ function Donate() {
                     }`}
                   >
                     {amt.toLocaleString()} XAF
+                    {donationType === "monthly" && (
+                      <span className="text-xs block">/month</span>
+                    )}
                   </button>
                 ))}
               </div>
@@ -316,7 +523,11 @@ function Donate() {
                   id="amount"
                   value={amount}
                   onChange={(e) => setAmount(Number(e.target.value))}
-                  placeholder={t("amountPlaceholder")}
+                  placeholder={
+                    donationType === "monthly"
+                      ? "Enter monthly amount (min 500 XAF)"
+                      : t("amountPlaceholder")
+                  }
                   className="border-3 border-blue-300 rounded p-2 lg:p-3 focus:outline-none focus:border-blue-500 w-full text-sm lg:text-base"
                   required
                 />
@@ -386,8 +597,17 @@ function Donate() {
                 className="bg-main-500 text-white rounded-lg p-3 lg:p-4 font-bold text-base lg:text-lg hover:bg-main-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={showPendingPopup}
               >
-                {t("donateBtn")}
+                {donationType === "instant"
+                  ? t("donateBtn")
+                  : "Subscribe Monthly"}
               </button>
+
+              {donationType === "monthly" && (
+                <p className="text-xs text-gray-500 text-center">
+                  You will receive an email before each monthly billing with a
+                  payment link. You can cancel anytime.
+                </p>
+              )}
             </div>
           </form>
         </div>
@@ -402,6 +622,11 @@ function Donate() {
         show={showErrorPopup}
         message={errorMessage}
         onClose={() => setShowErrorPopup(false)}
+      />
+      <SubscriptionManagementModal
+        show={showManagementModal}
+        onClose={() => setShowManagementModal(false)}
+        email={email}
       />
       <Footer />
     </div>

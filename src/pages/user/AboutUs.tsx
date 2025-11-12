@@ -119,7 +119,7 @@ function AboutUs() {
             Time Mafodom transforms lives through compassionate action. From the
             vibrant heart of Dschang, Cameroon, we weave together philanthropic
             dreams, educational opportunities, cultural celebrations, scientific
-            innovation, and humanitarian missions—creating ripples of positive
+            innovation, and humanitarian missions creating ripples of positive
             change that touch communities near and far. Every project we
             undertake, every hand we extend, carries the promise of a brighter
             tomorrow built on dignity, knowledge, and shared humanity.
@@ -165,7 +165,7 @@ function AboutUs() {
                 compassionate humanitarian aid, groundbreaking scientific
                 collaboration, and sustainable social development. We believe
                 that when communities are equipped with knowledge, resources,
-                and unwavering support, they don't just survive—they flourish,
+                and unwavering support, they don't just survive , they flourish,
                 innovate, and inspire generations to come.
               </p>
             </div>
@@ -192,7 +192,7 @@ function AboutUs() {
               </p>
               <p className="text-[16px] md:text-[20px] font-bold text-gray-400 mt-8">
                 We envision a future where compassion and solidarity transcend
-                all borders—geographic, cultural, and economic. A world where
+                all borders geographic, cultural, and economic. A world where
                 every community, regardless of circumstance, possesses the
                 knowledge to grow, the resources to prosper, and the support
                 network to overcome any challenge. Where children dream without
