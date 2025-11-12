@@ -173,7 +173,7 @@ function Home() {
             >
               Where compassion meets action. From Dschang to the world, we're
               building bridges of hope through education, healthcare, cultural
-              enrichment, and humanitarian outreach—transforming lives one
+              enrichment, and humanitarian outreach. Transforming lives one
               community at a time.
             </motion.span>
 
@@ -292,7 +292,7 @@ function Home() {
                 In every community we serve, from the vibrant streets of Dschang
                 to villages across Cameroon and beyond, we see untapped
                 potential waiting to flourish. Our mission transcends borders
-                and barriers—we don't just build clinics and schools; we
+                and barriers. We don't just build clinics and schools; we
                 cultivate ecosystems where health thrives, where education opens
                 doors once thought permanently closed, and where cultural
                 traditions become sources of pride and economic opportunity.
@@ -305,7 +305,7 @@ function Home() {
                 className="text-secondary-text-500 text-base md:text-2xl mt-4"
               >
                 Every initiative we launch is rooted in the belief that
-                sustainable development begins with people—their stories, their
+                sustainable development begins with people, their stories, their
                 strengths, their dreams. By honoring cultural wisdom while
                 embracing innovation, by treating health as a fundamental right
                 rather than a privilege, and by investing in education that
@@ -400,7 +400,7 @@ function Home() {
               </p>
               <p>
                 From newborns to elders, your kindness creates lasting impact.
-                Join us—because every gift births a brighter tomorrow.
+                Join us because every gift births a brighter tomorrow.
               </p>
             </motion.div>
 

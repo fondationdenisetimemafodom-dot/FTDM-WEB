@@ -15,6 +15,7 @@ import VolunteerForm from "../../components/VolunteerForm";
 import { useState, useEffect } from "react";
 import axiosInstance from "../../lib/axiosInstance";
 import { Loader2, ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { motion } from "framer-motion";
 
 /*-----------------------------------------------------------------------------------------------------
 | @interface Project
@@ -221,13 +222,24 @@ function Media() {
         }}
       >
         <div className="flex flex-col items-center max-w-[1074px] gap-2 px-4 py-10">
-          <span className="text-[40px] lg:text-[56px] text-center font-bold text-main-500">
+          <motion.span
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, delay: 0.8 }}
+            className="text-[40px] md:text-4xl lg:text-[56px] text-center font-bold  leading-tight
+             text-main-500"
+          >
             Featured Highlights
-          </span>
-          <span className="text-lg font-semibold text-secondary-text-500 text-center">
+          </motion.span>
+          <motion.span
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.5 }}
+            className="text-lg md:text-xl lg:text-3xl font-regular text-secondary-text-500 text-center"
+          >
             Explore the moments, stories, and milestones of Fondation Denise
-            Time MAFODOM
-          </span>
+            Time Mafodom
+          </motion.span>
         </div>
 
         <div className="w-full max-w-[1200px] px-4 pb-16">

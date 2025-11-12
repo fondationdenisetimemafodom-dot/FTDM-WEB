@@ -247,8 +247,8 @@ function Donate() {
             >
               Your generosity fuels our mission of human solidarity and
               transforms lives across Cameroon and beyond. Whether through
-              Mobile Money, PayPal, or other channels, every contribution—no
-              matter the size—becomes a beacon of hope, empowering education,
+              Mobile Money, PayPal, or other channels, every contribution no
+              matter the size becomes a beacon of hope, empowering education,
               healthcare, cultural initiatives, and community development.
               Together, we turn compassion into action and dreams into reality
               for those who need it most.
