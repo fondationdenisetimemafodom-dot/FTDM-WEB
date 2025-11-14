@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import API_BASE_URL from "../lib/api";
+
 import {
   MapPin,
   Users,
@@ -14,7 +16,16 @@ type MediaItem = {
   url: string;
   _id: string;
 };
-
+type Article = {
+  _id: string;
+  title: string;
+  content: string;
+  projectTitle: string;
+  tags: string[];
+  published: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
 /*-----------------------------------------------------------------------------------------------------
 | @interface ProjectDetailsPageProps
 | @brief    Props interface for ProjectDetailsPage component
@@ -43,7 +54,9 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
   onBack,
 }) => {
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
-
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [articlesLoading, setArticlesLoading] = useState(true);
+  const [articlesError, setArticlesError] = useState("");
   // Return early if no project
   if (!project) {
     return (
@@ -107,6 +120,39 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
     return temp.innerHTML;
   };
 
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        setArticlesLoading(true);
+        setArticlesError("");
+        const response = await fetch(`${API_BASE_URL}/api/articles`);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch articles");
+        }
+
+        const data = await response.json();
+        const allArticles = data.articles || data;
+
+        // Filter articles that match the project title and are published
+        const filteredArticles = allArticles.filter(
+          (article: Article) =>
+            article.projectTitle === project?.title && article.published
+        );
+
+        setArticles(filteredArticles);
+      } catch (err) {
+        console.error("Failed to fetch articles:", err);
+        setArticlesError("Failed to load articles");
+      } finally {
+        setArticlesLoading(false);
+      }
+    };
+
+    if (project) {
+      fetchArticles();
+    }
+  }, [project?.title]);
   const currentMedia = project.media?.[currentMediaIndex];
   const sanitizedDescription = sanitizeHtml(project.description || "");
   const galleryMedia = project.media?.slice(0, 4) || [];
@@ -290,6 +336,82 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
             </div>
           </div>
         )}
+        <div className="bg-white rounded-2xl mt-10 shadow-lg p-6 md:p-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">
+            Associated Articles
+          </h2>
+
+          {articlesLoading ? (
+            <div className="flex flex-col items-center justify-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-main-500"></div>
+              <p className="text-gray-500 mt-4">Loading articles...</p>
+            </div>
+          ) : articlesError ? (
+            <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
+              <svg
+                className="w-5 h-5 text-red-500"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <p className="text-red-700">{articlesError}</p>
+            </div>
+          ) : articles.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">
+                No articles found for this project
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {articles.map((article) => (
+                <div
+                  key={article._id}
+                  className="p-4 border border-gray-200 rounded-lg hover:shadow-md transition"
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      {article.title}
+                    </h3>
+                    <span className="text-xs text-gray-500">
+                      {new Date(article.createdAt).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </span>
+                  </div>
+
+                  <p className="text-gray-700 text-sm line-clamp-2">
+                    {article.content}
+                  </p>
+                  {article.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {article.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-0.5 bg-main-100 text-main-700 rounded text-xs font-medium"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {article.tags.length > 3 && (
+                        <span className="text-gray-500 text-xs">
+                          +{article.tags.length - 3} more
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

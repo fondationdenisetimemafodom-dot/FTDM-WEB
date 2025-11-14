@@ -597,9 +597,7 @@ function Donate() {
                 className="bg-main-500 text-white rounded-lg p-3 lg:p-4 font-bold text-base lg:text-lg hover:bg-main-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={showPendingPopup}
               >
-                {donationType === "instant"
-                  ? t("donateBtn")
-                  : "Subscribe Monthly"}
+                {donationType === "instant" ? t("donateBtn") : "Donate Monthly"}
               </button>
 
               {donationType === "monthly" && (
