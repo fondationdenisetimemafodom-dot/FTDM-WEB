@@ -22,9 +22,9 @@ function UserNavbar() {
           <img
             src={logo}
             alt="Logo"
-            className="h-[60px] w-[70px] sm:h-[80px] sm:w-[95px] lg:h-[97px] lg:w-[115px]"
+            className="h-[40px] w-[50px] sm:h-[50px] sm:w-[60px] lg:h-[70px] lg:w-[85px]"
           />
-          <span className="font-bold text-sm sm:text-base max-w-55 lg:text-[25px]">
+          <span className="font-bold text-xs sm:text-sm lg:text-[16px] max-w-55">
             {t("logoText")}
           </span>
         </div>
@@ -34,7 +34,7 @@ function UserNavbar() {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `lg:text-[25px] font-medium ${
+              `lg:text-[16px] font-medium ${
                 isActive
                   ? "text-main-500 border-b-4 border-main-500"
                   : "text-soft-dark-500 hover:text-color-main-500"
@@ -46,7 +46,7 @@ function UserNavbar() {
           <NavLink
             to="/about-us"
             className={({ isActive }) =>
-              `lg:text-[25px] font-medium ${
+              `lg:text-[16px] font-medium ${
                 isActive
                   ? "text-main-500 border-b-4 border-main-500"
                   : "text-soft-dark-500 hover:text-color-main-500"
@@ -58,7 +58,7 @@ function UserNavbar() {
           <NavLink
             to="/projects"
             className={({ isActive }) =>
-              `lg:text-[25px] font-medium ${
+              `lg:text-[16px] font-medium ${
                 isActive
                   ? "text-main-500 border-b-4 border-main-500"
                   : "text-soft-dark-500 hover:text-color-main-500"
@@ -70,7 +70,7 @@ function UserNavbar() {
           <NavLink
             to="/media"
             className={({ isActive }) =>
-              `lg:text-[25px] font-medium ${
+              `lg:text-[16px] font-medium ${
                 isActive
                   ? "text-main-500 border-b-4 border-main-500"
                   : "text-soft-dark-500 hover:text-color-main-500"
@@ -82,7 +82,7 @@ function UserNavbar() {
           <NavLink
             to="/contact-us"
             className={({ isActive }) =>
-              `lg:text-[25px] font-medium ${
+              `lg:text-[16px] font-medium ${
                 isActive
                   ? "text-main-500 border-b-4 border-main-500"
                   : "text-soft-dark-500 hover:text-color-main-500"
@@ -111,7 +111,7 @@ function UserNavbar() {
           </NavLink>
         </div>
         <div className="flex  items-center gap-2">
-          <div className="lg:hidden relative">
+          <div className="lg:hidden relative lg:text-[16px] font-medium">
             <LanguageSwitcher />
           </div>
           {/* Mobile Hamburger Icon */}
@@ -120,7 +120,7 @@ function UserNavbar() {
             className="lg:hidden text-main-500 p-2"
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>

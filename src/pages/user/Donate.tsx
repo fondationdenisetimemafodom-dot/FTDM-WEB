@@ -337,7 +337,7 @@ function Donate() {
        | @param --
        | @return --
        -----------------------------------------------------------------------------------------------------*/}
-      <div className="flex flex-col items-center w-screen">
+      <div className="flex flex-col items-center w-full">
         <div
           className="flex flex-col items-center justify-center md:min-h-screen w-full px-4 py-20"
           style={{
