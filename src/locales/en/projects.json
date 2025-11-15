@@ -1,0 +1,48 @@
+{
+  "hero": {
+    "title": "Transforming Vision Into Tangible Impact",
+    "subtitle": "From building healthcare facilities to empowering youth through education, explore the multifaceted initiatives we've brought to life across Cameroon and beyond. Each project represents a commitment fulfilled, a community uplifted, and a step forward in our mission to foster human solidarity through meaningful action that creates ripples of lasting change for generations to come."
+  },
+  "categories": {
+    "all": "All Projects",
+    "healthcare": "Health Care",
+    "education": "Education",
+    "culture": "Culture",
+    "social": "Social Development",
+    "humanitarian": "Humanitarian Aid"
+  },
+  "states": {
+    "loading": "Loading projects...",
+    "error": "Failed to load projects. Please try again.",
+    "noProjects": "No projects found for this category.",
+    "tryAgain": "Try Again"
+  },
+  "projectDetails": {
+    "location": "Location",
+    "beneficiaries": "Beneficiaries",
+    "started": "Started",
+    "description": "Project Description",
+    "gallery": "Project Gallery",
+    "articles": "Associated Articles",
+    "status": {
+      "ongoing": "Ongoing",
+      "completed": "Completed"
+    },
+    "notFound": "Project not found",
+    "backButton": "Back to Projects",
+    "articlesLoading": "Loading articles...",
+    "articlesError": "Failed to load articles",
+    "noArticles": "No articles found for this project"
+  },
+  "collective": {
+    "title": "Collective impact objectives",
+    "subtitle": "The Measurable difference we are going to make this year",
+    "stats": {
+      "projects": "Projects",
+      "lives": "Lives Impacted",
+      "villages": "Villages Reached",
+      "investments": "Investments"
+    },
+    "donate": "Donate"
+  }
+}

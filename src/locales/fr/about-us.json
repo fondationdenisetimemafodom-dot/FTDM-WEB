@@ -1,0 +1,39 @@
+{
+  "hero": {
+    "title": "Construire des Ponts d'Espoir à Travers les Communautés",
+    "description": "Née d'une vision de solidarité humaine sans limites, la Fondation Denise Time Mafodom transforme les vies par l'action compatissante. Du cœur vibrant de Dschang, au Cameroun, nous tissons ensemble des rêves philanthropiques, des opportunités éducatives, des célébrations culturelles, l'innovation scientifique et les missions humanitaires créant des ondulations de changement positif qui touchent les communautés proches et lointaines. Chaque projet que nous entreprennons, chaque main que nous tendons, porte la promesse d'un demain meilleur construit sur la dignité, les connaissances et l'humanité partagée."
+  },
+  "missionVision": {
+    "sectionTitle": "Notre Mission et Vision",
+    "missionLabel": "NOTRE MISSION",
+    "missionTitle": "Allumer l'espoir, autonomiser les vies, transformer les communautés par l'humanité partagée",
+    "missionDescription": "Champion la solidarité humaine en créant des voies d'opportunité par l'éducation transformatrice, l'échange culturel dynamique, l'aide humanitaire compatissante, la collaboration scientifique révolutionnaire et le développement social durable. Nous croyons que lorsque les communautés sont équipées de connaissances, de ressources et d'un soutien inébranlable, elles ne font pas que survivre, elles prospèrent, innovent et inspirent les générations à venir.",
+    "visionLabel": "NOTRE VISION",
+    "visionTitle": "Un monde uni par la compassion, où chaque communauté prospère avec dignité et sens",
+    "visionDescription": "Nous envisageons un avenir où la compassion et la solidarité transcendent toutes les frontières géographiques, culturelles et économiques. Un monde où chaque communauté, quelles que soient les circonstances, possède les connaissances pour grandir, les ressources pour prospérer et le réseau de soutien pour surmonter tout défi. Où les enfants rêvent sans limites, où les traditions sont célébrées comme des ponts plutôt que comme des barrières, et où le potentiel humain ne connaît pas de limites."
+  },
+  "missionCards": {
+    "education": {
+      "title": "Éducation",
+      "description": "Libérer le potentiel par le savoir et les opportunités d'apprentissage. Nous croyons que l'éducation est la pierre angulaire de l'autonomisation, ouvrant des portes à des avenirs plus brillants et brisant les cycles de pauvreté à travers les générations."
+    },
+    "culture": {
+      "title": "Culture",
+      "description": "Célébrer le patrimoine tout en construisant des ponts entre les communautés. Nous honorons les traditions culturelles comme des sources de force et d'identité, favorisant la compréhension mutuelle et le respect entre les différents milieux."
+    },
+    "health": {
+      "title": "Initiatives de Santé",
+      "description": "Construire des communautés plus saines grâce à des initiatives d'accessibilité des soins de santé et de bien-être. Nous veillons à ce que les services de santé de qualité atteignent ceux qui en ont le plus besoin, car le bien-être est un droit humain fondamental."
+    }
+  },
+  "supporters": {
+    "title": "Nos Meilleurs Supporters",
+    "description": "Nous sommes profondément reconnaissants envers nos meilleurs supporters dont la générosité et l'engagement font avancer notre mission. Ensemble, nous construisons un avenir plus brillant pour tous.",
+    "loading": "Chargement des supporters...",
+    "error": "Échec du chargement des supporters. Veuillez réessayer plus tard.",
+    "partnersTitle": "Nos Partenaires",
+    "noSupporters": "Aucun supporter à afficher pour le moment",
+    "becomeSupporter": "Vous pouvez devenir l'un de nos meilleurs supporters aussi!",
+    "donateButton": "Donner pour devenir"
+  }
+}

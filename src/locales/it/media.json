@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "title": "Punti salienti in evidenza",
+    "subtitle": "Esplora i momenti, le storie e i traguardi della Fondazione Denise Time Mafodom"
+  },
+  "slider": {
+    "loading": "Caricamento dei punti salienti...",
+    "noMedia": "Nessun media disponibile",
+    "readMore": "Scopri di più",
+    "status": {
+      "ongoing": "In corso",
+      "completed": "Completato"
+    },
+    "beneficiaries": "beneficiari"
+  },
+  "gallery": {
+    "title": "Galleria multimediale",
+    "loading": "Caricamento dei media...",
+    "noItemsFound": "Nessun {type} trovato",
+    "tabs": {
+      "all": "Tutti",
+      "images": "Immagini",
+      "videos": "Video"
+    },
+    "view": "Visualizza",
+    "showMore": "Mostra di più"
+  },
+  "modal": {
+    "preview": "Anteprima media",
+    "uploaded": "Caricato:"
+  },
+  "cta": {
+    "title": "Puoi contribuire a fornire un luogo per i bambini con esigenze speciali!",
+    "volunteer": "Unisciti come volontario",
+    "donate": "Donare"
+  }
+}

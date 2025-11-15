@@ -1,0 +1,39 @@
+{
+  "hero": {
+    "title": "Building Bridges of Hope Across Communities",
+    "description": "Born from a vision of boundless human solidarity, Fondation Denise Time Mafodom transforms lives through compassionate action. From the vibrant heart of Dschang, Cameroon, we weave together philanthropic dreams, educational opportunities, cultural celebrations, scientific innovation, and humanitarian missions creating ripples of positive change that touch communities near and far. Every project we undertake, every hand we extend, carries the promise of a brighter tomorrow built on dignity, knowledge, and shared humanity."
+  },
+  "missionVision": {
+    "sectionTitle": "Our Mission And Vision",
+    "missionLabel": "OUR MISSION",
+    "missionTitle": "Igniting hope, empowering lives, transforming communities through shared humanity",
+    "missionDescription": "To champion human solidarity by creating pathways to opportunity through transformative education, vibrant cultural exchange, compassionate humanitarian aid, groundbreaking scientific collaboration, and sustainable social development. We believe that when communities are equipped with knowledge, resources, and unwavering support, they don't just survive , they flourish, innovate, and inspire generations to come.",
+    "visionLabel": "OUR VISION",
+    "visionTitle": "A world united by compassion, where every community thrives with dignity and purpose",
+    "visionDescription": "We envision a future where compassion and solidarity transcend all borders geographic, cultural, and economic. A world where every community, regardless of circumstance, possesses the knowledge to grow, the resources to prosper, and the support network to overcome any challenge. Where children dream without limits, where traditions are celebrated as bridges rather than barriers, and where human potential knows no boundaries."
+  },
+  "missionCards": {
+    "education": {
+      "title": "Education",
+      "description": "Unlocking potential through knowledge and learning opportunities. We believe education is the cornerstone of empowerment, opening doors to brighter futures and breaking cycles of poverty across generations."
+    },
+    "culture": {
+      "title": "Culture",
+      "description": "Celebrating heritage while building bridges between communities. We honor cultural traditions as sources of strength and identity, fostering mutual understanding and respect across diverse backgrounds."
+    },
+    "health": {
+      "title": "Health Endeavours",
+      "description": "Building healthier communities through accessible healthcare and wellness initiatives. We ensure that quality health services reach those who need them most, because well-being is a fundamental human right."
+    }
+  },
+  "supporters": {
+    "title": "Our Top Supporters",
+    "description": "We are deeply grateful to our top supporters whose generosity and commitment drive our mission forward. Together, we are building a brighter future for all.",
+    "loading": "Loading supporters...",
+    "error": "Failed to load supporters. Please try again later.",
+    "partnersTitle": "Our Partners",
+    "noSupporters": "No supporters to display at this time",
+    "becomeSupporter": "You can become one of our Top supporters too!",
+    "donateButton": "Donate to become"
+  }
+}

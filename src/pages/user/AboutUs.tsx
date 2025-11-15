@@ -7,6 +7,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 import UserNavbar from "../../components/UserNavbar";
 import Footer from "../../components/Footer";
 import Mission1 from "../../assets/images/mission1.png";
@@ -41,6 +42,7 @@ interface Contributor {
 }
 
 function AboutUs() {
+  const { t } = useTranslation("about-us");
   const [contributors, setContributors] = useState<Contributor[]>([]);
   const [partners, setPartners] = useState<Contributor[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -89,7 +91,6 @@ function AboutUs() {
     <div className="flex flex-col min-h-screen">
       <UserNavbar />
 
-      {/* Hero section */}
       <div
         className="flex flex-col items-center justify-center w-full px-4 py-20"
         style={{
@@ -106,7 +107,7 @@ function AboutUs() {
             transition={{ duration: 1.5, delay: 0.8 }}
             className="text-[40px]  md:text-4xl lg:text-[56px] text-center font-bold text-white leading-tight"
           >
-            Building Bridges of Hope Across Communities
+            {t("hero.title")}
           </motion.span>
 
           <motion.span
@@ -115,19 +116,11 @@ function AboutUs() {
             transition={{ duration: 1, delay: 1.5 }}
             className="text-lg md:text-xl lg:text-3xl font-regular text-white text-center"
           >
-            Born from a vision of boundless human solidarity, Fondation Denise
-            Time Mafodom transforms lives through compassionate action. From the
-            vibrant heart of Dschang, Cameroon, we weave together philanthropic
-            dreams, educational opportunities, cultural celebrations, scientific
-            innovation, and humanitarian missions creating ripples of positive
-            change that touch communities near and far. Every project we
-            undertake, every hand we extend, carries the promise of a brighter
-            tomorrow built on dignity, knowledge, and shared humanity.
+            {t("hero.description")}
           </motion.span>
         </div>
       </div>
 
-      {/* Mission section */}
       <div className="w-full p-10 lg:p-25 flex flex-col justify-between items-center bg-[#F3F5F8]">
         <motion.span
           initial={{ opacity: 0, y: -20 }}
@@ -136,11 +129,10 @@ function AboutUs() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-[40px] font-bold self-center"
         >
-          Our Mission And Vision
+          {t("missionVision.sectionTitle")}
         </motion.span>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-30 mt-10">
-          {/* Mission */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -151,27 +143,19 @@ function AboutUs() {
             <div className="flex flex-row items-start gap-5 self-start mt-8">
               <div className="mt-2 bg-soft-dark-500 h-4 w-20"></div>
               <p className="uppercase text-lg md:text-2xl font-bold text-soft-dark-500">
-                OUR MISSION
+                {t("missionVision.missionLabel")}
               </p>
             </div>
             <div className="max-w-[496px]">
               <p className="text-lg md:text-3xl font-bold text-secondary-text-500">
-                Igniting hope, empowering lives, transforming communities
-                through shared humanity
+                {t("missionVision.missionTitle")}
               </p>
               <p className="text-[16px] md:text-[20px] font-bold text-gray-400 mt-8">
-                To champion human solidarity by creating pathways to opportunity
-                through transformative education, vibrant cultural exchange,
-                compassionate humanitarian aid, groundbreaking scientific
-                collaboration, and sustainable social development. We believe
-                that when communities are equipped with knowledge, resources,
-                and unwavering support, they don't just survive , they flourish,
-                innovate, and inspire generations to come.
+                {t("missionVision.missionDescription")}
               </p>
             </div>
           </motion.div>
 
-          {/* Vision */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -182,28 +166,20 @@ function AboutUs() {
             <div className="flex flex-row items-start gap-5 self-start mt-8">
               <div className="mt-2 bg-soft-dark-500 h-4 w-20"></div>
               <p className="uppercase text-lg md:text-2xl font-bold text-soft-dark-500">
-                OUR VISION
+                {t("missionVision.visionLabel")}
               </p>
             </div>
             <div className="max-w-[496px]">
               <p className="text-lg md:text-3xl font-bold text-secondary-text-500">
-                A world united by compassion, where every community thrives with
-                dignity and purpose
+                {t("missionVision.visionTitle")}
               </p>
               <p className="text-[16px] md:text-[20px] font-bold text-gray-400 mt-8">
-                We envision a future where compassion and solidarity transcend
-                all borders geographic, cultural, and economic. A world where
-                every community, regardless of circumstance, possesses the
-                knowledge to grow, the resources to prosper, and the support
-                network to overcome any challenge. Where children dream without
-                limits, where traditions are celebrated as bridges rather than
-                barriers, and where human potential knows no boundaries.
+                {t("missionVision.visionDescription")}
               </p>
             </div>
           </motion.div>
         </div>
 
-        {/* Mission Cards */}
         <div className="w-full flex flex-col md:flex-row items-center justify-center gap-10 mt-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -219,13 +195,10 @@ function AboutUs() {
             }}
           >
             <span className="text-[20px] md:text-2xl font-bold text-white">
-              Education
+              {t("missionCards.education.title")}
             </span>
             <span className="text-[12px] md:text-[16px] font-bold text-white">
-              Unlocking potential through knowledge and learning opportunities.
-              We believe education is the cornerstone of empowerment, opening
-              doors to brighter futures and breaking cycles of poverty across
-              generations.
+              {t("missionCards.education.description")}
             </span>
           </motion.div>
 
@@ -243,13 +216,10 @@ function AboutUs() {
             }}
           >
             <span className="text-[20px] md:text-2xl font-bold text-white">
-              Culture
+              {t("missionCards.culture.title")}
             </span>
             <span className="text-[12px] md:text-[16px] font-bold text-white">
-              Celebrating heritage while building bridges between communities.
-              We honor cultural traditions as sources of strength and identity,
-              fostering mutual understanding and respect across diverse
-              backgrounds.
+              {t("missionCards.culture.description")}
             </span>
           </motion.div>
 
@@ -267,31 +237,25 @@ function AboutUs() {
             }}
           >
             <span className="text-[20px] md:text-2xl font-bold text-white">
-              Health Endeavours
+              {t("missionCards.health.title")}
             </span>
             <span className="text-[12px] md:text-[16px] font-bold text-white">
-              Building healthier communities through accessible healthcare and
-              wellness initiatives. We ensure that quality health services reach
-              those who need them most, because well-being is a fundamental
-              human right.
+              {t("missionCards.health.description")}
             </span>
           </motion.div>
         </div>
       </div>
-      {/* Contributors section */}
+
       <div className="w-full p-10 lg:p-25 flex flex-col justify-between items-center bg-white">
         <div className="flex flex-col justify-between items-center mb-12">
           <span className="text-[40px] font-bold text-center mb-4">
-            Our Top Supporters
+            {t("supporters.title")}
           </span>
           <span className="text-center max-w-[600px] text-gray-600 text-base">
-            We are deeply grateful to our top supporters whose generosity and
-            commitment drive our mission forward. Together, we are building a
-            brighter future for all.
+            {t("supporters.description")}
           </span>
         </div>
 
-        {/* Loading State */}
         {loading && (
           <div className="flex flex-col items-center justify-center py-20 space-y-4">
             <svg
@@ -314,11 +278,10 @@ function AboutUs() {
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               ></path>
             </svg>
-            <p className="text-gray-500 text-lg">Loading supporters...</p>
+            <p className="text-gray-500 text-lg">{t("supporters.loading")}</p>
           </div>
         )}
 
-        {/* Error State */}
         {error && !loading && (
           <div className="mb-8 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3 max-w-2xl">
             <svg
@@ -336,7 +299,6 @@ function AboutUs() {
           </div>
         )}
 
-        {/* Contributors Grid */}
         {!loading && !error && contributors.length > 0 && (
           <div className="w-full mb-20">
             <div className="flex flex-wrap items-start justify-center gap-x-12 gap-y-16">
@@ -350,11 +312,10 @@ function AboutUs() {
           </div>
         )}
 
-        {/* Partners Grid */}
         {!loading && !error && partners.length > 0 && (
           <div className="w-full">
             <h3 className="text-3xl font-bold text-center mb-12 text-gray-900">
-              Our Partners
+              {t("supporters.partnersTitle")}
             </h3>
             <div className="flex flex-wrap items-start justify-center gap-x-12 gap-y-16">
               {partners.map((partner) => (
@@ -364,7 +325,6 @@ function AboutUs() {
           </div>
         )}
 
-        {/* Empty State */}
         {!loading &&
           !error &&
           contributors.length === 0 &&
@@ -380,18 +340,18 @@ function AboutUs() {
                 </svg>
               </div>
               <p className="text-gray-500 text-lg">
-                No supporters to display at this time
+                {t("supporters.noSupporters")}
               </p>
             </div>
           )}
         <span className="text-[40px] font-bold text-center my-6">
-          You can become one of our Top supporters too!
+          {t("supporters.becomeSupporter")}
         </span>
         <NavLink
           to="/donate"
           className="flex items-center hover:vibrate justify-center bg-main-500  py-3 px-5 text-white text-2xl font-semibold rounded-[12px] hover:cursor-pointer"
         >
-          Donate to become
+          {t("supporters.donateButton")}
         </NavLink>
       </div>
 

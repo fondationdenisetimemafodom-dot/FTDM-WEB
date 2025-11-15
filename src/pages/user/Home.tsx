@@ -147,7 +147,7 @@ function Home() {
       <div className=" w-full ">
         {/*hero section*/}
         <div
-          className=" w-full  p-2 px-10 lg:px-25 flex flex-col lg:flex-row justify-between items-center "
+          className=" w-full pt-27 pb-40 p-2 px-10 lg:px-25 flex flex-col lg:flex-row justify-between items-center "
           style={{
             backgroundImage: `linear-gradient(to right, #ffffffcc 30%, #dbeafe), url(${BgImage})`,
             backgroundSize: "cover",
@@ -160,41 +160,47 @@ function Home() {
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.5, delay: 0.8 }}
-              className="block max-w-[500px] font-bold text-[40px] md:text-[60px] text-main-500"
+              className="block max-w-[500px] font-bold text-[22px] sm:text-[20px] md:text-[35px lg:text-[40px] text-main-500"
+              style={{
+                lineHeight: "1.9",
+                fontFamily: "Arial, sans-serif",
+                letterSpacing: "1px",
+              }}
             >
-              Transforming Lives Through Solidarity
+              {t("hero.title")}
             </motion.span>
 
             <motion.span
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.5 }}
-              className="text-[20px] md:text-[30px] font-medium text-secondary-500 block mt-6 max-w-[567px]"
+              className="text-[14px] sm:text-[16px] md:text-[20px] font-medium text-secondary-500 block mt-9 max-w-[567px]"
+              style={{
+                lineHeight: "2.1",
+                fontFamily: "Arial, sans-serif",
+              }}
             >
-              Where compassion meets action. From Dschang to the world, we're
-              building bridges of hope through education, healthcare, cultural
-              enrichment, and humanitarian outreach. Transforming lives one
-              community at a time.
+              {t("hero.subtitle")}
             </motion.span>
 
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.5, delay: 0.8 }}
-              className="flex flex-col md:flex-row items-center gap-10 md:gap-24 mt-12"
+              className="flex flex-col md:flex-row items-center gap-10 md:gap-24 mt-20"
             >
               <NavLink
                 to="/donate"
-                className="flex items-center justify-center bg-main-500 w-58 md:w-28 lg:w-50 p-2 text-white text-2xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
+                className="flex items-center justify-center bg-main-500 w-58 md:w-28 lg:w-50 px-4 py-2 text-white text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
-                Donate
+                {t("hero_buttons.donate")}
               </NavLink>
 
               <button
                 onClick={() => setShowVolunteer(true)}
-                className="border-[3px] border-main-500 py-2 px-4 text-main-500 text-2xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
+                className="border-[3px] border-main-500 py-2 px-4 text-main-500 text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
-                Volunteer with us
+                {t("hero_buttons.volunteer")}
               </button>
             </motion.div>
           </div>
@@ -218,9 +224,9 @@ function Home() {
             className="w-[400px] h-[319px] mt-20 lg:mt-0 lg:w-[574px] lg:h-[496px]"
           />
         </div>
+
         {/* About us section */}
         <div className="w-full p-10 lg:p-25 flex flex-col md:flex-row justify-between items-center">
-          {/* Video */}
           <div className="w-full max-w-[440px] md:max-w-[500px] h-[250px] md:h-[600px] rounded-xl overflow-hidden mb-8 md:mb-0 md:mr-12 shadow-lg flex items-center justify-center">
             <video
               className="w-full h-[100%] object-cover rounded-xl"
@@ -260,15 +266,15 @@ function Home() {
 
           <div className="flex flex-col items-start justify-center gap-8">
             <div className="flex flex-row items-start gap-5">
-              <div className="mt-2 bg-soft-dark-500 h-4 w-20"></div>
+              <div className="mt-2 bg-soft-dark-500 h-2 w-20"></div>
               <motion.p
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 1, delay: 0.2 }}
-                className="uppercase text-lg md:text-2xl font-bold text-soft-dark-500"
+                className="uppercase lg:text-[15px] md:text-2xl font-bold text-soft-dark-500"
               >
-                Know about us
+                {t("about.label")}
               </motion.p>
             </div>
             <div className="flex flex-col gap-2 max-w-[682px]">
@@ -277,48 +283,33 @@ function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 1.5, delay: 0.4 }}
-                className="text-[28px] md:text-[48px] font-bold mt-2"
+                className="block max-w-[500px] font-bold text-[22px] sm:text-[20px] md:text-[35px] lg:text-[30px] text-main-700"
+                style={{
+                  lineHeight: "1.4",
+                  fontFamily: "Arial, sans-serif",
+                  letterSpacing: "1px",
+                }}
               >
-                Weaving Health, Progress, and Heritage Into the Fabric of
-                Tomorrow
+                {t("about.title")}
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, y: -30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 1, delay: 0.8 }}
-                className="text-secondary-text-500 text-base md:text-2xl"
+                className="text-[14px] sm:text-[16px] md:text-[20px] font-medium text-secondary-500 block max-w-[567px]"
+                style={{
+                  lineHeight: "2.1",
+                  fontFamily: "Arial, sans-serif",
+                }}
               >
-                In every community we serve, from the vibrant streets of Dschang
-                to villages across Cameroon and beyond, we see untapped
-                potential waiting to flourish. Our mission transcends borders
-                and barriers. We don't just build clinics and schools; we
-                cultivate ecosystems where health thrives, where education opens
-                doors once thought permanently closed, and where cultural
-                traditions become sources of pride and economic opportunity.
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: -30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 1, delay: 1.2 }}
-                className="text-secondary-text-500 text-base md:text-2xl mt-4"
-              >
-                Every initiative we launch is rooted in the belief that
-                sustainable development begins with people, their stories, their
-                strengths, their dreams. By honoring cultural wisdom while
-                embracing innovation, by treating health as a fundamental right
-                rather than a privilege, and by investing in education that
-                transforms generations, we're not simply creating projects.
-                We're nurturing movements of change that ripple outward,
-                touching countless lives and reshaping what's possible for
-                entire communities.
+                {t("about.description")}
               </motion.span>
               <NavLink
                 to="/about-us"
-                className="bg-main-500 hover:vibrate text-lg md:text-2xl font-semibold mt-4 text-white hover:cursor-pointer py-4 px-6 max-w-[70%] md:max-w-[40%] rounded-2xl flex items-center justify-center gap-2"
+                className="flex items-center justify-center bg-main-500  py-2 w-50 text-white text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
-                Learn more
+                <a href="">{t("about.link")}</a>
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -349,102 +340,129 @@ function Home() {
             </div>
           </div>
         </div>
+
         {/* Support Our Work Section */}
-        <div className="w-screen bg-white p-4  flex justify-center">
-          <div className="p-10 md-p25 flex flex-col items-start gap-6">
-            {/* Header */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col gap-2"
-            >
-              <div className="flex flex-row items-start gap-5">
-                <div className="mt-2 bg-soft-dark-500 h-4 w-20"></div>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
+        <div className="w-full bg-white p-4  flex justify-center">
+          <div className="p-10 md-p25 flex flex-col md:flex-row items-center gap-6">
+            <div className="w-full flex flex-col md:grid md:grid-cols-2 items-start md:items-center gap-6">
+              <div className="w-full md:col-start-1 md:row-start-1 flex flex-col items-start gap-6">
+                <div className="flex flex-row items-start gap-5">
+                  <div className="mt-2 bg-soft-dark-500 h-2 w-20"></div>
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 1, delay: 0.2 }}
+                    className="uppercase lg:text-[15px] md:text-2xl font-bold text-soft-dark-500"
+                  >
+                    {t("support.label")}
+                  </motion.p>
+                </div>
+
+                <motion.h2
+                  initial={{ opacity: 0, y: -10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.5 }}
-                  transition={{ duration: 1, delay: 0.2 }}
-                  className="uppercase text-lg md:text-2xl font-bold text-soft-dark-500"
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="block max-w-[500px] font-bold text-[22px] sm:text-[20px] md:text-[35px] lg:text-[30px] text-main-700"
+                  style={{
+                    lineHeight: "1.4",
+                    fontFamily: "Arial, sans-serif",
+                    letterSpacing: "1px",
+                  }}
                 >
-                  Donate
-                </motion.p>
+                  {t("support.title")}
+                </motion.h2>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="flex flex-col gap-4"
+                >
+                  <p
+                    className="text-[14px] sm:text-[16px] md:text-[20px] font-medium text-secondary-500"
+                    style={{
+                      lineHeight: "2.1",
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                  >
+                    {t("support.description1")}
+                  </p>
+                  <p
+                    className="text-[14px] sm:text-[16px] md:text-[20px] font-medium text-secondary-500"
+                    style={{
+                      lineHeight: "2.1",
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                  >
+                    {t("support.description2")}
+                  </p>
+                  <p
+                    className="text-[14px] sm:text-[16px] md:text-[20px] font-medium text-secondary-500"
+                    style={{
+                      lineHeight: "2.1",
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                  >
+                    {t("support.description3")}
+                  </p>
+                  <p
+                    className="text-[14px] sm:text-[16px] md:text-[20px] font-medium text-secondary-500"
+                    style={{
+                      lineHeight: "2.1",
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                  >
+                    {t("support.description4")}
+                  </p>
+                </motion.div>
               </div>
-              <h2 className="text-[28px] lg:text-[36px] font-bold text-gray-900 leading-tight">
-                Support our work - Your gifts- Births dreams
-              </h2>
-            </motion.div>
 
-            {/* Description Paragraphs */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col gap-4 text-gray-700 text-lg lg:text-2xl"
-            >
-              <p>
-                Your support fuels real change in communities that need it most.
-                Every gift helps provide healthcare, education, and essential
-                resources.
-              </p>
-              <p>
-                With your generosity, we build schools, clinics, and safe
-                spaces. You empower families to dream bigger and achieve more.
-              </p>
-              <p>
-                Together, we turn hope into action and ideas into reality. Your
-                contribution breathes life into projects that transform lives.
-              </p>
-              <p>
-                From newborns to elders, your kindness creates lasting impact.
-                Join us because every gift births a brighter tomorrow.
-              </p>
-            </motion.div>
+              <div className="w-full md:col-start-2 md:row-start-1 flex justify-center">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                  className="w-full flex justify-center"
+                >
+                  <img
+                    src={home_donate_image || "/placeholder.svg"}
+                    alt="Children being supported by the foundation"
+                    className="w-full max-w-[440px] md:max-w-[500px] h-[250px] md:h-[600px] rounded-lg shadow-lg object-cover"
+                  />
+                </motion.div>
+              </div>
 
-            {/* Image */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="w-full"
-            >
-              <img
-                src={home_donate_image}
-                alt="Children being supported by the foundation"
-                className="w-[90%] h-[550px] rounded-lg shadow-lg"
-              />
-            </motion.div>
-
-            {/* Donate Button */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="w-full flex justify-center"
-            >
-              <NavLink
-                to="/donate"
-                className="bg-blue-600 hover:vibrate text-white text-lg font-semibold py-3 px-12 rounded-lg transition-colors duration-300"
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="w-full md:col-start-1 md:row-start-2 flex justify-center md:justify-start"
               >
-                Donate today
-              </NavLink>
-            </motion.div>
+                <NavLink
+                  to="/donate"
+                  className="flex items-center justify-center bg-main-500 px-4 py-2 text-white text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
+                >
+                  {t("support.button")}
+                </NavLink>
+              </motion.div>
+            </div>
           </div>
         </div>
+
         {/*projects section*/}
         <div className="w-full p-10 lg:p-25 flex flex-col justify-between items-center bg-[#F3F5F8]">
           <span className=" text-[40px] font-bold self-center">
-            Projects We Have Done
+            {t("projects.title")}
           </span>
           <div className="flex flex-row items-start gap-5 self-start mt-8">
             <div className="mt-2 bg-soft-dark-500 h-4 w-20"></div>
             <p className="uppercase text-lg md:text-2xl font-bold text-soft-dark-500">
-              VIEW OUR PROJECTS
+              {t("projects.label")}
             </p>
           </div>
 
@@ -471,7 +489,7 @@ function Home() {
                     to="/projects"
                     className="bg-main-500 text-xl md:text-2xl font-semibold text-white hover:bg-main-600 transition-colors py-4 px-8 rounded-xl flex items-center justify-center gap-2"
                   >
-                    View All Projects
+                    {t("projects.viewAll")}
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

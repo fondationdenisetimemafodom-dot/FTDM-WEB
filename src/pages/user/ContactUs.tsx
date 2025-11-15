@@ -571,7 +571,7 @@ function ContactUs() {
               transition={{ duration: 1.5, delay: 0.8 }}
               className="text-[40px] md:text-4xl lg:text-[56px] text-center font-bold text-white leading-tight"
             >
-              Let's Start a Conversation
+              {t("hero.title")}
             </motion.span>
 
             <motion.span
@@ -580,13 +580,7 @@ function ContactUs() {
               transition={{ duration: 1, delay: 1.5 }}
               className="text-lg md:text-xl lg:text-3xl font-regular text-white text-center"
             >
-              Whether you're interested in partnering with us, volunteering your
-              time and skills, learning more about our initiatives, or simply
-              want to share your thoughts, we're here to listen. Your voice
-              matters in our mission to build stronger, more compassionate
-              communities. Reach out through any of our channels below, and
-              let's explore how we can work together to create meaningful
-              change.
+              {t("hero.description")}
             </motion.span>
           </div>
         </div>

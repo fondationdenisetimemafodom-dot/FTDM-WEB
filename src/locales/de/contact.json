@@ -1,21 +1,25 @@
 {
+  "hero": {
+    "title": "Lassen Sie uns ein Gespräch beginnen",
+    "description": "Ob Sie an einer Partnerschaft mit uns interessiert sind, freiwillig Ihre Zeit und Fähigkeiten anbieten möchten, mehr über unsere Initiativen erfahren oder einfach Ihre Gedanken teilen möchten - wir sind hier zum Zuhören. Ihre Stimme ist wichtig für unsere Mission, stärkere und mitfühlendere Gemeinschaften aufzubauen. Wenden Sie sich über einen der folgenden Kanäle an uns und lassen Sie uns erkunden, wie wir zusammenarbeiten können, um bedeutungsvolle Veränderungen zu schaffen."
+  },
   "title": "KONTAKTIEREN SIE UNS",
   "headline": "Wir würden gerne von Ihnen hören",
-  "description": "Haben Sie eine Frage oder möchten Sie eine Anfrage stellen? Bitte kontaktieren Sie uns über das Formular oder die folgenden Details.",
-  "letsTalk": "Lass uns reden!",
-  "phone": "+237 690000000",
-  "email": "help@fdtm.org",
+  "description": "Haben Sie eine Frage oder möchten Sie sich erkundigen? Bitte kontaktieren Sie uns gerne über das Formular oder die folgenden Details.",
+  "letsTalk": "Lassen Sie uns sprechen!",
+  "phone": "+237  699 817 143",
+  "email": "fondationdenisetimemafodomonlus@gmail.com",
   "headOffice": "Hauptsitz",
   "headOfficeAddress1": "Westregion, Dschang",
   "headOfficeAddress2": "Kamerun",
-  "branchOffice": "Zweigstelle",
+  "branchOffice": "Filiale",
   "branchOfficeAddress1": "Mafodom",
   "branchOfficeAddress2": "Kamerun",
   "formHeadline": "Möchten Sie uns eine Nachricht hinterlassen?",
   "form": {
     "firstName": "Vorname",
     "lastName": "Nachname",
-    "email": "E-Mail",
+    "email": "Email-Adresse",
     "subject": "Betreff",
     "message": "Nachricht hinterlassen...",
     "send": "Nachricht senden"

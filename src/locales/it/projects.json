@@ -1,0 +1,48 @@
+{
+  "hero": {
+    "title": "Trasformare la visione in impatto tangibile",
+    "subtitle": "Dalla costruzione di strutture sanitarie all'empowerment dei giovani attraverso l'istruzione, esplora le iniziative multifacetate che abbiamo portato in vita in Camerun e oltre. Ogni progetto rappresenta un impegno mantenuto, una comunità sollevata, e un passo avanti nella nostra missione di promuovere la solidarietà umana attraverso azioni significative che creano increspature di cambiamento duraturo per le generazioni a venire."
+  },
+  "categories": {
+    "all": "Tutti i progetti",
+    "healthcare": "Assistenza sanitaria",
+    "education": "Istruzione",
+    "culture": "Cultura",
+    "social": "Sviluppo sociale",
+    "humanitarian": "Aiuto umanitario"
+  },
+  "states": {
+    "loading": "Caricamento progetti...",
+    "error": "Errore nel caricamento dei progetti. Si prega di riprovare.",
+    "noProjects": "Nessun progetto trovato per questa categoria.",
+    "tryAgain": "Riprova"
+  },
+  "projectDetails": {
+    "location": "Posizione",
+    "beneficiaries": "Beneficiari",
+    "started": "Iniziato",
+    "description": "Descrizione del progetto",
+    "gallery": "Galleria del progetto",
+    "articles": "Articoli associati",
+    "status": {
+      "ongoing": "In corso",
+      "completed": "Completato"
+    },
+    "notFound": "Progetto non trovato",
+    "backButton": "Torna ai progetti",
+    "articlesLoading": "Caricamento articoli...",
+    "articlesError": "Errore nel caricamento degli articoli",
+    "noArticles": "Nessun articolo trovato per questo progetto"
+  },
+  "collective": {
+    "title": "Obiettivi di impatto collettivo",
+    "subtitle": "La differenza misurabile che faremo quest'anno",
+    "stats": {
+      "projects": "Progetti",
+      "lives": "Vite toccate",
+      "villages": "Villaggi raggiunti",
+      "investments": "Investimenti"
+    },
+    "donate": "Dona"
+  }
+}

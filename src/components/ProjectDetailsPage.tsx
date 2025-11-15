@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import API_BASE_URL from "../lib/api";
 
 import {
@@ -26,10 +27,7 @@ type Article = {
   createdAt: string;
   updatedAt: string;
 };
-/*-----------------------------------------------------------------------------------------------------
-| @interface ProjectDetailsPageProps
-| @brief    Props interface for ProjectDetailsPage component
------------------------------------------------------------------------------------------------------*/
+
 interface ProjectDetailsPageProps {
   project: {
     _id: string;
@@ -45,39 +43,34 @@ interface ProjectDetailsPageProps {
   onBack: () => void;
 }
 
-/*-----------------------------------------------------------------------------------------------------
-| @function ProjectDetailsPage
-| @brief    Renders a full page displaying complete project details with media carousel and gallery
------------------------------------------------------------------------------------------------------*/
 const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
   project,
   onBack,
 }) => {
+  const { t } = useTranslation("projects");
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
   const [articles, setArticles] = useState<Article[]>([]);
   const [articlesLoading, setArticlesLoading] = useState(true);
   const [articlesError, setArticlesError] = useState("");
-  // Return early if no project
+
   if (!project) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-600 text-lg mb-4">Project not found</p>
+          <p className="text-gray-600 text-lg mb-4">
+            {t("projectDetails.notFound")}
+          </p>
           <button
             onClick={onBack}
             className="px-6 py-2 bg-main-500 text-white rounded-lg hover:bg-main-600 transition"
           >
-            Back to Projects
+            {t("projectDetails.backButton")}
           </button>
         </div>
       </div>
     );
   }
 
-  /*-----------------------------------------------------------------------------------------------------
-  | @function formatDate
-  | @brief    Formats ISO date string to readable format
-  -----------------------------------------------------------------------------------------------------*/
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
@@ -86,30 +79,18 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
     });
   };
 
-  /*-----------------------------------------------------------------------------------------------------
-  | @function handlePrevMedia
-  | @brief    Navigates to previous media item in carousel
-  -----------------------------------------------------------------------------------------------------*/
   const handlePrevMedia = () => {
     setCurrentMediaIndex((prev) =>
       prev === 0 ? project.media.length - 1 : prev - 1
     );
   };
 
-  /*-----------------------------------------------------------------------------------------------------
-  | @function handleNextMedia
-  | @brief    Navigates to next media item in carousel
-  -----------------------------------------------------------------------------------------------------*/
   const handleNextMedia = () => {
     setCurrentMediaIndex((prev) =>
       prev === project.media.length - 1 ? 0 : prev + 1
     );
   };
 
-  /*-----------------------------------------------------------------------------------------------------
-  | @function sanitizeHtml
-  | @brief    Sanitizes HTML content to only allow safe formatting tags
-  -----------------------------------------------------------------------------------------------------*/
   const sanitizeHtml = (html: string): string => {
     const temp = document.createElement("div");
     temp.innerHTML = html;
@@ -134,7 +115,6 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
         const data = await response.json();
         const allArticles = data.articles || data;
 
-        // Filter articles that match the project title and are published
         const filteredArticles = allArticles.filter(
           (article: Article) =>
             article.projectTitle === project?.title && article.published
@@ -143,7 +123,7 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
         setArticles(filteredArticles);
       } catch (err) {
         console.error("Failed to fetch articles:", err);
-        setArticlesError("Failed to load articles");
+        setArticlesError(t("projectDetails.articlesError"));
       } finally {
         setArticlesLoading(false);
       }
@@ -152,14 +132,14 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
     if (project) {
       fetchArticles();
     }
-  }, [project?.title]);
+  }, [project?.title, t]);
+
   const currentMedia = project.media?.[currentMediaIndex];
   const sanitizedDescription = sanitizeHtml(project.description || "");
   const galleryMedia = project.media?.slice(0, 4) || [];
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Back Button */}
       <div className="bg-white shadow-sm sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-4">
           <button
@@ -167,15 +147,15 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
             className="flex items-center text-gray-600 hover:text-main-500 transition"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
-            <span className="font-medium">Back to Projects</span>
+            <span className="font-medium">
+              {t("projectDetails.backButton")}
+            </span>
           </button>
         </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-8">
-        {/* Header Section */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
-          {/* Media Carousel */}
           {project.media && project.media.length > 0 && currentMedia && (
             <div className="relative w-full h-64 md:h-96 bg-gray-200">
               {currentMedia.type === "video" ? (
@@ -186,13 +166,12 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
                 />
               ) : (
                 <img
-                  src={currentMedia.url}
+                  src={currentMedia.url || "/placeholder.svg"}
                   alt={project.title}
                   className="w-full h-full object-cover"
                 />
               )}
 
-              {/* Carousel Navigation */}
               {project.media.length > 1 && (
                 <>
                   <button
@@ -208,7 +187,6 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
                     <ChevronRight className="w-6 h-6 text-gray-800" />
                   </button>
 
-                  {/* Media Indicators */}
                   <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                     {project.media.map((_, index) => (
                       <button
@@ -225,7 +203,6 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
                 </>
               )}
 
-              {/* Status and Category Badges */}
               <div className="absolute top-4 left-4">
                 <span
                   className={`px-4 py-2 rounded-full text-sm font-semibold ${
@@ -234,7 +211,9 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
                       : "bg-green-500 text-white"
                   }`}
                 >
-                  {project.status === "ongoing" ? "Ongoing" : "Completed"}
+                  {project.status === "ongoing"
+                    ? t("projectDetails.status.ongoing")
+                    : t("projectDetails.status.completed")}
                 </span>
               </div>
               <div className="absolute top-4 right-4">
@@ -245,18 +224,18 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
             </div>
           )}
 
-          {/* Project Title and Info */}
           <div className="p-6 md:p-8">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
               {project.title}
             </h1>
 
-            {/* Project Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
               <div className="flex items-center p-4 bg-gray-50 rounded-lg">
                 <MapPin className="w-6 h-6 mr-3 text-main-500 flex-shrink-0" />
                 <div>
-                  <p className="text-xs text-gray-500 uppercase">Location</p>
+                  <p className="text-xs text-gray-500 uppercase">
+                    {t("projectDetails.location")}
+                  </p>
                   <p className="font-semibold text-gray-800">
                     {project.location}
                   </p>
@@ -266,7 +245,7 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
                 <Users className="w-6 h-6 mr-3 text-main-500 flex-shrink-0" />
                 <div>
                   <p className="text-xs text-gray-500 uppercase">
-                    Beneficiaries
+                    {t("projectDetails.beneficiaries")}
                   </p>
                   <p className="font-semibold text-gray-800">
                     {project.beneficiaries}
@@ -276,7 +255,9 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
               <div className="flex items-center p-4 bg-gray-50 rounded-lg">
                 <Calendar className="w-6 h-6 mr-3 text-main-500 flex-shrink-0" />
                 <div>
-                  <p className="text-xs text-gray-500 uppercase">Started</p>
+                  <p className="text-xs text-gray-500 uppercase">
+                    {t("projectDetails.started")}
+                  </p>
                   <p className="font-semibold text-gray-800">
                     {formatDate(project.startDate)}
                   </p>
@@ -284,10 +265,9 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
               </div>
             </div>
 
-            {/* Project Description */}
             <div>
               <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                Project Description
+                {t("projectDetails.description")}
               </h2>
               <div
                 className="text-gray-700 leading-relaxed prose prose-sm md:prose-base max-w-none [&>p]:mb-4 [&>strong]:font-bold [&>em]:italic [&>ul]:list-disc [&>ul]:ml-6 [&>ul]:mb-4 [&>ol]:list-decimal [&>ol]:ml-6 [&>ol]:mb-4"
@@ -297,11 +277,10 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
           </div>
         </div>
 
-        {/* Media Gallery - First 4 Media Items */}
         {galleryMedia.length > 0 && (
           <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
-              Project Gallery
+              {t("projectDetails.gallery")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {galleryMedia.map((media, index) => (
@@ -318,12 +297,11 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
                     />
                   ) : (
                     <img
-                      src={media.url}
+                      src={media.url || "/placeholder.svg"}
                       alt={`${project.title} - Image ${index + 1}`}
                       className="w-full h-full object-cover"
                     />
                   )}
-                  {/* Play icon overlay for videos */}
                   {media.type === "video" && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
                       <div className="w-16 h-16 rounded-full bg-white bg-opacity-90 flex items-center justify-center">
@@ -338,13 +316,15 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
         )}
         <div className="bg-white rounded-2xl mt-10 shadow-lg p-6 md:p-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">
-            Associated Articles
+            {t("projectDetails.articles")}
           </h2>
 
           {articlesLoading ? (
             <div className="flex flex-col items-center justify-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-main-500"></div>
-              <p className="text-gray-500 mt-4">Loading articles...</p>
+              <p className="text-gray-500 mt-4">
+                {t("projectDetails.articlesLoading")}
+              </p>
             </div>
           ) : articlesError ? (
             <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
@@ -364,7 +344,7 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({
           ) : articles.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-500 text-lg">
-                No articles found for this project
+                {t("projectDetails.noArticles")}
               </p>
             </div>
           ) : (

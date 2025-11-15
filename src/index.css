@@ -8,6 +8,10 @@
   --color-soft-dark-500: #0e1115;
   --color-primary-text: #1d2130;
 }
+
+body {
+  font-family: "poppins", sans-serif;
+}
 /* Additional Tiptap placeholder styling */
 .tiptap p.is-editor-empty::before {
   @apply text-gray-400 content-[attr(data-placeholder)] float-left pointer-events-none h-0;

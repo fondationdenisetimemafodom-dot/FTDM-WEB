@@ -1,16 +1,44 @@
 {
+  "pageTitle": "Be the Change You Wish to See",
+  "pageDescription": "Your generosity fuels our mission of human solidarity and transforms lives across Cameroon and beyond. Whether through Mobile Money, PayPal, or other channels, every contribution no matter the size becomes a beacon of hope, empowering education, healthcare, cultural initiatives, and community development. Together, we turn compassion into action and dreams into reality for those who need it most.",
+  "chooseDonationType": "Choose Donation Type",
+  "instantDonation": "Instant Donation",
+  "instantDescription": "Make a one-time donation now",
+  "monthlySubscription": "Monthly Subscription",
+  "monthlyDescription": "Support us every month automatically",
+  "activeSubscription": "You have an active monthly subscription",
+  "manageSubscription": "Manage Subscription",
   "benefits": {
     "updates": "Regular Impact Updates",
     "secure": "Secure Payments",
     "transparent": "100% Transparent"
   },
   "amount": "Donation Amount",
+  "monthlyAmount": "Monthly Amount",
+  "minimumMonthly": "Minimum 500 XAF per month",
+  "perMonth": "/month",
   "amountPlaceholder": "Enter custom amount",
+  "monthlyAmountPlaceholder": "Enter monthly amount (min 500 XAF)",
   "personalInfo": "Personal Information",
   "firstName": "First Name",
   "lastName": "Last Name",
   "email": "Email Address",
   "phone": "Phone Number",
   "comments": "Message (Optional)",
-  "donateBtn": "Donate Now"
+  "donateBtn": "Donate Now",
+  "donateMonthly": "Donate Monthly",
+  "monthlyBillingNote": "You will receive an email before each monthly billing with a payment link. You can cancel anytime.",
+  "errors": {
+    "invalidAmount": "Please enter a valid donation amount.",
+    "minimumMonthly": "Minimum monthly subscription amount is 500 XAF.",
+    "firstNameRequired": "Please enter your first name.",
+    "lastNameRequired": "Please enter your last name.",
+    "invalidEmail": "Please enter a valid email address.",
+    "phoneRequired": "Please enter your phone number.",
+    "verificationFailed": "Donation verification failed. Please contact support if payment was deducted.",
+    "donationFailed": "Donation failed. Please try again.",
+    "networkError": "Network error, please try again.",
+    "subscriptionExists": "You already have an active subscription. Please manage your existing subscription.",
+    "subscriptionFailed": "Failed to create subscription. Please try again."
+  }
 }

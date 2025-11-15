@@ -517,11 +517,13 @@ const Footer: React.FC = () => {
                 {t("links.donate")}
               </NavLink>
             </li>
+            {/* Blog Link 
             <li>
               <NavLink to="/blog" className="hover:underline">
                 {t("links.blog")}
               </NavLink>
             </li>
+            */}
           </ul>
         </div>
 

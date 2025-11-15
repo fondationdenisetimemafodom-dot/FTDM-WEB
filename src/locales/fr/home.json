@@ -1,89 +1,39 @@
 {
-  "header": {
-    "logo": "Ensemble pour la Solidarité Humaine",
-    "nav": {
-      "home": "Accueil",
-      "about": "À propos",
-      "projects": "Projets",
-      "news": "Actualités",
-      "contact": "Contact"
-    },
-    "donate": "Faire un don"
-  },
   "hero": {
-    "title": "Ensemble pour la Solidarité Humaine",
-    "subtitle": "Nous promouvons la santé, l’éducation et l’autonomisation économique pour un monde meilleur.",
-    "cta": {
-      "primary": "Faire un don",
-      "secondary": "En savoir plus"
-    }
+    "title": "TRANSFORMER LES VIES PAR LA SOLIDARITÉ",
+    "subtitle": "Où la compassion rencontre l'action. De Douala au monde, nous construisons des ponts d'espoir à travers l'éducation, les soins de santé, l'enrichissement culturel et l'aide humanitaire. Transformer les vies une communauté à la fois."
+  },
+  "hero_buttons": {
+    "donate": "Donner",
+    "volunteer": "Devenir volontaire"
   },
   "about": {
-    "title": "Qui sommes-nous",
-    "description": "Nous promouvons la santé, l’éducation et l’autonomisation économique pour un monde meilleur. Ensemble, nous créons un impact durable."
+    "label": "À propos de nous",
+    "title": "Tisser la santé, le progrès et le patrimoine dans le tissu de demain",
+    "description": "Dans chaque communauté que nous servons, des rues vibrantes de Douala aux villages à travers le Cameroun et au-delà, nous voyons un potentiel inexploité qui attend de s'épanouir. Notre mission transcende les frontières et les obstacles. Nous ne nous contentons pas de construire des cliniques et des écoles ; nous cultivons des écosystèmes où la santé prospère, où l'éducation ouvre des portes autrefois jugées fermées, et où les traditions culturelles deviennent des sources de fierté et d'opportunités économiques.",
+    "link": "En savoir plus"
+  },
+  "support": {
+    "label": "Donner",
+    "title": "Soutenir notre travail - Vos dons - Naissent des rêves",
+    "description1": "Votre soutien alimente un vrai changement dans les communautés qui en ont le plus besoin. Chaque don aide à fournir des soins de santé, l'éducation et les ressources essentielles.",
+    "description2": "Grâce à votre générosité, nous construisons des écoles, des cliniques et des espaces sûrs. Vous habilitez les familles à rêver plus grand et à réaliser davantage.",
+    "description3": "Ensemble, nous transformons l'espoir en action et les idées en réalité. Votre contribution donne vie à des projets qui transforment les vies.",
+    "description4": "Des nouveau-nés aux aînés, votre bienveillance crée un impact durable. Rejoignez-nous car chaque don naît d'un demain plus lumineux.",
+    "button": "Donner aujourd'hui"
   },
   "projects": {
-    "title": "Projets en cours",
-    "cta": "Voir tous les projets",
-    "cards": {
-      "project1": {
-        "title": "Initiative Eau Propre",
-        "description": "Apporter de l’eau potable aux communautés rurales."
-      },
-      "project2": {
-        "title": "Soutien Éducatif",
-        "description": "Fournir des ressources aux écoles et aux jeunes apprenants."
-      },
-      "project3": {
-        "title": "Sensibilisation à la Santé",
-        "description": "Offrir des soins de santé et de la sensibilisation dans les zones défavorisées."
-      }
-    }
-  },
-  "news": {
-    "title": "Dernières Actualités",
-    "cta": "Lire toutes les actualités",
-    "items": {
-      "news1": {
-        "title": "Campagne de santé communautaire",
-        "excerpt": "Notre dernière campagne a atteint plus de 500 familles."
-      },
-      "news2": {
-        "title": "Programme d’autonomisation des jeunes",
-        "excerpt": "Aider les jeunes à acquérir des compétences pour l’avenir."
-      },
-      "news3": {
-        "title": "Nouvelle initiative scolaire",
-        "excerpt": "Partenariat avec les leaders locaux pour soutenir l’éducation."
-      }
-    }
+    "title": "Les projets que nous avons réalisés",
+    "label": "VOIR NOS PROJETS",
+    "viewAll": "Voir tous les projets"
   },
   "joinUs": {
     "title": "Rejoignez-nous pour faire la différence",
-    "subtitle": "Chaque contribution, même petite, crée des ondulations de changement positif dans les communautés",
+    "subtitle": "Chaque contribution, si petite soit-elle, crée des ondes de changement positif dans les communautés",
     "buttons": {
-      "donate": "Faire un don",
-      "volunteer": "Devenir bénévole",
-      "partner": "Partenariat"
-    }
-  },
-  "footer": {
-    "cta": {
-      "title": "Rejoignez-nous pour faire la différence",
-      "subtitle": "Chaque contribution compte pour améliorer des vies.",
-      "donate": "Faire un don",
-      "contact": "Nous contacter"
-    },
-    "links": {
-      "about": "À propos",
-      "projects": "Projets",
-      "news": "Actualités",
-      "contact": "Contact"
-    },
-    "legal": {
-      "rights": "Tous droits réservés",
-      "privacy": "Politique de confidentialité",
-      "terms": "Conditions générales"
+      "donate": "Donner",
+      "volunteer": "Devenir volontaire",
+      "partner": "Devenir partenaire"
     }
   }
 }

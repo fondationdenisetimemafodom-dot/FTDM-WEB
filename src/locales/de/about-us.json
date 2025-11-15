@@ -1,0 +1,39 @@
+{
+  "hero": {
+    "title": "Brücken der Hoffnung über Gemeinschaften hinweg bauen",
+    "description": "Gegründet auf einer Vision unbegrenzter menschlicher Solidarität, transformiert die Fondation Denise Time Mafodom Leben durch mitfühlende Maßnahmen. Aus dem lebendigen Herzen von Dschang, Kamerun, weben wir philanthropische Träume, Bildungschancen, kulturelle Feiern, wissenschaftliche Innovation und humanitäre Missionen zusammen und schaffen Wellen positiver Veränderung, die Gemeinschaften nah und fern berühren. Jedes Projekt, das wir durchführen, jede Hand, die wir reichen, trägt das Versprechen einer besseren Zukunft, die auf Würde, Wissen und gemeinsamer Menschheit aufgebaut ist."
+  },
+  "missionVision": {
+    "sectionTitle": "Unsere Mission und Vision",
+    "missionLabel": "UNSERE MISSION",
+    "missionTitle": "Hoffnung entzünden, Leben ermächtigen, Gemeinschaften durch gemeinsame Menschheit verändern",
+    "missionDescription": "Menschliche Solidarität fördern, indem wir Wege zu Chancen durch transformative Bildung, lebendigen kulturellen Austausch, mitfühlende humanitäre Hilfe, bahnbrechende wissenschaftliche Zusammenarbeit und nachhaltige soziale Entwicklung schaffen. Wir glauben, dass Gemeinschaften, wenn sie mit Wissen, Ressourcen und unwavering Support ausgestattet sind, nicht nur überleben, sondern gedeihen, innovieren und kommende Generationen inspirieren.",
+    "visionLabel": "UNSERE VISION",
+    "visionTitle": "Eine Welt vereint durch Mitgefühl, in der jede Gemeinschaft mit Würde und Zweck gedeiht",
+    "visionDescription": "Wir stellen uns eine Zukunft vor, in der Mitgefühl und Solidarität alle geografischen, kulturellen und wirtschaftlichen Grenzen überschreiten. Eine Welt, in der jede Gemeinschaft, unabhängig von den Umständen, das Wissen zum Wachsen, die Ressourcen zum Gedeihen und das Unterstützungsnetzwerk hat, um jede Herausforderung zu überwinden. Wo Kinder ohne Grenzen träumen, wo Traditionen als Brücken und nicht als Barrieren gefeiert werden, und wo menschliches Potenzial keine Grenzen kennt."
+  },
+  "missionCards": {
+    "education": {
+      "title": "Bildung",
+      "description": "Potenziale durch Wissen und Lernmöglichkeiten freisetzen. Wir glauben, dass Bildung der Eckpfeiler der Selbstermächtigung ist und die Türen zu helleren Zukunftaussichten öffnet und Armutszyklen über Generationen hinweg bricht."
+    },
+    "culture": {
+      "title": "Kultur",
+      "description": "Erbe feiern und Brücken zwischen Gemeinschaften bauen. Wir ehren kulturelle Traditionen als Quellen der Stärke und Identität und fördern gegenseitiges Verständnis und Respekt über verschiedene Hintergründe hinweg."
+    },
+    "health": {
+      "title": "Gesundheitsinitiativen",
+      "description": "Gesündere Gemeinschaften durch zugängliche Gesundheits- und Wellnessinitiativen aufbauen. Wir stellen sicher, dass hochwertige Gesundheitsdienste diejenigen erreichen, die sie am meisten brauchen, denn Wohlbefinden ist ein grundlegendes Menschenrecht."
+    }
+  },
+  "supporters": {
+    "title": "Unsere Top-Unterstützer",
+    "description": "Wir sind unseren Top-Unterstützern zutiefst dankbar, deren Großzügigkeit und Engagement unsere Mission vorantreiben. Zusammen bauen wir eine bessere Zukunft für alle.",
+    "loading": "Unterstützer werden geladen...",
+    "error": "Unterstützer konnten nicht geladen werden. Bitte versuchen Sie es später erneut.",
+    "partnersTitle": "Unsere Partner",
+    "noSupporters": "Derzeit keine Unterstützer zum Anzeigen",
+    "becomeSupporter": "Du kannst auch einer unserer Top-Unterstützer werden!",
+    "donateButton": "Spenden um zu werden"
+  }
+}

@@ -1,89 +1,39 @@
 {
-  "header": {
-    "logo": "Gemeinsam für Menschliche Solidarität",
-    "nav": {
-      "home": "Startseite",
-      "about": "Über uns",
-      "projects": "Projekte",
-      "news": "Nachrichten",
-      "contact": "Kontakt"
-    },
-    "donate": "Jetzt spenden"
-  },
   "hero": {
-    "title": "Gemeinsam für Menschliche Solidarität",
-    "subtitle": "Wir fördern Gesundheit, Bildung und wirtschaftliche Stärkung für eine bessere Welt.",
-    "cta": {
-      "primary": "Jetzt spenden",
-      "secondary": "Mehr erfahren"
-    }
+    "title": "LEBEN DURCH SOLIDARITÄT VERÄNDERN",
+    "subtitle": "Wo Mitgefühl auf Handeln trifft. Von Dschang bis zur Welt bauen wir Brücken der Hoffnung durch Bildung, Gesundheitswesen, kulturelle Bereicherung und humanitäre Hilfe. Leben eine Gemeinschaft nach der anderen verändern."
+  },
+  "hero_buttons": {
+    "donate": "Spenden",
+    "volunteer": "Freiwilliger"
   },
   "about": {
-    "title": "Wer wir sind",
-    "description": "Wir fördern Gesundheit, Bildung und wirtschaftliche Stärkung für eine bessere Welt. Gemeinsam schaffen wir nachhaltige Wirkung."
+    "label": "Über uns",
+    "title": "Gesundheit, Fortschritt und Erbe in das Gefüge von morgen weben",
+    "description": "In jeder Gemeinde, die wir dienen, von den lebendigen Straßen von Dschang bis zu Dörfern in Kamerun und darüber hinaus, sehen wir ungenutzte Potenziale, die darauf warten zu gedeihen. Unsere Mission überschreitet Grenzen und Hindernisse. Wir bauen nicht nur Kliniken und Schulen; wir kultivieren Ökosysteme, in denen Gesundheit gedeiht, in denen Bildung Türen öffnet, die einst für immer geschlossen schienen, und in denen kulturelle Traditionen zu Quellen des Stolzes und wirtschaftlicher Chancen werden.",
+    "link": "Mehr erfahren"
+  },
+  "support": {
+    "label": "Spenden",
+    "title": "Unterstützen Sie unsere Arbeit - Ihre Gaben - Träume entstehen",
+    "description1": "Ihre Unterstützung fördert echten Wandel in Gemeinden, die es am meisten brauchen. Jede Spende hilft, Gesundheitswesen, Bildung und grundlegende Ressourcen bereitzustellen.",
+    "description2": "Mit Ihrer Großzügigkeit bauen wir Schulen, Kliniken und sichere Räume. Sie befähigen Familien, größer zu träumen und mehr zu erreichen.",
+    "description3": "Gemeinsam verwandeln wir Hoffnung in Aktion und Ideen in Wirklichkeit. Ihr Beitrag bringt Projekte zum Leben, die Leben verändern.",
+    "description4": "Von Neugeborenen bis zu Senioren, Ihre Güte schafft bleibende Auswirkungen. Treten Sie uns bei, denn jede Spende wird zu einem helleren Morgen.",
+    "button": "Heute spenden"
   },
   "projects": {
-    "title": "Aktuelle Projekte",
-    "cta": "Alle Projekte ansehen",
-    "cards": {
-      "project1": {
-        "title": "Sauberes Wasser Initiative",
-        "description": "Bereitstellung von sicherem und sauberem Wasser für ländliche Gemeinden."
-      },
-      "project2": {
-        "title": "Bildungsunterstützung",
-        "description": "Unterstützung von Schulen und jungen Lernenden mit Ressourcen."
-      },
-      "project3": {
-        "title": "Gesundheitsaufklärung",
-        "description": "Gesundheitsversorgung und Aufklärung in benachteiligten Gebieten anbieten."
-      }
-    }
-  },
-  "news": {
-    "title": "Neueste Nachrichten",
-    "cta": "Alle Nachrichten lesen",
-    "items": {
-      "news1": {
-        "title": "Gesundheitskampagne in der Gemeinde",
-        "excerpt": "Unsere letzte Kampagne erreichte über 500 Familien."
-      },
-      "news2": {
-        "title": "Jugendförderungsprogramm",
-        "excerpt": "Junge Menschen dabei unterstützen, Fähigkeiten für die Zukunft zu erwerben."
-      },
-      "news3": {
-        "title": "Neue Schulinitiative",
-        "excerpt": "Zusammenarbeit mit lokalen Führungskräften zur Unterstützung der Bildung."
-      }
-    }
+    "title": "Projekte, die wir durchgeführt haben",
+    "label": "UNSERE PROJEKTE ANSEHEN",
+    "viewAll": "Alle Projekte anzeigen"
   },
   "joinUs": {
-    "title": "Machen Sie mit uns einen Unterschied",
-    "subtitle": "Jeder Beitrag, egal wie klein, erzeugt Wellen positiver Veränderung in Gemeinschaften",
+    "title": "Machen Sie mit und machen Sie einen Unterschied",
+    "subtitle": "Jeder Beitrag, egal wie klein, erzeugt Wellen positiver Veränderungen in Gemeinden",
     "buttons": {
       "donate": "Spenden",
-      "volunteer": "Ehrenamtlich tätig werden",
+      "volunteer": "Freiwilliger",
       "partner": "Partner werden"
-    }
-  },
-  "footer": {
-    "cta": {
-      "title": "Schließen Sie sich uns an, um einen Unterschied zu machen",
-      "subtitle": "Jeder Beitrag zählt, um Leben zu verbessern.",
-      "donate": "Spenden",
-      "contact": "Kontaktieren Sie uns"
-    },
-    "links": {
-      "about": "Über uns",
-      "projects": "Projekte",
-      "news": "Nachrichten",
-      "contact": "Kontakt"
-    },
-    "legal": {
-      "rights": "Alle Rechte vorbehalten",
-      "privacy": "Datenschutzrichtlinie",
-      "terms": "Allgemeine Geschäftsbedingungen"
     }
   }
 }

@@ -1,23 +1,27 @@
 {
-  "title": "CONTACTEZ-NOUS",
+  "hero": {
+    "title": "Commençons une conversation",
+    "description": "Que vous soyez intéressé par un partenariat avec nous, que vous souhaitiez nous proposer vos compétences bénévoles, en savoir plus sur nos initiatives, ou simplement partager vos réflexions, nous sommes à l'écoute. Votre voix est importante dans notre mission de construire des communautés plus fortes et plus compatissantes. Contactez-nous par l'un des canaux ci-dessous et explorons comment nous pouvons travailler ensemble pour créer un changement significatif."
+  },
+  "title": "NOUS CONTACTER",
   "headline": "Nous aimerions avoir de vos nouvelles",
-  "description": "Vous avez une question ou souhaitez vous renseigner ? N'hésitez pas à nous contacter via le formulaire ou les coordonnées suivantes.",
-  "letsTalk": "Parlons-en !",
-  "phone": "+237 690000000",
-  "email": "help@fdtm.org",
-  "headOffice": "Siège social",
-  "headOfficeAddress1": "Région de l’Ouest, Dschang",
+  "description": "Avez-vous une question à l'esprit ou souhaitez-vous vous renseigner? N'hésitez pas à nous contacter via le formulaire ou les détails suivants.",
+  "letsTalk": "Parlons!",
+  "phone": "+237  699 817 143",
+  "email": "fondationdenisetimemafodomonlus@gmail.com",
+  "headOffice": "Siège Social",
+  "headOfficeAddress1": "Région Ouest, Dschang",
   "headOfficeAddress2": "Cameroun",
-  "branchOffice": "Bureau secondaire",
+  "branchOffice": "Bureau de Branche",
   "branchOfficeAddress1": "Mafodom",
   "branchOfficeAddress2": "Cameroun",
-  "formHeadline": "Voulez-vous nous laisser un message ?",
+  "formHeadline": "Voulez-vous nous laisser un message?",
   "form": {
     "firstName": "Prénom",
     "lastName": "Nom",
-    "email": "Adresse e-mail",
+    "email": "Adresse Email",
     "subject": "Sujet",
-    "message": "Laissez un message...",
+    "message": "Laisser un message...",
     "send": "Envoyer le message"
   }
 }

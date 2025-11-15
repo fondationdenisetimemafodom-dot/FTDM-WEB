@@ -1,0 +1,39 @@
+{
+  "hero": {
+    "title": "Costruire Ponti di Speranza Tra le Comunità",
+    "description": "Nata da una visione di solidarietà umana senza limiti, la Fondazione Denise Time Mafodom trasforma le vite attraverso l'azione compassionevole. Dal cuore vibrante di Dschang, Camerun, tessiamo insieme sogni filantropici, opportunità educative, celebrazioni culturali, innovazione scientifica e missioni umanitarie creando increspature di cambiamento positivo che toccano comunità vicine e lontane. Ogni progetto che intrapreniamo, ogni mano che tendiamo, porta la promessa di un domani più luminoso costruito su dignità, conoscenza e umanità condivisa."
+  },
+  "missionVision": {
+    "sectionTitle": "La Nostra Missione e Visione",
+    "missionLabel": "LA NOSTRA MISSIONE",
+    "missionTitle": "Accendere la speranza, responsabilizzare le vite, trasformare le comunità attraverso l'umanità condivisa",
+    "missionDescription": "Campionare la solidarietà umana creando percorsi di opportunità attraverso l'educazione trasformativa, lo scambio culturale vibrante, l'aiuto umanitario compassionevole, la collaborazione scientifica rivoluzionaria e lo sviluppo sociale sostenibile. Crediamo che quando le comunità sono equipaggiate con conoscenza, risorse e supporto incrollabile, non solo sopravvivono, prosperano, innovano e ispirano le generazioni a venire.",
+    "visionLabel": "LA NOSTRA VISIONE",
+    "visionTitle": "Un mondo unito dalla compassione, dove ogni comunità prospera con dignità e scopo",
+    "visionDescription": "Immaginiamo un futuro in cui compassione e solidarietà trascendono tutti i confini geografici, culturali ed economici. Un mondo in cui ogni comunità, indipendentemente dalle circostanze, possieda la conoscenza per crescere, le risorse per prosperare e la rete di supporto per superare qualsiasi sfida. Dove i bambini sognano senza limiti, dove le tradizioni sono celebrate come ponti piuttosto che come barriere, e dove il potenziale umano non conosce confini."
+  },
+  "missionCards": {
+    "education": {
+      "title": "Educazione",
+      "description": "Sbloccare il potenziale attraverso la conoscenza e le opportunità di apprendimento. Crediamo che l'educazione sia la pietra angolare dell'emancipazione, aprendo le porte a futuri più luminosi e rompendo i cicli di povertà attraverso le generazioni."
+    },
+    "culture": {
+      "title": "Cultura",
+      "description": "Celebrare il patrimonio costruendo ponti tra le comunità. Onoriamo le tradizioni culturali come fonti di forza e identità, promuovendo la comprensione reciproca e il rispetto tra i diversi contesti."
+    },
+    "health": {
+      "title": "Sforzi Sanitari",
+      "description": "Costruire comunità più sane attraverso iniziative di accessibilità sanitaria e benessere. Garantiamo che i servizi sanitari di qualità raggiungano chi ne ha più bisogno, perché il benessere è un diritto umano fondamentale."
+    }
+  },
+  "supporters": {
+    "title": "I Nostri Migliori Sostenitori",
+    "description": "Siamo profondamente grati ai nostri migliori sostenitori la cui generosità e impegno spingono avanti la nostra missione. Insieme, stiamo costruendo un futuro più luminoso per tutti.",
+    "loading": "Caricamento sostenitori...",
+    "error": "Impossibile caricare i sostenitori. Si prega di riprovare più tardi.",
+    "partnersTitle": "I Nostri Partner",
+    "noSupporters": "Nessun sostenitore da visualizzare al momento",
+    "becomeSupporter": "Puoi diventare uno dei nostri migliori sostenitori anche tu!",
+    "donateButton": "Dona per diventare"
+  }
+}

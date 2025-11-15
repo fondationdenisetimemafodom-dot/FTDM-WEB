@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "title": "Featured Highlights",
+    "subtitle": "Explore the moments, stories, and milestones of Fondation Denise Time Mafodom"
+  },
+  "slider": {
+    "loading": "Loading highlights...",
+    "noMedia": "No media available",
+    "readMore": "Read More",
+    "status": {
+      "ongoing": "Ongoing",
+      "completed": "Completed"
+    },
+    "beneficiaries": "beneficiaries"
+  },
+  "gallery": {
+    "title": "Media Gallery",
+    "loading": "Loading media...",
+    "noItemsFound": "No {type} found",
+    "tabs": {
+      "all": "All",
+      "images": "Images",
+      "videos": "Videos"
+    },
+    "view": "View",
+    "showMore": "Show More"
+  },
+  "modal": {
+    "preview": "Media Preview",
+    "uploaded": "Uploaded:"
+  },
+  "cta": {
+    "title": "You can contribute to provide a place for children with special needs!",
+    "volunteer": "Join as a volunteer",
+    "donate": "Donate"
+  }
+}

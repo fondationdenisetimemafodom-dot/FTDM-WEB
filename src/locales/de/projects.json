@@ -1,0 +1,48 @@
+{
+  "hero": {
+    "title": "Vision in greifbare Auswirkungen umwandeln",
+    "subtitle": "Von der Errichtung von Gesundheitseinrichtungen bis zur Stärkung von Jugendlichen durch Bildung - entdecken Sie die vielfältigen Initiativen, die wir in Kamerun und darüber hinaus zum Leben erweckt haben. Jedes Projekt stellt ein erfülltes Engagement dar, eine unterstützte Gemeinschaft und einen Schritt vorwärts in unserer Mission, menschliche Solidarität durch sinnvolle Maßnahmen zu fördern, die Wellen des Wandels für kommende Generationen schaffen."
+  },
+  "categories": {
+    "all": "Alle Projekte",
+    "healthcare": "Gesundheitswesen",
+    "education": "Bildung",
+    "culture": "Kultur",
+    "social": "Soziale Entwicklung",
+    "humanitarian": "Humanitäre Hilfe"
+  },
+  "states": {
+    "loading": "Projekte werden geladen...",
+    "error": "Fehler beim Laden der Projekte. Bitte versuchen Sie es erneut.",
+    "noProjects": "Keine Projekte für diese Kategorie gefunden.",
+    "tryAgain": "Erneut versuchen"
+  },
+  "projectDetails": {
+    "location": "Standort",
+    "beneficiaries": "Begünstigte",
+    "started": "Gestartet",
+    "description": "Projektbeschreibung",
+    "gallery": "Projektgalerie",
+    "articles": "Zugehörige Artikel",
+    "status": {
+      "ongoing": "Laufend",
+      "completed": "Abgeschlossen"
+    },
+    "notFound": "Projekt nicht gefunden",
+    "backButton": "Zurück zu Projekten",
+    "articlesLoading": "Artikel werden geladen...",
+    "articlesError": "Fehler beim Laden von Artikeln",
+    "noArticles": "Keine Artikel für dieses Projekt gefunden"
+  },
+  "collective": {
+    "title": "Ziele für kollektive Auswirkungen",
+    "subtitle": "Der messbare Unterschied, den wir dieses Jahr machen werden",
+    "stats": {
+      "projects": "Projekte",
+      "lives": "Leben berührt",
+      "villages": "Dörfer erreicht",
+      "investments": "Investitionen"
+    },
+    "donate": "Spenden"
+  }
+}

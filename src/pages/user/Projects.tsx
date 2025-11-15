@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Add this import
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import UserNavbar from "../../components/UserNavbar";
 import Footer from "../../components/Footer";
 import ProjectCard from "../../components/ProjectCard";
 import axiosInstance from "../../lib/axiosInstance";
 import { Loader2 } from "lucide-react";
-// Remove ProjectModal import
 import { NavLink } from "react-router";
 import BgImage from "../../assets/images/projects.jpg";
 import { motion } from "framer-motion";
@@ -17,10 +17,6 @@ type MediaItem = {
   _id: string;
 };
 
-/*-----------------------------------------------------------------------------------------------------
-| @interface Project
-| @brief    Interface defining project structure from backend
------------------------------------------------------------------------------------------------------*/
 interface Project {
   _id: string;
   title: string;
@@ -35,34 +31,17 @@ interface Project {
   updatedAt: string;
 }
 
-/*-----------------------------------------------------------------------------------------------------
-| @constant CATEGORIES
-| @brief    Array of available project categories for filtering
------------------------------------------------------------------------------------------------------*/
-const CATEGORIES = [
-  "All Projects",
-  "Health Care",
-  "Education",
-  "Culture",
-  "Social Development",
-  "Humanitarian Aid",
-];
-
 function Projects() {
-  const navigate = useNavigate(); // Add this hook
+  const { t } = useTranslation("projects");
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [projects, setProjects] = useState<Project[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
-  const [activeFilter, setActiveFilter] = useState("All Projects");
+  const [activeFilter, setActiveFilter] = useState(t("categories.all"));
   const [totalProjects, setTotalProjects] = useState(0);
   const [totalBeneficiaries, setTotalBeneficiaries] = useState(0);
-  // Remove selectedProject state
 
-  /*-----------------------------------------------------------------------------------------------------
-  | @function fetchProjects
-  | @brief    Fetches all projects from backend API and calculates totals
-  -----------------------------------------------------------------------------------------------------*/
   const fetchProjects = async () => {
     try {
       setLoading(true);
@@ -75,7 +54,6 @@ function Projects() {
       setFilteredProjects(projectsData);
       setTotalProjects(projectsData.length);
 
-      // Calculate total beneficiaries across all projects
       const beneficiariesSum = projectsData.reduce(
         (sum: number, project: Project) => {
           const beneficiaryCount = parseInt(project.beneficiaries) || 0;
@@ -86,23 +64,16 @@ function Projects() {
       setTotalBeneficiaries(beneficiariesSum);
     } catch (err: any) {
       console.error("Failed to fetch projects:", err);
-      setError(
-        err.response?.data?.message ||
-          "Failed to load projects. Please try again."
-      );
+      setError(err.response?.data?.message || t("states.error"));
     } finally {
       setLoading(false);
     }
   };
 
-  /*-----------------------------------------------------------------------------------------------------
-  | @function handleFilterChange
-  | @brief    Filters projects based on selected category
-  -----------------------------------------------------------------------------------------------------*/
   const handleFilterChange = (category: string) => {
     setActiveFilter(category);
 
-    if (category === "All Projects") {
+    if (category === t("categories.all")) {
       setFilteredProjects(projects);
     } else {
       const filtered = projects.filter(
@@ -114,25 +85,26 @@ function Projects() {
     }
   };
 
-  /*-----------------------------------------------------------------------------------------------------
-  | @function handleProjectClick
-  | @brief    Navigates to project details page
-  | @param    project - project object to view details
-  -----------------------------------------------------------------------------------------------------*/
   const handleProjectClick = (project: Project) => {
     navigate(`/projects/${project._id}`, { state: { project } });
   };
 
-  // Fetch projects on component mount
   useEffect(() => {
     fetchProjects();
   }, []);
 
+  const CATEGORIES = [
+    t("categories.all"),
+    t("categories.healthcare"),
+    t("categories.education"),
+    t("categories.culture"),
+    t("categories.social"),
+    t("categories.humanitarian"),
+  ];
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <UserNavbar />
 
-      {/* Hero Section */}
       <div
         className="w-full p-10 lg:p-25 flex flex-col lg:flex-row justify-center items-center"
         style={{
@@ -149,7 +121,7 @@ function Projects() {
             transition={{ duration: 1.5, delay: 0.8 }}
             className="text-[40px] md:text-4xl lg:text-[56px] text-center font-bold text-white leading-tight"
           >
-            Transforming Vision Into Tangible Impact
+            {t("hero.title")}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: -30 }}
@@ -157,17 +129,11 @@ function Projects() {
             transition={{ duration: 1, delay: 1.5 }}
             className="text-lg md:text-xl lg:text-3xl font-regular text-white text-center"
           >
-            From building healthcare facilities to empowering youth through
-            education, explore the multifaceted initiatives we've brought to
-            life across Cameroon and beyond. Each project represents a
-            commitment fulfilled, a community uplifted, and a step forward in
-            our mission to foster human solidarity through meaningful action
-            that creates ripples of lasting change for generations to come.
+            {t("hero.subtitle")}
           </motion.p>
         </div>
       </div>
 
-      {/* Filter Section */}
       <div className="flex flex-col items-center w-full py-8 md:py-10 bg-white border-t border-gray-200">
         <div className="max-w-7xl w-full px-4 md:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
@@ -188,18 +154,15 @@ function Projects() {
         </div>
       </div>
 
-      {/* Projects Section */}
       <div className="flex-grow w-full py-12 bg-white md:py-16">
         <div className="w-[90%] mx-auto px-4 md:px-6 lg:px-8">
-          {/* Loading State */}
           {loading && (
             <div className="flex flex-col items-center justify-center py-20">
               <Loader2 className="w-12 h-12 animate-spin text-main-500 mb-4" />
-              <p className="text-gray-600 text-lg">Loading projects...</p>
+              <p className="text-gray-600 text-lg">{t("states.loading")}</p>
             </div>
           )}
 
-          {/* Error State */}
           {error && !loading && (
             <div className="flex flex-col items-center justify-center py-20">
               <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md">
@@ -208,22 +171,20 @@ function Projects() {
                   onClick={fetchProjects}
                   className="mt-4 w-full px-4 py-2 bg-main-500 text-white rounded-lg hover:bg-main-600 transition"
                 >
-                  Try Again
+                  {t("states.tryAgain")}
                 </button>
               </div>
             </div>
           )}
 
-          {/* No Projects State */}
           {!loading && !error && filteredProjects.length === 0 && (
             <div className="flex flex-col items-center justify-center py-20">
               <p className="text-gray-600 text-lg text-center">
-                No projects found for this category.
+                {t("states.noProjects")}
               </p>
             </div>
           )}
 
-          {/* Projects Grid */}
           {!loading && !error && filteredProjects.length > 0 && (
             <div className="flex flex-col gap-6 md:gap-8">
               {filteredProjects.map((project) => (
@@ -238,13 +199,12 @@ function Projects() {
         </div>
       </div>
 
-      {/* Collective Impact Objectives Section */}
       <div className="flex flex-col items-center py-12 md:py-16 lg:py-20 gap-6 px-4 md:px-6 lg:px-8 bg-white">
         <h2 className="font-bold text-3xl md:text-4xl lg:text-[48px] text-center text-gray-800">
-          Collective impact objectives
+          {t("collective.title")}
         </h2>
         <p className="text-center text-lg md:text-2xl lg:text-3xl max-w-[774px] text-secondary-text-500">
-          The Measurable difference we are going to make this year
+          {t("collective.subtitle")}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-6 mt-6 w-full max-w-6xl">
           <div className="flex flex-col items-center gap-3 md:gap-4">
@@ -252,7 +212,7 @@ function Projects() {
               {totalProjects}+
             </span>
             <span className="text-xl md:text-2xl lg:text-3xl font-semibold text-secondary-text-500 text-center">
-              Projects
+              {t("collective.stats.projects")}
             </span>
           </div>
           <div className="flex flex-col items-center gap-3 md:gap-4">
@@ -260,7 +220,7 @@ function Projects() {
               {totalBeneficiaries.toLocaleString()}+
             </span>
             <span className="text-xl md:text-2xl lg:text-3xl font-semibold text-secondary-text-500 text-center">
-              Lives Impacted
+              {t("collective.stats.lives")}
             </span>
           </div>
           <div className="flex flex-col items-center gap-3 md:gap-4">
@@ -268,7 +228,7 @@ function Projects() {
               15+
             </span>
             <span className="text-xl md:text-2xl lg:text-3xl font-semibold text-secondary-text-500 text-center">
-              Villages Reached
+              {t("collective.stats.villages")}
             </span>
           </div>
           <div className="flex flex-col items-center gap-3 md:gap-4">
@@ -276,7 +236,7 @@ function Projects() {
               100K+
             </span>
             <span className="text-xl md:text-2xl lg:text-3xl font-semibold text-secondary-text-500 text-center">
-              Investments
+              {t("collective.stats.investments")}
             </span>
           </div>
         </div>
@@ -284,11 +244,9 @@ function Projects() {
           to="/donate"
           className="flex items-center justify-center bg-main-500 px-8 py-3 md:px-10 md:py-3 text-white text-xl md:text-2xl font-semibold rounded-xl hover:bg-main-600 transition-colors duration-200 mt-4"
         >
-          Donate
+          {t("collective.donate")}
         </NavLink>
       </div>
-
-      {/* Remove ProjectModal component */}
 
       <Footer />
     </div>
