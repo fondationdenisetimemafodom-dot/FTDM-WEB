@@ -93,32 +93,32 @@ function Donate() {
   ------------------------------------------------------------------------------------------------------*/
   const validateForm = (): boolean => {
     if (!amount || amount <= 0) {
-      setErrorMessage("Please enter a valid donation amount.");
+      setErrorMessage(t("errors.invalidAmount"));
       setShowErrorPopup(true);
       return false;
     }
     if (donationType === "monthly" && amount < 500) {
-      setErrorMessage("Minimum monthly subscription amount is 500 XAF.");
+      setErrorMessage(t("errors.minimumMonthly"));
       setShowErrorPopup(true);
       return false;
     }
     if (!firstName.trim()) {
-      setErrorMessage("Please enter your first name.");
+      setErrorMessage(t("errors.firstNameRequired"));
       setShowErrorPopup(true);
       return false;
     }
     if (!lastName.trim()) {
-      setErrorMessage("Please enter your last name.");
+      setErrorMessage(t("errors.lastNameRequired"));
       setShowErrorPopup(true);
       return false;
     }
     if (!email.trim() || !email.includes("@")) {
-      setErrorMessage("Please enter a valid email address.");
+      setErrorMessage(t("errors.invalidEmail"));
       setShowErrorPopup(true);
       return false;
     }
     if (!phone.trim()) {
-      setErrorMessage("Please enter your phone number.");
+      setErrorMessage(t("errors.phoneRequired"));
       setShowErrorPopup(true);
       return false;
     }
@@ -231,22 +231,18 @@ function Donate() {
           setShowThankYouPopup(true);
           resetForm();
         } else {
-          setErrorMessage(
-            "Donation verification failed. Please contact support if payment was deducted."
-          );
+          setErrorMessage(t("errors.verificationFailed"));
           setShowErrorPopup(true);
         }
       } else {
         setShowPendingPopup(false);
-        setErrorMessage(
-          response.data?.message || "Donation failed. Please try again."
-        );
+        setErrorMessage(response.data?.message || t("errors.donationFailed"));
         setShowErrorPopup(true);
       }
     } catch (error: any) {
       setShowPendingPopup(false);
       setErrorMessage(
-        error?.response?.data?.message || "Network error, please try again."
+        error?.response?.data?.message || t("errors.networkError")
       );
       setShowErrorPopup(true);
     }
@@ -266,9 +262,7 @@ function Donate() {
     }
 
     if (hasActiveSubscription) {
-      setErrorMessage(
-        "You already have an active subscription. Please manage your existing subscription."
-      );
+      setErrorMessage(t("errors.subscriptionExists"));
       setShowErrorPopup(true);
       return;
     }
@@ -298,15 +292,14 @@ function Donate() {
         resetForm();
       } else {
         setErrorMessage(
-          response.data.message || "Failed to create subscription."
+          response.data.message || t("errors.subscriptionFailed")
         );
         setShowErrorPopup(true);
       }
     } catch (error: any) {
       setShowPendingPopup(false);
       setErrorMessage(
-        error?.response?.data?.message ||
-          "Failed to create subscription. Please try again."
+        error?.response?.data?.message || t("errors.subscriptionFailed")
       );
       setShowErrorPopup(true);
     } finally {
@@ -355,7 +348,7 @@ function Donate() {
               transition={{ duration: 1.5, delay: 0.8 }}
               className="text-[40px] md:text-4xl lg:text-[56px] text-center font-bold text-white leading-tight"
             >
-              Be the Change You Wish to See
+              {t("pageTitle")}
             </motion.span>
 
             <motion.span
@@ -364,13 +357,7 @@ function Donate() {
               transition={{ duration: 1, delay: 1.5 }}
               className="text-lg md:text-xl lg:text-3xl font-regular text-white text-center"
             >
-              Your generosity fuels our mission of human solidarity and
-              transforms lives across Cameroon and beyond. Whether through
-              Mobile Money, PayPal, or other channels, every contribution no
-              matter the size becomes a beacon of hope, empowering education,
-              healthcare, cultural initiatives, and community development.
-              Together, we turn compassion into action and dreams into reality
-              for those who need it most.
+              {t("pageDescription")}
             </motion.span>
           </div>
         </div>
@@ -387,10 +374,9 @@ function Donate() {
             onSubmit={handleDonation}
           >
             <div className="flex flex-col space-y-4">
-              {/* Donation Type Toggle */}
               <div className="flex flex-col gap-4 mb-6">
                 <h2 className="text-main-500 text-2xl lg:text-3xl font-bold">
-                  Choose Donation Type
+                  {t("chooseDonationType")}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <button
@@ -411,10 +397,10 @@ function Donate() {
                         }`}
                       />
                       <h3 className="text-xl font-bold text-gray-800">
-                        Instant Donation
+                        {t("instantDonation")}
                       </h3>
                       <p className="text-sm text-gray-600 text-center">
-                        Make a one-time donation now
+                        {t("instantDescription")}
                       </p>
                     </div>
                   </button>
@@ -437,24 +423,23 @@ function Donate() {
                         }`}
                       />
                       <h3 className="text-xl font-bold text-gray-800">
-                        Monthly Subscription
+                        {t("monthlySubscription")}
                       </h3>
                       <p className="text-sm text-gray-600 text-center">
-                        Support us every month automatically
+                        {t("monthlyDescription")}
                       </p>
                     </div>
                   </button>
                 </div>
               </div>
 
-              {/* Manage Subscription Button */}
               {hasActiveSubscription && (
                 <div className="bg-blue-50 border border-blue-300 rounded-lg p-4 mb-4">
                   <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
                     <div className="flex items-center gap-2">
                       <FaCheckCircle className="text-green-500 text-xl" />
                       <span className="text-gray-700 font-medium">
-                        You have an active monthly subscription
+                        {t("activeSubscription")}
                       </span>
                     </div>
                     <button
@@ -462,13 +447,12 @@ function Donate() {
                       onClick={() => setShowManagementModal(true)}
                       className="bg-main-500 text-white px-6 py-2 rounded-lg hover:bg-main-600 transition duration-300"
                     >
-                      Manage Subscription
+                      {t("manageSubscription")}
                     </button>
                   </div>
                 </div>
               )}
 
-              {/* Benefits section */}
               <div className="flex flex-col lg:flex-row lg:justify-between w-full mb-6 lg:mb-10 gap-4">
                 <div className="flex gap-3 lg:gap-5 items-center">
                   <FaCheckCircle className="h-5 w-5 lg:h-6 lg:w-6 text-green-500 flex-shrink-0" />
@@ -490,13 +474,12 @@ function Donate() {
                 </div>
               </div>
 
-              {/* Amount */}
               <label className="text-main-500 text-2xl lg:text-3xl font-bold mb-3 lg:mb-5">
-                {donationType === "monthly" ? "Monthly Amount" : t("amount")}
+                {donationType === "monthly" ? t("monthlyAmount") : t("amount")}
               </label>
               {donationType === "monthly" && (
                 <p className="text-sm text-gray-600 -mt-2 mb-2">
-                  Minimum 500 XAF per month
+                  {t("minimumMonthly")}
                 </p>
               )}
               <div className="grid grid-cols-2 lg:flex lg:flex-wrap gap-3 mb-4">
@@ -513,7 +496,7 @@ function Donate() {
                   >
                     {amt.toLocaleString()} XAF
                     {donationType === "monthly" && (
-                      <span className="text-xs block">/month</span>
+                      <span className="text-xs block">{t("perMonth")}</span>
                     )}
                   </button>
                 ))}
@@ -526,7 +509,7 @@ function Donate() {
                   onChange={(e) => setAmount(Number(e.target.value))}
                   placeholder={
                     donationType === "monthly"
-                      ? "Enter monthly amount (min 500 XAF)"
+                      ? t("monthlyAmountPlaceholder")
                       : t("amountPlaceholder")
                   }
                   className="border-3 border-blue-300 rounded p-2 lg:p-3 focus:outline-none focus:border-blue-500 w-full text-sm lg:text-base"
@@ -534,7 +517,6 @@ function Donate() {
                 />
               </div>
 
-              {/* Personal Info */}
               <label className="text-main-500 text-2xl lg:text-3xl font-bold mt-3 mb-3 lg:mb-5">
                 {t("personalInfo")}
               </label>
@@ -592,7 +574,6 @@ function Donate() {
                 ></textarea>
               </div>
 
-              {/* Submit */}
               <button
                 type="submit"
                 className="bg-main-500 text-white flex items-center justify-center rounded-lg p-3 lg:p-4 font-bold text-base lg:text-lg hover:bg-main-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -603,14 +584,13 @@ function Donate() {
                 ) : loading ? (
                   <div className="animate-spin self-center rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-white"></div>
                 ) : (
-                  "Donate Monthly"
+                  t("donateMonthly")
                 )}
               </button>
 
               {donationType === "monthly" && (
                 <p className="text-xs text-gray-500 text-center">
-                  You will receive an email before each monthly billing with a
-                  payment link. You can cancel anytime.
+                  {t("monthlyBillingNote")}
                 </p>
               )}
             </div>

@@ -167,7 +167,7 @@ function Home() {
                 letterSpacing: "1px",
               }}
             >
-              TRANSFORMING LIVES THROUGH SOLIDARITY
+              {t("hero.title")}
             </motion.span>
 
             <motion.span
@@ -177,15 +177,10 @@ function Home() {
               className="text-[14px] sm:text-[16px] md:text-[20px] font-medium text-secondary-500 block mt-9 max-w-[567px]"
               style={{
                 lineHeight: "2.1",
-
                 fontFamily: "Arial, sans-serif",
-                // letterSpacing: "0.055em",
               }}
             >
-              Where compassion meets action. From Dschang to the world, we're
-              building bridges of hope through education, healthcare, cultural
-              enrichment, and humanitarian outreach. Transforming lives one
-              community at a time.
+              {t("hero.subtitle")}
             </motion.span>
 
             <motion.div
@@ -198,14 +193,14 @@ function Home() {
                 to="/donate"
                 className="flex items-center justify-center bg-main-500 w-58 md:w-28 lg:w-50 px-4 py-2 text-white text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
-                Donate
+                {t("hero_buttons.donate")}
               </NavLink>
 
               <button
                 onClick={() => setShowVolunteer(true)}
                 className="border-[3px] border-main-500 py-2 px-4 text-main-500 text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
-                Volunteer with us
+                {t("hero_buttons.volunteer")}
               </button>
             </motion.div>
           </div>
@@ -229,9 +224,9 @@ function Home() {
             className="w-[400px] h-[319px] mt-20 lg:mt-0 lg:w-[574px] lg:h-[496px]"
           />
         </div>
+
         {/* About us section */}
         <div className="w-full p-10 lg:p-25 flex flex-col md:flex-row justify-between items-center">
-          {/* Video */}
           <div className="w-full max-w-[440px] md:max-w-[500px] h-[250px] md:h-[600px] rounded-xl overflow-hidden mb-8 md:mb-0 md:mr-12 shadow-lg flex items-center justify-center">
             <video
               className="w-full h-[100%] object-cover rounded-xl"
@@ -279,7 +274,7 @@ function Home() {
                 transition={{ duration: 1, delay: 0.2 }}
                 className="uppercase lg:text-[15px] md:text-2xl font-bold text-soft-dark-500"
               >
-                Know about us
+                {t("about.label")}
               </motion.p>
             </div>
             <div className="flex flex-col gap-2 max-w-[682px]">
@@ -295,8 +290,7 @@ function Home() {
                   letterSpacing: "1px",
                 }}
               >
-                Weaving Health, Progress, and Heritage Into the Fabric of
-                Tomorrow
+                {t("about.title")}
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, y: -30 }}
@@ -309,40 +303,13 @@ function Home() {
                   fontFamily: "Arial, sans-serif",
                 }}
               >
-                In every community we serve, from the vibrant streets of Dschang
-                to villages across Cameroon and beyond, we see untapped
-                potential waiting to flourish. Our mission transcends borders
-                and barriers. We don't just build clinics and schools; we
-                cultivate ecosystems where health thrives, where education opens
-                doors once thought permanently closed, and where cultural
-                traditions become sources of pride and economic opportunity.
+                {t("about.description")}
               </motion.span>
-              {/* <motion.span
-                initial={{ opacity: 0, y: -30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 1, delay: 1.2 }}
-                className="text-[14px] sm:text-[16px] md:text-[20px] font-medium text-secondary-500 block max-w-[567px] mt-8"
-                style={{
-                  lineHeight: "2.1",
-                  fontFamily: "Arial, sans-serif",
-                }}
-              >
-                Every initiative we launch is rooted in the belief that
-                sustainable development begins with people, their stories, their
-                strengths, their dreams. By honoring cultural wisdom while
-                embracing innovation, by treating health as a fundamental right
-                rather than a privilege, and by investing in education that
-                transforms generations, we're not simply creating projects.
-                We're nurturing movements of change that ripple outward,
-                touching countless lives and reshaping what's possible for
-                entire communities.
-              </motion.span> */}
               <NavLink
                 to="/about-us"
                 className="flex items-center justify-center bg-main-500  py-2 w-50 text-white text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
-                <a href="">Learn more</a>
+                <a href="">{t("about.link")}</a>
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -373,16 +340,12 @@ function Home() {
             </div>
           </div>
         </div>
+
         {/* Support Our Work Section */}
         <div className="w-full bg-white p-4  flex justify-center">
           <div className="p-10 md-p25 flex flex-col md:flex-row items-center gap-6">
-            {/* Header moved into left column (small label + big title) */}
-
-            {/* Two-column layout: text (left) and image (right) - mobile stacks with button last */}
             <div className="w-full flex flex-col md:grid md:grid-cols-2 items-start md:items-center gap-6">
-              {/* Left: text content (md: row 1 col 1) */}
               <div className="w-full md:col-start-1 md:row-start-1 flex flex-col items-start gap-6">
-                {/* small header above the big title (like Know about us) */}
                 <div className="flex flex-row items-start gap-5">
                   <div className="mt-2 bg-soft-dark-500 h-2 w-20"></div>
                   <motion.p
@@ -392,11 +355,10 @@ function Home() {
                     transition={{ duration: 1, delay: 0.2 }}
                     className="uppercase lg:text-[15px] md:text-2xl font-bold text-soft-dark-500"
                   >
-                    Donate
+                    {t("support.label")}
                   </motion.p>
                 </div>
 
-                {/* Big title: Support our work (match 'Weaving Health' sizes) */}
                 <motion.h2
                   initial={{ opacity: 0, y: -10 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -409,7 +371,7 @@ function Home() {
                     letterSpacing: "1px",
                   }}
                 >
-                  Support our work - Your gifts- Births dreams
+                  {t("support.title")}
                 </motion.h2>
 
                 <motion.div
@@ -426,9 +388,7 @@ function Home() {
                       fontFamily: "Arial, sans-serif",
                     }}
                   >
-                    Your support fuels real change in communities that need it
-                    most. Every gift helps provide healthcare, education, and
-                    essential resources.
+                    {t("support.description1")}
                   </p>
                   <p
                     className="text-[14px] sm:text-[16px] md:text-[20px] font-medium text-secondary-500"
@@ -437,9 +397,7 @@ function Home() {
                       fontFamily: "Arial, sans-serif",
                     }}
                   >
-                    With your generosity, we build schools, clinics, and safe
-                    spaces. You empower families to dream bigger and achieve
-                    more.
+                    {t("support.description2")}
                   </p>
                   <p
                     className="text-[14px] sm:text-[16px] md:text-[20px] font-medium text-secondary-500"
@@ -448,9 +406,7 @@ function Home() {
                       fontFamily: "Arial, sans-serif",
                     }}
                   >
-                    Together, we turn hope into action and ideas into reality.
-                    Your contribution breathes life into projects that transform
-                    lives.
+                    {t("support.description3")}
                   </p>
                   <p
                     className="text-[14px] sm:text-[16px] md:text-[20px] font-medium text-secondary-500"
@@ -459,16 +415,11 @@ function Home() {
                       fontFamily: "Arial, sans-serif",
                     }}
                   >
-                    From newborns to elders, your kindness creates lasting
-                    impact. Join us because every gift births a brighter
-                    tomorrow.
+                    {t("support.description4")}
                   </p>
                 </motion.div>
-
-                {/* button moved down so on mobile it appears after image (last) */}
               </div>
 
-              {/* Right: image (md: row 1 col 2) */}
               <div className="w-full md:col-start-2 md:row-start-1 flex justify-center">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -478,14 +429,13 @@ function Home() {
                   className="w-full flex justify-center"
                 >
                   <img
-                    src={home_donate_image}
+                    src={home_donate_image || "/placeholder.svg"}
                     alt="Children being supported by the foundation"
                     className="w-full max-w-[440px] md:max-w-[500px] h-[250px] md:h-[600px] rounded-lg shadow-lg object-cover"
                   />
                 </motion.div>
               </div>
 
-              {/* Donate button: placed after image in DOM so mobile shows it last; on md placed under left column */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -497,21 +447,22 @@ function Home() {
                   to="/donate"
                   className="flex items-center justify-center bg-main-500 px-4 py-2 text-white text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
                 >
-                  Donate today
+                  {t("support.button")}
                 </NavLink>
               </motion.div>
             </div>
           </div>
         </div>
+
         {/*projects section*/}
         <div className="w-full p-10 lg:p-25 flex flex-col justify-between items-center bg-[#F3F5F8]">
           <span className=" text-[40px] font-bold self-center">
-            Projects We Have Done
+            {t("projects.title")}
           </span>
           <div className="flex flex-row items-start gap-5 self-start mt-8">
             <div className="mt-2 bg-soft-dark-500 h-4 w-20"></div>
             <p className="uppercase text-lg md:text-2xl font-bold text-soft-dark-500">
-              VIEW OUR PROJECTS
+              {t("projects.label")}
             </p>
           </div>
 
@@ -538,7 +489,7 @@ function Home() {
                     to="/projects"
                     className="bg-main-500 text-xl md:text-2xl font-semibold text-white hover:bg-main-600 transition-colors py-4 px-8 rounded-xl flex items-center justify-center gap-2"
                   >
-                    View All Projects
+                    {t("projects.viewAll")}
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

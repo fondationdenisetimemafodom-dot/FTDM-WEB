@@ -1,63 +1,31 @@
 {
-  "header": {
-    "logo": "Together for Human Solidarity",
-    "nav": {
-      "home": "Home",
-      "about": "About Us",
-      "projects": "Projects",
-      "news": "News",
-      "contact": "Contact"
-    },
-    "donate": "Donate Now"
-  },
   "hero": {
-    "title": "Together for Human Solidarity",
-    "subtitle": "We promote health, education, and economic empowerment for a better world.",
-    "cta": {
-      "primary": "Donate Now",
-      "secondary": "Learn More"
-    }
+    "title": "TRANSFORMING LIVES THROUGH SOLIDARITY",
+    "subtitle": "Where compassion meets action. From Dschang to the world, we're building bridges of hope through education, healthcare, cultural enrichment, and humanitarian outreach. Transforming lives one community at a time."
+  },
+  "hero_buttons": {
+    "donate": "Donate",
+    "volunteer": "Volunteer with us"
   },
   "about": {
-    "title": "Who we are",
-    "description": "We promote health, education, and economic empowerment for a better world. Together, we create impact that lasts."
+    "label": "Know about us",
+    "title": "Weaving Health, Progress, and Heritage Into the Fabric of Tomorrow",
+    "description": "In every community we serve, from the vibrant streets of Dschang to villages across Cameroon and beyond, we see untapped potential waiting to flourish. Our mission transcends borders and barriers. We don't just build clinics and schools; we cultivate ecosystems where health thrives, where education opens doors once thought permanently closed, and where cultural traditions become sources of pride and economic opportunity.",
+    "link": "Learn more"
+  },
+  "support": {
+    "label": "Donate",
+    "title": "Support our work - Your gifts- Births dreams",
+    "description1": "Your support fuels real change in communities that need it most. Every gift helps provide healthcare, education, and essential resources.",
+    "description2": "With your generosity, we build schools, clinics, and safe spaces. You empower families to dream bigger and achieve more.",
+    "description3": "Together, we turn hope into action and ideas into reality. Your contribution breathes life into projects that transform lives.",
+    "description4": "From newborns to elders, your kindness creates lasting impact. Join us because every gift births a brighter tomorrow.",
+    "button": "Donate today"
   },
   "projects": {
-    "title": "Projects in tune today",
-    "cta": "View All Projects",
-    "cards": {
-      "project1": {
-        "title": "Clean Water Initiative",
-        "description": "Bringing safe and clean water to rural communities."
-      },
-      "project2": {
-        "title": "Educational Support",
-        "description": "Supporting schools and young learners with resources."
-      },
-      "project3": {
-        "title": "Health Outreach",
-        "description": "Providing healthcare and awareness in underserved areas."
-      }
-    }
-  },
-
-  "news": {
-    "title": "Latest News",
-    "cta": "Read All News",
-    "items": {
-      "news1": {
-        "title": "Community health outreach",
-        "excerpt": "Our latest campaign reached over 500 families."
-      },
-      "news2": {
-        "title": "Youth empowerment program",
-        "excerpt": "Helping young people gain skills for the future."
-      },
-      "news3": {
-        "title": "New school initiative",
-        "excerpt": "Partnering with local leaders to support education."
-      }
-    }
+    "title": "Projects We Have Done",
+    "label": "VIEW OUR PROJECTS",
+    "viewAll": "View All Projects"
   },
   "joinUs": {
     "title": "Join Us in making a difference",
@@ -66,25 +34,6 @@
       "donate": "Donate",
       "volunteer": "Volunteer",
       "partner": "Partner with us"
-    }
-  },
-  "footer": {
-    "cta": {
-      "title": "Join us in making a difference",
-      "subtitle": "Every contribution counts in creating better lives.",
-      "donate": "Donate",
-      "contact": "Contact Us"
-    },
-    "links": {
-      "about": "About Us",
-      "projects": "Projects",
-      "news": "News",
-      "contact": "Contact"
-    },
-    "legal": {
-      "rights": "All rights reserved",
-      "privacy": "Privacy Policy",
-      "terms": "Terms & Conditions"
     }
   }
 }

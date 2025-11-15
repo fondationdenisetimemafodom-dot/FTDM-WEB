@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "title": "Points forts en vedette",
+    "subtitle": "Explorez les moments, les histoires et les jalons de la Fondation Denise Time Mafodom"
+  },
+  "slider": {
+    "loading": "Chargement des points forts...",
+    "noMedia": "Aucun média disponible",
+    "readMore": "En savoir plus",
+    "status": {
+      "ongoing": "En cours",
+      "completed": "Terminé"
+    },
+    "beneficiaries": "bénéficiaires"
+  },
+  "gallery": {
+    "title": "Galerie médias",
+    "loading": "Chargement des médias...",
+    "noItemsFound": "Aucun {type} trouvé",
+    "tabs": {
+      "all": "Tous",
+      "images": "Images",
+      "videos": "Vidéos"
+    },
+    "view": "Voir",
+    "showMore": "Voir plus"
+  },
+  "modal": {
+    "preview": "Aperçu du média",
+    "uploaded": "Téléchargé :"
+  },
+  "cta": {
+    "title": "Vous pouvez contribuer à fournir un lieu pour les enfants ayant des besoins particuliers!",
+    "volunteer": "Rejoignez-nous comme bénévole",
+    "donate": "Donner"
+  }
+}

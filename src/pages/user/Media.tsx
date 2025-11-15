@@ -1,12 +1,7 @@
 "use client";
-/*-----------------------------------------------------------------------------------------------------
- | @component Media
- | @brief    Media library page with project highlights slider and media gallery with tabs
- | @param    --
- | @return   Media JSX element
- -----------------------------------------------------------------------------------------------------*/
 
 import type React from "react";
+import { useTranslation } from "react-i18next";
 import UserNavbar from "../../components/UserNavbar";
 import Footer from "../../components/Footer";
 import mediaBackground from "../../assets/images/media-pic.png";
@@ -17,21 +12,6 @@ import axiosInstance from "../../lib/axiosInstance";
 import { Loader2, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { motion } from "framer-motion";
 
-/*-----------------------------------------------------------------------------------------------------
-| @interface Project
-| @brief    Interface defining project structure from backend
-| @param    _id - unique project identifier
-| @param    title - project title/name
-| @param    category - project cause/category
-| @param    location - project location
-| @param    status - project status (ongoing/completed)
-| @param    beneficiaries - number of beneficiaries
-| @param    startDate - project start date
-| @param    description - project description
-| @param    media - array of project media items
-| @param    createdAt - project creation timestamp
-| @param    updatedAt - last update timestamp
------------------------------------------------------------------------------------------------------*/
 interface Project {
   _id: string;
   title: string;
@@ -46,15 +26,6 @@ interface Project {
   updatedAt: string;
 }
 
-/*-----------------------------------------------------------------------------------------------------
-| @interface Media
-| @brief    Interface defining media structure from Cloudinary API
-| @param    public_id - unique media identifier from Cloudinary
-| @param    url - media file URL
-| @param    type - media type (image or video)
-| @param    folder - Cloudinary folder path
-| @param    created_at - media creation timestamp
------------------------------------------------------------------------------------------------------*/
 interface Media {
   public_id: string;
   url: string;
@@ -63,13 +34,6 @@ interface Media {
   created_at: string;
 }
 
-/*-----------------------------------------------------------------------------------------------------
- | @component Modal
- | @brief    Generic modal wrapper with blurred background and close functionality
- | @param    {children} React.ReactNode - modal content
- | @param    {onClose} () => void - callback to close modal
- | @return   Modal JSX element
- -----------------------------------------------------------------------------------------------------*/
 const Modal = ({
   children,
   onClose,
@@ -92,19 +56,16 @@ const Modal = ({
   );
 };
 
-/*-----------------------------------------------------------------------------------------------------
- | @component MediaModal
- | @brief    Modal for displaying full-size media (image or video)
- | @param    media - media object to display
- | @param    onClose - callback to close modal
- | @return   Modal JSX element with media content
- -----------------------------------------------------------------------------------------------------*/
 const MediaModal = ({
   media,
   onClose,
+  previewTitle,
+  uploadedLabel,
 }: {
   media: Media | null;
   onClose: () => void;
+  previewTitle: string;
+  uploadedLabel: string;
 }) => {
   if (!media) return null;
 
@@ -112,7 +73,7 @@ const MediaModal = ({
     <Modal onClose={onClose}>
       <div className="flex flex-col items-center">
         <h2 className="text-xl font-semibold mb-4 text-gray-800">
-          Media Preview
+          {previewTitle}
         </h2>
         {media.type === "image" ? (
           <img
@@ -128,7 +89,7 @@ const MediaModal = ({
           />
         )}
         <p className="text-sm text-gray-500 mt-4">
-          Uploaded: {new Date(media.created_at).toLocaleDateString()}
+          {uploadedLabel} {new Date(media.created_at).toLocaleDateString()}
         </p>
       </div>
     </Modal>
@@ -136,6 +97,7 @@ const MediaModal = ({
 };
 
 function Media() {
+  const { t } = useTranslation("media");
   const [showVolunteer, setShowVolunteer] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
@@ -229,7 +191,7 @@ function Media() {
             className="text-[40px] md:text-4xl lg:text-[56px] text-center font-bold  leading-tight
              text-main-500"
           >
-            Featured Highlights
+            {t("hero.title")}
           </motion.span>
           <motion.span
             initial={{ opacity: 0, y: -30 }}
@@ -237,8 +199,7 @@ function Media() {
             transition={{ duration: 1, delay: 1.5 }}
             className="text-lg md:text-xl lg:text-3xl font-regular text-secondary-text-500 text-center"
           >
-            Explore the moments, stories, and milestones of Fondation Denise
-            Time Mafodom
+            {t("hero.subtitle")}
           </motion.span>
         </div>
 
@@ -246,7 +207,7 @@ function Media() {
           {loadingProjects ? (
             <div className="flex flex-col items-center justify-center py-12">
               <Loader2 className="w-12 h-12 animate-spin text-main-500 mb-4" />
-              <p className="text-gray-600 text-lg">Loading highlights...</p>
+              <p className="text-gray-600 text-lg">{t("slider.loading")}</p>
             </div>
           ) : projects.length > 0 ? (
             <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -268,7 +229,7 @@ function Media() {
                     )
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-400">
-                      No media available
+                      {t("slider.noMedia")}
                     </div>
                   )}
                 </div>
@@ -277,8 +238,8 @@ function Media() {
                   <div className="flex items-center gap-3">
                     <span className="bg-main-500 text-white px-3 py-1 rounded-full text-sm font-medium">
                       {currentProject?.status === "ongoing"
-                        ? "Ongoing"
-                        : "Completed"}
+                        ? t("slider.status.ongoing")
+                        : t("slider.status.completed")}
                     </span>
                     <span className="text-gray-500 text-sm">
                       {currentProject?.category}
@@ -331,7 +292,10 @@ function Media() {
                           d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                         />
                       </svg>
-                      <span>{currentProject?.beneficiaries} beneficiaries</span>
+                      <span>
+                        {currentProject?.beneficiaries}{" "}
+                        {t("slider.beneficiaries")}
+                      </span>
                     </div>
                   </div>
 
@@ -339,7 +303,7 @@ function Media() {
                     to="/projects"
                     className="bg-main-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-main-600 transition-colors w-fit flex items-center gap-2"
                   >
-                    Read More
+                    {t("slider.readMore")}
                     <svg
                       className="w-5 h-5"
                       fill="none"
@@ -399,7 +363,7 @@ function Media() {
       <div className="w-full max-w-[1200px] mx-auto px-4 py-12">
         <div className="flex flex-col  items-start sm:justify-between mb-8 gap-4">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
-            Media Gallery ({filteredMedia.length} items)
+            {t("gallery.title")} ({filteredMedia.length} items)
           </h2>
 
           <div className="flex gap-5 p-1 rounded-lg w-fit">
@@ -411,7 +375,7 @@ function Media() {
                   : "border-main-500 text-main-500 hover:bg-main-50"
               }`}
             >
-              All
+              {t("gallery.tabs.all")}
             </button>
             <button
               onClick={() => setActiveTab("images")}
@@ -421,7 +385,7 @@ function Media() {
                   : "border-main-500 text-main-500 hover:bg-main-50"
               }`}
             >
-              Images
+              {t("gallery.tabs.images")}
             </button>
             <button
               onClick={() => setActiveTab("videos")}
@@ -431,7 +395,7 @@ function Media() {
                   : "border-main-500 text-main-500 hover:bg-main-50"
               }`}
             >
-              Videos
+              {t("gallery.tabs.videos")}
             </button>
           </div>
         </div>
@@ -439,7 +403,7 @@ function Media() {
         {loadingMedia ? (
           <div className="flex flex-col items-center justify-center py-12">
             <Loader2 className="w-12 h-12 animate-spin text-main-500 mb-4" />
-            <p className="text-gray-600 text-lg">Loading media...</p>
+            <p className="text-gray-600 text-lg">{t("gallery.loading")}</p>
           </div>
         ) : filteredMedia.length > 0 ? (
           <>
@@ -480,7 +444,7 @@ function Media() {
                       onClick={() => setSelectedMedia(media)}
                       className="bg-main-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-main-600 transition-colors"
                     >
-                      View
+                      {t("gallery.view")}
                     </button>
                   </div>
                 </div>
@@ -493,7 +457,7 @@ function Media() {
                   onClick={handleShowMore}
                   className="bg-main-500 text-white px-8 py-3 rounded-xl font-semibold hover:bg-main-600 transition-colors"
                 >
-                  Show More
+                  {t("gallery.showMore")}
                 </button>
               </div>
             )}
@@ -501,7 +465,14 @@ function Media() {
         ) : (
           <div className="text-center py-12">
             <p className="text-gray-500 text-lg">
-              No {activeTab === "all" ? "" : activeTab} found
+              {t("gallery.noItemsFound", {
+                type:
+                  activeTab === "all"
+                    ? ""
+                    : activeTab === "images"
+                    ? t("gallery.tabs.images").toLowerCase()
+                    : t("gallery.tabs.videos").toLowerCase(),
+              })}
             </p>
           </div>
         )}
@@ -517,20 +488,20 @@ function Media() {
         }}
       >
         <span className="text-[28px] lg:text-[40px] text-center font-bold text-white">
-          You can contribute to provide a place for children with special needs!
+          {t("cta.title")}
         </span>
         <div className="flex flex-col md:flex-row justify-center md:justify-between items-center gap-6 md:gap-8 lg:gap-12 mt-12 text-xl md:text-2xl lg:text-[30px] max-w-6xl mx-auto font-semibold">
           <button
             onClick={() => setShowVolunteer(true)}
             className="bg-main-500 text-white hover:cursor-pointer py-4 px-6 w-full md:w-auto md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:bg-main-600 transition-colors"
           >
-            Join as a volunteer
+            {t("cta.volunteer")}
           </button>
           <NavLink
             to="/donate"
             className="bg-white text-main-500 py-4 px-6 w-full md:w-auto md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:cursor-pointer hover:bg-gray-50 transition-colors"
           >
-            Donate
+            {t("cta.donate")}
           </NavLink>
         </div>
       </div>
@@ -547,6 +518,8 @@ function Media() {
         <MediaModal
           media={selectedMedia}
           onClose={() => setSelectedMedia(null)}
+          previewTitle={t("modal.preview")}
+          uploadedLabel={t("modal.uploaded")}
         />
       )}
     </div>

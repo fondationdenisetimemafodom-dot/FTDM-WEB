@@ -1,89 +1,39 @@
 {
-  "header": {
-    "logo": "Insieme per la Solidarietà Umana",
-    "nav": {
-      "home": "Home",
-      "about": "Chi siamo",
-      "projects": "Progetti",
-      "news": "Notizie",
-      "contact": "Contatti"
-    },
-    "donate": "Dona ora"
-  },
   "hero": {
-    "title": "Insieme per la Solidarietà Umana",
-    "subtitle": "Promuoviamo salute, istruzione ed emancipazione economica per un mondo migliore.",
-    "cta": {
-      "primary": "Dona ora",
-      "secondary": "Scopri di più"
-    }
+    "title": "TRASFORMARE LE VITE ATTRAVERSO LA SOLIDARIETÀ",
+    "subtitle": "Dove la compassione incontra l'azione. Da Dschang al mondo, stiamo costruendo ponti di speranza attraverso l'istruzione, l'assistenza sanitaria, l'arricchimento culturale e l'aiuto umanitario. Trasformando le vite una comunità alla volta."
+  },
+  "hero_buttons": {
+    "donate": "Dona",
+    "volunteer": "Fai volontariato"
   },
   "about": {
-    "title": "Chi siamo",
-    "description": "Promuoviamo salute, istruzione ed emancipazione economica per un mondo migliore. Insieme creiamo un impatto duraturo."
+    "label": "Chi siamo",
+    "title": "Tessere salute, progresso e patrimonio nel tessuto del domani",
+    "description": "In ogni comunità che serviamo, dalle vibranti strade di Dschang ai villaggi attraverso il Camerun e oltre, vediamo un potenziale inesplorato in attesa di fiorire. La nostra missione trascende i confini e le barriere. Non costruiamo solo cliniche e scuole; coltiviamo ecosistemi dove la salute prospera, dove l'istruzione apre porte un tempo ritenute permanentemente chiuse, e dove le tradizioni culturali diventano fonti di orgoglio e opportunità economiche.",
+    "link": "Scopri di più"
+  },
+  "support": {
+    "label": "Dona",
+    "title": "Sostieni il nostro lavoro - I tuoi doni - Nascono i sogni",
+    "description1": "Il tuo sostegno alimenta il vero cambiamento nelle comunità che ne hanno più bisogno. Ogni dono aiuta a fornire assistenza sanitaria, istruzione e risorse essenziali.",
+    "description2": "Con la tua generosità, costruiamo scuole, cliniche e spazi sicuri. Dai potere alle famiglie di sognare in grande e realizzare di più.",
+    "description3": "Insieme, trasformiamo la speranza in azione e le idee in realtà. Il tuo contributo dà vita a progetti che trasformano le vite.",
+    "description4": "Dai neonati agli anziani, la tua gentilezza crea un impatto duraturo. Unisciti a noi perché ogni dono nasce da un domani più luminoso.",
+    "button": "Dona oggi"
   },
   "projects": {
-    "title": "Progetti in corso",
-    "cta": "Vedi tutti i progetti",
-    "cards": {
-      "project1": {
-        "title": "Iniziativa Acqua Pulita",
-        "description": "Portare acqua sicura e pulita alle comunità rurali."
-      },
-      "project2": {
-        "title": "Supporto Educativo",
-        "description": "Sostenere scuole e giovani studenti con risorse."
-      },
-      "project3": {
-        "title": "Campagna Salute",
-        "description": "Fornire assistenza sanitaria e sensibilizzazione nelle aree svantaggiate."
-      }
-    }
-  },
-  "news": {
-    "title": "Ultime Notizie",
-    "cta": "Leggi tutte le notizie",
-    "items": {
-      "news1": {
-        "title": "Campagna sanitaria comunitaria",
-        "excerpt": "La nostra ultima campagna ha raggiunto oltre 500 famiglie."
-      },
-      "news2": {
-        "title": "Programma di emancipazione giovanile",
-        "excerpt": "Aiutare i giovani ad acquisire competenze per il futuro."
-      },
-      "news3": {
-        "title": "Nuova iniziativa scolastica",
-        "excerpt": "Collaborazione con i leader locali per sostenere l’istruzione."
-      }
-    }
+    "title": "I progetti che abbiamo realizzato",
+    "label": "VISUALIZZA I NOSTRI PROGETTI",
+    "viewAll": "Visualizza tutti i progetti"
   },
   "joinUs": {
     "title": "Unisciti a noi per fare la differenza",
     "subtitle": "Ogni contributo, per quanto piccolo, crea onde di cambiamento positivo nelle comunità",
     "buttons": {
       "donate": "Dona",
-      "volunteer": "Diventa volontario",
-      "partner": "Collabora con noi"
-    }
-  },
-  "footer": {
-    "cta": {
-      "title": "Unisciti a noi per fare la differenza",
-      "subtitle": "Ogni contributo conta per migliorare la vita.",
-      "donate": "Dona",
-      "contact": "Contattaci"
-    },
-    "links": {
-      "about": "Chi siamo",
-      "projects": "Progetti",
-      "news": "Notizie",
-      "contact": "Contatti"
-    },
-    "legal": {
-      "rights": "Tutti i diritti riservati",
-      "privacy": "Informativa sulla privacy",
-      "terms": "Termini e condizioni"
+      "volunteer": "Fai volontariato",
+      "partner": "Diventa partner"
     }
   }
 }

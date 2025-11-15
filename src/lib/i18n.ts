@@ -26,8 +26,8 @@ i18n
     )
   )
   .init({
-    lng: "en",
-    fallbackLng: "en",
+    lng: "fr",
+    fallbackLng: "fr",
     debug: import.meta.env.MODE === "development",
 
     interpolation: {
