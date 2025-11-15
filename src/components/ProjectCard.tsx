@@ -1,5 +1,6 @@
 import React from "react";
 import { MapPin, Users, Calendar } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type MediaItem = {
   publicId: string;
@@ -52,6 +53,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   media,
   onClick,
 }) => {
+  const { t } = useTranslation("projects");
+
   /*-----------------------------------------------------------------------------------------------------
   | @function formatDate
   | @brief    Formats ISO date string to readable format
@@ -73,11 +76,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   | @return   string - sanitized HTML with only safe tags
   -----------------------------------------------------------------------------------------------------*/
   const sanitizeHtml = (html: string): string => {
-    // Create a temporary div to parse HTML
     const temp = document.createElement("div");
     temp.innerHTML = html;
 
-    // Remove dangerous tags (script, style, etc.)
     const dangerousTags = temp.querySelectorAll(
       "script, style, iframe, object, embed"
     );
@@ -110,21 +111,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <div className="w-[90vw] p-10 overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col md:flex-row justify-between md:h-[75vh] h-[90vh]">
-      {/* Project Details */}
       <div className="p-5 flex flex-col flex-1">
-        {/* Title */}
         <h3 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2">
           {title}
         </h3>
 
-        {/* Description - with HTML formatting preserved */}
         <div
           className="text-gray-600 text-sm mb-4 flex-grow overflow-hidden relative"
           style={{
             display: "-webkit-box",
             WebkitLineClamp: 6,
             WebkitBoxOrient: "vertical",
-            maxHeight: "9rem", // Approximately 6 lines
+            maxHeight: "9rem",
           }}
         >
           <div
@@ -133,7 +131,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           />
         </div>
 
-        {/* Project Stats */}
         <div className="space-y-2 mb-4">
           <div className="flex items-center text-sm text-gray-600">
             <MapPin className="w-4 h-4 mr-2 text-main-500" />
@@ -145,28 +142,26 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               <span className="font-semibold text-gray-800">
                 {beneficiaries}
               </span>{" "}
-              beneficiaries
+              {t("projects-card.beneficiaries")}
             </span>
           </div>
           <div className="flex items-center text-sm text-gray-600">
             <Calendar className="w-4 h-4 mr-2 text-main-500" />
             <span>
-              Started:{" "}
+              {t("projects-card.started")}{" "}
               <span className="font-medium">{formatDate(startDate)}</span>
             </span>
           </div>
         </div>
 
-        {/* Read More Button */}
         <button
           onClick={onClick}
           className="w-full px-4 py-2 bg-main-500 text-white rounded-lg hover:bg-main-600 transition-colors duration-200 font-medium"
         >
-          Read more
+          {t("projects-card.readMore")}
         </button>
       </div>
 
-      {/* Project Media */}
       <div className="flex-1 relative rounded-3xl overflow-hidden bg-gray-200">
         {mediaData.type === "video" ? (
           <video
@@ -184,7 +179,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           />
         )}
 
-        {/* Status Badge */}
         <div className="absolute top-4 left-4">
           <span
             className={`px-3 py-1 rounded-full text-xs font-semibold ${
@@ -193,11 +187,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 : "bg-green-500 text-white"
             }`}
           >
-            {status === "ongoing" ? "Ongoing" : "Completed"}
+            {status === "ongoing"
+              ? t("projects-card.ongoing")
+              : t("projects-card.completed")}
           </span>
         </div>
 
-        {/* Category Badge */}
         <div className="absolute top-4 right-4">
           <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white text-gray-700 border border-gray-200">
             {category}

@@ -44,5 +44,12 @@
       "investments": "Investissements"
     },
     "donate": "Donner"
+  },
+  "projects-card": {
+    "beneficiaries": "bénéficiaires",
+    "started": "Commencé:",
+    "readMore": "Lire la suite",
+    "ongoing": "En cours",
+    "completed": "Terminé"
   }
 }
