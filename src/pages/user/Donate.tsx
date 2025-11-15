@@ -40,7 +40,7 @@ function Donate() {
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [showManagementModal, setShowManagementModal] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const [donationType, setDonationType] = useState<DonationType>("instant");
   const [amount, setAmount] = useState<number | "">("");
   const [firstName, setFirstName] = useState("");
@@ -272,8 +272,7 @@ function Donate() {
       setShowErrorPopup(true);
       return;
     }
-
-    setShowPendingPopup(true);
+    setLoading(true);
 
     try {
       const response = await axios.post(
@@ -292,7 +291,7 @@ function Donate() {
       );
 
       setShowPendingPopup(false);
-
+      console.log(response.data);
       if (response.data.success) {
         setShowThankYouPopup(true);
         setHasActiveSubscription(true);
@@ -310,6 +309,8 @@ function Donate() {
           "Failed to create subscription. Please try again."
       );
       setShowErrorPopup(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -594,10 +595,16 @@ function Donate() {
               {/* Submit */}
               <button
                 type="submit"
-                className="bg-main-500 text-white rounded-lg p-3 lg:p-4 font-bold text-base lg:text-lg hover:bg-main-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={showPendingPopup}
+                className="bg-main-500 text-white flex items-center justify-center rounded-lg p-3 lg:p-4 font-bold text-base lg:text-lg hover:bg-main-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={showPendingPopup || loading}
               >
-                {donationType === "instant" ? t("donateBtn") : "Donate Monthly"}
+                {donationType === "instant" ? (
+                  t("donateBtn")
+                ) : loading ? (
+                  <div className="animate-spin self-center rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-white"></div>
+                ) : (
+                  "Donate Monthly"
+                )}
               </button>
 
               {donationType === "monthly" && (
