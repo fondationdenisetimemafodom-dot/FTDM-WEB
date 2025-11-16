@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import type React from "react";
+import { useTranslation } from "react-i18next";
 
 import axiosInstance from "../../lib/axiosInstance";
 import API_BASE_URL from "../../lib/api";
@@ -21,16 +22,8 @@ interface Donation {
   updatedAt: string;
 }
 
-interface Withdrawal {
-  _id: string;
-  amount: number;
-  accountNumber: string;
-  status: "pending" | "completed" | "failed";
-  createdAt: string;
-  updatedAt: string;
-}
-
 const DonationHistoryPage: React.FC = () => {
+  const { t } = useTranslation("withdrawals");
   const [activeTab, setActiveTab] = useState<"donations" | "withdrawals">(
     "donations"
   );
@@ -50,7 +43,7 @@ const DonationHistoryPage: React.FC = () => {
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
-                DONATIONS
+                {t("donations").toUpperCase()}
               </button>
               <button
                 onClick={() => setActiveTab("withdrawals")}
@@ -60,7 +53,7 @@ const DonationHistoryPage: React.FC = () => {
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
-                WITHDRAWALS
+                {t("withdrawals").toUpperCase()}
               </button>
             </div>
           </div>
@@ -74,6 +67,7 @@ const DonationHistoryPage: React.FC = () => {
 };
 
 const DonationsView: React.FC = () => {
+  const { t } = useTranslation("withdrawals");
   const [donations, setDonations] = useState<Donation[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -146,10 +140,13 @@ const DonationsView: React.FC = () => {
     <div className="mx-8 my-8 p-6 bg-white shadow-sm rounded-2xl">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-4">
-          <h1 className="text-xl font-semibold text-gray-900">All Donations</h1>
+          <h1 className="text-xl font-semibold text-gray-900">
+            {t("allDonations")}
+          </h1>
           {donations.length > 0 && (
             <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-              {donations.length} donation{donations.length !== 1 ? "s" : ""}
+              {donations.length}{" "}
+              {donations.length !== 1 ? t("donations_plural") : t("donation")}
             </span>
           )}
         </div>
@@ -157,7 +154,7 @@ const DonationsView: React.FC = () => {
           onClick={fetchDonations}
           disabled={loading}
           className="text-gray-500 hover:text-gray-700 p-2 rounded-md transition-colors disabled:opacity-50"
-          title="Refresh"
+          title={t("refresh")}
         >
           <svg
             className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
@@ -195,7 +192,7 @@ const DonationsView: React.FC = () => {
             onClick={fetchDonations}
             className="text-red-600 hover:text-red-800 text-sm font-medium"
           >
-            Try Again
+            {t("tryAgain")}
           </button>
         </div>
       )}
@@ -206,28 +203,28 @@ const DonationsView: React.FC = () => {
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
                 <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                  DONOR NAME
+                  {t("donorName").toUpperCase()}
                 </th>
                 <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                  EMAIL
+                  {t("email").toUpperCase()}
                 </th>
                 <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                  PHONE
+                  {t("phone").toUpperCase()}
                 </th>
                 <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                  AMOUNT
+                  {t("amount").toUpperCase()}
                 </th>
                 <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                  STATUS
+                  {t("status").toUpperCase()}
                 </th>
                 <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                  PAYMENT METHOD
+                  {t("paymentMethod").toUpperCase()}
                 </th>
                 <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                  DATE
+                  {t("date").toUpperCase()}
                 </th>
                 <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                  MESSAGE
+                  {t("message").toUpperCase()}
                 </th>
               </tr>
             </thead>
@@ -237,7 +234,7 @@ const DonationsView: React.FC = () => {
                   <td colSpan={8} className="py-12 text-center">
                     <div className="flex flex-col items-center justify-center space-y-3">
                       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-600"></div>
-                      <p className="text-gray-500">Loading donations...</p>
+                      <p className="text-gray-500">{t("loadingDonations")}</p>
                     </div>
                   </td>
                 </tr>
@@ -258,7 +255,7 @@ const DonationsView: React.FC = () => {
                           />
                         </svg>
                       </div>
-                      <p className="text-gray-500">No donations found</p>
+                      <p className="text-gray-500">{t("noDonations")}</p>
                     </div>
                   </td>
                 </tr>
@@ -297,8 +294,8 @@ const DonationsView: React.FC = () => {
                     </td>
                     <td className="py-3 px-4 text-sm text-gray-700">
                       {donation.paymentMethod === "mobile_money"
-                        ? "Mobile Money"
-                        : "Orange Money"}
+                        ? t("mobileMoneyLabel")
+                        : t("orangeMoneyLabel")}
                     </td>
                     <td className="py-3 px-4 text-sm text-gray-700">
                       {formatDate(donation.createdAt)}
@@ -317,7 +314,7 @@ const DonationsView: React.FC = () => {
           <div className="bg-gray-50 px-6 py-4 border-t border-gray-200">
             <div className="flex justify-between items-center">
               <div className="text-lg font-semibold text-gray-900">
-                Total Successful Donations:{" "}
+                {t("totalSuccessfulDonations")}{" "}
                 <span className="text-cyan-600">
                   {formatAmount(totalDonations)}
                 </span>
@@ -331,51 +328,27 @@ const DonationsView: React.FC = () => {
 };
 
 const WithdrawalsView: React.FC = () => {
-  const [withdrawals, setWithdrawals] = useState<Withdrawal[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { t } = useTranslation("withdrawals");
   const [error, setError] = useState("");
-  const [totalWithdrawals, setTotalWithdrawals] = useState(0);
   const [withdrawAmount, setWithdrawAmount] = useState("");
-  const [accountNumber, setAccountNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [pin, setPin] = useState("");
   const [withdrawing, setWithdrawing] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
-  const fetchWithdrawals = async () => {
-    try {
-      setLoading(true);
-      setError("");
-
-      const response = await axiosInstance.get(
-        `${API_BASE_URL}/api/withdrawals`
-      );
-      const withdrawalsData = response.data.data.withdrawals;
-
-      setWithdrawals(withdrawalsData);
-
-      const total = withdrawalsData.reduce(
-        (sum: number, w: Withdrawal) => sum + w.amount,
-        0
-      );
-      setTotalWithdrawals(total);
-    } catch (err: any) {
-      console.error("Failed to fetch withdrawals:", err);
-      setError(
-        err.response?.data?.message ||
-          "Failed to load withdrawals. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleWithdraw = async () => {
     if (!withdrawAmount || Number(withdrawAmount) <= 0) {
-      setError("Please enter a valid withdrawal amount");
+      setError(t("validWithdrawalAmount"));
       return;
     }
 
-    if (!accountNumber.trim()) {
-      setError("Please enter recipient account number");
+    if (!phoneNumber.trim()) {
+      setError(t("enterPhoneNumberError"));
+      return;
+    }
+
+    if (!pin.trim()) {
+      setError(t("enterPinError"));
       return;
     }
 
@@ -384,260 +357,110 @@ const WithdrawalsView: React.FC = () => {
       setError("");
 
       const response = await axiosInstance.post(
-        `${API_BASE_URL}/api/withdrawals`,
+        `${API_BASE_URL}/api/withdrawals/payout`,
         {
           amount: Number(withdrawAmount),
-          accountNumber: accountNumber.trim(),
+          phone: phoneNumber.trim(),
+          pin: pin.trim(),
         }
       );
 
       if (response.data.success) {
         setShowSuccessPopup(true);
         setWithdrawAmount("");
-        setAccountNumber("");
-        fetchWithdrawals();
+        setPhoneNumber("");
+        setPin("");
       } else {
-        setError("Withdrawal failed: " + response.data.message);
+        setError(t("withdrawalFailed") + response.data.message);
       }
     } catch (err: any) {
       console.error("Withdrawal error:", err);
-      setError(
-        err.response?.data?.message ||
-          "Failed to process withdrawal. Please try again."
-      );
+      setError(err.response?.data?.message || t("withdrawalError"));
     } finally {
       setWithdrawing(false);
     }
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  };
-
-  const formatAmount = (amount: number) => {
-    return amount.toLocaleString() + " CFA";
-  };
-
-  const getStatusBadge = (status: string) => {
-    const baseClasses = "px-3 py-1 rounded-full text-xs font-medium";
-    switch (status) {
-      case "completed":
-        return `${baseClasses} bg-green-100 text-green-800`;
-      case "pending":
-        return `${baseClasses} bg-yellow-100 text-yellow-800`;
-      case "failed":
-        return `${baseClasses} bg-red-100 text-red-800`;
-      default:
-        return `${baseClasses} bg-gray-100 text-gray-800`;
-    }
-  };
-
-  useEffect(() => {
-    fetchWithdrawals();
-  }, []);
-
   return (
     <>
       <div className="mx-8 my-8 p-6 bg-white shadow-sm rounded-2xl">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center space-x-4">
-            <h1 className="text-xl font-semibold text-gray-900">
-              All Withdrawals
-            </h1>
-            {withdrawals.length > 0 && (
-              <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                {withdrawals.length} withdrawal
-                {withdrawals.length !== 1 ? "s" : ""}
-              </span>
-            )}
-          </div>
-          <button
-            onClick={fetchWithdrawals}
-            disabled={loading}
-            className="text-gray-500 hover:text-gray-700 p-2 rounded-md transition-colors disabled:opacity-50"
-            title="Refresh"
-          >
-            <svg
-              className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-              />
-            </svg>
-          </button>
-        </div>
-
-        {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
-            <svg
-              className="w-5 h-5 text-red-500"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <div className="flex-1">
-              <p className="text-red-700">{error}</p>
-            </div>
-            <button
-              onClick={() => setError("")}
-              className="text-red-600 hover:text-red-800 text-sm font-medium"
-            >
-              Dismiss
-            </button>
-          </div>
-        )}
-
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden mb-6">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-gray-50 border-b border-gray-200">
-                <tr>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    WITHDRAWAL ID
-                  </th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    ACCOUNT NUMBER
-                  </th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    AMOUNT
-                  </th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    STATUS
-                  </th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    DATE
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {loading ? (
-                  <tr>
-                    <td colSpan={5} className="py-12 text-center">
-                      <div className="flex flex-col items-center justify-center space-y-3">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-600"></div>
-                        <p className="text-gray-500">Loading withdrawals...</p>
-                      </div>
-                    </td>
-                  </tr>
-                ) : withdrawals.length === 0 ? (
-                  <tr>
-                    <td colSpan={5} className="py-12 text-center">
-                      <div className="flex flex-col items-center justify-center space-y-3">
-                        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
-                          <svg
-                            className="w-8 h-8 text-gray-400"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                        <p className="text-gray-500">No withdrawals found</p>
-                      </div>
-                    </td>
-                  </tr>
-                ) : (
-                  withdrawals.map((withdrawal) => (
-                    <tr
-                      key={withdrawal._id}
-                      className="hover:bg-gray-50 transition-colors"
-                    >
-                      <td className="py-3 px-4 text-sm font-mono text-gray-700">
-                        {withdrawal._id}
-                      </td>
-                      <td className="py-3 px-4 text-sm text-gray-700">
-                        {withdrawal.accountNumber}
-                      </td>
-                      <td className="py-3 px-4 text-sm font-semibold text-gray-900">
-                        {formatAmount(withdrawal.amount)}
-                      </td>
-                      <td className="py-3 px-4">
-                        <span className={getStatusBadge(withdrawal.status)}>
-                          {withdrawal.status.charAt(0).toUpperCase() +
-                            withdrawal.status.slice(1)}
-                        </span>
-                      </td>
-                      <td className="py-3 px-4 text-sm text-gray-700">
-                        {formatDate(withdrawal.createdAt)}
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-
-          {!loading && withdrawals.length > 0 && (
-            <div className="bg-gray-50 px-6 py-4 border-t border-gray-200">
-              <div className="flex justify-between items-center">
-                <div className="text-lg font-semibold text-gray-900">
-                  Total Withdrawals:{" "}
-                  <span className="text-cyan-600">
-                    {formatAmount(totalWithdrawals)}
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
         <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">
-            Process New Withdrawal
+            {t("processNewWithdrawal")}
           </h2>
+
+          {error && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
+              <svg
+                className="w-5 h-5 text-red-500"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <div className="flex-1">
+                <p className="text-red-700">{error}</p>
+              </div>
+              <button
+                onClick={() => setError("")}
+                className="text-red-600 hover:text-red-800 text-sm font-medium"
+              >
+                {t("dismiss")}
+              </button>
+            </div>
+          )}
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Withdrawal Amount (CFA)
+                {t("withdrawalAmount")}
               </label>
               <input
                 type="number"
                 value={withdrawAmount}
                 onChange={(e) => setWithdrawAmount(e.target.value)}
-                placeholder="Enter amount"
+                placeholder={t("enterAmount")}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Recipient Account Number
+                {t("phoneNumber")}
               </label>
               <input
                 type="text"
-                value={accountNumber}
-                onChange={(e) => setAccountNumber(e.target.value)}
-                placeholder="Enter account number"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                placeholder={t("enterPhoneNumber")}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
               />
             </div>
           </div>
+
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              {t("pin")}
+            </label>
+            <input
+              type="password"
+              value={pin}
+              onChange={(e) => setPin(e.target.value)}
+              placeholder={t("enterPin")}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+            />
+          </div>
+
           <div className="mt-4">
             <button
               onClick={handleWithdraw}
               disabled={withdrawing}
               className="bg-cyan-500 hover:bg-cyan-600 disabled:opacity-50 text-white px-6 py-2 rounded-md font-medium transition-colors"
             >
-              {withdrawing ? "Processing..." : "PROCESS WITHDRAWAL"}
+              {withdrawing ? t("processing") : t("processWithdrawal")}
             </button>
           </div>
         </div>
@@ -650,7 +473,7 @@ const WithdrawalsView: React.FC = () => {
               <div className="absolute inset-0 border-4 border-gray-200 rounded-full"></div>
               <div className="absolute inset-0 border-4 border-cyan-500 rounded-full border-t-transparent animate-spin"></div>
             </div>
-            <p className="text-gray-600">Processing withdrawal...</p>
+            <p className="text-gray-600">{t("processingWithdrawal")}</p>
           </div>
         </div>
       )}
@@ -674,16 +497,14 @@ const WithdrawalsView: React.FC = () => {
               </svg>
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Success!
+              {t("success")}
             </h3>
-            <p className="text-gray-600 mb-6">
-              Withdrawal request has been processed successfully
-            </p>
+            <p className="text-gray-600 mb-6">{t("withdrawalSuccess")}</p>
             <button
               onClick={() => setShowSuccessPopup(false)}
               className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
             >
-              Close
+              {t("close")}
             </button>
           </div>
         </div>

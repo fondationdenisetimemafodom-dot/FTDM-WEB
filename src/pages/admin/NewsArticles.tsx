@@ -7,9 +7,11 @@
 -----------------------------------------------------------------------------------------------------*/
 
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import axiosInstance from "../../lib/axiosInstance";
 
 const NewsArticles: React.FC = () => {
+  const { t } = useTranslation("news-articles");
   const [activeTab, setActiveTab] = useState<"create" | "view">("create");
 
   return (
@@ -27,7 +29,7 @@ const NewsArticles: React.FC = () => {
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
-                CREATE ARTICLE
+                {t("createArticle")}
               </button>
               <button
                 onClick={() => setActiveTab("view")}
@@ -37,7 +39,7 @@ const NewsArticles: React.FC = () => {
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
-                VIEW ARTICLES
+                {t("viewArticles")}
               </button>
             </div>
           </div>
@@ -66,6 +68,7 @@ interface ArticleFormData {
 }
 
 const CreateArticleView: React.FC = () => {
+  const { t } = useTranslation("news-articles");
   const [formData, setFormData] = useState<ArticleFormData>({
     title: "",
     content: "",
@@ -120,15 +123,15 @@ const CreateArticleView: React.FC = () => {
 
       // Validation
       if (!formData.title.trim()) {
-        setErrorMsg("Title is required");
+        setErrorMsg(t("titleRequired"));
         return;
       }
       if (!formData.content.trim()) {
-        setErrorMsg("Content is required");
+        setErrorMsg(t("contentRequired"));
         return;
       }
       if (!formData.projectTitle.trim()) {
-        setErrorMsg("Project title is required");
+        setErrorMsg(t("projectRequired"));
         return;
       }
 
@@ -155,7 +158,7 @@ const CreateArticleView: React.FC = () => {
       setTagInput("");
     } catch (err: any) {
       console.error("Failed to create article:", err);
-      setErrorMsg(err.response?.data?.message || "Failed to create article");
+      setErrorMsg(err.response?.data?.message || t("failedToCreate"));
     } finally {
       setLoading(false);
     }
@@ -166,7 +169,7 @@ const CreateArticleView: React.FC = () => {
       <div className="mx-8 mb-8 p-6 bg-white shadow-sm rounded-2xl">
         <div className="mb-8">
           <h1 className="text-xl font-semibold text-gray-900 mb-2">
-            CREATE ARTICLE
+            {t("createArticle")}
           </h1>
         </div>
 
@@ -194,7 +197,7 @@ const CreateArticleView: React.FC = () => {
           {/* Title */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Article Title
+              {t("articleTitle")}
             </label>
             <input
               type="text"
@@ -202,7 +205,7 @@ const CreateArticleView: React.FC = () => {
               onChange={(e) =>
                 setFormData({ ...formData, title: e.target.value })
               }
-              placeholder="Enter article title"
+              placeholder={t("enterArticleTitle")}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
             />
           </div>
@@ -210,7 +213,7 @@ const CreateArticleView: React.FC = () => {
           {/* Project Title */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Project Title
+              {t("projectTitle")}
             </label>
             <input
               type="text"
@@ -218,7 +221,7 @@ const CreateArticleView: React.FC = () => {
               onChange={(e) =>
                 setFormData({ ...formData, projectTitle: e.target.value })
               }
-              placeholder="Associated project name"
+              placeholder={t("associatedProject")}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
             />
           </div>
@@ -226,7 +229,7 @@ const CreateArticleView: React.FC = () => {
           {/* Tags */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Tags
+              {t("tags")}
             </label>
             <div className="flex gap-2 mb-3">
               <input
@@ -239,14 +242,14 @@ const CreateArticleView: React.FC = () => {
                     handleAddTag();
                   }
                 }}
-                placeholder="Add a tag and press Enter"
+                placeholder={t("addTagPrompt")}
                 className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
               />
               <button
                 onClick={handleAddTag}
                 className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-md font-medium transition-colors"
               >
-                Add
+                {t("add")}
               </button>
             </div>
             {formData.tags.length > 0 && (
@@ -272,14 +275,14 @@ const CreateArticleView: React.FC = () => {
           {/* Content */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Content
+              {t("content")}
             </label>
             <textarea
               value={formData.content}
               onChange={(e) =>
                 setFormData({ ...formData, content: e.target.value })
               }
-              placeholder="Enter article content"
+              placeholder={t("enterContent")}
               rows={10}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
             />
@@ -297,7 +300,7 @@ const CreateArticleView: React.FC = () => {
                 className="w-4 h-4 rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500"
               />
               <span className="text-sm font-medium text-gray-700">
-                Publish immediately
+                {t("publishImmediately")}
               </span>
             </label>
           </div>
@@ -310,7 +313,7 @@ const CreateArticleView: React.FC = () => {
             disabled={loading}
             className="bg-cyan-500 hover:bg-cyan-600 disabled:opacity-50 text-white px-6 py-2 rounded-md font-medium transition-colors"
           >
-            {loading ? "Publishing..." : "PUBLISH"}
+            {loading ? t("publishing") : t("publish")}
           </button>
         </div>
       </div>
@@ -323,7 +326,7 @@ const CreateArticleView: React.FC = () => {
               <div className="absolute inset-0 border-4 border-gray-200 rounded-full"></div>
               <div className="absolute inset-0 border-4 border-cyan-500 rounded-full border-t-transparent animate-spin"></div>
             </div>
-            <p className="text-gray-600">Publishing...</p>
+            <p className="text-gray-600">{t("processingLoader")}</p>
           </div>
         </div>
       )}
@@ -348,16 +351,14 @@ const CreateArticleView: React.FC = () => {
               </svg>
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Success!
+              {t("successTitle")}
             </h3>
-            <p className="text-gray-600 mb-6">
-              Article has been published successfully
-            </p>
+            <p className="text-gray-600 mb-6">{t("articlePublished")}</p>
             <button
               onClick={() => setShowSuccessPopup(false)}
               className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
             >
-              Close
+              {t("close")}
             </button>
           </div>
         </div>
@@ -398,215 +399,8 @@ interface ArticleDetailModalProps {
   article: Article | null;
 }
 
-const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
-  isOpen,
-  onClose,
-  onConfirm,
-  articleTitle,
-  loading,
-}) => {
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-lg max-w-md w-full p-6">
-        <div className="flex items-center mb-4">
-          <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
-            <svg
-              className="w-5 h-5 text-red-500"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
-          <h2 className="text-lg font-semibold text-gray-800">
-            Delete Article
-          </h2>
-        </div>
-
-        <p className="text-gray-600 mb-6">
-          Are you sure you want to delete <strong>"{articleTitle}"</strong>?
-          This action cannot be undone.
-        </p>
-
-        <div className="flex space-x-3">
-          <button
-            onClick={onClose}
-            disabled={loading}
-            className="flex-1 px-4 py-2 text-gray-600 hover:text-gray-800 font-medium disabled:opacity-50"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={onConfirm}
-            disabled={loading}
-            className="flex-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center justify-center"
-          >
-            {loading ? (
-              <>
-                <svg
-                  className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-                Deleting...
-              </>
-            ) : (
-              "Delete"
-            )}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const ArticleDetailModal: React.FC<ArticleDetailModalProps> = ({
-  isOpen,
-  onClose,
-  article,
-}) => {
-  if (!isOpen || !article) return null;
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
-  return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-lg max-w-3xl w-full max-h-[90vh] overflow-hidden">
-        {/* Modal Header */}
-        <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-xl font-semibold text-gray-800">
-            Article Details
-          </h2>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 p-1"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-
-        {/* Modal Content */}
-        <div className="p-6 max-h-[75vh] overflow-y-auto space-y-6">
-          {/* Title */}
-          <div>
-            <h3 className="text-2xl font-semibold text-gray-900 mb-2">
-              {article.title}
-            </h3>
-            <p className="text-sm text-gray-500">
-              Project:{" "}
-              <span className="font-medium">{article.projectTitle}</span>
-            </p>
-          </div>
-
-          {/* Metadata */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-50 p-3 rounded-lg">
-              <p className="text-xs text-gray-500 mb-1">Status</p>
-              <span
-                className={`inline-block px-2 py-1 rounded text-xs font-medium ${
-                  article.published
-                    ? "bg-green-100 text-green-700"
-                    : "bg-yellow-100 text-yellow-700"
-                }`}
-              >
-                {article.published ? "Published" : "Draft"}
-              </span>
-            </div>
-          </div>
-
-          {/* Tags */}
-          {article.tags.length > 0 && (
-            <div>
-              <h4 className="text-sm font-semibold text-gray-700 mb-2">Tags</h4>
-              <div className="flex flex-wrap gap-2">
-                {article.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm font-medium"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Content */}
-          <div>
-            <h4 className="text-sm font-semibold text-gray-700 mb-2">
-              Content
-            </h4>
-            <div className="bg-gray-50 p-4 rounded-lg max-h-48 overflow-y-auto">
-              <p className="text-sm text-gray-700 whitespace-pre-wrap">
-                {article.content}
-              </p>
-            </div>
-          </div>
-
-          {/* Author and Dates */}
-          <div className="border-t pt-4">
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <p className="text-xs text-gray-500">Created</p>
-                <p className="font-medium text-gray-700">
-                  {formatDate(article.createdAt)}
-                </p>
-              </div>
-              <div>
-                <p className="text-xs text-gray-500">Last Updated</p>
-                <p className="font-medium text-gray-700">
-                  {formatDate(article.updatedAt)}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const ViewArticlesView: React.FC = () => {
+  const { t } = useTranslation("news-articles");
   const [articles, setArticles] = useState<Article[]>([]);
   const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
@@ -693,10 +487,7 @@ const ViewArticlesView: React.FC = () => {
       setFilteredArticles(articlesData);
     } catch (err: any) {
       console.error("Failed to fetch articles:", err);
-      setError(
-        err.response?.data?.message ||
-          "Failed to load articles. Please try again."
-      );
+      setError(t("failedToFetch"));
     } finally {
       setLoading(false);
     }
@@ -755,10 +546,7 @@ const ViewArticlesView: React.FC = () => {
       });
     } catch (err: any) {
       console.error("Failed to delete article:", err);
-      setError(
-        err.response?.data?.message ||
-          "Failed to delete article. Please try again."
-      );
+      setError(t("failedToDelete"));
       setDeleteModal((prev) => ({ ...prev, loading: false }));
     }
   };
@@ -801,12 +589,12 @@ const ViewArticlesView: React.FC = () => {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-4">
             <h1 className="text-xl font-semibold text-gray-900">
-              All Articles
+              {t("allArticles")}
             </h1>
             {filteredArticles.length > 0 && (
               <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                {filteredArticles.length} item
-                {filteredArticles.length !== 1 ? "s" : ""}
+                {filteredArticles.length}{" "}
+                {filteredArticles.length === 1 ? t("item") : t("items")}
               </span>
             )}
           </div>
@@ -815,7 +603,7 @@ const ViewArticlesView: React.FC = () => {
               onClick={retryFetch}
               disabled={loading}
               className="text-gray-500 hover:text-gray-700 p-2 rounded-md transition-colors disabled:opacity-50"
-              title="Refresh"
+              title={t("refresh")}
             >
               <svg
                 className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
@@ -846,7 +634,7 @@ const ViewArticlesView: React.FC = () => {
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              All
+              {t("filterAll")}
             </button>
             <button
               onClick={() => handleSearch(searchQuery, "published")}
@@ -856,7 +644,7 @@ const ViewArticlesView: React.FC = () => {
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              Published
+              {t("filterPublished")}
             </button>
             <button
               onClick={() => handleSearch(searchQuery, "draft")}
@@ -866,7 +654,7 @@ const ViewArticlesView: React.FC = () => {
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              Draft
+              {t("filterDraft")}
             </button>
           </div>
 
@@ -887,7 +675,7 @@ const ViewArticlesView: React.FC = () => {
             </svg>
             <input
               type="text"
-              placeholder="Search by title, project, or tag..."
+              placeholder={t("searchPlaceholder")}
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value, filterPublished)}
               className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 text-sm w-72"
@@ -936,7 +724,7 @@ const ViewArticlesView: React.FC = () => {
               onClick={retryFetch}
               className="text-red-600 hover:text-red-800 text-sm font-medium"
             >
-              Try Again
+              {t("refresh")}
             </button>
           </div>
         )}
@@ -948,25 +736,25 @@ const ViewArticlesView: React.FC = () => {
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    TITLE
+                    {t("tableTitle")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    PROJECT
+                    {t("tableProject")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    STATUS
+                    {t("tableStatus")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    TAGS
+                    {t("tableTags")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    LAST UPDATE
+                    {t("tableLastUpdate")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    ACTION
+                    {t("tableAction")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    DELETE
+                    {t("tableDelete")}
                   </th>
                 </tr>
               </thead>
@@ -976,7 +764,7 @@ const ViewArticlesView: React.FC = () => {
                     <td colSpan={7} className="py-12 text-center">
                       <div className="flex flex-col items-center justify-center space-y-3">
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-                        <p className="text-gray-500">Loading...</p>
+                        <p className="text-gray-500">{t("loading")}</p>
                       </div>
                     </td>
                   </tr>
@@ -999,8 +787,8 @@ const ViewArticlesView: React.FC = () => {
                         </div>
                         <p className="text-gray-500">
                           {searchQuery || filterPublished !== "all"
-                            ? "No results found"
-                            : "No articles found"}
+                            ? t("noResults")
+                            : t("noArticles")}
                         </p>
                       </div>
                     </td>
@@ -1025,7 +813,9 @@ const ViewArticlesView: React.FC = () => {
                               : "bg-yellow-100 text-yellow-700"
                           }`}
                         >
-                          {article.published ? "Published" : "Draft"}
+                          {article.published
+                            ? t("statusPublished")
+                            : t("statusDraft")}
                         </span>
                       </td>
                       <td className="py-3 px-4">
@@ -1053,7 +843,7 @@ const ViewArticlesView: React.FC = () => {
                           onClick={() => handleViewArticle(article)}
                           className="text-cyan-500 cursor-pointer underline hover:text-cyan-600 transition-colors text-sm"
                         >
-                          View
+                          {t("viewArticle")}
                         </button>
                       </td>
                       <td className="py-3 px-4">
@@ -1062,7 +852,7 @@ const ViewArticlesView: React.FC = () => {
                             handleDeleteArticle(article._id, article.title)
                           }
                           className="text-red-500 hover:text-red-600 cursor-pointer transition-colors"
-                          title="Delete"
+                          title={t("deleteArticle")}
                         >
                           <svg
                             className="w-4 h-4"
@@ -1104,6 +894,216 @@ const ViewArticlesView: React.FC = () => {
         loading={deleteModal.loading}
       />
     </>
+  );
+};
+
+const ArticleDetailModal: React.FC<ArticleDetailModalProps> = ({
+  isOpen,
+  article,
+}) => {
+  const { t } = useTranslation("news-articles");
+
+  if (!isOpen || !article) return null;
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl shadow-lg max-w-md w-full p-6">
+        <div className="flex items-center mb-4">
+          <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
+            <svg
+              className="w-5 h-5 text-red-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </div>
+          <h2 className="text-lg font-semibold text-gray-800">
+            {t("articleDetails")}
+          </h2>
+        </div>
+
+        {/* Modal Content */}
+        <div className="p-6 max-h-[90vh] overflow-hidden space-y-6">
+          {/* Title */}
+          <div>
+            <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+              {article.title}
+            </h3>
+            <p className="text-sm text-gray-500">
+              {t("detailProject")}{" "}
+              <span className="font-medium">{article.projectTitle}</span>
+            </p>
+          </div>
+
+          {/* Metadata */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-gray-50 p-3 rounded-lg">
+              <p className="text-xs text-gray-500 mb-1">{t("detailStatus")}</p>
+              <span
+                className={`inline-block px-2 py-1 rounded text-xs font-medium ${
+                  article.published
+                    ? "bg-green-100 text-green-700"
+                    : "bg-yellow-100 text-yellow-700"
+                }`}
+              >
+                {article.published ? t("statusPublished") : t("statusDraft")}
+              </span>
+            </div>
+          </div>
+
+          {/* Tags */}
+          {article.tags.length > 0 && (
+            <div>
+              <h4 className="text-sm font-semibold text-gray-700 mb-2">
+                {t("detailTags")}
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {article.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm font-medium"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Content */}
+          <div>
+            <h4 className="text-sm font-semibold text-gray-700 mb-2">
+              {t("detailContent")}
+            </h4>
+            <div className="bg-gray-50 p-4 rounded-lg max-h-48 overflow-y-auto">
+              <p className="text-sm text-gray-700 whitespace-pre-wrap">
+                {article.content}
+              </p>
+            </div>
+          </div>
+
+          {/* Author and Dates */}
+          <div className="border-t pt-4">
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <p className="text-xs text-gray-500">{t("detailCreated")}</p>
+                <p className="font-medium text-gray-700">
+                  {formatDate(article.createdAt)}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-500">
+                  {t("detailLastUpdated")}
+                </p>
+                <p className="font-medium text-gray-700">
+                  {formatDate(article.updatedAt)}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  articleTitle,
+  loading,
+}) => {
+  const { t } = useTranslation("news-articles");
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
+        <div className="flex items-center mb-4">
+          <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
+            <svg
+              className="w-5 h-5 text-red-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </div>
+          <h2 className="text-lg font-semibold text-gray-800">
+            {t("deleteArticle")}
+          </h2>
+        </div>
+
+        <p className="text-gray-600 mb-6">
+          {t("deleteConfirmation")} <strong>"{articleTitle}"</strong>?{" "}
+          {t("deleteWarning")}
+        </p>
+
+        <div className="flex space-x-3">
+          <button
+            onClick={onClose}
+            disabled={loading}
+            className="flex-1 px-4 py-2 text-gray-600 hover:text-gray-800 font-medium disabled:opacity-50"
+          >
+            {t("cancel")}
+          </button>
+          <button
+            onClick={onConfirm}
+            disabled={loading}
+            className="flex-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center justify-center"
+          >
+            {loading ? (
+              <>
+                <svg
+                  className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+                {t("deleting")}
+              </>
+            ) : (
+              /* using translation key for Delete button */
+              t("deleteButton")
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 

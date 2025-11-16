@@ -7,9 +7,11 @@
 -----------------------------------------------------------------------------------------------------*/
 
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import axiosInstance from "../../lib/axiosInstance";
 
 const MediaLibrary: React.FC = () => {
+  const { t } = useTranslation("media-library");
   const [activeTab, setActiveTab] = useState<"upload" | "images" | "videos">(
     "upload"
   );
@@ -28,7 +30,7 @@ const MediaLibrary: React.FC = () => {
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
-                UPLOAD MEDIA
+                {t("uploadMediaTab")}
               </button>
               <button
                 onClick={() => setActiveTab("images")}
@@ -38,7 +40,7 @@ const MediaLibrary: React.FC = () => {
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
-                VIEW IMAGES
+                {t("viewImagesTab")}
               </button>
               <button
                 onClick={() => setActiveTab("videos")}
@@ -48,7 +50,7 @@ const MediaLibrary: React.FC = () => {
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
-                VIEW VIDEOS
+                {t("viewVideosTab")}
               </button>
             </div>
           </div>
@@ -74,6 +76,7 @@ const MediaLibrary: React.FC = () => {
 -----------------------------------------------------------------------------------------------------*/
 
 const UploadMediaView: React.FC = () => {
+  const { t } = useTranslation("media-library");
   const [mediaFile, setMediaFile] = useState<File | null>(null);
   const [mediaPreview, setMediaPreview] = useState<string>("");
   const [mediaType, setMediaType] = useState<"image" | "video" | null>(null);
@@ -115,12 +118,12 @@ const UploadMediaView: React.FC = () => {
       setErrorMsg("");
 
       if (!mediaFile) {
-        setErrorMsg("Please select a media file");
+        setErrorMsg(t("pleaseSelectMedia"));
         return;
       }
 
       if (!mediaType) {
-        setErrorMsg("Invalid file type. Please upload an image or video.");
+        setErrorMsg(t("invalidFileType"));
         return;
       }
 
@@ -138,7 +141,7 @@ const UploadMediaView: React.FC = () => {
       setMediaType(null);
     } catch (err: any) {
       console.error("Failed to upload media:", err);
-      setErrorMsg(err.response?.data?.message || "Failed to upload media");
+      setErrorMsg(err.response?.data?.message || t("failedToUpload"));
     } finally {
       setLoading(false);
     }
@@ -149,7 +152,7 @@ const UploadMediaView: React.FC = () => {
       <div className="mx-4 lg:mx-8 mb-8 p-4 lg:p-6 bg-white shadow-sm rounded-2xl">
         <div className="mb-8">
           <h1 className="text-xl font-semibold text-gray-900 mb-2">
-            UPLOAD MEDIA
+            {t("uploadMediaTitle")}
           </h1>
         </div>
 
@@ -175,7 +178,7 @@ const UploadMediaView: React.FC = () => {
         <div className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Media File
+              {t("mediaFileLabel")}
             </label>
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-blue-50 relative overflow-hidden min-h-[296px]">
               {!mediaPreview ? (
@@ -194,7 +197,7 @@ const UploadMediaView: React.FC = () => {
                     />
                   </svg>
                   <p className="text-sm text-gray-600 mb-2">
-                    Browse to upload image or video
+                    {t("browseToUpload")}
                   </p>
                   <input
                     type="file"
@@ -207,7 +210,7 @@ const UploadMediaView: React.FC = () => {
                     htmlFor="media-upload"
                     className="cursor-pointer text-sm text-cyan-500 hover:text-cyan-600"
                   >
-                    Select File
+                    {t("selectFile")}
                   </label>
                 </>
               ) : (
@@ -236,7 +239,7 @@ const UploadMediaView: React.FC = () => {
                     <label
                       htmlFor="change-media"
                       className="cursor-pointer bg-white bg-opacity-90 p-2 rounded-full shadow-md hover:bg-opacity-100"
-                      title="Change file"
+                      title={t("changeFile")}
                     >
                       <svg
                         className="w-4 h-4"
@@ -259,7 +262,7 @@ const UploadMediaView: React.FC = () => {
                         setMediaType(null);
                       }}
                       className="bg-red-500 bg-opacity-90 p-2 rounded-full shadow-md hover:bg-opacity-100 text-white"
-                      title="Remove file"
+                      title={t("removeFile")}
                     >
                       <svg
                         className="w-4 h-4"
@@ -287,7 +290,7 @@ const UploadMediaView: React.FC = () => {
               disabled={loading}
               className="bg-cyan-500 hover:bg-cyan-600 disabled:opacity-50 text-white px-6 py-2 rounded-md font-medium transition-colors"
             >
-              {loading ? "Uploading..." : "UPLOAD"}
+              {loading ? t("uploading") : t("uploadButton")}
             </button>
           </div>
         </div>
@@ -300,7 +303,7 @@ const UploadMediaView: React.FC = () => {
               <div className="absolute inset-0 border-4 border-gray-200 rounded-full"></div>
               <div className="absolute inset-0 border-4 border-cyan-500 rounded-full border-t-transparent animate-spin"></div>
             </div>
-            <p className="text-gray-600">Uploading...</p>
+            <p className="text-gray-600">{t("uploading")}</p>
           </div>
         </div>
       )}
@@ -324,16 +327,14 @@ const UploadMediaView: React.FC = () => {
               </svg>
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Success!
+              {t("successTitle")}
             </h3>
-            <p className="text-gray-600 mb-6">
-              Media has been uploaded successfully
-            </p>
+            <p className="text-gray-600 mb-6">{t("successMessage")}</p>
             <button
               onClick={() => setShowSuccessPopup(false)}
               className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
             >
-              Close
+              {t("closeButton")}
             </button>
           </div>
         </div>
@@ -376,6 +377,8 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
   onConfirm,
   loading,
 }) => {
+  const { t } = useTranslation("media-library");
+
   if (!isOpen) return null;
 
   return (
@@ -395,13 +398,12 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
               />
             </svg>
           </div>
-          <h2 className="text-lg font-semibold text-gray-800">Delete Media</h2>
+          <h2 className="text-lg font-semibold text-gray-800">
+            {t("deleteMediaTitle")}
+          </h2>
         </div>
 
-        <p className="text-gray-600 mb-6">
-          Are you sure you want to delete this media? This action cannot be
-          undone.
-        </p>
+        <p className="text-gray-600 mb-6">{t("deleteConfirmation")}</p>
 
         <div className="flex space-x-3">
           <button
@@ -409,7 +411,7 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
             disabled={loading}
             className="flex-1 px-4 py-2 text-gray-600 hover:text-gray-800 font-medium disabled:opacity-50"
           >
-            Cancel
+            {t("cancelButton")}
           </button>
           <button
             onClick={onConfirm}
@@ -438,10 +440,10 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                Deleting...
+                {t("deleting")}
               </>
             ) : (
-              "Delete"
+              t("deleteButton")
             )}
           </button>
         </div>
@@ -455,6 +457,8 @@ const MediaDetailModal: React.FC<MediaDetailModalProps> = ({
   onClose,
   media,
 }) => {
+  const { t } = useTranslation("media-library");
+
   if (!isOpen || !media) return null;
 
   const formatDate = (dateString: string) => {
@@ -471,7 +475,7 @@ const MediaDetailModal: React.FC<MediaDetailModalProps> = ({
       <div className="bg-white rounded-2xl shadow-lg max-w-4xl w-full max-h-[90vh] overflow-hidden">
         <div className="flex items-center justify-between p-6 border-b">
           <h2 className="text-xl font-semibold text-gray-800">
-            {media.type === "image" ? "Image" : "Video"} Details
+            {media.type === "image" ? t("imageDetails") : t("videoDetails")}
           </h2>
           <button
             onClick={onClose}
@@ -512,17 +516,17 @@ const MediaDetailModal: React.FC<MediaDetailModalProps> = ({
             <div className="w-full pt-4 border-t">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-xs text-gray-500">Created</p>
+                  <p className="text-xs text-gray-500">{t("createdLabel")}</p>
                   <p className="text-sm text-gray-700">
                     {formatDate(media.created_at)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Folder</p>
+                  <p className="text-xs text-gray-500">{t("folderLabel")}</p>
                   <p className="text-sm text-gray-700">{media.folder}</p>
                 </div>
                 <div className="lg:col-span-2">
-                  <p className="text-xs text-gray-500">URL</p>
+                  <p className="text-xs text-gray-500">{t("urlLabel")}</p>
                   <a
                     href={media.url}
                     target="_blank"
@@ -544,6 +548,7 @@ const MediaDetailModal: React.FC<MediaDetailModalProps> = ({
 const ViewMediaView: React.FC<{ mediaType: "image" | "video" }> = ({
   mediaType,
 }) => {
+  const { t } = useTranslation("media-library");
   const [mediaList, setMediaList] = useState<Media[]>([]);
   const [filteredMedia, setFilteredMedia] = useState<Media[]>([]);
   const [loading, setLoading] = useState(true);
@@ -610,9 +615,7 @@ const ViewMediaView: React.FC<{ mediaType: "image" | "video" }> = ({
       setFilteredMedia(filtered);
     } catch (err: any) {
       console.error("Failed to fetch media:", err);
-      setError(
-        err.response?.data?.message || "Failed to load media. Please try again."
-      );
+      setError(err.response?.data?.message || t("failedToLoadMedia"));
     } finally {
       setLoading(false);
     }
@@ -668,10 +671,7 @@ const ViewMediaView: React.FC<{ mediaType: "image" | "video" }> = ({
       });
     } catch (err: any) {
       console.error("Failed to delete media:", err);
-      setError(
-        err.response?.data?.message ||
-          "Failed to delete media. Please try again."
-      );
+      setError(err.response?.data?.message || t("failedToDeleteMedia"));
       setDeleteModal((prev) => ({ ...prev, loading: false }));
     }
   };
@@ -712,12 +712,14 @@ const ViewMediaView: React.FC<{ mediaType: "image" | "video" }> = ({
         <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-6 gap-4">
           <div className="flex items-center space-x-4">
             <h1 className="text-xl font-semibold text-gray-900">
-              {mediaType === "image" ? "All Images" : "All Videos"}
+              {mediaType === "image" ? t("allImages") : t("allVideos")}
             </h1>
             {filteredMedia.length > 0 && (
               <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                {filteredMedia.length} item
-                {filteredMedia.length !== 1 ? "s" : ""}
+                {filteredMedia.length}{" "}
+                {filteredMedia.length === 1
+                  ? t("itemSingular")
+                  : t("itemPlural")}
               </span>
             )}
           </div>
@@ -726,7 +728,7 @@ const ViewMediaView: React.FC<{ mediaType: "image" | "video" }> = ({
               onClick={retryFetch}
               disabled={loading}
               className="text-gray-500 hover:text-gray-700 p-2 rounded-md transition-colors disabled:opacity-50"
-              title="Refresh"
+              title={t("refresh")}
             >
               <svg
                 className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
@@ -762,7 +764,7 @@ const ViewMediaView: React.FC<{ mediaType: "image" | "video" }> = ({
             </svg>
             <input
               type="text"
-              placeholder="Search by URL..."
+              placeholder={t("searchPlaceholder")}
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
               className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 text-sm w-full lg:w-64"
@@ -810,7 +812,7 @@ const ViewMediaView: React.FC<{ mediaType: "image" | "video" }> = ({
               onClick={retryFetch}
               className="text-red-600 hover:text-red-800 text-sm font-medium"
             >
-              Try Again
+              {t("tryAgain")}
             </button>
           </div>
         )}
@@ -819,7 +821,7 @@ const ViewMediaView: React.FC<{ mediaType: "image" | "video" }> = ({
           <div className="py-12 text-center">
             <div className="flex flex-col items-center justify-center space-y-3">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-              <p className="text-gray-500">Loading...</p>
+              <p className="text-gray-500">{t("loading")}</p>
             </div>
           </div>
         ) : filteredMedia.length === 0 ? (
@@ -839,7 +841,11 @@ const ViewMediaView: React.FC<{ mediaType: "image" | "video" }> = ({
                 </svg>
               </div>
               <p className="text-gray-500">
-                {searchQuery ? "No results found" : `No ${mediaType}s found`}
+                {searchQuery
+                  ? t("noResultsFound")
+                  : mediaType === "image"
+                  ? t("noImagesFound")
+                  : t("noVideosFound")}
               </p>
             </div>
           </div>
@@ -876,7 +882,7 @@ const ViewMediaView: React.FC<{ mediaType: "image" | "video" }> = ({
                       onClick={() => handleViewMedia(media)}
                       className="text-cyan-500 hover:text-cyan-600 text-sm font-medium"
                     >
-                      View
+                      {t("view")}
                     </button>
                     <button
                       onClick={() => handleDeleteMedia(media.public_id)}
