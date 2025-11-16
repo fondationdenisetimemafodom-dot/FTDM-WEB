@@ -6,6 +6,7 @@ import API_BASE_URL from "../../../lib/api";
 import { useNavigate } from "react-router";
 import logo from "../../../assets/images/logo.png";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 
 /*-----------------------------------------------------------------------------------------------------
  | @component AdminLogin
@@ -248,17 +249,18 @@ function AdminLogin() {
       setLoading(false);
     }
   };
+  const { t } = useTranslation("auth");
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-white px-6 sm:px-10 md:px-16 lg:px-20 py-8 sm:py-10 shadow-md rounded-lg">
         <img
-          src={logo}
+          src={logo || "/placeholder.svg"}
           className="h-20 sm:h-32 md:h-40 w-auto mx-auto mb-4"
           alt="FTDM Logo"
         />
         <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-center text-gray-500 mb-6">
-          welcome to FTDM admin control!!
+          {t("login.title")}
         </h2>
         {/* Error Message */}
         {error && (
@@ -274,7 +276,7 @@ function AdminLogin() {
               htmlFor="email"
               className="block text-xl sm:text-2xl md:text-[30px] font-bold text-main-500"
             >
-              Email
+              {t("common.email")}
             </label>
             <input
               type="email"
@@ -285,7 +287,7 @@ function AdminLogin() {
               disabled={isBlocked}
               maxLength={254}
               className="mt-1 w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main-500 focus:border-main-500"
-              placeholder="admin@example.com"
+              placeholder={t("login.emailPlaceholder")}
             />
           </div>
 
@@ -294,7 +296,7 @@ function AdminLogin() {
               htmlFor="password"
               className="block text-xl sm:text-2xl md:text-[30px] font-bold text-main-500"
             >
-              Password
+              {t("common.password")}
             </label>
             <div className="relative mt-1">
               <input
@@ -308,14 +310,18 @@ function AdminLogin() {
                 maxLength={128}
                 autoComplete="current-password"
                 className="w-full px-3 sm:px-4 py-2 pr-10 sm:pr-12 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main-500 focus:border-main-500"
-                placeholder="••••••••"
+                placeholder={t("login.passwordPlaceholder")}
               />
               {/* Password visibility toggle button */}
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
                 className="absolute inset-y-0 right-0 pr-2 sm:pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none"
-                aria-label={showPassword ? "Hide password" : "Show password"}
+                aria-label={
+                  showPassword
+                    ? t("common.hidePassword")
+                    : t("common.showPassword")
+                }
               >
                 {showPassword ? (
                   <FiEyeOff className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -338,9 +344,9 @@ function AdminLogin() {
             {loading ? (
               <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-white"></div>
             ) : isBlocked ? (
-              "Account Blocked"
+              t("login.accountBlocked")
             ) : (
-              "Login"
+              t("login.loginButton")
             )}
           </button>
 
@@ -350,7 +356,7 @@ function AdminLogin() {
               className="block text-sm sm:text-base md:text-lg font-bold text-main-500 hover:opacity-70"
               type="button"
             >
-              Forgot password
+              {t("login.forgotPassword")}
             </button>
           </div>
         </form>

@@ -6,6 +6,7 @@ import API_BASE_URL from "../../../lib/api";
 import { useNavigate } from "react-router";
 import logo from "../../../assets/images/logo.png";
 import { FiEye, FiEyeOff, FiCheck, FiX, FiArrowLeft } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 
 /*-----------------------------------------------------------------------------------------------------
  | @component ResetPassword
@@ -267,24 +268,20 @@ function ResetPassword() {
     }
   };
 
-  /*-----------------------------------------------------------------------------------------------------
-  | @function PasswordStrengthIndicator
-  | @brief Renders password strength validation indicators
-  | @param --
-  | @return JSX element with strength indicators
-  -----------------------------------------------------------------------------------------------------*/
+  const { t } = useTranslation("auth");
+
   const PasswordStrengthIndicator = () => (
     <div className="mt-2 space-y-1">
       <div className="text-sm font-medium text-gray-700 mb-2">
-        Password Requirements:
+        {t("resetPassword.passwordRequirements")}
       </div>
       {[
-        { key: "length", text: "At least 8 characters" },
-        { key: "uppercase", text: "One uppercase letter" },
-        { key: "lowercase", text: "One lowercase letter" },
-        { key: "number", text: "One number" },
-        { key: "special", text: "One special character" },
-      ].map(({ key, text }) => (
+        { key: "length", textKey: "resetPassword.requirement.length" },
+        { key: "uppercase", textKey: "resetPassword.requirement.uppercase" },
+        { key: "lowercase", textKey: "resetPassword.requirement.lowercase" },
+        { key: "number", textKey: "resetPassword.requirement.number" },
+        { key: "special", textKey: "resetPassword.requirement.special" },
+      ].map(({ key, textKey }) => (
         <div key={key} className="flex items-center space-x-2">
           {passwordStrength[key as keyof typeof passwordStrength] ? (
             <FiCheck className="h-4 w-4 text-green-500" />
@@ -298,7 +295,7 @@ function ResetPassword() {
                 : "text-red-600"
             }`}
           >
-            {text}
+            {t(textKey)}
           </span>
         </div>
       ))}
@@ -309,7 +306,7 @@ function ResetPassword() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-white px-6 sm:px-10 md:px-16 lg:px-20 py-8 sm:py-10 shadow-md rounded-lg">
         <img
-          src={logo}
+          src={logo || "/placeholder.svg"}
           className="h-20 sm:h-32 md:h-40 w-auto mx-auto mb-4"
           alt="FTDM Logo"
         />
@@ -321,12 +318,12 @@ function ResetPassword() {
             type="button"
           >
             <FiArrowLeft className="h-5 w-5 mr-2" />
-            <span className="text-sm sm:text-base">Back</span>
+            <span className="text-sm sm:text-base">{t("common.back")}</span>
           </button>
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-center text-gray-500">
-            Set New Password
+            {t("resetPassword.title")}
           </h2>
-          <div className="w-16"></div> {/* Spacer for center alignment */}
+          <div className="w-16"></div>
         </div>
 
         {/* Success Message */}
@@ -354,7 +351,7 @@ function ResetPassword() {
               htmlFor="newPassword"
               className="block text-xl sm:text-2xl md:text-[30px] font-bold text-main-500"
             >
-              New Password
+              {t("resetPassword.newPasswordLabel")}
             </label>
             <div className="relative mt-1">
               <input
@@ -367,14 +364,18 @@ function ResetPassword() {
                 minLength={8}
                 maxLength={128}
                 className="w-full px-3 sm:px-4 py-2 pl-10 pr-12 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main-500 focus:border-main-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
-                placeholder="Enter new password"
+                placeholder={t("resetPassword.newPasswordPlaceholder")}
                 autoComplete="new-password"
               />
               <button
                 type="button"
                 onClick={() => setShowNewPassword(!showNewPassword)}
                 className="absolute inset-y-0 right-0 pr-2 sm:pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none"
-                aria-label={showNewPassword ? "Hide password" : "Show password"}
+                aria-label={
+                  showNewPassword
+                    ? t("common.hidePassword")
+                    : t("common.showPassword")
+                }
               >
                 {showNewPassword ? (
                   <FiEyeOff className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -391,7 +392,7 @@ function ResetPassword() {
               htmlFor="confirmPassword"
               className="block text-xl sm:text-2xl md:text-[30px] font-bold text-main-500"
             >
-              Confirm Password
+              {t("resetPassword.confirmPasswordLabel")}
             </label>
             <div className="relative mt-1">
               <input
@@ -406,7 +407,7 @@ function ResetPassword() {
                 minLength={8}
                 maxLength={128}
                 className="w-full px-3 sm:px-4 py-2 pl-10 pr-12 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main-500 focus:border-main-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
-                placeholder="Confirm new password"
+                placeholder={t("resetPassword.confirmPasswordPlaceholder")}
                 autoComplete="new-password"
               />
               <button
@@ -414,7 +415,9 @@ function ResetPassword() {
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 className="absolute inset-y-0 right-0 pr-2 sm:pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none"
                 aria-label={
-                  showConfirmPassword ? "Hide password" : "Show password"
+                  showConfirmPassword
+                    ? t("common.hidePassword")
+                    : t("common.showPassword")
                 }
               >
                 {showConfirmPassword ? (
@@ -428,7 +431,7 @@ function ResetPassword() {
               <div className="mt-2 flex items-center space-x-2">
                 <FiX className="h-4 w-4 text-red-500" />
                 <span className="text-sm text-red-600">
-                  Passwords do not match
+                  {t("resetPassword.passwordsDoNotMatch")}
                 </span>
               </div>
             )}
@@ -438,7 +441,7 @@ function ResetPassword() {
                 <div className="mt-2 flex items-center space-x-2">
                   <FiCheck className="h-4 w-4 text-green-500" />
                   <span className="text-sm text-green-600">
-                    Passwords match
+                    {t("resetPassword.passwordsMatch")}
                   </span>
                 </div>
               )}
@@ -461,21 +464,21 @@ function ResetPassword() {
             {loading ? (
               <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-white"></div>
             ) : isBlocked ? (
-              "Temporarily Blocked"
+              t("common.temporarilyBlocked")
             ) : (
-              "Reset Password"
+              t("resetPassword.resetButton")
             )}
           </button>
 
           <div className="text-center mt-4">
             <p className="text-sm text-gray-600">
-              Remember your password?{" "}
+              {t("resetPassword.rememberPassword")}{" "}
               <button
                 type="button"
                 onClick={() => navigate("/fdtm-admin")}
                 className="text-main-500 hover:opacity-70 font-medium"
               >
-                Back to Login
+                {t("resetPassword.backToLogin")}
               </button>
             </p>
           </div>

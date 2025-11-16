@@ -6,6 +6,7 @@ import API_BASE_URL from "../../../lib/api";
 import { useNavigate } from "react-router";
 import logo from "../../../assets/images/logo.png";
 import { FiCheck, FiArrowLeft } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 
 /*-----------------------------------------------------------------------------------------------------
  | @component ForgotPassword
@@ -301,12 +302,13 @@ function ForgotPassword() {
     setSuccess("");
     await handleEmailSubmit(new Event("submit") as any);
   };
+  const { t } = useTranslation("auth");
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-white px-6 sm:px-10 md:px-16 lg:px-20 py-8 sm:py-10 shadow-md rounded-lg">
         <img
-          src={logo}
+          src={logo || "/placeholder.svg"}
           className="h-20 sm:h-32 md:h-40 w-auto mx-auto mb-4"
           alt="FTDM Logo"
         />
@@ -320,12 +322,14 @@ function ForgotPassword() {
             type="button"
           >
             <FiArrowLeft className="h-5 w-5 mr-2" />
-            <span className="text-sm sm:text-base">Back</span>
+            <span className="text-sm sm:text-base">{t("common.back")}</span>
           </button>
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-center text-gray-500">
-            {step === "email" ? "Reset Password" : "Verify Code"}
+            {step === "email"
+              ? t("forgotPassword.title")
+              : t("forgotPassword.verifyCodeTitle")}
           </h2>
-          <div className="w-16"></div> {/* Spacer for center alignment */}
+          <div className="w-16"></div>
         </div>
 
         {/* Success Message */}
@@ -340,8 +344,7 @@ function ForgotPassword() {
           <div className="mb-6 p-4 bg-blue-50 border-l-4 border-main-500 flex items-center space-x-3">
             <div className="flex-1">
               <p className="text-main-500 text-sm sm:text-base">
-                Please enter your email address. You will receive an email
-                message with instructions on how to reset your password.
+                {t("forgotPassword.infoMessage")}
               </p>
             </div>
           </div>
@@ -363,7 +366,7 @@ function ForgotPassword() {
                 htmlFor="email"
                 className="block text-xl mb-2 sm:text-2xl md:text-[30px] font-bold text-main-500"
               >
-                Email
+                {t("common.email")}
               </label>
 
               <div className="relative">
@@ -376,7 +379,7 @@ function ForgotPassword() {
                   disabled={isBlocked}
                   maxLength={254}
                   className="mt-1 w-full px-3 sm:px-4 py-2 pl-10 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main-500 focus:border-main-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
-                  placeholder="admin@example.com"
+                  placeholder={t("login.emailPlaceholder")}
                 />
               </div>
             </div>
@@ -393,9 +396,9 @@ function ForgotPassword() {
               {loading ? (
                 <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-white"></div>
               ) : isBlocked ? (
-                "Temporarily Blocked"
+                t("common.temporarilyBlocked")
               ) : (
-                "Send Reset Code"
+                t("forgotPassword.sendButton")
               )}
             </button>
           </form>
@@ -406,10 +409,10 @@ function ForgotPassword() {
                 htmlFor="code"
                 className="block text-xl sm:text-2xl md:text-[30px] font-bold text-main-500"
               >
-                Verification Code
+                {t("forgotPassword.codeLabel")}
               </label>
               <p className="text-sm text-gray-600 mb-2">
-                Enter the 6-digit code sent to {email}
+                {t("forgotPassword.codeDescription", { email })}
               </p>
               <input
                 type="text"
@@ -423,8 +426,8 @@ function ForgotPassword() {
                 maxLength={6}
                 minLength={6}
                 pattern="\d{6}"
-                className="mt-1 w-full px-3 sm:px-4 py-2  sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main-500 focus:border-main-500 disabled:bg-gray-100 disabled:cursor-not-allowed text-center text-2xl tracking-widest"
-                placeholder="123456"
+                className="mt-1 w-full px-3 sm:px-4 py-2 sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main-500 focus:border-main-500 disabled:bg-gray-100 disabled:cursor-not-allowed text-center text-2xl tracking-widest"
+                placeholder={t("forgotPassword.codePlaceholder")}
               />
             </div>
 
@@ -440,9 +443,9 @@ function ForgotPassword() {
               {loading ? (
                 <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-white"></div>
               ) : isBlocked ? (
-                "Temporarily Blocked"
+                t("common.temporarilyBlocked")
               ) : (
-                "Verify Code"
+                t("forgotPassword.verifyButton")
               )}
             </button>
 
@@ -458,8 +461,8 @@ function ForgotPassword() {
                 }`}
               >
                 {countdown > 0
-                  ? `Resend code in ${countdown}s`
-                  : "Didn't receive code? Resend"}
+                  ? t("forgotPassword.resendCountdown", { seconds: countdown })
+                  : t("forgotPassword.resendCode")}
               </button>
             </div>
           </form>
