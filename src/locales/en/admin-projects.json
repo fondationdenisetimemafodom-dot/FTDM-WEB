@@ -1,0 +1,108 @@
+{
+  "header": {
+    "createProjects": "CREATE PROJECTS",
+    "viewProjects": "VIEW PROJECTS"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "tryAgain": "Try Again",
+    "goBack": "Go back",
+    "refresh": "Refresh",
+    "created": "Created",
+    "updated": "Updated",
+    "lastUpdated": "Last updated",
+    "view": "View",
+    "done": "Done",
+    "apply": "Apply",
+    "ongoing": "Ongoing",
+    "completed": "Completed",
+    "beneficiaries": "beneficiaries",
+    "editing": "Editing",
+    "publishing": "Publishing...",
+    "updating": "Updating",
+    "loadingProjects": "Loading projects...",
+    "loadingProjectData": "Loading project data...",
+    "editProject": "Edit project",
+    "deleteProject": "Delete project",
+    "addMoreMedia": "Add more media",
+    "editMedia": "Edit media",
+    "removeMedia": "Remove media",
+    "openInNewTab": "Open in new tab"
+  },
+  "viewProjects": {
+    "allProjects": "All Projects",
+    "projectCount": "project | projects",
+    "matching": "matching",
+    "searchPlaceholder": "Search projects...",
+    "failedToLoad": "Failed to load projects. Please try again.",
+    "table": {
+      "project": "PROJECT",
+      "cause": "CAUSE",
+      "location": "LOCATION",
+      "status": "STATUS",
+      "beneficiaries": "BENEFICIARIES",
+      "lastUpdate": "LAST UPDATE",
+      "action": "ACTION",
+      "delete": "DELETE"
+    },
+    "noProjects": "No projects found",
+    "noProjectsMatching": "No projects found matching '{{searchQuery}}'",
+    "createFirst": "Create your first project to get started",
+    "viewDetails": "View Details"
+  },
+  "deleteConfirmation": {
+    "title": "Delete Project",
+    "message": "Are you sure you want to delete '{{projectTitle}}'? This action cannot be undone.",
+    "deleting": "Deleting..."
+  },
+  "createProject": {
+    "editProject": "EDIT PROJECT",
+    "ngoProjectsCreate": "NGO PROJECTS/CREATE PROJECT",
+    "label": {
+      "title": "Title",
+      "cause": "Cause",
+      "details": "Details",
+      "markAs": "Mark as",
+      "description": "Description"
+    },
+    "placeholder": {
+      "projectName": "Project name",
+      "cause": "Enter cause",
+      "location": "Location",
+      "beneficiaries": "Number of beneficiaries",
+      "startDate": "Start date"
+    },
+    "browseToUpload": "Browse to upload images and videos",
+    "selectFiles": "Select Files",
+    "noMediaAvailable": "No media available",
+    "unsupportedMediaType": "Unsupported media type",
+    "chooseFromMediaLibrary": "Choose images and videos from Media Library",
+    "status": {
+      "ongoing": "Ongoing",
+      "completed": "Completed"
+    },
+    "button": {
+      "publish": "PUBLISH",
+      "update": "UPDATE"
+    },
+    "publishing": "Publishing...",
+    "updating": "Updating...",
+    "publishingProject": "Publishing project...",
+    "updatingProject": "Updating project...",
+    "editPhoto": "Edit photo",
+    "zoomOut": "Zoom out",
+    "zoomIn": "Zoom in",
+    "dragToCrop": "Drag the crop area to adjust",
+    "crop": {
+      "width": "Width",
+      "height": "Height"
+    }
+  },
+  "projectDetail": {
+    "noMedia": "No media available",
+    "started": "Started",
+    "category": "Category",
+    "description": "Description"
+  }
+}

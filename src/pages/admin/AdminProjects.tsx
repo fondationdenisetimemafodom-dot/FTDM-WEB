@@ -2,8 +2,11 @@ import React, { useState } from "react";
 
 import CreateProjectView from "../../components/Admin/CreateProjectView";
 import ViewProjectsView from "../../components/Admin/ViewProjectsView";
+import { useTranslation } from "react-i18next";
 
 const AdminProjects: React.FC = () => {
+  const { t } = useTranslation("admin-projects");
+
   const [activeTab, setActiveTab] = useState<"create" | "view">("create");
 
   return (
@@ -21,7 +24,7 @@ const AdminProjects: React.FC = () => {
                     : "text-gray-500 hover:text-gray-700 "
                 }`}
               >
-                CREATE PROJECTS
+                {t("header.createProjects")}
               </button>
               <button
                 onClick={() => setActiveTab("view")}
@@ -31,7 +34,7 @@ const AdminProjects: React.FC = () => {
                     : "text-gray-500 hover:text-gray-700 "
                 }`}
               >
-                VIEW PROJECTS
+                {t("header.viewProjects")}
               </button>
             </div>
           </div>

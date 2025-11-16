@@ -7,6 +7,7 @@
 -----------------------------------------------------------------------------------------------------*/
 
 import React, { useState, useRef, useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   FiUpload,
   FiCheck,
@@ -103,6 +104,7 @@ const CreateProjectView = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
   const isEditMode = Boolean(projectId);
+  const { t } = useTranslation("admin-projects");
 
   // Form states
   const [title, setTitle] = useState("");
@@ -822,12 +824,15 @@ const CreateProjectView = () => {
             <button
               onClick={() => navigate(-1)}
               className="text-gray-500 hover:text-gray-700 p-2 rounded-md transition-colors"
-              title="Go back"
+              title={t("common.goBack")}
             >
               <FiArrowLeft className="w-5 h-5" />
             </button>
+            {/* <CHANGE> Replaced hardcoded title text with translation key */}
             <h1 className="text-xl font-semibold text-gray-900 mb-2">
-              {isEditMode ? "EDIT PROJECT" : "NGO PROJECTS/CREATE PROJECT"}
+              {isEditMode
+                ? t("createProject.editProject")
+                : t("createProject.ngoProjectsCreate")}
             </h1>
           </div>
           {fetchLoading && (
@@ -846,7 +851,7 @@ const CreateProjectView = () => {
               onClick={handleSubmit}
               className="text-red-600 hover:text-red-800 text-sm font-medium"
             >
-              Try Again
+              {t("common.tryAgain")}
             </button>
           </div>
         )}
@@ -855,7 +860,8 @@ const CreateProjectView = () => {
           <div className="flex justify-center items-center h-96">
             <div className="text-center">
               <FiLoader className="animate-spin text-cyan-500 text-3xl mx-auto mb-4" />
-              <p className="text-gray-600">Loading project data...</p>
+              {/* <CHANGE> Replaced loading text with translation key */}
+              <p className="text-gray-600">{t("common.loadingProjectData")}</p>
             </div>
           </div>
         ) : (
@@ -863,14 +869,15 @@ const CreateProjectView = () => {
             {/* Left Column */}
             <div className="space-y-6">
               <div>
+                {/* <CHANGE> Replaced label text with translation key */}
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Title
+                  {t("createProject.label.title")}
                 </label>
                 <input
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Project name"
+                  placeholder={t("createProject.placeholder.projectName")}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
                 />
               </div>
@@ -880,8 +887,9 @@ const CreateProjectView = () => {
                 {!hasMedia ? (
                   <>
                     <FiUpload className="w-8 h-8 text-gray-400 mx-auto mb-4" />
+                    {/* <CHANGE> Replaced upload text with translation key */}
                     <p className="text-sm text-gray-600 mb-2">
-                      Browse to upload images and videos
+                      {t("createProject.browseToUpload")}
                     </p>
                     <input
                       type="file"
@@ -895,7 +903,7 @@ const CreateProjectView = () => {
                       htmlFor="file-upload"
                       className="cursor-pointer text-sm text-cyan-500 hover:text-cyan-600"
                     >
-                      Select Files
+                      {t("createProject.selectFiles")}
                     </label>
                   </>
                 ) : (
@@ -909,45 +917,26 @@ const CreateProjectView = () => {
                         if (!currentMedia) {
                           return (
                             <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-md">
+                              {/* <CHANGE> Replaced no media text with translation key */}
                               <p className="text-gray-500">
-                                No media available
+                                {t("createProject.noMediaAvailable")}
                               </p>
                             </div>
                           );
                         }
 
-                        console.log("Rendering media:", {
-                          url: currentMedia.url,
-                          type: currentMedia.type,
-                          isImage: currentMedia.isImage,
-                          isVideo: currentMedia.isVideo,
-                          isNew: currentMedia.isNew,
-                        });
-
                         // Handle image display
                         if (currentMedia.isImage) {
                           return (
                             <img
-                              src={currentMedia.url}
+                              src={currentMedia.url || "/placeholder.svg"}
                               alt={`Media ${currentCarouselIndex + 1}`}
                               className="w-full h-full object-cover rounded-md"
                               onError={(e) => {
-                                console.error(
-                                  "Image failed to load:",
-                                  currentMedia.url
-                                );
-                                // Fallback to a placeholder or retry logic
                                 const target = e.currentTarget;
                                 if (!target.dataset.retried) {
                                   target.dataset.retried = "true";
-                                  // You could add retry logic here or show an error placeholder
                                 }
-                              }}
-                              onLoad={() => {
-                                console.log(
-                                  "Image loaded successfully:",
-                                  currentMedia.url
-                                );
                               }}
                             />
                           );
@@ -960,18 +949,6 @@ const CreateProjectView = () => {
                               src={currentMedia.url}
                               controls
                               className="w-full h-full rounded-md"
-                              onError={() => {
-                                console.error(
-                                  "Video failed to load:",
-                                  currentMedia.url
-                                );
-                              }}
-                              onLoadedData={() => {
-                                console.log(
-                                  "Video loaded successfully:",
-                                  currentMedia.url
-                                );
-                              }}
                             />
                           );
                         }
@@ -980,8 +957,9 @@ const CreateProjectView = () => {
                         return (
                           <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-md">
                             <div className="text-center">
+                              {/* <CHANGE> Replaced unsupported media text with translation key */}
                               <p className="text-gray-500 mb-2">
-                                Unsupported media type
+                                {t("createProject.unsupportedMediaType")}
                               </p>
                               <p className="text-xs text-gray-400">
                                 Type: {currentMedia.type}
@@ -992,7 +970,7 @@ const CreateProjectView = () => {
                                 rel="noopener noreferrer"
                                 className="text-blue-500 hover:text-blue-700 text-sm mt-2 inline-block"
                               >
-                                Open in new tab
+                                {t("common.openInNewTab")}
                               </a>
                             </div>
                           </div>
@@ -1029,7 +1007,7 @@ const CreateProjectView = () => {
                         <button
                           onClick={openEditPopup}
                           className="bg-white bg-opacity-90 p-2 rounded-full shadow-md hover:bg-opacity-100"
-                          title="Edit media"
+                          title={t("common.editMedia")}
                         >
                           <FiEdit2 className="w-4 h-4" />
                         </button>
@@ -1044,7 +1022,7 @@ const CreateProjectView = () => {
                         <label
                           htmlFor="add-carousel-files"
                           className="cursor-pointer bg-white bg-opacity-90 p-2 rounded-full shadow-md hover:bg-opacity-100"
-                          title="Add more media"
+                          title={t("common.addMoreMedia")}
                         >
                           <FiPlus className="w-4 h-4" />
                         </label>
@@ -1069,7 +1047,7 @@ const CreateProjectView = () => {
                                 }
                               }}
                               className="bg-red-500 bg-opacity-90 p-2 rounded-full shadow-md hover:bg-opacity-100 text-white"
-                              title="Remove media"
+                              title={t("common.removeMedia")}
                             >
                               <FiTrash2 className="w-4 h-4" />
                             </button>
@@ -1085,8 +1063,9 @@ const CreateProjectView = () => {
                 <span className="text-white bg-cyan-500 font-bold rounded-[6px] py-1 px-2 mr-2">
                   +
                 </span>
+                {/* <CHANGE> Replaced media library text with translation key */}
                 <span className="text-sm font-semibold text-white">
-                  Choose images and videos from Media Library
+                  {t("createProject.chooseFromMediaLibrary")}
                 </span>
               </div>
             </div>
@@ -1095,47 +1074,50 @@ const CreateProjectView = () => {
             <div className="space-y-6">
               <div className="px-4 space-y-6">
                 <div>
+                  {/* <CHANGE> Replaced cause label with translation key */}
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Cause
+                    {t("createProject.label.cause")}
                   </label>
                   <input
                     value={cause}
                     onChange={(e) => setCause(e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
-                    placeholder="Cause"
+                    placeholder={t("createProject.placeholder.cause")}
                   />
                 </div>
 
                 <div className="space-y-3">
+                  {/* <CHANGE> Replaced details label with translation key */}
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Details
+                    {t("createProject.label.details")}
                   </label>
                   <input
                     type="text"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    placeholder="Location"
+                    placeholder={t("createProject.placeholder.location")}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 mb-3"
                   />
                   <input
                     type="text"
                     value={beneficiaries}
                     onChange={(e) => setBeneficiaries(e.target.value)}
-                    placeholder="beneficiaries"
+                    placeholder={t("createProject.placeholder.beneficiaries")}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 mb-3"
                   />
                   <input
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    placeholder="Start date"
+                    placeholder={t("createProject.placeholder.startDate")}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 mb-3"
                   />
                 </div>
 
                 <div className="mt-6">
+                  {/* <CHANGE> Replaced mark as label with translation key */}
                   <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Mark as
+                    {t("createProject.label.markAs")}
                   </label>
                   <div className="flex space-x-4">
                     <label className="flex items-center">
@@ -1158,7 +1140,10 @@ const CreateProjectView = () => {
                           <FiCheck className="w-3 h-3 text-white" />
                         )}
                       </div>
-                      <span className="text-sm text-gray-700">Ongoing</span>
+                      {/* <CHANGE> Replaced ongoing text with translation key */}
+                      <span className="text-sm text-gray-700">
+                        {t("createProject.status.ongoing")}
+                      </span>
                     </label>
                     <label className="flex items-center">
                       <input
@@ -1180,7 +1165,10 @@ const CreateProjectView = () => {
                           <FiCheck className="w-3 h-3 text-white" />
                         )}
                       </div>
-                      <span className="text-sm text-gray-700">Completed</span>
+                      {/* <CHANGE> Replaced completed text with translation key */}
+                      <span className="text-sm text-gray-700">
+                        {t("createProject.status.completed")}
+                      </span>
                     </label>
                   </div>
                 </div>
@@ -1191,8 +1179,9 @@ const CreateProjectView = () => {
 
         {/* Bottom Section */}
         <div className="flex-col items-center justify-between mt-2 pt-6 space-y-2">
+          {/* <CHANGE> Replaced description label with translation key */}
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Description
+            {t("createProject.label.description")}
           </label>
           <div className="border rounded-md p-3 focus-within:ring-0 focus-within:outline-none">
             <MenuBar editor={editor} />
@@ -1202,6 +1191,7 @@ const CreateProjectView = () => {
             />
           </div>
 
+          {/* <CHANGE> Replaced button text with translation keys */}
           <button
             onClick={handleSubmit}
             disabled={loading || fetchLoading}
@@ -1209,11 +1199,11 @@ const CreateProjectView = () => {
           >
             {loading
               ? isEditMode
-                ? "Updating..."
-                : "Publishing..."
+                ? t("common.updating")
+                : t("common.publishing")
               : isEditMode
-              ? "UPDATE"
-              : "PUBLISH"}
+              ? t("createProject.button.update")
+              : t("createProject.button.publish")}
           </button>
         </div>
       </div>
@@ -1226,19 +1216,25 @@ const CreateProjectView = () => {
               <div className="absolute inset-0 border-4 border-gray-200 rounded-full"></div>
               <div className="absolute inset-0 border-4 border-cyan-500 rounded-full border-t-transparent animate-spin"></div>
             </div>
+            {/* <CHANGE> Replaced loading message with translation key */}
             <p className="text-gray-600">
-              {isEditMode ? "Updating project..." : "Publishing project..."}
+              {isEditMode
+                ? t("createProject.updatingProject")
+                : t("createProject.publishingProject")}
             </p>
           </div>
         </div>
       )}
 
-      {/* Crop Modal - Same as before */}
+      {/* Crop Modal */}
       {showCropModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[110] p-4">
           <div className="bg-white rounded-xl max-w-3xl w-full max-h-[95vh] overflow-hidden">
             <div className="flex items-center justify-between p-4 border-b">
-              <h2 className="text-xl font-semibold">Edit photo</h2>
+              {/* <CHANGE> Replaced edit photo heading with translation key */}
+              <h2 className="text-xl font-semibold">
+                {t("createProject.editPhoto")}
+              </h2>
               <button
                 onClick={() => setShowCropModal(false)}
                 className="text-gray-500 hover:text-gray-700 p-1"
@@ -1257,7 +1253,10 @@ const CreateProjectView = () => {
                     className="flex items-center space-x-1 px-3 py-2 border rounded-lg hover:bg-gray-50"
                   >
                     <FiZoomOut className="w-4 h-4" />
-                    <span className="text-sm">Zoom out</span>
+                    {/* <CHANGE> Replaced zoom out text with translation key */}
+                    <span className="text-sm">
+                      {t("createProject.zoomOut")}
+                    </span>
                   </button>
                   <button
                     onClick={() =>
@@ -1266,14 +1265,17 @@ const CreateProjectView = () => {
                     className="flex items-center space-x-1 px-3 py-2 border rounded-lg hover:bg-gray-50"
                   >
                     <FiZoomIn className="w-4 h-4" />
-                    <span className="text-sm">Zoom in</span>
+                    {/* <CHANGE> Replaced zoom in text with translation key */}
+                    <span className="text-sm">{t("createProject.zoomIn")}</span>
                   </button>
                 </div>
+                {/* <CHANGE> Replaced drag instruction with translation key */}
                 <div className="text-sm text-gray-500">
-                  Drag the crop area to adjust
+                  {t("createProject.dragToCrop")}
                 </div>
               </div>
 
+              {/* ... existing crop container code ... */}
               <div
                 ref={cropContainerRef}
                 className="relative mx-auto bg-gray-100 rounded-lg overflow-hidden"
@@ -1281,7 +1283,7 @@ const CreateProjectView = () => {
               >
                 <img
                   ref={imageRef}
-                  src={cropImageSrc}
+                  src={cropImageSrc || "/placeholder.svg"}
                   alt="Crop preview"
                   className="w-full h-full object-contain select-none"
                   style={{
@@ -1329,8 +1331,9 @@ const CreateProjectView = () => {
 
               <div className="flex items-center justify-center mt-4 space-x-6">
                 <div className="flex items-center space-x-2">
+                  {/* <CHANGE> Replaced width label with translation key */}
                   <label className="text-sm font-medium text-gray-700">
-                    Width:
+                    {t("createProject.crop.width")}
                   </label>
                   <input
                     type="range"
@@ -1350,8 +1353,9 @@ const CreateProjectView = () => {
                   </span>
                 </div>
                 <div className="flex items-center space-x-2">
+                  {/* <CHANGE> Replaced height label with translation key */}
                   <label className="text-sm font-medium text-gray-700">
-                    Height:
+                    {t("createProject.crop.height")}
                   </label>
                   <input
                     type="range"
@@ -1374,17 +1378,18 @@ const CreateProjectView = () => {
             </div>
 
             <div className="flex justify-end space-x-3 p-4 border-t bg-gray-50">
+              {/* <CHANGE> Replaced cancel and apply buttons with translation keys */}
               <button
                 onClick={() => setShowCropModal(false)}
                 className="px-6 py-2 text-gray-600 hover:text-gray-800 font-medium"
               >
-                Cancel
+                {t("common.cancel")}
               </button>
               <button
                 onClick={applyCrop}
                 className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
               >
-                Apply
+                {t("common.apply")}
               </button>
             </div>
 
@@ -1393,12 +1398,15 @@ const CreateProjectView = () => {
         </div>
       )}
 
-      {/* File Editor Popup - Same as before */}
+      {/* File Editor Popup */}
       {showPopup && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[60] p-4">
           <div className="bg-white rounded-lg max-w-5xl w-full max-h-[90vh] overflow-hidden">
             <div className="flex items-center justify-between p-4 border-b">
-              <h2 className="text-lg font-semibold">Editor</h2>
+              {/* <CHANGE> Replaced editor heading with translation key */}
+              <h2 className="text-lg font-semibold">
+                {t("createProject.editor")}
+              </h2>
               <button
                 onClick={handlePopupClose}
                 className="text-gray-500 hover:text-gray-700"
@@ -1407,13 +1415,14 @@ const CreateProjectView = () => {
               </button>
             </div>
 
+            {/* ... existing editor popup code ... */}
             <div className="flex h-[70vh]">
               <div className="flex-1 bg-gray-100 relative">
                 {popupFiles.length > 0 && currentPopupFile && (
                   <div className="w-full h-full flex items-center justify-center p-4">
                     {currentPopupFile.file.type.startsWith("image/") ? (
                       <img
-                        src={currentPopupFile.preview}
+                        src={currentPopupFile.preview || "/placeholder.svg"}
                         alt="Preview"
                         className="max-w-full max-h-full object-contain rounded-lg"
                       />
@@ -1517,7 +1526,7 @@ const CreateProjectView = () => {
                       >
                         {fileItem.file.type.startsWith("image/") ? (
                           <img
-                            src={fileItem.preview}
+                            src={fileItem.preview || "/placeholder.svg"}
                             alt={`Preview ${idx + 1}`}
                             className="w-full h-24 object-cover"
                           />
@@ -1564,11 +1573,12 @@ const CreateProjectView = () => {
             </div>
 
             <div className="flex items-center justify-between p-4 border-t bg-gray-50">
+              {/* <CHANGE> Replaced footer buttons with translation keys */}
               <button
                 onClick={handlePopupClose}
                 className="px-6 py-2 text-gray-600 hover:text-gray-800 font-medium"
               >
-                Cancel
+                {t("common.cancel")}
               </button>
               <div className="flex space-x-3">
                 <button
@@ -1576,7 +1586,7 @@ const CreateProjectView = () => {
                   className="px-8 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
                   disabled={popupFiles.length === 0}
                 >
-                  Done
+                  {t("common.done")}
                 </button>
               </div>
             </div>

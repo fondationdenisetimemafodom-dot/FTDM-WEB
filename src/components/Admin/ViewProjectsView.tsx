@@ -24,6 +24,7 @@ import {
 } from "react-icons/fi";
 import axiosInstance from "../../lib/axiosInstance";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 type MediaItem = {
   publicId: string;
@@ -105,6 +106,7 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
   loading,
 }) => {
   if (!isOpen) return null;
+  const { t } = useTranslation("admin-projects");
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
@@ -114,13 +116,12 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
             <FiAlertCircle className="text-red-500 text-xl" />
           </div>
           <h2 className="text-base sm:text-lg font-semibold text-gray-800">
-            Delete Project
+            {t("deleteConfirmation.title")}
           </h2>
         </div>
 
         <p className="text-sm sm:text-base text-gray-600 mb-6">
-          Are you sure you want to delete <strong>"{projectTitle}"</strong>?
-          This action cannot be undone.
+          {t("deleteConfirmation.message", { projectTitle })}
         </p>
 
         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
@@ -129,7 +130,7 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
             disabled={loading}
             className="flex-1 px-4 py-2 text-gray-600 hover:text-gray-800 font-medium disabled:opacity-50 border border-gray-300 rounded-lg sm:border-0"
           >
-            Cancel
+            {t("common.cancel")}
           </button>
           <button
             onClick={onConfirm}
@@ -139,10 +140,11 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
             {loading ? (
               <>
                 <FiLoader className="animate-spin mr-2" />
-                Deleting...
+
+                {t("deleteConfirmation.deleting")}
               </>
             ) : (
-              "Delete"
+              t("common.delete")
             )}
           </button>
         </div>
@@ -163,6 +165,7 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
   project,
 }) => {
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+  const { t } = useTranslation("admin-projects");
 
   /*-----------------------------------------------------------------------------------------------------
   | @function navigateMedia
@@ -320,8 +323,9 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 </>
               ) : (
                 <div className="h-64 sm:h-80 bg-gray-100 rounded-lg flex items-center justify-center">
+                  {/* <CHANGE> Replaced no media text with translation key */}
                   <p className="text-gray-500 text-sm sm:text-base">
-                    No media available
+                    {t("projectDetail.noMedia")}
                   </p>
                 </div>
               )}
@@ -334,10 +338,14 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                     project.status
                   )} w-fit`}
                 >
-                  {project.status === "ongoing" ? "Ongoing" : "Completed"}
+                  {/* <CHANGE> Replaced status with translation key */}
+                  {project.status === "ongoing"
+                    ? t("common.ongoing")
+                    : t("common.completed")}
                 </span>
+                {/* <CHANGE> Replaced created text with translation key */}
                 <span className="text-xs sm:text-sm text-gray-500">
-                  Created {formatDate(project.createdAt)}
+                  {t("common.created")} {formatDate(project.createdAt)}
                 </span>
               </div>
 
@@ -349,18 +357,25 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
                 <div className="flex items-center space-x-3 text-gray-600 text-sm sm:text-base">
                   <FiCalendar className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />
-                  <span>Started {formatDate(project.startDate)}</span>
+                  {/* <CHANGE> Replaced started text with translation key */}
+                  <span>
+                    {t("projectDetail.started")} {formatDate(project.startDate)}
+                  </span>
                 </div>
 
                 <div className="flex items-center space-x-3 text-gray-600 text-sm sm:text-base">
                   <FiUsers className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />
-                  <span>{project.beneficiaries} beneficiaries</span>
+                  {/* <CHANGE> Replaced beneficiaries text with translation key */}
+                  <span>
+                    {project.beneficiaries} {t("common.beneficiaries")}
+                  </span>
                 </div>
               </div>
 
               <div>
+                {/* <CHANGE> Replaced category label with translation key */}
                 <h3 className="text-sm font-semibold text-gray-700 mb-2">
-                  Category
+                  {t("projectDetail.category")}
                 </h3>
                 <span className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs sm:text-sm">
                   {project.category}
@@ -368,8 +383,9 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
               </div>
 
               <div>
+                {/* <CHANGE> Replaced description label with translation key */}
                 <h3 className="text-sm font-semibold text-gray-700 mb-2">
-                  Description
+                  {t("projectDetail.description")}
                 </h3>
                 <div
                   className="text-gray-600 text-xs sm:text-sm leading-relaxed"
@@ -378,8 +394,9 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
               </div>
 
               <div className="pt-4 border-t">
+                {/* <CHANGE> Replaced last updated text with translation key */}
                 <p className="text-xs text-gray-500">
-                  Last updated {formatDate(project.updatedAt)}
+                  {t("common.lastUpdated")} {formatDate(project.updatedAt)}
                 </p>
               </div>
             </div>
@@ -391,6 +408,7 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 };
 
 const ViewProjectsView = () => {
+  const { t } = useTranslation("admin-projects");
   const [projects, setProjects] = useState<Project[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -608,14 +626,18 @@ const ViewProjectsView = () => {
       <div className="mx-4 sm:mx-6 lg:mx-8 mb-6 sm:mb-8 p-4 sm:p-6 bg-white shadow-sm rounded-2xl">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 space-y-4 sm:space-y-0">
           <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+            {/* <CHANGE> Replaced heading with translation key */}
             <h1 className="text-lg sm:text-xl font-semibold text-gray-900">
-              All Projects
+              {t("viewProjects.allProjects")}
             </h1>
             {filteredProjects.length > 0 && (
               <span className="text-xs sm:text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full w-fit">
-                {filteredProjects.length} project
-                {filteredProjects.length !== 1 ? "s" : ""}
-                {searchQuery && ` matching "${searchQuery}"`}
+                {filteredProjects.length}{" "}
+                {t("viewProjects.projectCount", {
+                  count: filteredProjects.length,
+                })}
+                {searchQuery &&
+                  ` ${t("viewProjects.matching")} "${searchQuery}"`}
               </span>
             )}
           </div>
@@ -624,7 +646,7 @@ const ViewProjectsView = () => {
               onClick={retryFetch}
               disabled={loading}
               className="text-gray-500 hover:text-gray-700 p-2 rounded-md transition-colors disabled:opacity-50"
-              title="Refresh projects"
+              title={t("common.refresh")}
             >
               <FiRefreshCw
                 className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
@@ -632,9 +654,10 @@ const ViewProjectsView = () => {
             </button>
             <div className="relative flex-1 sm:flex-initial">
               <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              {/* <CHANGE> Replaced search placeholder with translation key */}
               <input
                 type="text"
-                placeholder="Search projects..."
+                placeholder={t("viewProjects.searchPlaceholder")}
                 value={searchQuery}
                 onChange={(e) => handleSearch(e.target.value)}
                 className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 text-sm w-full sm:w-64"
@@ -661,7 +684,8 @@ const ViewProjectsView = () => {
               onClick={retryFetch}
               className="text-red-600 hover:text-red-800 text-sm font-medium w-fit"
             >
-              Try Again
+              {/* <CHANGE> Replaced try again with translation key */}
+              {t("common.tryAgain")}
             </button>
           </div>
         )}
@@ -671,29 +695,30 @@ const ViewProjectsView = () => {
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
+                  {/* <CHANGE> Replaced all table headers with translation keys */}
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    PROJECT
+                    {t("viewProjects.table.project")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    CAUSE
+                    {t("viewProjects.table.cause")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    LOCATION
+                    {t("viewProjects.table.location")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    STATUS
+                    {t("viewProjects.table.status")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    BENEFICIARIES
+                    {t("viewProjects.table.beneficiaries")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    LAST UPDATE
+                    {t("viewProjects.table.lastUpdate")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    ACTION
+                    {t("viewProjects.table.action")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    DELETE
+                    {t("viewProjects.table.delete")}
                   </th>
                 </tr>
               </thead>
@@ -703,8 +728,10 @@ const ViewProjectsView = () => {
                     <td colSpan={8} className="py-12 text-center">
                       <div className="flex flex-col items-center justify-center space-y-3">
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-
-                        <p className="text-gray-500">Loading projects...</p>
+                        {/* <CHANGE> Replaced loading text with translation key */}
+                        <p className="text-gray-500">
+                          {t("common.loadingProjects")}
+                        </p>
                       </div>
                     </td>
                   </tr>
@@ -715,14 +742,17 @@ const ViewProjectsView = () => {
                         <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
                           <FiAlertCircle className="text-gray-400 text-2xl" />
                         </div>
+                        {/* <CHANGE> Replaced no projects found messages with translation keys */}
                         <p className="text-gray-500">
                           {searchQuery
-                            ? `No projects found matching "${searchQuery}"`
-                            : "No projects found"}
+                            ? t("viewProjects.noProjectsMatching", {
+                                searchQuery,
+                              })
+                            : t("viewProjects.noProjects")}
                         </p>
                         {!searchQuery && (
                           <p className="text-sm text-gray-400">
-                            Create your first project to get started
+                            {t("viewProjects.createFirst")}
                           </p>
                         )}
                       </div>
@@ -739,6 +769,7 @@ const ViewProjectsView = () => {
                           <img
                             src={
                               getThumbnailUrl(project.media) ||
+                              "/placeholder.svg" ||
                               "/placeholder.svg"
                             }
                             alt={project.title}
@@ -749,8 +780,10 @@ const ViewProjectsView = () => {
                             <span className="font-medium text-gray-900 text-sm block">
                               {project.title}
                             </span>
+                            {/* <CHANGE> Replaced created text with translation key */}
                             <span className="text-xs text-gray-500">
-                              Created {formatDate(project.createdAt)}
+                              {t("common.created")}{" "}
+                              {formatDate(project.createdAt)}
                             </span>
                           </div>
                         </div>
@@ -767,9 +800,10 @@ const ViewProjectsView = () => {
                             project.status
                           )}`}
                         >
+                          {/* <CHANGE> Replaced status with translation key */}
                           {project.status === "ongoing"
-                            ? "Ongoing"
-                            : "Completed"}
+                            ? t("common.ongoing")
+                            : t("common.completed")}
                         </span>
                       </td>
                       <td className="py-3 px-4 text-sm flex justify-center text-gray-700">
@@ -783,12 +817,13 @@ const ViewProjectsView = () => {
                           onClick={() => handleViewProject(project)}
                           className="text-cyan-500 cursor-pointer underline hover:text-cyan-600 transition-colors"
                         >
-                          View
+                          {/* <CHANGE> Replaced view button with translation key */}
+                          {t("common.view")}
                         </button>
                         <button
                           onClick={() => handleUpdateProject(project._id)}
                           className="text-cyan-500 cursor-pointer hover:text-cyan-600 transition-colors"
-                          title="Edit project"
+                          title={t("common.editProject")}
                         >
                           <FiEdit className="w-4 h-4" />
                         </button>
@@ -799,7 +834,7 @@ const ViewProjectsView = () => {
                             handleDeleteProject(project._id, project.title)
                           }
                           className="text-red-500 hover:text-red-600 cursor-pointer transition-colors"
-                          title="Delete project"
+                          title={t("common.deleteProject")}
                         >
                           <FiTrash2 className="w-4 h-4" />
                         </button>
@@ -816,7 +851,10 @@ const ViewProjectsView = () => {
               <div className="py-12 text-center">
                 <div className="flex flex-col items-center justify-center space-y-3">
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-                  <p className="text-gray-500 text-sm">Loading projects...</p>
+                  {/* <CHANGE> Replaced loading text with translation key */}
+                  <p className="text-gray-500 text-sm">
+                    {t("common.loadingProjects")}
+                  </p>
                 </div>
               </div>
             ) : filteredProjects.length === 0 ? (
@@ -825,14 +863,15 @@ const ViewProjectsView = () => {
                   <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
                     <FiAlertCircle className="text-gray-400 text-2xl" />
                   </div>
+                  {/* <CHANGE> Replaced no projects found messages with translation keys */}
                   <p className="text-gray-500 text-sm">
                     {searchQuery
-                      ? `No projects found matching "${searchQuery}"`
-                      : "No projects found"}
+                      ? t("viewProjects.noProjectsMatching", { searchQuery })
+                      : t("viewProjects.noProjects")}
                   </p>
                   {!searchQuery && (
                     <p className="text-xs text-gray-400">
-                      Create your first project to get started
+                      {t("viewProjects.createFirst")}
                     </p>
                   )}
                 </div>
@@ -863,9 +902,10 @@ const ViewProjectsView = () => {
                               project.status
                             )}`}
                           >
+                            {/* <CHANGE> Replaced status with translation key */}
                             {project.status === "ongoing"
-                              ? "Ongoing"
-                              : "Completed"}
+                              ? t("common.ongoing")
+                              : t("common.completed")}
                           </span>
                           <span className="text-xs text-gray-500">
                             {project.category}
@@ -881,11 +921,17 @@ const ViewProjectsView = () => {
                       </div>
                       <div className="flex items-center space-x-2">
                         <FiUsers className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
-                        <span>{project.beneficiaries} beneficiaries</span>
+                        {/* <CHANGE> Replaced beneficiaries text with translation key */}
+                        <span>
+                          {project.beneficiaries} {t("common.beneficiaries")}
+                        </span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <FiCalendar className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
-                        <span>Updated {formatDate(project.updatedAt)}</span>
+                        {/* <CHANGE> Replaced updated text with translation key */}
+                        <span>
+                          {t("common.updated")} {formatDate(project.updatedAt)}
+                        </span>
                       </div>
                     </div>
 
@@ -894,13 +940,14 @@ const ViewProjectsView = () => {
                         onClick={() => handleViewProject(project)}
                         className="text-cyan-500 text-sm font-medium hover:text-cyan-600 transition-colors"
                       >
-                        View Details
+                        {/* <CHANGE> Replaced view details with translation key */}
+                        {t("viewProjects.viewDetails")}
                       </button>
                       <div className="flex items-center space-x-3">
                         <button
                           onClick={() => handleUpdateProject(project._id)}
                           className="text-cyan-500 hover:text-cyan-600 transition-colors p-1"
-                          title="Edit project"
+                          title={t("common.editProject")}
                         >
                           <FiEdit className="w-4 h-4" />
                         </button>
@@ -909,7 +956,7 @@ const ViewProjectsView = () => {
                             handleDeleteProject(project._id, project.title)
                           }
                           className="text-red-500 hover:text-red-600 transition-colors p-1"
-                          title="Delete project"
+                          title={t("common.deleteProject")}
                         >
                           <FiTrash2 className="w-4 h-4" />
                         </button>

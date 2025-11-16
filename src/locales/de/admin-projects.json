@@ -1,0 +1,108 @@
+{
+  "header": {
+    "createProjects": "PROJEKTE ERSTELLEN",
+    "viewProjects": "PROJEKTE ANZEIGEN"
+  },
+  "common": {
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "tryAgain": "Erneut versuchen",
+    "goBack": "Zurück",
+    "refresh": "Aktualisieren",
+    "created": "Erstellt",
+    "updated": "Aktualisiert",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "view": "Anzeigen",
+    "done": "Fertig",
+    "apply": "Anwenden",
+    "ongoing": "Laufend",
+    "completed": "Abgeschlossen",
+    "beneficiaries": "Begünstigte",
+    "editing": "Bearbeitung",
+    "publishing": "Veröffentlichung...",
+    "updating": "Aktualisierung",
+    "loadingProjects": "Projekte werden geladen...",
+    "loadingProjectData": "Projektdaten werden geladen...",
+    "editProject": "Projekt bearbeiten",
+    "deleteProject": "Projekt löschen",
+    "addMoreMedia": "Weitere Medien hinzufügen",
+    "editMedia": "Medien bearbeiten",
+    "removeMedia": "Medien entfernen",
+    "openInNewTab": "In neuem Tab öffnen"
+  },
+  "viewProjects": {
+    "allProjects": "Alle Projekte",
+    "projectCount": "Projekt | Projekte",
+    "matching": "übereinstimmend",
+    "searchPlaceholder": "Projekte durchsuchen...",
+    "failedToLoad": "Projekte konnten nicht geladen werden. Bitte versuchen Sie es erneut.",
+    "table": {
+      "project": "PROJEKT",
+      "cause": "GRUND",
+      "location": "STANDORT",
+      "status": "STATUS",
+      "beneficiaries": "BEGÜNSTIGTE",
+      "lastUpdate": "LETZTE AKTUALISIERUNG",
+      "action": "AKTION",
+      "delete": "LÖSCHEN"
+    },
+    "noProjects": "Keine Projekte gefunden",
+    "noProjectsMatching": "Keine Projekte gefunden, die '{{searchQuery}}' entsprechen",
+    "createFirst": "Erstellen Sie Ihr erstes Projekt, um zu beginnen",
+    "viewDetails": "Details anzeigen"
+  },
+  "deleteConfirmation": {
+    "title": "Projekt löschen",
+    "message": "Sind Sie sicher, dass Sie '{{projectTitle}}' löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "deleting": "Wird gelöscht..."
+  },
+  "createProject": {
+    "editProject": "PROJEKT BEARBEITEN",
+    "ngoProjectsCreate": "NGO-PROJEKTE/PROJEKT ERSTELLEN",
+    "label": {
+      "title": "Titel",
+      "cause": "Grund",
+      "details": "Details",
+      "markAs": "Markieren als",
+      "description": "Beschreibung"
+    },
+    "placeholder": {
+      "projectName": "Projektname",
+      "cause": "Geben Sie den Grund ein",
+      "location": "Standort",
+      "beneficiaries": "Anzahl der Begünstigten",
+      "startDate": "Startdatum"
+    },
+    "browseToUpload": "Durchsuchen Sie, um Bilder und Videos hochzuladen",
+    "selectFiles": "Dateien auswählen",
+    "noMediaAvailable": "Keine Medien verfügbar",
+    "unsupportedMediaType": "Nicht unterstützter Medientyp",
+    "chooseFromMediaLibrary": "Wählen Sie Bilder und Videos aus der Medienbibliothek",
+    "status": {
+      "ongoing": "Laufend",
+      "completed": "Abgeschlossen"
+    },
+    "button": {
+      "publish": "VERÖFFENTLICHEN",
+      "update": "AKTUALISIEREN"
+    },
+    "publishing": "Wird veröffentlicht...",
+    "updating": "Wird aktualisiert...",
+    "publishingProject": "Projekt wird veröffentlicht...",
+    "updatingProject": "Projekt wird aktualisiert...",
+    "editPhoto": "Foto bearbeiten",
+    "zoomOut": "Verkleinern",
+    "zoomIn": "Vergrößern",
+    "dragToCrop": "Ziehen Sie den Zuschnittbereich, um ihn anzupassen",
+    "crop": {
+      "width": "Breite",
+      "height": "Höhe"
+    }
+  },
+  "projectDetail": {
+    "noMedia": "Keine Medien verfügbar",
+    "started": "Begonnen",
+    "category": "Kategorie",
+    "description": "Beschreibung"
+  }
+}

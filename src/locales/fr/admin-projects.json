@@ -1,0 +1,108 @@
+{
+  "header": {
+    "createProjects": "CRÉER DES PROJETS",
+    "viewProjects": "AFFICHER LES PROJETS"
+  },
+  "common": {
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "tryAgain": "Réessayer",
+    "goBack": "Retour",
+    "refresh": "Actualiser",
+    "created": "Créé",
+    "updated": "Mis à jour",
+    "lastUpdated": "Dernière mise à jour",
+    "view": "Afficher",
+    "done": "Terminé",
+    "apply": "Appliquer",
+    "ongoing": "En cours",
+    "completed": "Terminé",
+    "beneficiaries": "bénéficiaires",
+    "editing": "Édition",
+    "publishing": "Publication...",
+    "updating": "Mise à jour",
+    "loadingProjects": "Chargement des projets...",
+    "loadingProjectData": "Chargement des données du projet...",
+    "editProject": "Modifier le projet",
+    "deleteProject": "Supprimer le projet",
+    "addMoreMedia": "Ajouter plus de médias",
+    "editMedia": "Modifier les médias",
+    "removeMedia": "Supprimer les médias",
+    "openInNewTab": "Ouvrir dans un nouvel onglet"
+  },
+  "viewProjects": {
+    "allProjects": "Tous les projets",
+    "projectCount": "projet | projets",
+    "matching": "correspondant",
+    "searchPlaceholder": "Rechercher des projets...",
+    "failedToLoad": "Impossible de charger les projets. Veuillez réessayer.",
+    "table": {
+      "project": "PROJET",
+      "cause": "CAUSE",
+      "location": "EMPLACEMENT",
+      "status": "STATUT",
+      "beneficiaries": "BÉNÉFICIAIRES",
+      "lastUpdate": "DERNIÈRE MISE À JOUR",
+      "action": "ACTION",
+      "delete": "SUPPRIMER"
+    },
+    "noProjects": "Aucun projet trouvé",
+    "noProjectsMatching": "Aucun projet trouvé correspondant à '{{searchQuery}}'",
+    "createFirst": "Créez votre premier projet pour commencer",
+    "viewDetails": "Voir les détails"
+  },
+  "deleteConfirmation": {
+    "title": "Supprimer le projet",
+    "message": "Êtes-vous sûr de vouloir supprimer '{{projectTitle}}'? Cette action ne peut pas être annulée.",
+    "deleting": "Suppression..."
+  },
+  "createProject": {
+    "editProject": "MODIFIER LE PROJET",
+    "ngoProjectsCreate": "PROJETS ONG/CRÉER UN PROJET",
+    "label": {
+      "title": "Titre",
+      "cause": "Cause",
+      "details": "Détails",
+      "markAs": "Marquer comme",
+      "description": "Description"
+    },
+    "placeholder": {
+      "projectName": "Nom du projet",
+      "cause": "Entrez la cause",
+      "location": "Emplacement",
+      "beneficiaries": "Nombre de bénéficiaires",
+      "startDate": "Date de début"
+    },
+    "browseToUpload": "Parcourir pour télécharger des images et des vidéos",
+    "selectFiles": "Sélectionner les fichiers",
+    "noMediaAvailable": "Aucun média disponible",
+    "unsupportedMediaType": "Type de média non pris en charge",
+    "chooseFromMediaLibrary": "Choisissez des images et des vidéos dans la bibliothèque multimédia",
+    "status": {
+      "ongoing": "En cours",
+      "completed": "Terminé"
+    },
+    "button": {
+      "publish": "PUBLIER",
+      "update": "METTRE À JOUR"
+    },
+    "publishing": "Publication...",
+    "updating": "Mise à jour...",
+    "publishingProject": "Publication du projet...",
+    "updatingProject": "Mise à jour du projet...",
+    "editPhoto": "Modifier la photo",
+    "zoomOut": "Zoom arrière",
+    "zoomIn": "Zoom avant",
+    "dragToCrop": "Faites glisser la zone de recadrage pour ajuster",
+    "crop": {
+      "width": "Largeur",
+      "height": "Hauteur"
+    }
+  },
+  "projectDetail": {
+    "noMedia": "Aucun média disponible",
+    "started": "Commencé",
+    "category": "Catégorie",
+    "description": "Description"
+  }
+}
