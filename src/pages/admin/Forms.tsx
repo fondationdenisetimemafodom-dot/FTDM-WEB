@@ -2,10 +2,12 @@
 
 import type React from "react";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next"; // Added i18n hook
 import axiosInstance from "../../lib/axiosInstance";
 import { Trash2 } from "lucide-react";
 import { FiTrash2 } from "react-icons/fi";
 import dummy from "../../assets/images/dummy.png";
+
 interface Message {
   _id: string;
   message_type: "anonymous" | "identified";
@@ -52,6 +54,7 @@ interface DeleteConfirmation {
 }
 
 function Forms() {
+  const { t } = useTranslation("forms"); // Added translation hook
   const [messageToggle, setMessageToggle] = useState<
     "identified" | "anonymous"
   >("identified");
@@ -140,9 +143,8 @@ function Forms() {
       isOpen: true,
       type: "message",
       id,
-      title: "Delete Message",
-      message:
-        "Are you sure you want to delete this message? This action cannot be undone.",
+      title: t("delete_message"), // Using translation key
+      message: t("delete_message_confirmation"), // Using translation key
     });
   };
 
@@ -151,9 +153,8 @@ function Forms() {
       isOpen: true,
       type: "volunteer",
       id,
-      title: "Delete Volunteer Application",
-      message:
-        "Are you sure you want to delete this volunteer application? This action cannot be undone.",
+      title: t("delete_volunteer_application"), // Using translation key
+      message: t("delete_volunteer_confirmation"), // Using translation key
     });
   };
 
@@ -162,9 +163,8 @@ function Forms() {
       isOpen: true,
       type: "partnership",
       id,
-      title: "Delete Partnership Application",
-      message:
-        "Are you sure you want to delete this partnership application? This action cannot be undone.",
+      title: t("delete_partnership_application"), // Using translation key
+      message: t("delete_partnership_confirmation"), // Using translation key
     });
   };
 
@@ -225,20 +225,6 @@ function Forms() {
     });
   };
 
-  /*const handleViewMessage = async (message: Message): Promise<void> => {
-    setSelectedMessage(message);
-    if (message.status === "new") {
-      try {
-        await axiosInstance.patch(`/api/messages/${message._id}/status`, {
-          status: "read",
-        });
-        fetchMessages();
-      } catch (error) {
-        console.error("Failed to update message status:", error);
-      }
-    }
-  };*/
-
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
@@ -249,11 +235,6 @@ function Forms() {
       minute: "2-digit",
     });
   };
-
-  useEffect(() => {
-    fetchMessages();
-    fetchForms();
-  }, []);
 
   const renderPartnershipsList = (): React.ReactElement => {
     if (formsLoading) {
@@ -267,7 +248,7 @@ function Forms() {
     if (partnerships.length === 0) {
       return (
         <div className="text-center py-12 text-gray-500">
-          No partnership applications found
+          {t("no_partnerships_found")} {/* Using translation key */}
         </div>
       );
     }
@@ -278,25 +259,25 @@ function Forms() {
           <thead className="border-b border-gray-200">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Organization
+                {t("organization")} {/* Using translation key */}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Contact Person
+                {t("contact_person")} {/* Using translation key */}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Phone Number
+                {t("phone_number")} {/* Using translation key */}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Email
+                {t("email")} {/* Using translation key */}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Date
+                {t("date")} {/* Using translation key */}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Action
+                {t("action")} {/* Using translation key */}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Delete
+                {t("delete")} {/* Using translation key */}
               </th>
             </tr>
           </thead>
@@ -323,7 +304,7 @@ function Forms() {
                     onClick={() => setSelectedPartnership(partnership)}
                     className="text-cyan-500 cursor-pointer underline hover:text-cyan-600 transition-colors"
                   >
-                    View
+                    {t("view")} {/* Using translation key */}
                   </button>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
@@ -355,7 +336,7 @@ function Forms() {
     if (volunteers.length === 0) {
       return (
         <div className="text-center py-12 text-gray-500">
-          No volunteer applications found
+          {t("no_volunteers_found")} {/* Using translation key */}
         </div>
       );
     }
@@ -366,22 +347,22 @@ function Forms() {
           <thead className="border-b border-gray-200">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Full Name
+                {t("full_name")} {/* Using translation key */}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Phone Number
+                {t("phone_number")} {/* Using translation key */}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Email Address
+                {t("email_address")} {/* Using translation key */}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Date
+                {t("date")} {/* Using translation key */}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Action
+                {t("action")} {/* Using translation key */}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Delete
+                {t("delete")} {/* Using translation key */}
               </th>
             </tr>
           </thead>
@@ -405,7 +386,7 @@ function Forms() {
                     onClick={() => setSelectedVolunteer(volunteer)}
                     className="text-cyan-500 cursor-pointer underline hover:text-cyan-600 transition-colors"
                   >
-                    View
+                    {t("view")} {/* Using translation key */}
                   </button>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
@@ -439,7 +420,9 @@ function Forms() {
 
     if (messages.length === 0) {
       return (
-        <div className="text-center py-12 text-gray-500">No messages found</div>
+        <div className="text-center py-12 text-gray-500">
+          {t("no_messages_found")} {/* Using translation key */}
+        </div>
       );
     }
 
@@ -451,7 +434,7 @@ function Forms() {
             className="flex items-start gap-4 bg-blue-100 p-4 rounded-lg border border-gray-200 hover:bg-gray-50 transition"
           >
             <img
-              src={dummy}
+              src={dummy || "/placeholder.svg"}
               alt="profile"
               className="w-12 h-12 rounded-full object-cover"
             />
@@ -481,7 +464,10 @@ function Forms() {
               </p>
               {messageToggle === "identified" && (
                 <div className="mt-2 text-xs text-gray-500 space-y-1">
-                  <p>Email: {message.email || "N/A"}</p>
+                  <p>
+                    {t("email")}: {message.email || "N/A"}
+                  </p>{" "}
+                  {/* Using translation key */}
                 </div>
               )}
             </div>
@@ -500,7 +486,7 @@ function Forms() {
           <div className="p-6">
             <div className="flex justify-between items-start mb-6">
               <h3 className="text-2xl font-bold text-gray-900">
-                Message Details
+                {t("message_details")} {/* Using translation key */}
               </h3>
               <button
                 onClick={() => setSelectedMessage(null)}
@@ -535,13 +521,17 @@ function Forms() {
                 <>
                   {selectedMessage.email && (
                     <div>
-                      <p className="text-sm font-medium text-gray-500">Email</p>
+                      <p className="text-sm font-medium text-gray-500">
+                        {t("email")} {/* Using translation key */}
+                      </p>
                       <p className="text-gray-900">{selectedMessage.email}</p>
                     </div>
                   )}
                   {selectedMessage.phone_number && (
                     <div>
-                      <p className="text-sm font-medium text-gray-500">Phone</p>
+                      <p className="text-sm font-medium text-gray-500">
+                        {t("phone")} {/* Using translation key */}
+                      </p>
                       <p className="text-gray-900">
                         {selectedMessage.phone_number}
                       </p>
@@ -550,7 +540,7 @@ function Forms() {
                   {selectedMessage.subject && (
                     <div>
                       <p className="text-sm font-medium text-gray-500">
-                        Subject
+                        {t("subject")} {/* Using translation key */}
                       </p>
                       <p className="text-gray-900">{selectedMessage.subject}</p>
                     </div>
@@ -560,7 +550,7 @@ function Forms() {
 
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-2">
-                  Message
+                  {t("message")} {/* Using translation key */}
                 </p>
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <p className="text-gray-900 whitespace-pre-wrap">
@@ -574,7 +564,7 @@ function Forms() {
                   onClick={() => setSelectedMessage(null)}
                   className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition"
                 >
-                  Close
+                  {t("close")} {/* Using translation key */}
                 </button>
               </div>
             </div>
@@ -593,7 +583,8 @@ function Forms() {
           <div className="p-6">
             <div className="flex justify-between items-start mb-6">
               <h3 className="text-2xl font-bold text-gray-900">
-                Volunteer Application Details
+                {t("volunteer_application_details")}{" "}
+                {/* Using translation key */}
               </h3>
               <button
                 onClick={() => setSelectedVolunteer(null)}
@@ -619,19 +610,23 @@ function Forms() {
               </div>
 
               <div>
-                <p className="text-sm font-medium text-gray-500">Email</p>
+                <p className="text-sm font-medium text-gray-500">
+                  {t("email")} {/* Using translation key */}
+                </p>
                 <p className="text-gray-900">{selectedVolunteer.email}</p>
               </div>
 
               <div>
                 <p className="text-sm font-medium text-gray-500">
-                  Phone Number
+                  {t("phone_number")} {/* Using translation key */}
                 </p>
                 <p className="text-gray-900">{selectedVolunteer.phone}</p>
               </div>
 
               <div>
-                <p className="text-sm font-medium text-gray-500">Status</p>
+                <p className="text-sm font-medium text-gray-500">
+                  {t("status")} {/* Using translation key */}
+                </p>
                 <p className="text-gray-900 capitalize">
                   {selectedVolunteer.status}
                 </p>
@@ -639,7 +634,7 @@ function Forms() {
 
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-2">
-                  Motivation
+                  {t("motivation")} {/* Using translation key */}
                 </p>
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <p className="text-gray-900 whitespace-pre-wrap">
@@ -653,7 +648,7 @@ function Forms() {
                   onClick={() => setSelectedVolunteer(null)}
                   className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition"
                 >
-                  Close
+                  {t("close")} {/* Using translation key */}
                 </button>
               </div>
             </div>
@@ -672,7 +667,8 @@ function Forms() {
           <div className="p-6">
             <div className="flex justify-between items-start mb-6">
               <h3 className="text-2xl font-bold text-gray-900">
-                Partnership Application Details
+                {t("partnership_application_details")}{" "}
+                {/* Using translation key */}
               </h3>
               <button
                 onClick={() => setSelectedPartnership(null)}
@@ -699,7 +695,7 @@ function Forms() {
 
               <div>
                 <p className="text-sm font-medium text-gray-500">
-                  Contact Person
+                  {t("contact_person")} {/* Using translation key */}
                 </p>
                 <p className="text-gray-900">
                   {selectedPartnership.contactPerson}
@@ -707,20 +703,22 @@ function Forms() {
               </div>
 
               <div>
-                <p className="text-sm font-medium text-gray-500">Email</p>
+                <p className="text-sm font-medium text-gray-500">
+                  {t("email")} {/* Using translation key */}
+                </p>
                 <p className="text-gray-900">{selectedPartnership.email}</p>
               </div>
 
               <div>
                 <p className="text-sm font-medium text-gray-500">
-                  Phone Number
+                  {t("phone_number")} {/* Using translation key */}
                 </p>
                 <p className="text-gray-900">{selectedPartnership.phone}</p>
               </div>
 
               <div>
                 <p className="text-sm font-medium text-gray-500">
-                  Partnership Type
+                  {t("partnership_type")} {/* Using translation key */}
                 </p>
                 <p className="text-gray-900 capitalize">
                   {selectedPartnership.partnership_type}
@@ -728,7 +726,9 @@ function Forms() {
               </div>
 
               <div>
-                <p className="text-sm font-medium text-gray-500">Status</p>
+                <p className="text-sm font-medium text-gray-500">
+                  {t("status")} {/* Using translation key */}
+                </p>
                 <p className="text-gray-900 capitalize">
                   {selectedPartnership.status}
                 </p>
@@ -736,7 +736,7 @@ function Forms() {
 
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-2">
-                  Proposal
+                  {t("proposal")} {/* Using translation key */}
                 </p>
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <p className="text-gray-900 whitespace-pre-wrap">
@@ -748,9 +748,9 @@ function Forms() {
               <div className="flex justify-end gap-2 pt-4">
                 <button
                   onClick={() => setSelectedPartnership(null)}
-                  className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition"
+                  className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition font-medium"
                 >
-                  Close
+                  {t("close")} {/* Using translation key */}
                 </button>
               </div>
             </div>
@@ -775,7 +775,7 @@ function Forms() {
               onClick={cancelDelete}
               className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition font-medium"
             >
-              Cancel
+              {t("cancel")} {/* Using translation key */}
             </button>
             <button
               onClick={executeDelete}
@@ -784,7 +784,7 @@ function Forms() {
               {loading ? (
                 <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-white"></div>
               ) : (
-                <span>Delete</span>
+                <span>{t("delete")}</span>
               )}
             </button>
           </div>
@@ -793,6 +793,11 @@ function Forms() {
     );
   };
 
+  useEffect(() => {
+    fetchMessages();
+    fetchForms();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="p-6 space-y-8">
@@ -800,7 +805,7 @@ function Forms() {
         <div className="bg-white rounded-lg shadow">
           <div className="px-6 py-4 bg-white">
             <h2 className="text-xl font-bold text-main-500">
-              Partnership request
+              {t("partnership_request")} {/* Using translation key */}
             </h2>
           </div>
           <div>{renderPartnershipsList()}</div>
@@ -810,7 +815,7 @@ function Forms() {
         <div className="bg-white rounded-lg shadow">
           <div className="px-6 py-4 bg-white">
             <h2 className="text-xl font-bold text-main-500">
-              Volunteer request
+              {t("volunteer_request")} {/* Using translation key */}
             </h2>
           </div>
           <div>{renderVolunteersList()}</div>
@@ -820,7 +825,9 @@ function Forms() {
         <div className="bg-white rounded-lg shadow pb-10">
           <div className="px-6 py-4">
             <div className="flex flex-col justify-between items-start">
-              <h2 className="text-xl font-bold text-main-500 mb-4">Messages</h2>
+              <h2 className="text-xl font-bold text-main-500 mb-4">
+                {t("messages")} {/* Using translation key */}
+              </h2>
               <div className="flex gap-2">
                 <button
                   onClick={() => setMessageToggle("identified")}
@@ -830,7 +837,7 @@ function Forms() {
                       : "text-black hover:underline hover:underline-offset-6"
                   }`}
                 >
-                  Identified
+                  {t("identified")} {/* Using translation key */}
                 </button>
                 <button
                   onClick={() => setMessageToggle("anonymous")}
@@ -840,7 +847,7 @@ function Forms() {
                       : "text-black hover:underline hover:underline-offset-6"
                   }`}
                 >
-                  Anonymous
+                  {t("anonymous")} {/* Using translation key */}
                 </button>
               </div>
             </div>

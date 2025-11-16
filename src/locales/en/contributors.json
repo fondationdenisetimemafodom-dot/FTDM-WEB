@@ -1,0 +1,86 @@
+{
+  "header": {
+    "createTab": "CREATE CONTRIBUTOR/PARTNER",
+    "viewTab": "VIEW CONTRIBUTORS/PARTNERS"
+  },
+  "create": {
+    "title": "ADD CONTRIBUTOR/PARTNER",
+    "imageLabel": "Profile Image",
+    "browseText": "Browse to upload profile image",
+    "selectImage": "Select Image",
+    "nameLabel": "Name",
+    "namePlaceholder": "Full name",
+    "roleLabel": "Role",
+    "rolePlaceholder": "e.g., Board Member, Partner Organization",
+    "typeLabel": "Type",
+    "typeContributor": "Contributor",
+    "typePartner": "Partner",
+    "socialMediaLabel": "Social Media Links",
+    "facebookPlaceholder": "Facebook URL",
+    "twitterPlaceholder": "Twitter URL",
+    "instagramPlaceholder": "Instagram URL",
+    "linkedinPlaceholder": "LinkedIn URL",
+    "websitePlaceholder": "Website URL",
+    "publishButton": "PUBLISH",
+    "publishing": "Publishing...",
+    "validation": {
+      "nameRequired": "Name is required",
+      "roleRequired": "Role is required",
+      "imageRequired": "Image is required"
+    },
+    "success": {
+      "title": "Success!",
+      "message": "Contributor/Partner has been added successfully",
+      "closeButton": "Close"
+    }
+  },
+  "view": {
+    "title": "All Contributors & Partners",
+    "item": "item",
+    "items": "items",
+    "allFilter": "All",
+    "contributorsFilter": "Contributors",
+    "partnersFilter": "Partners",
+    "searchPlaceholder": "Search by name or role...",
+    "table": {
+      "nameHeader": "NAME",
+      "roleHeader": "ROLE",
+      "typeHeader": "TYPE",
+      "socialMediaHeader": "SOCIAL MEDIA",
+      "lastUpdateHeader": "LAST UPDATE",
+      "actionHeader": "ACTION",
+      "deleteHeader": "DELETE",
+      "viewButton": "View",
+      "noneText": "None",
+      "loading": "Loading...",
+      "noResults": "No results found",
+      "noContributors": "No contributors or partners found"
+    },
+    "modal": {
+      "contributorDetails": "Contributor Details",
+      "partnerDetails": "Partner Details",
+      "socialMediaTitle": "Social Media",
+      "createdLabel": "Created",
+      "lastUpdatedLabel": "Last Updated",
+      "facebookTitle": "Facebook",
+      "twitterTitle": "Twitter",
+      "instagramTitle": "Instagram",
+      "linkedinTitle": "LinkedIn",
+      "websiteTitle": "Website"
+    },
+    "delete": {
+      "title": "Delete Contributor/Partner",
+      "message": "Are you sure you want to delete",
+      "warning": "This action cannot be undone.",
+      "cancelButton": "Cancel",
+      "deleteButton": "Delete",
+      "deleting": "Deleting...",
+      "errorMessage": "Failed to delete contributor. Please try again."
+    }
+  },
+  "errors": {
+    "failedToCreate": "Failed to create contributor/partner",
+    "failedToFetch": "Failed to load contributors. Please try again.",
+    "tryAgain": "Try Again"
+  }
+}

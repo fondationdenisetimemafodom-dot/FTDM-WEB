@@ -1,0 +1,86 @@
+{
+  "header": {
+    "createTab": "Crea Contributore/Partner",
+    "viewTab": "Vedi Contributori/Partner"
+  },
+  "create": {
+    "title": "Aggiungi Contributore/Partner",
+    "imageLabel": "Immagine Profilo",
+    "browseText": "Sfoglia per caricare l'immagine",
+    "selectImage": "Seleziona Immagine",
+    "nameLabel": "Nome",
+    "namePlaceholder": "Nome completo",
+    "roleLabel": "Ruolo",
+    "rolePlaceholder": "es. Membro del Consiglio, Organizzazione Partner",
+    "typeLabel": "Tipo",
+    "typeContributor": "Contributore",
+    "typePartner": "Partner",
+    "socialMediaLabel": "Link Social",
+    "facebookPlaceholder": "URL Facebook",
+    "twitterPlaceholder": "URL Twitter",
+    "instagramPlaceholder": "URL Instagram",
+    "linkedinPlaceholder": "URL LinkedIn",
+    "websitePlaceholder": "URL Sito Web",
+    "publishButton": "Pubblica",
+    "publishing": "Pubblicazione...",
+    "validation": {
+      "nameRequired": "Il nome è obbligatorio",
+      "roleRequired": "Il ruolo è obbligatorio",
+      "imageRequired": "L'immagine è obbligatoria"
+    },
+    "success": {
+      "title": "Successo",
+      "message": "Contributore o partner aggiunto con successo",
+      "closeButton": "Chiudi"
+    }
+  },
+  "view": {
+    "title": "Tutti i Contributori e Partner",
+    "item": "elemento",
+    "items": "elementi",
+    "allFilter": "Tutti",
+    "contributorsFilter": "Contributori",
+    "partnersFilter": "Partner",
+    "searchPlaceholder": "Cerca per nome o ruolo...",
+    "table": {
+      "nameHeader": "Nome",
+      "roleHeader": "Ruolo",
+      "typeHeader": "Tipo",
+      "socialMediaHeader": "Social",
+      "lastUpdateHeader": "Ultimo Aggiornamento",
+      "actionHeader": "Azione",
+      "deleteHeader": "Elimina",
+      "viewButton": "Vedi",
+      "noneText": "Nessuno",
+      "loading": "Caricamento...",
+      "noResults": "Nessun risultato trovato",
+      "noContributors": "Nessun contributore o partner trovato"
+    },
+    "modal": {
+      "contributorDetails": "Dettagli Contributore",
+      "partnerDetails": "Dettagli Partner",
+      "socialMediaTitle": "Social",
+      "createdLabel": "Creato",
+      "lastUpdatedLabel": "Ultimo aggiornamento",
+      "facebookTitle": "Facebook",
+      "twitterTitle": "Twitter",
+      "instagramTitle": "Instagram",
+      "linkedinTitle": "LinkedIn",
+      "websiteTitle": "Sito Web"
+    },
+    "delete": {
+      "title": "Elimina Contributore/Partner",
+      "message": "Vuoi davvero eliminare",
+      "warning": "L'azione non può essere annullata.",
+      "cancelButton": "Annulla",
+      "deleteButton": "Elimina",
+      "deleting": "Eliminazione...",
+      "errorMessage": "Impossibile eliminare il contributore. Riprova."
+    }
+  },
+  "errors": {
+    "failedToCreate": "Impossibile creare contributore o partner",
+    "failedToFetch": "Impossibile caricare i contributori. Riprova.",
+    "tryAgain": "Riprova"
+  }
+}

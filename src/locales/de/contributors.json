@@ -1,0 +1,86 @@
+{
+  "header": {
+    "createTab": "Beitragender/Partner erstellen",
+    "viewTab": "Beitragende/Partner anzeigen"
+  },
+  "create": {
+    "title": "Beitragenden/Partner hinzufügen",
+    "imageLabel": "Profilbild",
+    "browseText": "Durchsuchen zum Hochladen des Profilbilds",
+    "selectImage": "Bild auswählen",
+    "nameLabel": "Name",
+    "namePlaceholder": "Vollständiger Name",
+    "roleLabel": "Rolle",
+    "rolePlaceholder": "zB Vorstandsmitglied, Partnerorganisation",
+    "typeLabel": "Typ",
+    "typeContributor": "Beitragender",
+    "typePartner": "Partner",
+    "socialMediaLabel": "Social Media Links",
+    "facebookPlaceholder": "Facebook URL",
+    "twitterPlaceholder": "Twitter URL",
+    "instagramPlaceholder": "Instagram URL",
+    "linkedinPlaceholder": "LinkedIn URL",
+    "websitePlaceholder": "Website URL",
+    "publishButton": "Veröffentlichen",
+    "publishing": "Wird veröffentlicht...",
+    "validation": {
+      "nameRequired": "Name ist erforderlich",
+      "roleRequired": "Rolle ist erforderlich",
+      "imageRequired": "Bild ist erforderlich"
+    },
+    "success": {
+      "title": "Erfolg",
+      "message": "Beitragender oder Partner erfolgreich hinzugefügt",
+      "closeButton": "Schließen"
+    }
+  },
+  "view": {
+    "title": "Alle Beitragenden und Partner",
+    "item": "Eintrag",
+    "items": "Einträge",
+    "allFilter": "Alle",
+    "contributorsFilter": "Beitragende",
+    "partnersFilter": "Partner",
+    "searchPlaceholder": "Nach Name oder Rolle suchen...",
+    "table": {
+      "nameHeader": "Name",
+      "roleHeader": "Rolle",
+      "typeHeader": "Typ",
+      "socialMediaHeader": "Social Media",
+      "lastUpdateHeader": "Letzte Aktualisierung",
+      "actionHeader": "Aktion",
+      "deleteHeader": "Löschen",
+      "viewButton": "Anzeigen",
+      "noneText": "Keine",
+      "loading": "Lädt...",
+      "noResults": "Keine Ergebnisse gefunden",
+      "noContributors": "Keine Beitragenden oder Partner gefunden"
+    },
+    "modal": {
+      "contributorDetails": "Details zum Beitragenden",
+      "partnerDetails": "Details zum Partner",
+      "socialMediaTitle": "Social Media",
+      "createdLabel": "Erstellt",
+      "lastUpdatedLabel": "Letzte Aktualisierung",
+      "facebookTitle": "Facebook",
+      "twitterTitle": "Twitter",
+      "instagramTitle": "Instagram",
+      "linkedinTitle": "LinkedIn",
+      "websiteTitle": "Website"
+    },
+    "delete": {
+      "title": "Beitragenden/Partner löschen",
+      "message": "Möchten Sie wirklich löschen",
+      "warning": "Dieser Vorgang kann nicht rückgängig gemacht werden.",
+      "cancelButton": "Abbrechen",
+      "deleteButton": "Löschen",
+      "deleting": "Wird gelöscht...",
+      "errorMessage": "Beitragender konnte nicht gelöscht werden. Bitte erneut versuchen."
+    }
+  },
+  "errors": {
+    "failedToCreate": "Beitragenden oder Partner konnte nicht erstellt werden",
+    "failedToFetch": "Beitragende konnten nicht geladen werden. Bitte erneut versuchen.",
+    "tryAgain": "Erneut versuchen"
+  }
+}

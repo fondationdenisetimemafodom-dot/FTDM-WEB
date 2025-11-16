@@ -8,8 +8,10 @@
 
 import React, { useState } from "react";
 import axiosInstance from "../../lib/axiosInstance";
+import { useTranslation } from "react-i18next";
 
 const AdminContributorsPartners: React.FC = () => {
+  const { t } = useTranslation("contributors");
   const [activeTab, setActiveTab] = useState<"create" | "view">("create");
 
   return (
@@ -27,7 +29,7 @@ const AdminContributorsPartners: React.FC = () => {
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
-                CREATE CONTRIBUTOR/PARTNER
+                {t("header.createTab")}
               </button>
               <button
                 onClick={() => setActiveTab("view")}
@@ -37,7 +39,7 @@ const AdminContributorsPartners: React.FC = () => {
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
-                VIEW CONTRIBUTORS/PARTNERS
+                {t("header.viewTab")}
               </button>
             </div>
           </div>
@@ -78,6 +80,7 @@ interface ContributorFormData {
 }
 
 const CreateContributorView: React.FC = () => {
+  const { t } = useTranslation("contributors");
   const [formData, setFormData] = useState<ContributorFormData>({
     name: "",
     role: "",
@@ -134,15 +137,15 @@ const CreateContributorView: React.FC = () => {
 
       // Validation
       if (!formData.name.trim()) {
-        setErrorMsg("Name is required");
+        setErrorMsg(t("create.validation.nameRequired"));
         return;
       }
       if (!formData.role.trim()) {
-        setErrorMsg("Role is required");
+        setErrorMsg(t("create.validation.roleRequired"));
         return;
       }
       if (!formData.image) {
-        setErrorMsg("Image is required");
+        setErrorMsg(t("create.validation.imageRequired"));
         return;
       }
 
@@ -172,9 +175,7 @@ const CreateContributorView: React.FC = () => {
       setImagePreview("");
     } catch (err: any) {
       console.error("Failed to create contributor/partner:", err);
-      setErrorMsg(
-        err.response?.data?.message || "Failed to create contributor/partner"
-      );
+      setErrorMsg(err.response?.data?.message || t("errors.failedToCreate"));
     } finally {
       setLoading(false);
     }
@@ -185,7 +186,7 @@ const CreateContributorView: React.FC = () => {
       <div className="mx-8 mb-8 p-6 bg-white shadow-sm rounded-2xl">
         <div className="mb-8">
           <h1 className="text-xl font-semibold text-gray-900 mb-2">
-            ADD CONTRIBUTOR/PARTNER
+            {t("create.title")}
           </h1>
         </div>
 
@@ -215,7 +216,7 @@ const CreateContributorView: React.FC = () => {
             {/* Image Upload */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Profile Image
+                {t("create.imageLabel")}
               </label>
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-blue-50 relative overflow-hidden h-[296px]">
                 {!imagePreview ? (
@@ -230,11 +231,11 @@ const CreateContributorView: React.FC = () => {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                        d="M7 16a4 4 0 01-.88 7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                       />
                     </svg>
                     <p className="text-sm text-gray-600 mb-2">
-                      Browse to upload profile image
+                      {t("create.browseText")}
                     </p>
                     <input
                       type="file"
@@ -247,13 +248,13 @@ const CreateContributorView: React.FC = () => {
                       htmlFor="image-upload"
                       className="cursor-pointer text-sm text-cyan-500 hover:text-cyan-600"
                     >
-                      Select Image
+                      {t("create.selectImage")}
                     </label>
                   </>
                 ) : (
                   <div className="w-full h-full relative">
                     <img
-                      src={imagePreview}
+                      src={imagePreview || "/placeholder.svg"}
                       alt="Preview"
                       className="w-full h-full object-cover rounded-md"
                     />
@@ -317,7 +318,7 @@ const CreateContributorView: React.FC = () => {
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Name
+                {t("create.nameLabel")}
               </label>
               <input
                 type="text"
@@ -325,14 +326,14 @@ const CreateContributorView: React.FC = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
-                placeholder="Full name"
+                placeholder={t("create.namePlaceholder")}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Role
+                {t("create.roleLabel")}
               </label>
               <input
                 type="text"
@@ -340,14 +341,14 @@ const CreateContributorView: React.FC = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, role: e.target.value })
                 }
-                placeholder="e.g., Board Member, Partner Organization"
+                placeholder={t("create.rolePlaceholder")}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-3">
-                Type
+                {t("create.typeLabel")}
               </label>
               <div className="flex space-x-4">
                 <label className="flex items-center">
@@ -387,7 +388,9 @@ const CreateContributorView: React.FC = () => {
                       </svg>
                     )}
                   </div>
-                  <span className="text-sm text-gray-700">Contributor</span>
+                  <span className="text-sm text-gray-700">
+                    {t("create.typeContributor")}
+                  </span>
                 </label>
                 <label className="flex items-center">
                   <input
@@ -426,7 +429,9 @@ const CreateContributorView: React.FC = () => {
                       </svg>
                     )}
                   </div>
-                  <span className="text-sm text-gray-700">Partner</span>
+                  <span className="text-sm text-gray-700">
+                    {t("create.typePartner")}
+                  </span>
                 </label>
               </div>
             </div>
@@ -434,7 +439,7 @@ const CreateContributorView: React.FC = () => {
             {/* Social Media Links */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-3">
-                Social Media Links
+                {t("create.socialMediaLabel")}
               </label>
               <div className="space-y-3">
                 <div className="flex items-center space-x-2">
@@ -451,7 +456,7 @@ const CreateContributorView: React.FC = () => {
                     onChange={(e) =>
                       handleSocialMediaChange("facebook", e.target.value)
                     }
-                    placeholder="Facebook URL"
+                    placeholder={t("create.facebookPlaceholder")}
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
                   />
                 </div>
@@ -462,7 +467,7 @@ const CreateContributorView: React.FC = () => {
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417a9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
                   </svg>
                   <input
                     type="url"
@@ -470,7 +475,7 @@ const CreateContributorView: React.FC = () => {
                     onChange={(e) =>
                       handleSocialMediaChange("twitter", e.target.value)
                     }
-                    placeholder="Twitter URL"
+                    placeholder={t("create.twitterPlaceholder")}
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
                   />
                 </div>
@@ -489,7 +494,7 @@ const CreateContributorView: React.FC = () => {
                     onChange={(e) =>
                       handleSocialMediaChange("instagram", e.target.value)
                     }
-                    placeholder="Instagram URL"
+                    placeholder={t("create.instagramPlaceholder")}
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
                   />
                 </div>
@@ -508,7 +513,7 @@ const CreateContributorView: React.FC = () => {
                     onChange={(e) =>
                       handleSocialMediaChange("linkedin", e.target.value)
                     }
-                    placeholder="LinkedIn URL"
+                    placeholder={t("create.linkedinPlaceholder")}
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
                   />
                 </div>
@@ -527,7 +532,7 @@ const CreateContributorView: React.FC = () => {
                     onChange={(e) =>
                       handleSocialMediaChange("website", e.target.value)
                     }
-                    placeholder="Website URL"
+                    placeholder={t("create.websitePlaceholder")}
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
                   />
                 </div>
@@ -543,7 +548,7 @@ const CreateContributorView: React.FC = () => {
             disabled={loading}
             className="bg-cyan-500 hover:bg-cyan-600 disabled:opacity-50 text-white px-6 py-2 rounded-md font-medium transition-colors"
           >
-            {loading ? "Publishing..." : "PUBLISH"}
+            {loading ? t("create.publishing") : t("create.publishButton")}
           </button>
         </div>
       </div>
@@ -556,7 +561,7 @@ const CreateContributorView: React.FC = () => {
               <div className="absolute inset-0 border-4 border-gray-200 rounded-full"></div>
               <div className="absolute inset-0 border-4 border-cyan-500 rounded-full border-t-transparent animate-spin"></div>
             </div>
-            <p className="text-gray-600">Publishing...</p>
+            <p className="text-gray-600">{t("create.publishing")}</p>
           </div>
         </div>
       )}
@@ -581,16 +586,14 @@ const CreateContributorView: React.FC = () => {
               </svg>
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Success!
+              {t("create.success.title")}
             </h3>
-            <p className="text-gray-600 mb-6">
-              Contributor/Partner has been added successfully
-            </p>
+            <p className="text-gray-600 mb-6">{t("create.success.message")}</p>
             <button
               onClick={() => setShowSuccessPopup(false)}
               className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
             >
-              Close
+              {t("create.success.closeButton")}
             </button>
           </div>
         </div>
@@ -641,6 +644,8 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
   contributorName,
   loading,
 }) => {
+  const { t } = useTranslation("contributors");
+
   if (!isOpen) return null;
 
   return (
@@ -661,13 +666,13 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
             </svg>
           </div>
           <h2 className="text-lg font-semibold text-gray-800">
-            Delete Contributor/Partner
+            {t("view.delete.title")}
           </h2>
         </div>
 
         <p className="text-gray-600 mb-6">
-          Are you sure you want to delete <strong>"{contributorName}"</strong>?
-          This action cannot be undone.
+          {t("view.delete.message")} <strong>"{contributorName}"</strong>?
+          {t("view.delete.warning")}
         </p>
 
         <div className="flex space-x-3">
@@ -676,7 +681,7 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
             disabled={loading}
             className="flex-1 px-4 py-2 text-gray-600 hover:text-gray-800 font-medium disabled:opacity-50"
           >
-            Cancel
+            {t("view.delete.cancelButton")}
           </button>
           <button
             onClick={onConfirm}
@@ -705,10 +710,11 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                Deleting...
+                {t("view.delete.deleting")}
               </>
             ) : (
-              "Delete"
+              /* replaced with translation key */
+              t("view.delete.deleteButton")
             )}
           </button>
         </div>
@@ -722,6 +728,8 @@ const ContributorDetailModal: React.FC<ContributorDetailModalProps> = ({
   onClose,
   contributor,
 }) => {
+  const { t } = useTranslation("contributors");
+
   if (!isOpen || !contributor) return null;
 
   const formatDate = (dateString: string) => {
@@ -735,7 +743,7 @@ const ContributorDetailModal: React.FC<ContributorDetailModalProps> = ({
 
   const socialMediaPlatforms = [
     {
-      name: "Facebook",
+      name: t("view.modal.facebookTitle"),
       key: "facebook",
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -745,17 +753,17 @@ const ContributorDetailModal: React.FC<ContributorDetailModalProps> = ({
       color: "text-blue-600",
     },
     {
-      name: "Twitter",
+      name: t("view.modal.twitterTitle"),
       key: "twitter",
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417a9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
         </svg>
       ),
       color: "text-blue-400",
     },
     {
-      name: "Instagram",
+      name: t("view.modal.instagramTitle"),
       key: "instagram",
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -765,7 +773,7 @@ const ContributorDetailModal: React.FC<ContributorDetailModalProps> = ({
       color: "text-pink-600",
     },
     {
-      name: "LinkedIn",
+      name: t("view.modal.linkedinTitle"),
       key: "linkedin",
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -775,7 +783,7 @@ const ContributorDetailModal: React.FC<ContributorDetailModalProps> = ({
       color: "text-blue-700",
     },
     {
-      name: "Website",
+      name: t("view.modal.websiteTitle"),
       key: "website",
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -792,8 +800,9 @@ const ContributorDetailModal: React.FC<ContributorDetailModalProps> = ({
         {/* Modal Header */}
         <div className="flex items-center justify-between p-6 border-b">
           <h2 className="text-xl font-semibold text-gray-800">
-            {contributor.type === "contributor" ? "Contributor" : "Partner"}{" "}
-            Details
+            {contributor.type === "contributor"
+              ? t("view.modal.contributorDetails")
+              : t("view.modal.partnerDetails")}
           </h2>
           <button
             onClick={onClose}
@@ -821,7 +830,7 @@ const ContributorDetailModal: React.FC<ContributorDetailModalProps> = ({
             {/* Profile Image */}
             <div className="w-40 h-40 rounded-full overflow-hidden bg-gray-100">
               <img
-                src={contributor.picture.url}
+                src={contributor.picture.url || "/placeholder.svg"}
                 alt={contributor.name}
                 className="w-full h-full object-cover"
               />
@@ -840,7 +849,9 @@ const ContributorDetailModal: React.FC<ContributorDetailModalProps> = ({
                     : "bg-green-100 text-green-700"
                 }`}
               >
-                {contributor.type === "contributor" ? "Contributor" : "Partner"}
+                {contributor.type === "contributor"
+                  ? t("create.typeContributor")
+                  : t("create.typePartner")}
               </span>
             </div>
 
@@ -849,7 +860,7 @@ const ContributorDetailModal: React.FC<ContributorDetailModalProps> = ({
               Object.keys(contributor.socialMedia).length > 0 && (
                 <div className="w-full">
                   <h4 className="text-sm font-semibold text-gray-700 mb-3 text-center">
-                    Social Media
+                    {t("view.modal.socialMediaTitle")}
                   </h4>
                   <div className="flex flex-wrap justify-center gap-3">
                     {socialMediaPlatforms.map((platform) => {
@@ -883,13 +894,17 @@ const ContributorDetailModal: React.FC<ContributorDetailModalProps> = ({
             <div className="w-full pt-4 border-t text-center">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-xs text-gray-500">Created</p>
+                  <p className="text-xs text-gray-500">
+                    {t("view.modal.createdLabel")}
+                  </p>
                   <p className="text-sm text-gray-700">
                     {formatDate(contributor.createdAt)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Last Updated</p>
+                  <p className="text-xs text-gray-500">
+                    {t("view.modal.lastUpdatedLabel")}
+                  </p>
                   <p className="text-sm text-gray-700">
                     {formatDate(contributor.updatedAt)}
                   </p>
@@ -904,6 +919,7 @@ const ContributorDetailModal: React.FC<ContributorDetailModalProps> = ({
 };
 
 const ViewContributorsView: React.FC = () => {
+  const { t } = useTranslation("contributors");
   const [contributors, setContributors] = useState<Contributor[]>([]);
   const [filteredContributors, setFilteredContributors] = useState<
     Contributor[]
@@ -991,10 +1007,7 @@ const ViewContributorsView: React.FC = () => {
       setFilteredContributors(contributorsData);
     } catch (err: any) {
       console.error("Failed to fetch contributors:", err);
-      setError(
-        err.response?.data?.message ||
-          "Failed to load contributors. Please try again."
-      );
+      setError(err.response?.data?.message || t("errors.failedToFetch"));
     } finally {
       setLoading(false);
     }
@@ -1059,10 +1072,7 @@ const ViewContributorsView: React.FC = () => {
       });
     } catch (err: any) {
       console.error("Failed to delete contributor:", err);
-      setError(
-        err.response?.data?.message ||
-          "Failed to delete contributor. Please try again."
-      );
+      setError(err.response?.data?.message || t("view.delete.errorMessage"));
       setDeleteModal((prev) => ({ ...prev, loading: false }));
     }
   };
@@ -1105,12 +1115,14 @@ const ViewContributorsView: React.FC = () => {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-4">
             <h1 className="text-xl font-semibold text-gray-900">
-              All Contributors & Partners
+              {t("view.title")}
             </h1>
             {filteredContributors.length > 0 && (
               <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                {filteredContributors.length} item
-                {filteredContributors.length !== 1 ? "s" : ""}
+                {filteredContributors.length}{" "}
+                {filteredContributors.length !== 1
+                  ? t("view.items")
+                  : t("view.item")}
               </span>
             )}
           </div>
@@ -1150,7 +1162,7 @@ const ViewContributorsView: React.FC = () => {
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              All
+              {t("view.allFilter")}
             </button>
             <button
               onClick={() => handleSearch(searchQuery, "contributor")}
@@ -1160,7 +1172,7 @@ const ViewContributorsView: React.FC = () => {
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              Contributors
+              {t("view.contributorsFilter")}
             </button>
             <button
               onClick={() => handleSearch(searchQuery, "partner")}
@@ -1170,7 +1182,7 @@ const ViewContributorsView: React.FC = () => {
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              Partners
+              {t("view.partnersFilter")}
             </button>
           </div>
 
@@ -1191,7 +1203,7 @@ const ViewContributorsView: React.FC = () => {
             </svg>
             <input
               type="text"
-              placeholder="Search by name or role..."
+              placeholder={t("view.searchPlaceholder")}
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value, filterType)}
               className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 text-sm w-64"
@@ -1240,7 +1252,7 @@ const ViewContributorsView: React.FC = () => {
               onClick={retryFetch}
               className="text-red-600 hover:text-red-800 text-sm font-medium"
             >
-              Try Again
+              {t("errors.tryAgain")}
             </button>
           </div>
         )}
@@ -1252,25 +1264,25 @@ const ViewContributorsView: React.FC = () => {
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    NAME
+                    {t("view.table.nameHeader")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    ROLE
+                    {t("view.table.roleHeader")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    TYPE
+                    {t("view.table.typeHeader")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    SOCIAL MEDIA
+                    {t("view.table.socialMediaHeader")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    LAST UPDATE
+                    {t("view.table.lastUpdateHeader")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    ACTION
+                    {t("view.table.actionHeader")}
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-gray-700 text-sm">
-                    DELETE
+                    {t("view.table.deleteHeader")}
                   </th>
                 </tr>
               </thead>
@@ -1280,8 +1292,9 @@ const ViewContributorsView: React.FC = () => {
                     <td colSpan={7} className="py-12 text-center">
                       <div className="flex flex-col items-center justify-center space-y-3">
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-
-                        <p className="text-gray-500">Loading...</p>
+                        <p className="text-gray-500">
+                          {t("view.table.loading")}
+                        </p>
                       </div>
                     </td>
                   </tr>
@@ -1304,8 +1317,8 @@ const ViewContributorsView: React.FC = () => {
                         </div>
                         <p className="text-gray-500">
                           {searchQuery || filterType !== "all"
-                            ? "No results found"
-                            : "No contributors or partners found"}
+                            ? t("view.table.noResults")
+                            : t("view.table.noContributors")}
                         </p>
                       </div>
                     </td>
@@ -1319,7 +1332,7 @@ const ViewContributorsView: React.FC = () => {
                       <td className="py-3 px-4">
                         <div className="flex items-center space-x-3">
                           <img
-                            src={contributor.picture.url}
+                            src={contributor.picture.url || "/placeholder.svg"}
                             alt={contributor.name}
                             className="w-10 h-10 rounded-full object-cover cursor-pointer hover:opacity-80 transition-opacity"
                             onClick={() => handleViewContributor(contributor)}
@@ -1341,8 +1354,8 @@ const ViewContributorsView: React.FC = () => {
                           }`}
                         >
                           {contributor.type === "contributor"
-                            ? "Contributor"
-                            : "Partner"}
+                            ? t("create.typeContributor")
+                            : t("create.typePartner")}
                         </span>
                       </td>
                       <td className="py-3 px-4">
@@ -1377,7 +1390,7 @@ const ViewContributorsView: React.FC = () => {
                                 fill="currentColor"
                                 viewBox="0 0 24 24"
                               >
-                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417a9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
                               </svg>
                             </a>
                           )}
@@ -1419,7 +1432,7 @@ const ViewContributorsView: React.FC = () => {
                             (Object.keys(contributor.socialMedia).length ===
                               0 && (
                               <span className="text-xs text-gray-400">
-                                None
+                                {t("view.table.noneText")}
                               </span>
                             ))}
                         </div>
@@ -1432,7 +1445,7 @@ const ViewContributorsView: React.FC = () => {
                           onClick={() => handleViewContributor(contributor)}
                           className="text-cyan-500 cursor-pointer underline hover:text-cyan-600 transition-colors text-sm"
                         >
-                          View
+                          {t("view.table.viewButton")}
                         </button>
                       </td>
                       <td className="py-3 px-4">

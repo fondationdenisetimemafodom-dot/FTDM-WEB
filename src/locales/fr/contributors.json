@@ -1,0 +1,86 @@
+{
+  "header": {
+    "createTab": "Créer un contributeur ou partenaire",
+    "viewTab": "Voir les contributeurs et partenaires"
+  },
+  "create": {
+    "title": "Ajouter un contributeur ou partenaire",
+    "imageLabel": "Image de profil",
+    "browseText": "Parcourir pour importer une image",
+    "selectImage": "Sélectionner l'image",
+    "nameLabel": "Nom",
+    "namePlaceholder": "Nom complet",
+    "roleLabel": "Rôle",
+    "rolePlaceholder": "ex. Membre du conseil, Organisation partenaire",
+    "typeLabel": "Type",
+    "typeContributor": "Contributeur",
+    "typePartner": "Partenaire",
+    "socialMediaLabel": "Liens des réseaux sociaux",
+    "facebookPlaceholder": "URL Facebook",
+    "twitterPlaceholder": "URL Twitter",
+    "instagramPlaceholder": "URL Instagram",
+    "linkedinPlaceholder": "URL LinkedIn",
+    "websitePlaceholder": "URL du site web",
+    "publishButton": "Publier",
+    "publishing": "Publication en cours...",
+    "validation": {
+      "nameRequired": "Le nom est obligatoire",
+      "roleRequired": "Le rôle est obligatoire",
+      "imageRequired": "L'image est obligatoire"
+    },
+    "success": {
+      "title": "Succès",
+      "message": "Contributeur ou partenaire ajouté avec succès",
+      "closeButton": "Fermer"
+    }
+  },
+  "view": {
+    "title": "Tous les contributeurs et partenaires",
+    "item": "élément",
+    "items": "éléments",
+    "allFilter": "Tous",
+    "contributorsFilter": "Contributeurs",
+    "partnersFilter": "Partenaires",
+    "searchPlaceholder": "Rechercher par nom ou rôle...",
+    "table": {
+      "nameHeader": "Nom",
+      "roleHeader": "Rôle",
+      "typeHeader": "Type",
+      "socialMediaHeader": "Réseaux sociaux",
+      "lastUpdateHeader": "Dernière mise à jour",
+      "actionHeader": "Action",
+      "deleteHeader": "Supprimer",
+      "viewButton": "Voir",
+      "noneText": "Aucun",
+      "loading": "Chargement...",
+      "noResults": "Aucun résultat trouvé",
+      "noContributors": "Aucun contributeur ou partenaire trouvé"
+    },
+    "modal": {
+      "contributorDetails": "Détails du contributeur",
+      "partnerDetails": "Détails du partenaire",
+      "socialMediaTitle": "Réseaux sociaux",
+      "createdLabel": "Créé le",
+      "lastUpdatedLabel": "Mis à jour le",
+      "facebookTitle": "Facebook",
+      "twitterTitle": "Twitter",
+      "instagramTitle": "Instagram",
+      "linkedinTitle": "LinkedIn",
+      "websiteTitle": "Site web"
+    },
+    "delete": {
+      "title": "Supprimer un contributeur ou partenaire",
+      "message": "Voulez vous vraiment supprimer",
+      "warning": "Cette action est irréversible.",
+      "cancelButton": "Annuler",
+      "deleteButton": "Supprimer",
+      "deleting": "Suppression...",
+      "errorMessage": "Impossible de supprimer ce contributeur. Veuillez réessayer."
+    }
+  },
+  "errors": {
+    "failedToCreate": "Échec de la création du contributeur ou partenaire",
+    "failedToFetch": "Échec du chargement des contributeurs. Veuillez réessayer.",
+    "tryAgain": "Réessayer"
+  }
+}
