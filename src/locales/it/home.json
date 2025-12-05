@@ -1,7 +1,7 @@
 {
   "hero": {
-    "title": "TRASFORMARE LE VITE ATTRAVERSO LA SOLIDARIETÀ",
-    "subtitle": "Dove la compassione incontra l'azione. Da Dschang al mondo, stiamo costruendo ponti di speranza attraverso l'istruzione, l'assistenza sanitaria, l'arricchimento culturale e l'aiuto umanitario. Trasformando le vite una comunità alla volta."
+    "title": "COSTRUIRE UN FUTURO MIGLIORE, MANO NELLA MANO",
+    "subtitle": "Crediamo nel potere della comunità. In collaborazione con i villaggi da Dschang al Camerun, garantiamo che ogni famiglia abbia l'opportunità di prosperare attraverso l'accesso all'assistenza sanitaria, all'istruzione e al patrimonio culturale."
   },
   "hero_buttons": {
     "donate": "Dona",
@@ -9,27 +9,27 @@
   },
   "about": {
     "label": "Chi siamo",
-    "title": "Tessere salute, progresso e patrimonio nel tessuto del domani",
-    "description": "In ogni comunità che serviamo, dalle vibranti strade di Dschang ai villaggi attraverso il Camerun e oltre, vediamo un potenziale inesplorato in attesa di fiorire. La nostra missione trascende i confini e le barriere. Non costruiamo solo cliniche e scuole; coltiviamo ecosistemi dove la salute prospera, dove l'istruzione apre porte un tempo ritenute permanentemente chiuse, e dove le tradizioni culturali diventano fonti di orgoglio e opportunità economiche.",
+    "title": "Dalle fondamenta: La nostra promessa alle comunità camerunensi.",
+    "description": "Crediamo che il vero cambiamento inizi con un passo fondamentale. In villaggi come Yantou e in tutto il Camerun, il futuro di un bambino dipende dall’avere una classe, la sopravvivenza di una madre dipende da una clinica locale, e lo spirito di una comunità è legato al suo patrimonio. La Fondazione Denise Time Mafodom (FDTM) è nata da questa semplice verità. Collaboriamo con leader locali e famiglie, fornendo le risorse essenziali di cui hanno bisogno per costruire salute duratura, opportunità e progresso.",
     "link": "Scopri di più"
   },
   "support": {
     "label": "Dona",
-    "title": "Sostieni il nostro lavoro - I tuoi doni - Nascono i sogni",
-    "description1": "Il tuo sostegno alimenta il vero cambiamento nelle comunità che ne hanno più bisogno. Ogni dono aiuta a fornire assistenza sanitaria, istruzione e risorse essenziali.",
-    "description2": "Con la tua generosità, costruiamo scuole, cliniche e spazi sicuri. Dai potere alle famiglie di sognare in grande e realizzare di più.",
-    "description3": "Insieme, trasformiamo la speranza in azione e le idee in realtà. Il tuo contributo dà vita a progetti che trasformano le vite.",
+    "title": "Il tuo dono, il loro futuro. Vedi l'impatto diretto della tua donazione.",
+    "description1": "Ogni donazione, indipendentemente dall'importo, fornisce risorse che cambiano la vita a una famiglia bisognosa.",
+    "description2": "Puoi essere la ragione per cui un bambino guarisce da una malattia, uno studente riceve il suo primo libro di testo o una nuova madre ha un posto sicuro dove partorire.",
+    "description3": "La tua generosità scrive una nuova storia per una comunità.",
     "description4": "Dai neonati agli anziani, la tua gentilezza crea un impatto duraturo. Unisciti a noi perché ogni dono nasce da un domani più luminoso.",
     "button": "Dona oggi"
   },
   "projects": {
-    "title": "I progetti che abbiamo realizzato",
+    "title": "Il nostro impatto in azione",
     "label": "VISUALIZZA I NOSTRI PROGETTI",
     "viewAll": "Visualizza tutti i progetti"
   },
   "joinUs": {
     "title": "Unisciti a noi per fare la differenza",
-    "subtitle": "Ogni contributo, per quanto piccolo, crea onde di cambiamento positivo nelle comunità",
+    "subtitle": "Hai il potere di creare un cambiamento duraturo. Che sia con il tuo tempo, la tua voce o una donazione, la tua collaborazione aiuta a costruire un mondo in cui ogni persona ha la possibilità di prosperare. Unisciti alla nostra missione oggi.",
     "buttons": {
       "donate": "Dona",
       "volunteer": "Fai volontariato",

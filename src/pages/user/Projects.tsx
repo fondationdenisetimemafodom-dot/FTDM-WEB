@@ -119,7 +119,7 @@ function Projects() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 0.8 }}
-            className="text-[40px] md:text-4xl lg:text-[56px] text-center font-bold text-white leading-tight"
+            className="text-[25px]  md:text-4xl lg:text-[35px] text-center font-bold text-white leading-tight"
           >
             {t("hero.title")}
           </motion.h1>
@@ -127,7 +127,7 @@ function Projects() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.5 }}
-            className="text-lg md:text-xl lg:text-3xl font-regular text-white text-center"
+            className="text-sm md:text-xl lg:text-xl font-regular text-white text-center font-weight 600px linespacing-0.5px"
           >
             {t("hero.subtitle")}
           </motion.p>
@@ -200,23 +200,23 @@ function Projects() {
       </div>
 
       <div className="flex flex-col items-center py-12 md:py-16 lg:py-20 gap-6 px-4 md:px-6 lg:px-8 bg-white">
-        <h2 className="font-bold text-3xl md:text-4xl lg:text-[48px] text-center text-gray-800">
+        <h2 className="font-bold text-2xl md:text-4xl lg:text-[30px] text-center text-gray-800">
           {t("collective.title")}
         </h2>
-        <p className="text-center text-lg md:text-2xl lg:text-3xl max-w-[774px] text-secondary-text-500">
+        <p className="text-center text-xl md:text-2xl lg:text-xl max-w-[774px] text-secondary-text-500">
           {t("collective.subtitle")}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-6 mt-6 w-full max-w-6xl">
           <div className="flex flex-col items-center gap-3 md:gap-4">
-            <span className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-green-500">
+            <span className="text-2xl md:text-6xl lg:text-4xl font-extrabold text-gray-700">
               {totalProjects}+
             </span>
-            <span className="text-xl md:text-2xl lg:text-3xl font-semibold text-secondary-text-500 text-center">
+            <span className="text-[20px] md:text-2xl lg:text-2xl font-semibold text-secondary-text-500 text-center">
               {t("collective.stats.projects")}
             </span>
           </div>
           <div className="flex flex-col items-center gap-3 md:gap-4">
-            <span className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-main-500">
+            <span className="text-2xl md:text-6xl lg:text-4xl font-extrabold text-gray-700">
               {totalBeneficiaries.toLocaleString()}+
             </span>
             <span className="text-xl md:text-2xl lg:text-3xl font-semibold text-secondary-text-500 text-center">
@@ -224,15 +224,15 @@ function Projects() {
             </span>
           </div>
           <div className="flex flex-col items-center gap-3 md:gap-4">
-            <span className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-red-500">
-              15+
+            <span className="text-2xl md:text-6xl lg:text-4xl font-extrabold text-gray-700">
+              3+
             </span>
             <span className="text-xl md:text-2xl lg:text-3xl font-semibold text-secondary-text-500 text-center">
               {t("collective.stats.villages")}
             </span>
           </div>
           <div className="flex flex-col items-center gap-3 md:gap-4">
-            <span className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-purple-500">
+            <span className="text-2xl md:text-6xl lg:text-4xl font-extrabold text-gray-700">
               100K+
             </span>
             <span className="text-xl md:text-2xl lg:text-3xl font-semibold text-secondary-text-500 text-center">

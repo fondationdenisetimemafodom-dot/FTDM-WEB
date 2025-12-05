@@ -1,7 +1,7 @@
 {
   "hero": {
-    "title": "TRANSFORMING LIVES THROUGH SOLIDARITY",
-    "subtitle": "Where compassion meets action. From Dschang to the world, we're building bridges of hope through education, healthcare, cultural enrichment, and humanitarian outreach. Transforming lives one community at a time."
+    "title": "BUILDING A BRIGHTER FUTURE, HAND-IN-HAND ",
+    "subtitle": "We believe in the power of community. In partnership with villages from Dschang to Cameroon, we're ensuring that every family has the opportunity to thrive through access to healthcare, education, and cultural heritage."
   },
   "hero_buttons": {
     "donate": "Donate",
@@ -9,27 +9,26 @@
   },
   "about": {
     "label": "Know about us",
-    "title": "Weaving Health, Progress, and Heritage Into the Fabric of Tomorrow",
-    "description": "In every community we serve, from the vibrant streets of Dschang to villages across Cameroon and beyond, we see untapped potential waiting to flourish. Our mission transcends borders and barriers. We don't just build clinics and schools; we cultivate ecosystems where health thrives, where education opens doors once thought permanently closed, and where cultural traditions become sources of pride and economic opportunity.",
-    "link": "Learn more"
+    "title": "From the Ground Up: Our Promise to Cameroonian Communities.",
+    "description": "We believe real change begins with a single, crucial step. In villages like Yantou and across Cameroon, a child’s future depends on having a classroom, a mother’s survival depends on a local clinic, and a community's spirit is tied to its heritage. The Fondation Denise Time Mafodom (FDTM) was born from this simple truth. we partner with local leaders and families, providing the essential resources they need to build lasting health, opportunity, and progress"
   },
   "support": {
     "label": "Donate",
-    "title": "Support our work - Your gifts- Births dreams",
-    "description1": "Your support fuels real change in communities that need it most. Every gift helps provide healthcare, education, and essential resources.",
-    "description2": "With your generosity, we build schools, clinics, and safe spaces. You empower families to dream bigger and achieve more.",
-    "description3": "Together, we turn hope into action and ideas into reality. Your contribution breathes life into projects that transform lives.",
+    "title": "Your Gift, Their Future. See the Direct Impact of Your Donation.",
+    "description1": "Every donation, no matter the size, provides life-changing resources for a family in need.",
+    "description2": "You can be the reason a child recovers from illness, a student receives their first textbook, or a new mother has a safe place to give birth",
+    "description3": " Your generosity writes a new story for a community.",
     "description4": "From newborns to elders, your kindness creates lasting impact. Join us because every gift births a brighter tomorrow.",
     "button": "Donate today"
   },
   "projects": {
-    "title": "Projects We Have Done",
+    "title": "Our Impact in Action",
     "label": "VIEW OUR PROJECTS",
     "viewAll": "View All Projects"
   },
   "joinUs": {
     "title": "Join Us in making a difference",
-    "subtitle": "Every contribution, no matter how small, creates ripples of positive change in communities",
+    "subtitle": "You have the power to create lasting change. Whether through your time, your voice, or a donation, your partnership helps build a world where every person has the chance to thrive. Join our mission today.",
     "buttons": {
       "donate": "Donate",
       "volunteer": "Volunteer",

@@ -346,7 +346,7 @@ function Donate() {
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.5, delay: 0.8 }}
-              className="text-[40px] md:text-4xl lg:text-[56px] text-center font-bold text-white leading-tight"
+              className="text-[25px]  md:text-4xl lg:text-[35px] text-center font-bold text-white leading-tight"
             >
               {t("pageTitle")}
             </motion.span>
@@ -355,7 +355,7 @@ function Donate() {
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.5 }}
-              className="text-lg md:text-xl lg:text-3xl font-regular text-white text-center"
+              className="text-sm md:text-xl lg:text-xl font-regular text-white text-center font-weight 600px linespacing-0.5px"
             >
               {t("pageDescription")}
             </motion.span>

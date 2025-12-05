@@ -147,7 +147,7 @@ function Home() {
       <div className=" w-full ">
         {/*hero section*/}
         <div
-          className=" w-full pt-27 pb-40 p-2 px-10 lg:px-25 flex flex-col lg:flex-row justify-between items-center "
+         className=" w-full pt-27 pb-40 p-2 px-10 lg:px-25 flex flex-col lg:flex-row justify-between items-center "
           style={{
             backgroundImage: `linear-gradient(to right, #ffffffcc 30%, #dbeafe), url(${BgImage})`,
             backgroundSize: "cover",
@@ -160,10 +160,10 @@ function Home() {
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.5, delay: 0.8 }}
-              className="block max-w-[500px] font-bold text-[22px] sm:text-[20px] md:text-[35px lg:text-[40px] text-main-500"
+              className="block max-w-[500px] font-bold text-[22px] sm:text-[25px] md:text-[35px lg:text-[40px] text-main-500"
               style={{
                 lineHeight: "1.9",
-                fontFamily: "Arial, sans-serif",
+                fontFamily: "inter, sans-serif",
                 letterSpacing: "1px",
               }}
             >
@@ -191,7 +191,7 @@ function Home() {
             >
               <NavLink
                 to="/donate"
-                className="flex items-center justify-center bg-main-500 w-58 md:w-28 lg:w-50 px-4 py-2 text-white text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
+                className="flex items-center justify-center bg-main-500 w-54 md:w-28 lg:w-50 px-4 py-2 text-white text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
                 {t("hero_buttons.donate")}
               </NavLink>
@@ -456,18 +456,18 @@ function Home() {
 
         {/*projects section*/}
         <div className="w-full p-10 lg:p-25 flex flex-col justify-between items-center bg-[#F3F5F8]">
-          <span className=" text-[40px] font-bold self-center">
+          <span className=" text-[30px] font-bold self-center">
             {t("projects.title")}
           </span>
           <div className="flex flex-row items-start gap-5 self-start mt-8">
-            <div className="mt-2 bg-soft-dark-500 h-4 w-20"></div>
-            <p className="uppercase text-lg md:text-2xl font-bold text-soft-dark-500">
+            {/* <div className="mt-2 bg-soft-dark-500 h-2 w-20"></div>
+            <p className="uppercase text-[16px] md:text-2xl font-bold text-soft-dark-500">
               {t("projects.label")}
-            </p>
+            </p> */}
           </div>
 
           {/* Projects Display */}
-          <div className="w-full mt-12">
+          <div className="w-full mt-zz">
             {loadingProjects ? (
               <div className="flex flex-col items-center justify-center py-12">
                 <Loader2 className="w-12 h-12 animate-spin text-main-500 mb-4" />
@@ -534,26 +534,28 @@ function Home() {
           <span className="text-3xl md:text-[40px] font-bold">
             {t("joinUs.title")}
           </span>
-          <span className="text-xl md:text-[30px] font-semibold block mt-4">
+          <span className="text-xl md:text-[20px] font-semibold block mt-4">
             {t("joinUs.subtitle")}
           </span>
         </div>
         <div className="flex flex-col md:flex-row justify-center md:justify-between items-center gap-6 md:gap-8 lg:gap-12 mt-12 text-xl md:text-2xl lg:text-[30px] max-w-6xl mx-auto font-semibold">
           <NavLink
             to="/donate"
-            className="bg-white hover:vibrate text-main-500 py-4 px-6 w-full md:w-auto md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:cursor-pointer hover:bg-gray-50 transition-colors"
+            className="bg-white hover:vibrate text-main-500 py-4 px-6 w-[230px]  md:min-w-[200px] lg:min-w-[230px] rounded-2xl flex items-center justify-center hover:cursor-pointer hover:bg-gray-50 transition-colors text-[20px]"
           >
             {t("joinUs.buttons.donate")}
           </NavLink>
           <button
             onClick={() => setShowVolunteer(true)}
-            className="bg-main-500 hover:vibrate text-white hover:cursor-pointer py-4 px-6 w-full md:w-auto md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:bg-main-600 transition-colors"
+            className="bg-main-500 hover:vibrate hover:cursor-pointer text-white py-4 px-6 w-[230px] md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:bg-main-600 transition-colors text-[18px]
+"
           >
             {t("joinUs.buttons.volunteer")}
           </button>
           <button
             onClick={() => setShowPartnership(true)}
-            className="bg-main-500 hover:vibrate hover:cursor-pointer text-white py-4 px-6 w-full md:w-auto md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:bg-main-600 transition-colors"
+            className="bg-main-500 hover:vibrate hover:cursor-pointer text-white py-4 px-6 w-[230px] md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:bg-main-600 transition-colors text-[18px]
+"
           >
             {t("joinUs.buttons.partner")}
           </button>

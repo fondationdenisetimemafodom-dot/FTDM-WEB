@@ -569,7 +569,7 @@ function ContactUs() {
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.5, delay: 0.8 }}
-              className="text-[40px] md:text-4xl lg:text-[56px] text-center font-bold text-white leading-tight"
+              className="text-[25px]  md:text-4xl lg:text-[35px] text-center font-bold text-white leading-tight"
             >
               {t("hero.title")}
             </motion.span>
@@ -578,7 +578,7 @@ function ContactUs() {
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.5 }}
-              className="text-lg md:text-xl lg:text-3xl font-regular text-white text-center"
+              className="text-sm md:text-xl lg:text-xl font-regular text-white text-center font-weight 600px linespacing-0.5px"
             >
               {t("hero.description")}
             </motion.span>
@@ -587,20 +587,20 @@ function ContactUs() {
 
         <div className="flex flex-col gap-12 items-center">
           <div className="flex flex-col lg:flex-row items-start justify-center bg-[#F3F5F8] w-full py-10 lg:py-20 px-4 lg:px-25 gap-8 lg:gap-28">
-            <div className="hidden lg:block mt-2 bg-soft-dark-500 h-4 w-20"></div>
+            {/* <div className="hidden lg:block mt-2 bg-soft-dark-500 h-4 w-20"></div> */}
 
             <div className="w-full lg:w-auto">
               <div className="flex flex-row items-center gap-4">
-                <div className="block lg:hidden bg-soft-dark-500 h-3 w-15"></div>
+                {/* <div className="block lg:hidden bg-soft-dark-500 h-3 w-15"></div>
                 <p className="uppercase text-xl lg:text-2xl font-bold text-soft-dark-500">
                   {t("title")}
-                </p>
+                </p> */}
               </div>
               <div className="flex flex-col gap-2 max-w-full lg:max-w-[480px]">
-                <h2 className="text-[40px] lg:text-[56px] font-bold text-main-500 mt-2">
+                <h2 className="text-[25px] lg:text-[30px] font-bold text-main-500 mt-2">
                   {t("headline")}
                 </h2>
-                <p className="text-secondary-text-500 text-lg lg:text-3xl">
+                <p className="text-secondary-text-500 text-[1px] lg:text-[20px] mt-4">
                   {t("description")}
                 </p>
               </div>

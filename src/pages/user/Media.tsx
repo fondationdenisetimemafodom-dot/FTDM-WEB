@@ -188,7 +188,7 @@ function Media() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 0.8 }}
-            className="text-[40px] md:text-4xl lg:text-[56px] text-center font-bold  leading-tight
+            className="text-[25px] md:text-4xl lg:text-[35px] text-center font-bold  leading-tight
              text-main-500"
           >
             {t("hero.title")}
@@ -197,7 +197,7 @@ function Media() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.5 }}
-            className="text-lg md:text-xl lg:text-3xl font-regular text-secondary-text-500 text-center"
+            className="text-sm md:text-xl lg:text-xl font-regular text-secondary-text-500 text-center font-weight 600px linespacing-0.5px"
           >
             {t("hero.subtitle")}
           </motion.span>
@@ -362,7 +362,7 @@ function Media() {
 
       <div className="w-full max-w-[1200px] mx-auto px-4 py-12">
         <div className="flex flex-col  items-start sm:justify-between mb-8 gap-4">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
+          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">
             {t("gallery.title")} ({filteredMedia.length} items)
           </h2>
 
@@ -479,7 +479,7 @@ function Media() {
       </div>
 
       <div
-        className="flex flex-col items-center w-full lg:w-[70vw] mx-auto my-20 p-8 lg:p-20 rounded-3xl"
+        className="flex flex-col items-center w-[80vw] lg:w-[90vw] mx-auto my-20 p-8 lg:p-20 rounded-3xl"
         style={{
           backgroundImage: `url(${mediaBackground})`,
           backgroundSize: "cover",
@@ -487,19 +487,21 @@ function Media() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <span className="text-[28px] lg:text-[40px] text-center font-bold text-white">
+        <span className="text-[20px] lg:text-[30px] text-center font-bold text-white">
           {t("cta.title")}
         </span>
         <div className="flex flex-col md:flex-row justify-center md:justify-between items-center gap-6 md:gap-8 lg:gap-12 mt-12 text-xl md:text-2xl lg:text-[30px] max-w-6xl mx-auto font-semibold">
           <button
             onClick={() => setShowVolunteer(true)}
-            className="bg-main-500 text-white hover:cursor-pointer py-4 px-6 w-full md:w-auto md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:bg-main-600 transition-colors"
+            className="bg-main-500 text-white hover:cursor-pointer py-4 px-6 w-full md:w-auto md:min-w-[100px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:bg-main-600 transition-colors text-[18px]
+"
           >
             {t("cta.volunteer")}
           </button>
           <NavLink
             to="/donate"
-            className="bg-white text-main-500 py-4 px-6 w-full md:w-auto md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:cursor-pointer hover:bg-gray-50 transition-colors"
+            className="bg-white text-main-500 py-4 px-6 w-full md:w-auto md:min-w-[200px] lg:min-w-[293px] rounded-2xl flex items-center justify-center hover:cursor-pointer hover:bg-gray-50 transition-colors text-[18px]
+"
           >
             {t("cta.donate")}
           </NavLink>

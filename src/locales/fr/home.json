@@ -1,7 +1,7 @@
 {
   "hero": {
-    "title": "TRANSFORMER LES VIES PAR LA SOLIDARITÉ",
-    "subtitle": "Où la compassion rencontre l'action. De Douala au monde, nous construisons des ponts d'espoir à travers l'éducation, les soins de santé, l'enrichissement culturel et l'aide humanitaire. Transformer les vies une communauté à la fois."
+    "title": "CONSTRUIRE UN AVENIR PLUS LUMINEUX, MAIN DANS LA MAIN ",
+    "subtitle": "Nous croyons au pouvoir de la communauté. En partenariat avec les villages de Dschang au Cameroun, nous veillons à ce que chaque famille ait la possibilité de prospérer grâce à l'accès aux soins de santé, à l'éducation et au patrimoine culturel."
   },
   "hero_buttons": {
     "donate": "Donner",
@@ -9,27 +9,27 @@
   },
   "about": {
     "label": "À propos de nous",
-    "title": "Tisser la santé, le progrès et le patrimoine dans le tissu de demain",
-    "description": "Dans chaque communauté que nous servons, des rues vibrantes de Douala aux villages à travers le Cameroun et au-delà, nous voyons un potentiel inexploité qui attend de s'épanouir. Notre mission transcende les frontières et les obstacles. Nous ne nous contentons pas de construire des cliniques et des écoles ; nous cultivons des écosystèmes où la santé prospère, où l'éducation ouvre des portes autrefois jugées fermées, et où les traditions culturelles deviennent des sources de fierté et d'opportunités économiques.",
+    "title": "De la base : Notre promesse aux communautés camerounaises.",
+    "description": "Nous croyons que le véritable changement commence par une étape cruciale. Dans des villages comme Yantou et partout au Cameroun, l'avenir d'un enfant dépend d'avoir une salle de classe, la survie d'une mère dépend d'une clinique locale, et l'esprit d'une communauté est lié à son patrimoine. La Fondation Denise Time Mafodom (FDTM) est née de cette vérité simple. Nous travaillons avec les dirigeants locaux et les familles, en fournissant les ressources essentielles dont ils ont besoin pour bâtir une santé durable, des opportunités et du progrès.",
     "link": "En savoir plus"
   },
   "support": {
     "label": "Donner",
-    "title": "Soutenir notre travail - Vos dons - Naissent des rêves",
-    "description1": "Votre soutien alimente un vrai changement dans les communautés qui en ont le plus besoin. Chaque don aide à fournir des soins de santé, l'éducation et les ressources essentielles.",
-    "description2": "Grâce à votre générosité, nous construisons des écoles, des cliniques et des espaces sûrs. Vous habilitez les familles à rêver plus grand et à réaliser davantage.",
-    "description3": "Ensemble, nous transformons l'espoir en action et les idées en réalité. Votre contribution donne vie à des projets qui transforment les vies.",
+    "title": "Votre don, leur avenir. Découvrez l'impact direct de votre don.",
+    "description1": "Chaque don, quelle que soit sa taille, fournit des ressources qui changent la vie d’une famille dans le besoin.",
+    "description2": "Vous pouvez être la raison pour laquelle un enfant guérit d’une maladie, un élève reçoit son premier manuel, ou une nouvelle mère a un lieu sûr pour accoucher.",
+    "description3": "Votre générosité écrit une nouvelle histoire pour une communauté.",
     "description4": "Des nouveau-nés aux aînés, votre bienveillance crée un impact durable. Rejoignez-nous car chaque don naît d'un demain plus lumineux.",
     "button": "Donner aujourd'hui"
   },
   "projects": {
-    "title": "Les projets que nous avons réalisés",
+    "title": "Notre impact en action",
     "label": "VOIR NOS PROJETS",
     "viewAll": "Voir tous les projets"
   },
   "joinUs": {
     "title": "Rejoignez-nous pour faire la différence",
-    "subtitle": "Chaque contribution, si petite soit-elle, crée des ondes de changement positif dans les communautés",
+    "subtitle": "Vous avez le pouvoir de créer un changement durable. Que ce soit par votre temps, votre voix ou un don, votre partenariat aide à bâtir un monde où chaque personne a la chance de prospérer. Rejoignez notre mission dès aujourd'hui.",
     "buttons": {
       "donate": "Donner",
       "volunteer": "Devenir volontaire",

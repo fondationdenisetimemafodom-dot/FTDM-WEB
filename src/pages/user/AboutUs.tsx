@@ -105,7 +105,7 @@ function AboutUs() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 0.8 }}
-            className="text-[40px]  md:text-4xl lg:text-[56px] text-center font-bold text-white leading-tight"
+            className="text-[25px]  md:text-4xl lg:text-[35px] text-center font-bold text-white leading-tight"
           >
             {t("hero.title")}
           </motion.span>
@@ -114,25 +114,25 @@ function AboutUs() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.5 }}
-            className="text-lg md:text-xl lg:text-3xl font-regular text-white text-center"
+            className="text-sm md:text-xl lg:text-xl font-regular text-white text-center font-weight 600px linespacing-0.5px"
           >
             {t("hero.description")}
           </motion.span>
         </div>
       </div>
 
-      <div className="w-full p-10 lg:p-25 flex flex-col justify-between items-center bg-[#F3F5F8]">
+      <div className="w-full p-10 lg:p-15 flex flex-col justify-between items-center bg-[#F3F5F8]">
         <motion.span
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-[40px] font-bold self-center"
+          className="text-[30px] font-bold self-center"
         >
           {t("missionVision.sectionTitle")}
         </motion.span>
 
-        <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-30 mt-10">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-30 mt-0">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -141,7 +141,7 @@ function AboutUs() {
             className="flex flex-col items-start gap-10 self-start mt-8"
           >
             <div className="flex flex-row items-start gap-5 self-start mt-8">
-              <div className="mt-2 bg-soft-dark-500 h-4 w-20"></div>
+              <div className="mt-3 bg-soft-dark-500 h-2 w-20"></div>
               <p className="uppercase text-lg md:text-2xl font-bold text-soft-dark-500">
                 {t("missionVision.missionLabel")}
               </p>
@@ -150,7 +150,7 @@ function AboutUs() {
               <p className="text-lg md:text-3xl font-bold text-secondary-text-500">
                 {t("missionVision.missionTitle")}
               </p>
-              <p className="text-[16px] md:text-[20px] font-bold text-gray-400 mt-8">
+              <p className="text-[16px] md:text-[20px]  text-gray-500 mt-8">
                 {t("missionVision.missionDescription")}
               </p>
             </div>
@@ -164,7 +164,7 @@ function AboutUs() {
             className="flex flex-col items-start gap-10 self-start mt-8"
           >
             <div className="flex flex-row items-start gap-5 self-start mt-8">
-              <div className="mt-2 bg-soft-dark-500 h-4 w-20"></div>
+              <div className="mt-3 bg-soft-dark-500 h-2 w-20"></div>
               <p className="uppercase text-lg md:text-2xl font-bold text-soft-dark-500">
                 {t("missionVision.visionLabel")}
               </p>
@@ -173,7 +173,7 @@ function AboutUs() {
               <p className="text-lg md:text-3xl font-bold text-secondary-text-500">
                 {t("missionVision.visionTitle")}
               </p>
-              <p className="text-[16px] md:text-[20px] font-bold text-gray-400 mt-8">
+              <p className="text-[16px] md:text-[20px]  text-gray-500 mt-8">
                 {t("missionVision.visionDescription")}
               </p>
             </div>
@@ -248,7 +248,7 @@ function AboutUs() {
 
       <div className="w-full p-10 lg:p-25 flex flex-col justify-between items-center bg-white">
         <div className="flex flex-col justify-between items-center mb-12">
-          <span className="text-[40px] font-bold text-center mb-4">
+          <span className="text-[30px] font-bold text-center mb-4">
             {t("supporters.title")}
           </span>
           <span className="text-center max-w-[600px] text-gray-600 text-base">
@@ -344,12 +344,12 @@ function AboutUs() {
               </p>
             </div>
           )}
-        <span className="text-[40px] font-bold text-center my-6">
+        <span className="text-[30px] font-bold text-center my-6">
           {t("supporters.becomeSupporter")}
         </span>
         <NavLink
           to="/donate"
-          className="flex items-center hover:vibrate justify-center bg-main-500  py-3 px-5 text-white text-2xl font-semibold rounded-[12px] hover:cursor-pointer"
+          className="flex items-center hover:vibrate justify-center bg-main-500  py-3 px-5 text-white text-xl font-semibold rounded-[12px] hover:cursor-pointer"
         >
           {t("supporters.donateButton")}
         </NavLink>
