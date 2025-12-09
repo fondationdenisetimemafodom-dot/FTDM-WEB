@@ -203,7 +203,7 @@ function UserNavbar() {
               to="/donate"
               onClick={closeMenu}
               className={({ isActive }) =>
-                `px-6 py-3 hover:vibrate rounded-[12px] text-lg font-medium text-center transition ${
+                `px-4 py-3 hover:vibrate rounded-[12px] text-lg font-medium text-center transition ${
                   isActive
                     ? "bg-white text-main-500 border-2 border-main-500"
                     : "bg-main-500 text-white hover:opacity-90"
