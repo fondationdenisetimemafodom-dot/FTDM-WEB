@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "../../src/assets/images/logo.png";
+import logo from "../../src/assets/images/Favicon.png.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 function UserNavbar() {
@@ -22,7 +22,7 @@ function UserNavbar() {
           <img
             src={logo}
             alt="Logo"
-            className="h-[40px] w-[50px] sm:h-[50px] sm:w-[60px] lg:h-[70px] lg:w-[85px]"
+            className="h-[40px] sm:h-[50px] lg:h-[70px] w-auto"
           />
           <span className="font-bold text-xs sm:text-sm lg:text-[16px] max-w-55">
             {t("logoText")}
