@@ -24,7 +24,7 @@ function UserNavbar() {
             alt="Logo"
             className="h-[40px] sm:h-[50px] lg:h-[70px] w-auto"
           />
-          <span className="font-bold text-xs sm:text-sm lg:text-[16px] max-w-55">
+          <span className="font-bold text-xs sm:text-[15px] lg:text-[20px] max-w-55">
             {t("logoText")}
           </span>
         </div>
