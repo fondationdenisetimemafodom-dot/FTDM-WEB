@@ -196,14 +196,14 @@ function Home() {
             >
               <NavLink
                 to="/donate"
-                className="flex items-center justify-center bg-main-500 w-54 md:w-28 lg:w-50 px-4 py-2 text-white text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
+                className="flex items-center justify-center bg-main-500 w-ful md:w-28 lg:w-50 px-4 py-2 text-white text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
                 {t("hero_buttons.donate")}
               </NavLink>
 
               {/* <button
                 onClick={() => setShowVolunteer(true)}
-                className="border-[3px] border-main-500 py-2 px-4 text-main-500 text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
+                className="border-[3px] border-main-500 py-2 px-20 text-main-500 text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
                 {t("hero_buttons.volunteer")}
               </button> */}
