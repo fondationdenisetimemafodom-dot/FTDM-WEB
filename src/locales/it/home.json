@@ -7,12 +7,84 @@
     "donate": "Dona",
     "viewprojects": "Vedi i nostri progetti"
   },
+  "trust": {
+    "onlusCertified": "ONLUS Certificata",
+    "onlusSubtitle": "Organizzazione registrata",
+
+    "lives": "200+ vite",
+    "livesSubtitle": "Beneficiari diretti",
+
+    "centerYantou": "Centro Yantou",
+    "centerSubtitle": "Operativo dal 2025",
+
+    "impact": "95% Impatto",
+    "impactSubtitle": "Donazioni sul campo"
+  },
+  "Topabout": {
+    "title": "Una vocazione nata da un sogno di giustizia sociale",
+    "paragraph": "La Fondazione Denise Time Mafodom è nata da una visione di solidarietà umana senza confini. Trasformiamo le vite attraverso un'azione compassionevole, dal cuore pulsante di Dschang ai villaggi più remoti del Camerun.",
+
+    "missionTitle": "La Nostra Missione",
+    "missionText": "Accendere la speranza, responsabilizzare le vite e trasformare le comunità attraverso l'umanità condivisa. Sosteniamo la solidarietà umana creando percorsi di opportunità attraverso un'educazione trasformativa, dinamici scambi culturali, un sostegno umanitario compassionevole e uno sviluppo sociale sostenibile.",
+    "missionPoints": {
+      "p1": "Educazione trasformativa",
+      "p2": "Assistenza sanitaria accessibile per tutti",
+      "p3": "Sviluppo sostenibile"
+    },
+
+    "visionTitle": "La Nostra Visione",
+    "visionText": "Un mondo unito dalla compassione, in cui ogni comunità prospera con dignità e uno scopo. Immaginiamo un futuro in cui la compassione trascenda tutti i confini geografici, culturali ed economici. Un mondo in cui i bambini sognano senza limiti e il potenziale umano non conosce barriere.",
+    "visionPoints": {
+      "p1": "Pari opportunità",
+      "p2": "Dignità per tutti",
+      "p3": "Comunità resilienti"
+    }
+  },
   "about": {
     "label": "Chi siamo",
     "title": "Dalle fondamenta: La nostra promessa alle comunità camerunensi.",
     "description": "Crediamo che il vero cambiamento inizi con un passo fondamentale. In villaggi come Yantou e in tutto il Camerun, il futuro di un bambino dipende dall’avere una classe, la sopravvivenza di una madre dipende da una clinica locale, e lo spirito di una comunità è legato al suo patrimonio. La Fondazione Denise Time Mafodom (FDTM) è nata da questa semplice verità. Collaboriamo con leader locali e famiglie, fornendo le risorse essenziali di cui hanno bisogno per costruire salute duratura, opportunità e progresso.",
     "link": "Scopri di più"
   },
+  
+    "coreValues": {
+      "title": "I nostri valori fondamentali",
+      "description": "Questi principi guidano ogni nostra azione e definiscono chi siamo come organizzazione."
+    },
+    "impactDirect": {
+      "title": "Impatto Diretto",
+      "text": "Ci concentriamo su progetti che portano un cambiamento misurabile e immediato nella vita delle persone, con risultati tangibili e verificabili."
+    },
+    "transparency": {
+      "title": "Trasparenza",
+      "text": "Ogni donazione è tracciata e il suo utilizzo è comunicato chiaramente ai nostri partner e donatori. I nostri report di impatto sono pubblici e dettagliati."
+    },
+    "sustainability": {
+      "title": "Sostenibilità",
+      "text": "Creiamo soluzioni che permettono alle comunità di diventare autosufficienti a lungo termine, con impatti che durano ben oltre le nostre interventi."
+    },
+    "focusAreas": {
+      "title": "Le nostre aree di intervento",
+      "description": "Il nostro lavoro si sviluppa su quattro pilastri essenziali per uno sviluppo umano completo e sostenibile."
+    },
+    "health": {
+      "title": "Salute",
+      "text": "Costruire e attrezzare centri sanitari per garantire l'accesso alle cure primarie per tutti, inclusa la salute materna e infantile."
+    },
+    "education": {
+      "title": "Educazione",
+      "text": "Fornire borse di studio, materiali scolastici e un ambiente favorevole all'apprendimento per liberare il potenziale di ogni bambino."
+    },
+    "culture": {
+      "title": "Cultura",
+      "text": "Celebrare il patrimonio locale e incoraggiare gli scambi culturali per rafforzare l'identità e la coesione sociale."
+    },
+    "humanitarianAid": {
+      "title": "Aiuto Umanitario",
+      "text": "Intervenire rapidamente per fornire aiuti essenziali alle popolazioni in crisi o in grave difficoltà."
+    },
+  
+  
   "support": {
     "label": "Dona",
     "title": "Il tuo dono, il loro futuro. Vedi l'impatto diretto della tua donazione.",
@@ -21,6 +93,14 @@
     "description3": "La tua generosità scrive una nuova storia per una comunità.",
     "description4": "Dai neonati agli anziani, la tua gentilezza crea un impatto duraturo. Unisciti a noi perché ogni dono nasce da un domani più luminoso.",
     "button": "Dona oggi"
+  },
+
+  "stories": {
+    "title": "Storie dal territorio",
+    "description": "Dietro ogni statistica si nasconde una storia umana, un sogno realizzato, una vita trasformata.",
+    "quote": "Prima dovevamo camminare due ore per vedere un medico. Ora l’assistenza sanitaria è alla nostra porta. La fondazione ha salvato il nostro villaggio.",
+    "author": "— Marie, residente di Yantou e madre di tre figli.",
+    "alt": "Marie di Yantou"
   },
   "projects": {
     "title": "Il nostro impatto in azione",
@@ -35,5 +115,18 @@
       "volunteer": "Fai volontariato",
       "partner": "Diventa partner"
     }
+  },
+  "gallery": {
+    "title": "In immagini",
+    "description": "Scopri i nostri progetti e l'impatto della tua generosità attraverso questi momenti catturati sul campo.",
+    "image1Src": "/src/assets/images/yantou 4.png",
+    "image1Alt": "Centro sanitario",
+    "image2Src": "/src/assets/images/yantou 6.jpg",
+    "image2Alt": "Classe scolastica",
+    "image3Src": "/src/assets/images/yantou7.jpg",
+    "image3Alt": "Assistenza sanitaria",
+    "image4Src": "/src/assets/images/yantou2.png",
+    "image4Alt": "Comunità"
   }
+  
 }

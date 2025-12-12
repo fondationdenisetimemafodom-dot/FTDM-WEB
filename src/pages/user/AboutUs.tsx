@@ -245,6 +245,72 @@ function AboutUs() {
           </motion.div>
         </div>
       </div>
+      <section
+      id="impact"
+      className="py-20 md:py-28 parallax-bg relative"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1509099863731-ef4bff19e808?auto=format&fit=crop&w=1600&q=80')",
+      }}
+    >
+      <div className="absolute inset-0 bg-blue-900/90"></div>
+
+      <div className="relative max-w-6xl mx-auto px-6 lg:px-8 text-center">
+
+        {/* TITLE */}
+        <h2
+          className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6"
+          data-aos="fade-up"
+        >
+          {t("impact.title")}
+        </h2>
+
+        {/* DESCRIPTION */}
+        <p
+          className="text-lg text-blue-100 max-w-2xl mx-auto mb-16"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          {t("impact.description")}
+        </p>
+
+        {/* STATS */}
+        <div
+          className="grid grid-cols-2 md:grid-cols-4 gap-8"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <div className="text-4xl md:text-5xl font-bold text-white mb-2 count-up" data-target="200">200</div>
+            <div className="text-blue-200 font-semibold">
+              {t("impact.livesImpacted")}
+            </div>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <div className="text-4xl md:text-5xl font-bold text-white mb-2 count-up" data-target="15">15</div>
+            <div className="text-blue-200 font-semibold">
+              {t("impact.villagesReached")}
+            </div>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <div className="text-4xl md:text-5xl font-bold text-white mb-2 count-up" data-target="100">100</div>
+            <div className="text-blue-200 font-semibold">
+              {t("impact.investments")}
+            </div>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <div className="text-4xl md:text-5xl font-bold text-white mb-2 count-up" data-target="1">1</div>
+            <div className="text-blue-200 font-semibold">
+              {t("impact.centersBuilt")}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
       <div className="w-full p-10 lg:p-25 flex flex-col justify-between items-center bg-white">
         <div className="flex flex-col justify-between items-center mb-12">

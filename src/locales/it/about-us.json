@@ -26,6 +26,15 @@
       "description": "Costruire comunità più sane attraverso iniziative di accessibilità sanitaria e benessere. Garantiamo che i servizi sanitari di qualità raggiungano chi ne ha più bisogno, perché il benessere è un diritto umano fondamentale."
     }
   },
+  "impact": {
+    "title": "Il nostro impatto in cifre",
+    "description": "La fiducia che ci accordate si traduce in risultati concreti sul campo.",
+
+    "livesImpacted": "Vite Impattate",
+    "villagesReached": "Villaggi Raggiunti",
+    "investments": "Investimenti (K€)",
+    "centersBuilt": "Centro Costruito"
+  },
   "supporters": {
     "title": "I Nostri Migliori Sostenitori",
     "description": "Siamo profondamente grati ai nostri migliori sostenitori la cui generosità e impegno spingono avanti la nostra missione. Insieme, stiamo costruendo un futuro più luminoso per tutti.",

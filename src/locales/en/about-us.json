@@ -26,6 +26,19 @@
       "description": "Building healthier communities through accessible healthcare and wellness initiatives. We ensure that quality health services reach those who need them most, because well-being is a fundamental human right."
     }
   },
+
+  
+    "impact": {
+      "title": "Our Impact in Numbers",
+      "description": "The trust you place in us translates into concrete results on the ground.",
+  
+      "livesImpacted": "Lives Impacted",
+      "villagesReached": "Villages Reached",
+      "investments": "Investments (K€)",
+      "centersBuilt": "Center Built"
+    },
+  
+  
   "supporters": {
     "title": "Our Top Supporters",
     "description": "We are deeply grateful to our top supporters whose generosity and commitment drive our mission forward. Together, we are building a brighter future for all.",

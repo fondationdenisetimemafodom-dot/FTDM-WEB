@@ -7,12 +7,85 @@
     "donate": "Spenden",
     "viewprojects": "Bekijk onze projecten"
   },
+
+  "trust": {
+    "onlusCertified": "ONLUS Zertifiziert",
+    "onlusSubtitle": "Registrierte Organisation",
+
+    "lives": "200+ Leben",
+    "livesSubtitle": "Direkte Begünstigte",
+
+    "centerYantou": "Yantou Zentrum",
+    "centerSubtitle": "Betriebsbereit 2025",
+
+    "impact": "95% Wirkung",
+    "impactSubtitle": "Spenden direkt vor Ort"
+  },
+  "Topabout": {
+    "title": "Eine Berufung, geboren aus einem Traum von sozialer Gerechtigkeit",
+    "paragraph": "Die Denise Time Mafodom Foundation ist aus einer Vision grenzenloser menschlicher Solidarität entstanden. Wir verwandeln Leben durch mitfühlendes Handeln, vom pulsierenden Herzen Dschangs bis in die entlegensten Dörfer Kameruns.",
+
+    "missionTitle": "Unsere Mission",
+    "missionText": "Hoffnung entfachen, Leben stärken und Gemeinschaften durch gemeinsame Menschlichkeit verwandeln. Wir setzen uns für menschliche Solidarität ein, indem wir Wege der Chancen schaffen: durch transformative Bildung, dynamischen Kulturaustausch, mitfühlende humanitäre Unterstützung und nachhaltige soziale Entwicklung.",
+    "missionPoints": {
+      "p1": "Transformative Bildung",
+      "p2": "Zugängliche Gesundheitsversorgung für alle",
+      "p3": "Nachhaltige Entwicklung"
+    },
+
+    "visionTitle": "Unsere Vision",
+    "visionText": "Eine Welt, vereint durch Mitgefühl, in der jede Gemeinschaft in Würde und mit Sinn gedeiht. Wir sehen eine Zukunft voraus, in der Mitgefühl alle geografischen, kulturellen und wirtschaftlichen Grenzen überwindet. Eine Welt, in der Kinder grenzenlos träumen und menschliches Potenzial keine Barrieren kennt.",
+    "visionPoints": {
+      "p1": "Gleiche Chancen",
+      "p2": "Würde für alle",
+      "p3": "Widerstandsfähige Gemeinschaften"
+    }
+  },
   "about": {
     "label": "Über uns",
     "title": "Gesundheit, Fortschritt und Erbe in das Gefüge von morgen weben",
     "description": "In jeder Gemeinde, die wir dienen, von den lebendigen Straßen von Dschang bis zu Dörfern in Kamerun und darüber hinaus, sehen wir ungenutzte Potenziale, die darauf warten zu gedeihen. Unsere Mission überschreitet Grenzen und Hindernisse. Wir bauen nicht nur Kliniken und Schulen; wir kultivieren Ökosysteme, in denen Gesundheit gedeiht, in denen Bildung Türen öffnet, die einst für immer geschlossen schienen, und in denen kulturelle Traditionen zu Quellen des Stolzes und wirtschaftlicher Chancen werden.",
     "link": "Mehr erfahren"
   },
+  
+    "coreValues": {
+      "title": "Unsere Kernwerte",
+      "description": "Diese Prinzipien leiten jede unserer Handlungen und definieren, wer wir als Organisation sind."
+    },
+    "impactDirect": {
+      "title": "Direkte Wirkung",
+      "text": "Wir konzentrieren uns auf Projekte, die messbare und unmittelbare Veränderungen im Leben der Menschen bewirken, mit greifbaren und überprüfbaren Ergebnissen."
+    },
+    "transparency": {
+      "title": "Transparenz",
+      "text": "Jede Spende wird verfolgt und deren Verwendung unseren Partnern und Spendern klar kommuniziert. Unsere Wirkungsberichte sind öffentlich und detailliert."
+    },
+    "sustainability": {
+      "title": "Nachhaltigkeit",
+      "text": "Wir schaffen Lösungen, die Gemeinschaften langfristig befähigen, selbstständig zu werden, mit Auswirkungen, die weit über unsere Interventionen hinausreichen."
+    },
+    "focusAreas": {
+      "title": "Unsere Schwerpunktbereiche",
+      "description": "Unsere Arbeit erstreckt sich über vier wesentliche Säulen für eine umfassende und nachhaltige menschliche Entwicklung."
+    },
+    "health": {
+      "title": "Gesundheit",
+      "text": "Aufbau und Ausstattung von Gesundheitszentren, um den Zugang zu primärer Gesundheitsversorgung für alle zu gewährleisten, einschließlich Mutter- und Kindergesundheit."
+    },
+    "education": {
+      "title": "Bildung",
+      "text": "Bereitstellung von Stipendien, Schulmaterialien und einer lernförderlichen Umgebung, um das Potenzial jedes Kindes freizusetzen."
+    },
+    "culture": {
+      "title": "Kultur",
+      "text": "Feier des lokalen Erbes und Förderung des kulturellen Austauschs zur Stärkung von Identität und sozialem Zusammenhalt."
+    },
+    "humanitarianAid": {
+      "title": "Humanitäre Hilfe",
+      "text": "Schnelle Hilfeleistung zur Bereitstellung von lebenswichtiger Unterstützung für Bevölkerungsgruppen in Krisen- oder Extremsituationen."
+    },
+  
+  
   "support": {
     "label": "Spenden",
     "title": "Unterstützen Sie unsere Arbeit - Ihre Gaben - Träume entstehen",
@@ -21,6 +94,14 @@
     "description3": "Gemeinsam verwandeln wir Hoffnung in Aktion und Ideen in Wirklichkeit. Ihr Beitrag bringt Projekte zum Leben, die Leben verändern.",
     "description4": "Von Neugeborenen bis zu Senioren, Ihre Güte schafft bleibende Auswirkungen. Treten Sie uns bei, denn jede Spende wird zu einem helleren Morgen.",
     "button": "Heute spenden"
+  },
+
+  "stories": {
+    "title": "Geschichten aus dem Einsatzgebiet",
+    "description": "Hinter jeder Statistik steckt eine menschliche Geschichte, ein erfüllter Traum, ein verändertes Leben.",
+    "quote": "Früher mussten wir zwei Stunden laufen, um einen Arzt zu sehen. Jetzt ist die Gesundheitsversorgung direkt vor unserer Tür. Die Stiftung hat unser Dorf gerettet.",
+    "author": "— Marie, Bewohnerin von Yantou und Mutter von drei Kindern.",
+    "alt": "Marie aus Yantou"
   },
   "projects": {
     "title": "Projekte, die wir durchgeführt haben",

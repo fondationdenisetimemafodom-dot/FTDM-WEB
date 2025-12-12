@@ -8,9 +8,16 @@
   --color-soft-dark-500: #0e1115;
   --color-primary-text: #1d2130;
 }
+@import "@fontsource/inter/300.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/inter/800.css";
+
 
 body {
-  font-family: "poppins", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 /* Additional Tiptap placeholder styling */
 .tiptap p.is-editor-empty::before {

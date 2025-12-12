@@ -7,11 +7,94 @@
     "donate": "Donate",
     "viewprojects": "View our projects"
   },
+  "trust": {
+    "onlusCertified": "ONLUS Certified",
+    "onlusSubtitle": "Registered organization",
+
+    "lives": "200+ lives",
+    "livesSubtitle": "Direct beneficiaries",
+
+    "centerYantou": "Yantou Center",
+    "centerSubtitle": "Operational 2025",
+
+    "impact": "95% Impact",
+    "impactSubtitle": "Donations used on the field"
+  },
+  "Topabout": {
+    "title": "A vocation born from a dream of social justice",
+    "paragraph": "The Denise Time Mafodom Foundation was born from a vision of boundless human solidarity. We transform lives through compassionate action, from the beating heart of Dschang to the most remote villages of Cameroon.",
+
+    "missionTitle": "Our Mission",
+    "missionText": "Igniting hope, empowering lives, and transforming communities through shared humanity. We champion human solidarity by creating pathways of opportunity through transformative education, dynamic cultural exchange, compassionate humanitarian support, and sustainable social development.",
+    "missionPoints": {
+      "p1": "Transformative education",
+      "p2": "Accessible healthcare for all",
+      "p3": "Sustainable development"
+    },
+
+    "visionTitle": "Our Vision",
+    "visionText": "A world united by compassion, where every community thrives with dignity and purpose. We envision a future where compassion transcends all geographic, cultural, and economic boundaries. A world where children dream without limits and human potential knows no barriers.",
+    "visionPoints": {
+      "p1": "Equal opportunities",
+      "p2": "Dignity for all",
+      "p3": "Resilient communities"
+    }
+  },
   "about": {
     "label": "Know about us",
     "title": "From the Ground Up: Our Promise to Cameroonian Communities.",
     "description": "We believe real change begins with a single, crucial step. In villages like Yantou and across Cameroon, a child’s future depends on having a classroom, a mother’s survival depends on a local clinic, and a community's spirit is tied to its heritage. The Fondation Denise Time Mafodom (FDTM) was born from this simple truth. we partner with local leaders and families, providing the essential resources they need to build lasting health, opportunity, and progress"
   },
+
+  
+    "coreValues": {
+      "title": "Our Core Values",
+      "description": "These principles guide every action we take and define who we are as an organization."},
+
+      
+        "impactDirect": {
+          "title": "Direct Impact",
+          "text": "We focus on projects that bring measurable and immediate change in people's lives, with tangible and verifiable results."
+        },
+
+        "transparency": {
+          "title": "Transparency",
+          "text": "Every donation is tracked and its use is communicated clearly to our partners and donors. Our impact reports are public and detailed."
+        },
+
+        "sustainability": {
+          "title": "Sustainability",
+          "text": "We create solutions that empower communities to become self-sufficient long-term, with impacts lasting well beyond our interventions."
+        },
+      
+
+    "focusAreas": {
+      "title": "Our Focus Areas",
+      "description": "Our work unfolds on four essential pillars for comprehensive and sustainable human development."},
+
+      
+        "health": {
+          "title": "Health",
+          "text": "Build and equip health centers to guarantee access to primary care for all, including maternal and child health."
+        },
+
+        "education": {
+          "title": "Education",
+          "text": "Provide scholarships, school supplies, and an environment conducive to learning to unlock each child's potential."
+        },
+
+        "culture": {
+          "title": "Culture",
+          "text": "Celebrate local heritage and encourage cultural exchanges to strengthen identity and social cohesion."
+        },
+
+        "humanitarianAid": {
+          "title": "Humanitarian Aid",
+          "text": "Respond quickly to provide essential aid to populations in crisis or extreme hardship."
+        },
+      
+  
+  
   "support": {
     "label": "Donate",
     "title": "Your Gift, Their Future. See the Direct Impact of Your Donation.",
@@ -20,6 +103,14 @@
     "description3": " Your generosity writes a new story for a community.",
     "description4": "From newborns to elders, your kindness creates lasting impact. Join us because every gift births a brighter tomorrow.",
     "button": "Donate today"
+  },
+
+  "stories": {
+    "title": "Stories from the Field",
+    "description": "Behind every statistic lies a human story, a fulfilled dream, a transformed life.",
+    "quote": "Before, we had to walk 2 hours to see a doctor. Now, healthcare is at our doorstep. The foundation saved our village.",
+    "author": "— Marie, resident of Yantou and mother of three children.",
+    "alt": "Marie from Yantou"
   },
   "projects": {
     "title": "Our Impact in Action",
@@ -34,5 +125,20 @@
       "volunteer": "Volunteer",
       "partner": "Partner with us"
     }
-  }
+  },
+
+  "gallery": {
+  "title": "In Pictures",
+  "description": "Discover our projects and the impact of your generosity through these moments captured in the field.",
+  "image1Src": "/src/assets/images/yantou 4.png",
+  "image1Alt": "Health center",
+  "image2Src": "/src/assets/images/yantou 6.jpg",
+  "image2Alt": "School class",
+  "image3Src": "/src/assets/images/yantou7.jpg",
+  "image3Alt": "Health care",
+  "image4Src": "/src/assets/images/yantou2.png",
+  "image4Alt": "Community"
 }
+}
+  
+

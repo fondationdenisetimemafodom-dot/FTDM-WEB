@@ -22,6 +22,11 @@ import home_donate_image from "../../assets/images/home_donate.jpg";
 import video from "../../assets/videos/fdtmvideo.mp4";
 import { Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 type MediaItem = {
   publicId: string;
   type: string;
@@ -231,6 +236,157 @@ function Home() {
           />
         </div>
 
+{/* trustbadges */}
+<section className="py-16 bg-white border-y border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+
+          {/* ONLUS */}
+          <div className="text-center card-hover p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-white">
+            <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-2">{t("trust.onlusCertified")}</h3>
+            <p className="text-sm text-gray-600">{t("trust.onlusSubtitle")}</p>
+          </div>
+
+          {/* Lives */}
+          <div className="text-center card-hover p-6 rounded-2xl bg-gradient-to-br from-green-50 to-white">
+            <div className="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-2">{t("trust.lives")}</h3>
+            <p className="text-sm text-gray-600">{t("trust.livesSubtitle")}</p>
+          </div>
+
+          {/* Yantou */}
+          <div className="text-center card-hover p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-white">
+            <div className="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-2">{t("trust.centerYantou")}</h3>
+            <p className="text-sm text-gray-600">{t("trust.centerSubtitle")}</p>
+          </div>
+
+          {/* Impact */}
+          <div className="text-center card-hover p-6 rounded-2xl bg-gradient-to-br from-orange-50 to-white">
+            <div className="w-16 h-16 bg-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-2">{t("trust.impact")}</h3>
+            <p className="text-sm text-gray-600">{t("trust.impactSubtitle")}</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section
+      id="about"
+      className="py-20 md:py-28 bg-gradient-to-br from-blue-50 via-white to-orange-50"
+    >
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+
+        {/* TITLE + INTRO */}
+        <div className="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            {t("Topabout.title")}
+          </h2>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            {t("Topabout.paragraph")}
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-10">
+
+          {/* MISSION */}
+          <div
+            className="bg-white rounded-3xl p-8 shadow-xl card-hover"
+            data-aos="fade-right"
+          >
+            <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+              <svg
+                className="w-7 h-7 text-blue-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+            </div>
+
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              {t("Topabout.missionTitle")}
+            </h3>
+            <p className="text-gray-700 leading-relaxed">
+              {t("Topabout.missionText")}
+            </p>
+
+            <div className="mt-6 space-y-3">
+              <p className="text-gray-700 leading-relaxed">• {t("Topabout.missionPoints.p1")}</p>
+              <p className="text-gray-700 leading-relaxed">• {t("Topabout.missionPoints.p2")}</p>
+              <p className="text-gray-700 leading-relaxed">• {t("Topabout.missionPoints.p3")}</p>
+            </div>
+          </div>
+
+          {/* VISION */}
+          <div
+            className="bg-white rounded-3xl p-8 shadow-xl card-hover"
+            data-aos="fade-left"
+          >
+            <div className="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
+              <svg
+                className="w-7 h-7 text-orange-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                />
+              </svg>
+            </div>
+
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              {t("Topabout.visionTitle")}
+            </h3>
+            <p className="text-gray-700 leading-relaxed">
+              {t("Topabout.visionText")}
+            </p>
+
+            <div className="mt-6 space-y-3">
+              <p className="text-gray-700 leading-relaxed">• {t("Topabout.visionPoints.p1")}</p>
+              <p className="text-gray-700 leading-relaxed">• {t("Topabout.visionPoints.p2")}</p>
+              <p className="text-gray-700 leading-relaxed">• {t("Topabout.visionPoints.p3")}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
         {/* About us section */}
         <div className="w-full p-10 lg:p-25 flex flex-col md:flex-row justify-between items-center">
           <div className="w-full max-w-[440px] md:max-w-[500px] h-[250px] md:h-[600px] rounded-xl overflow-hidden mb-8 md:mb-0 md:mr-12 shadow-lg flex items-center justify-center">
@@ -347,6 +503,206 @@ function Home() {
           </div>
         </div>
 
+        <section id="mission" className="py-20 md:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              {t("coreValues.title")}
+            </h2>
+            <p className="text-lg text-gray-700">{t("coreValues.description")}</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Impact Direct */}
+            <div
+              className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 card-hover"
+              data-aos="fade-up"
+            >
+              <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">{t("impactDirect.title")}</h3>
+              <p className="text-gray-700 leading-relaxed">{t("impactDirect.text")}</p>
+            </div>
+
+            {/* Transparency */}
+            <div
+              className="bg-gradient-to-br from-green-50 to-white rounded-2xl p-8 card-hover"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div className="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">{t("transparency.title")}</h3>
+              <p className="text-gray-700 leading-relaxed">{t("transparency.text")}</p>
+            </div>
+
+            {/* Sustainability */}
+            <div
+              className="bg-gradient-to-br from-orange-50 to-white rounded-2xl p-8 card-hover"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div className="w-16 h-16 bg-orange-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">{t("sustainability.title")}</h3>
+              <p className="text-gray-700 leading-relaxed">{t("sustainability.text")}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOCUS AREAS */}
+      <section className="py-20 md:py-28 bg-gradient-to-br from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              {t("focusAreas.title")}
+            </h2>
+            <p className="text-lg text-gray-700">{t("focusAreas.description")}</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Health */}
+            <div
+              className="bg-white rounded-2xl p-8 shadow-lg card-hover border-t-4 border-blue-600"
+              data-aos="fade-up"
+            >
+              <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                <svg
+                  className="w-7 h-7 text-blue-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">{t("health.title")}</h3>
+              <p className="text-gray-700 text-sm leading-relaxed">{t("health.text")}</p>
+            </div>
+
+            {/* Education */}
+            <div
+              className="bg-white rounded-2xl p-8 shadow-lg card-hover border-t-4 border-green-600"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div className="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
+                <svg
+                  className="w-7 h-7 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">{t("education.title")}</h3>
+              <p className="text-gray-700 text-sm leading-relaxed">{t("education.text")}</p>
+            </div>
+
+            {/* Culture */}
+            <div
+              className="bg-white rounded-2xl p-8 shadow-lg card-hover border-t-4 border-purple-600"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div className="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                <svg
+                  className="w-7 h-7 text-purple-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">{t("culture.title")}</h3>
+              <p className="text-gray-700 text-sm leading-relaxed">{t("culture.text")}</p>
+            </div>
+
+            {/* Humanitarian Aid */}
+            <div
+              className="bg-white rounded-2xl p-8 shadow-lg card-hover border-t-4 border-orange-600"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div className="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
+                <svg
+                  className="w-7 h-7 text-orange-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">{t("humanitarianAid.title")}</h3>
+              <p className="text-gray-700 text-sm leading-relaxed">{t("humanitarianAid.text")}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
         {/* Support Our Work Section */}
         <div className="w-full bg-white p-4  flex justify-center">
           <div className="p-10 md-p25 flex flex-col md:flex-row items-center gap-6">
@@ -460,6 +816,47 @@ function Home() {
           </div>
         </div>
 
+        <section
+      id="stories"
+      className="py-20 md:py-28 bg-gradient-to-br from-orange-50 via-white to-blue-50"
+    >
+      <div className="max-w-4xl mx-auto px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-12" data-aos="fade-up">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            {t("stories.title")}
+          </h2>
+          <p className="text-lg text-gray-700">
+            {t("stories.description")}
+          </p>
+        </div>
+
+        {/* Story Card */}
+        <div
+          className="bg-white rounded-3xl shadow-2xl p-8 md:p-12"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <img
+              src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=300&q=80"
+              alt={t("stories.alt")}
+              className="w-32 h-32 rounded-full object-cover shadow-xl ring-4 ring-blue-100"
+            />
+
+            <div className="flex-1 text-center md:text-left">
+              <blockquote className="text-xl md:text-2xl font-semibold text-gray-900 italic mb-4">
+                {t("stories.quote")}
+              </blockquote>
+              <p className="text-gray-600 font-medium">
+                {t("stories.author")}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
         {/*projects section*/}
         <div className="w-full p-10 lg:p-25 flex flex-col justify-between items-center bg-[#F3F5F8]">
           <span className=" text-[30px] font-bold self-center">
@@ -567,7 +964,149 @@ function Home() {
           </button>
         </div>
       </div>
+{/* Gallery Section */}
+<section className="py-20 md:py-28 bg-white">
+  <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <div className="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+        {t('gallery.title')}
+      </h2>
+      <p className="text-lg text-gray-700">
+        {t('gallery.description')}
+      </p>
+    </div>
 
+    <div className="relative" data-aos="fade-up" data-aos-delay="200">
+      {/* Navigation Buttons */}
+      <button
+        className="swiper-button-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center ml-4 hover:bg-gray-50 transition-all hover:scale-105 hidden md:flex"
+        aria-label="Previous image"
+      >
+        <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <button
+        className="swiper-button-next absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center mr-4 hover:bg-gray-50 transition-all hover:scale-105 hidden md:flex"
+        aria-label="Next image"
+      >
+        <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      {/* Swiper Container */}
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        spaceBetween={30}
+        slidesPerView={1}
+        loop={true}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+          el: '.gallery-pagination',
+          bulletClass: 'swiper-pagination-bullet',
+          bulletActiveClass: 'swiper-pagination-bullet-active',
+        }}
+        navigation={{
+          prevEl: '.swiper-button-prev',
+          nextEl: '.swiper-button-next',
+        }}
+        breakpoints={{
+          640: { slidesPerView: 1, spaceBetween: 20 },
+          768: { slidesPerView: 2, spaceBetween: 30 },
+          1024: { slidesPerView: 3, spaceBetween: 30 },
+        }}
+        className="gallerySwiper pb-12"
+      >
+        {/* Slide 1 */}
+        <SwiperSlide>
+          <div className="transition-all duration-400 ease-out hover:translate-y-[-8px]">
+            <div className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl">
+              <img
+                src={t('gallery.image1Src')}
+                alt={t('gallery.image1Alt')}
+                className="w-full h-96 object-cover rounded-2xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+            </div>
+          </div>
+        </SwiperSlide>
+
+        {/* Slide 2 */}
+        <SwiperSlide>
+          <div className="transition-all duration-400 ease-out hover:translate-y-[-8px]">
+            <div className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl">
+              <img
+                src={t('gallery.image2Src')}
+                alt={t('gallery.image2Alt')}
+                className="w-full h-96 object-cover rounded-2xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+            </div>
+          </div>
+        </SwiperSlide>
+
+        {/* Slide 3 */}
+        <SwiperSlide>
+          <div className="transition-all duration-400 ease-out hover:translate-y-[-8px]">
+            <div className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl">
+              <img
+                src={t('gallery.image3Src')}
+                alt={t('gallery.image3Alt')}
+                className="w-full h-96 object-cover rounded-2xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+            </div>
+          </div>
+        </SwiperSlide>
+
+        {/* Slide 4 */}
+        <SwiperSlide>
+          <div className="transition-all duration-400 ease-out hover:translate-y-[-8px]">
+            <div className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl">
+              <img
+                src={t('gallery.image4Src')}
+                alt={t('gallery.image4Alt')}
+                className="w-full h-96 object-cover rounded-2xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+            </div>
+          </div>
+        </SwiperSlide>
+      </Swiper>
+
+      {/* Pagination Dots */}
+      <div className="gallery-pagination flex justify-center mt-8 space-x-2">
+        <style>{`
+          .gallery-pagination .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background-color: #d1d5db;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border-radius: 50%;
+            cursor: pointer;
+          }
+          .gallery-pagination .swiper-pagination-bullet:hover {
+            opacity: 0.8;
+          }
+          .gallery-pagination .swiper-pagination-bullet-active {
+            background-color: #3b82f6;
+            opacity: 1;
+            transform: scale(1.2);
+          }
+        `}</style>
+      </div>
+    </div>
+  </div>
+</section>
+     
       <Footer />
 
       {/* Volunteer Modal */}

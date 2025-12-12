@@ -26,6 +26,16 @@
       "description": "Gesündere Gemeinschaften durch zugängliche Gesundheits- und Wellnessinitiativen aufbauen. Wir stellen sicher, dass hochwertige Gesundheitsdienste diejenigen erreichen, die sie am meisten brauchen, denn Wohlbefinden ist ein grundlegendes Menschenrecht."
     }
   },
+
+  "impact": {
+    "title": "Unsere Wirkung in Zahlen",
+    "description": "Das Vertrauen, das Sie uns schenken, führt zu konkreten Ergebnissen vor Ort.",
+
+    "livesImpacted": "Betroffene Leben",
+    "villagesReached": "Erreichte Dörfer",
+    "investments": "Investitionen (Tsd. €)",
+    "centersBuilt": "Gebautes Zentrum"
+  },
   "supporters": {
     "title": "Unsere Top-Unterstützer",
     "description": "Wir sind unseren Top-Unterstützern zutiefst dankbar, deren Großzügigkeit und Engagement unsere Mission vorantreiben. Zusammen bauen wir eine bessere Zukunft für alle.",

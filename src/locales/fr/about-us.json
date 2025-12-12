@@ -26,6 +26,15 @@
       "description": "Construire des communautés plus saines grâce à des initiatives d'accessibilité des soins de santé et de bien-être. Nous veillons à ce que les services de santé de qualité atteignent ceux qui en ont le plus besoin, car le bien-être est un droit humain fondamental."
     }
   },
+  "impact": {
+    "title": "Notre impact en chiffres",
+    "description": "La confiance que vous nous accordez se traduit par des résultats concrets sur le terrain.",
+
+    "livesImpacted": "Vies Impactées",
+    "villagesReached": "Villages Atteints",
+    "investments": "Investissements (K€)",
+    "centersBuilt": "Centre Construit"
+  },
   "supporters": {
     "title": "Nos Meilleurs Supporters",
     "description": "Nous sommes profondément reconnaissants envers nos meilleurs supporters dont la générosité et l'engagement font avancer notre mission. Ensemble, nous construisons un avenir plus brillant pour tous.",
