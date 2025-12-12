@@ -163,7 +163,7 @@ function Home() {
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.5, delay: 0.8 }}
-              className="block max-w-[700px] font-bold text-[30px] sm:text-[30px] md:text-[35px lg:text-[40px] text-main-500"
+              className="block max-w-[1000px] font-bold text-[30px] sm:text-[30px] md:text-[35px lg:text-[40px] text-main-500"
               style={{
                 lineHeight: "1.9",
                 // fontFamily: "inter, sans-serif",
@@ -177,9 +177,10 @@ function Home() {
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.0 }}
-              className="text-[14px] sm:text-[16px] md:text-[20px] font-medium text-secondary-500 block mt-9 max-w-[567px]"
+              className="text-[18px] sm:text-[18px] md:text-[20px] font-medium text-lg text-gray-700 leading-relaxed block mt-9 max-w-[567px]"
+            
               style={{
-                lineHeight: "2.1",
+                // lineHeight: "2.1",
                 fontFamily: "inter, sans-serif",
               }}
             >
@@ -191,6 +192,7 @@ function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.5, delay: 0.8 }}
               className="flex flex-col md:flex-row items-center gap-10 md:gap-24 mt-20"
+             
             >
               <NavLink
                 to="/donate"
@@ -237,7 +239,7 @@ function Home() {
 {/* trustbadges */}
 <section className="py-16 bg-white border-y border-gray-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 
           {/* ONLUS */}
           <div className="text-center card-hover p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-white">
