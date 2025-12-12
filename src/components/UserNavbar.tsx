@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "../../src/assets/images/Favicon.png.png";
+import logo from "../../src/assets/images/logo.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 function UserNavbar() {
