@@ -209,7 +209,7 @@ function Home() {
               </button> */}
              <NavLink
                 to="/projects"
-                className="border-[3px] border-main-500 py-2 px-4 text-main-500 text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
+                className="border-[3px] border-main-500 py-2 px-4 w-full flex items-center justify-center text-main-500 text-xl font-semibold rounded-[12px] hover:cursor-pointer hover:vibrate"
               >
                 {t("hero_buttons.viewprojects")}
               </NavLink>
