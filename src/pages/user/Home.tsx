@@ -177,7 +177,7 @@ function Home() {
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.0 }}
-              className="text-[18px] sm:text-[18px] md:text-[20px] font-medium text-lg text-gray-700 leading-relaxed block mt-9 max-w-[567px]"
+              className="text-[20px] sm:text-[18px] md:text-[20px] text-lg text-gray-700 leading-relaxed block mt-9 max-w-[567px]"
             
               style={{
                 // lineHeight: "2.1",
