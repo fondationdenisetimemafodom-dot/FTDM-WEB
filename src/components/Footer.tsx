@@ -452,7 +452,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-secondary-500 text-white py-8 px-20 mt-auto">
-      <div className="mx-auto flex flex-col items-center lg:items-start lg:flex-row lg:justify-between gap-8 lg:gap-16">
+      <div className="mx-auto flex flex-col items-left lg:items-start lg:flex-row lg:justify-between gap-8 lg:gap-16">
         {/* Logo and Info */}
         <div>
           <div className="flex flex-row items-start">
