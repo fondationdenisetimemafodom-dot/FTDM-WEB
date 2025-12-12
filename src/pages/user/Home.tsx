@@ -163,10 +163,10 @@ function Home() {
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.5, delay: 0.8 }}
-              className="block max-w-[500px] font-bold text-[22px] sm:text-[25px] md:text-[35px lg:text-[40px] text-main-500"
+              className="block max-w-[500px] font-bold text-[30px] sm:text-[25px] md:text-[35px lg:text-[40px] text-main-500"
               style={{
                 lineHeight: "1.9",
-                fontFamily: "inter, sans-serif",
+                // fontFamily: "inter, sans-serif",
                 letterSpacing: "1px",
               }}
             >
