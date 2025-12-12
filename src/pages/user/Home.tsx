@@ -150,7 +150,7 @@ function Home() {
       <div className=" w-full ">
         {/*hero section*/}
         <div
-         className=" w-full pt-27 pb-40 p-2 px-10 lg:px-25 flex flex-col lg:flex-row justify-between items-center "
+         className=" w-full pt-15 pb-40 p-2 px-10 lg:px-25 flex flex-col lg:flex-row justify-between items-center "
           style={{
             backgroundImage: `linear-gradient(to right, #ffffffcc 30%, #dbeafe), url(${BgImage})`,
             backgroundSize: "cover",
