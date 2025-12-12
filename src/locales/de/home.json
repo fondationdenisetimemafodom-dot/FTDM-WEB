@@ -116,5 +116,18 @@
       "volunteer": "Freiwilliger",
       "partner": "Partner werden"
     }
+  },
+  "gallery": {
+    "title": "In Bildern",
+    "description": "Entdecken Sie unsere Projekte und die Auswirkungen Ihrer Großzügigkeit durch diese auf dem Feld festgehaltenen Momente.",
+    "image1Src": "/src/assets/images/yantou 4.png",
+    "image1Alt": "Gesundheitszentrum",
+    "image2Src": "/src/assets/images/yantou 6.jpg",
+    "image2Alt": "Schulklasse",
+    "image3Src": "/src/assets/images/yantou7.jpg",
+    "image3Alt": "Gesundheitsversorgung",
+    "image4Src": "/src/assets/images/yantou2.png",
+    "image4Alt": "Gemeinschaft"
   }
+  
 }
